@@ -1,6 +1,7 @@
 package com.fdmgroup.JCollegeAppProject.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -34,13 +37,16 @@ private Course course;
 @ManyToOne (fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
 private Department department;
 @OneToMany (fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
-private Grade grade;
+private List<Grade> gradeList;
 
 public Professor() {
 	super();
 }
 
-public Professor(int professorId, String firstName, String lastName, String address, int phone, int fax, String email) {
+
+
+public Professor(int professorId, String firstName, String lastName, String address, int phone, int fax, String email,
+		Profile profile, Course course, Department department, List<Grade> gradeList) {
 	super();
 	this.professorId = professorId;
 	this.firstName = firstName;
@@ -49,8 +55,19 @@ public Professor(int professorId, String firstName, String lastName, String addr
 	this.phone = phone;
 	this.fax = fax;
 	this.email = email;
-
+	this.profile = profile;
+	this.course = course;
+	this.department = department;
+	this.gradeList = gradeList;
 }
+
+
+
+
+
+
+
+
 
 public int getProfessorId() {
 	return professorId;
@@ -108,13 +125,37 @@ public void setEmail(String email) {
 	this.email = email;
 }
 
-
-@Override
-public String toString() {
-	return "Professor [professor_Id=" + professorId + ", firstName=" + firstName + ", lastName=" + lastName
-			+ ", address=" + address + ", phone=" + phone + ", fax=" + fax + ", email=" + email + "]";
+public Profile getProfile() {
+	return profile;
 }
 
+public void setProfile(Profile profile) {
+	this.profile = profile;
+}
+
+public Course getCourse() {
+	return course;
+}
+
+public void setCourse(Course course) {
+	this.course = course;
+}
+
+public Department getDepartment() {
+	return department;
+}
+
+public void setDepartment(Department department) {
+	this.department = department;
+}
+
+public List<Grade> getGradeList() {
+	return gradeList;
+}
+
+public void setGradeList(List<Grade> gradeList) {
+	this.gradeList = gradeList;
+}
 
 
 
