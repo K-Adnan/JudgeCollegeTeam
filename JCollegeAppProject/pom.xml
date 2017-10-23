@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.fdmgroup</groupId>
-	<artifactId>SoloProjectFINAL</artifactId>
+	<artifactId>JCollegeAppProject</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SoloProjectFINAL Maven Webapp</name>
+	<name>JCollegeAppProject Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 
@@ -66,7 +66,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>SoloProjectFINAL</finalName>
+		<finalName>JCollegeAppProject</finalName>
 
 		<plugins>
 			<plugin>
