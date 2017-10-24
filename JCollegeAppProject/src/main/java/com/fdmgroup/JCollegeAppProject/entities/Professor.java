@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -16,13 +19,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "JC_PROFESSORS")
-public class Professor implements Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorValue("Professor")
+public class Professor extends User implements Serializable {
 
-	@Id
-	@SequenceGenerator(name = "professorid_sequence", sequenceName = "professorid_sequence", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "professorid_sequence")
-	private int professorId;
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -30,8 +30,6 @@ public class Professor implements Serializable {
 	private int fax;
 	private String email;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private User user;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Course course;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -43,28 +41,18 @@ public class Professor implements Serializable {
 		super();
 	}
 
-	public Professor(int professorId, String firstName, String lastName, String address, int phone, int fax,
-			String email, User user, Course course, Department department, List<Grade> gradeList) {
+	public Professor(String firstName, String lastName, String address, int phone, int fax,
+			String email, Course course, Department department, List<Grade> gradeList) {
 		super();
-		this.professorId = professorId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.phone = phone;
 		this.fax = fax;
 		this.email = email;
-		this.user = user;
 		this.course = course;
 		this.department = department;
 		this.gradeList = gradeList;
-	}
-
-	public int getProfessorId() {
-		return professorId;
-	}
-
-	public void setProfessorId(int professorId) {
-		this.professorId = professorId;
 	}
 
 	public String getFirstName() {
@@ -113,14 +101,6 @@ public class Professor implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public Course getCourse() {

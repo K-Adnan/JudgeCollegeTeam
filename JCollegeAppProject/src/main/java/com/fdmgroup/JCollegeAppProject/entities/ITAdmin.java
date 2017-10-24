@@ -2,24 +2,23 @@ package com.fdmgroup.JCollegeAppProject.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "JC_ITADMINS")
-public class ITAdmin implements Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorValue("ITAdmin")
+public class ITAdmin extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name = "itadminid_sequence", sequenceName = "itadminid", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "itadminid_sequence")
-
-	private int adminId;
 	private String name;
 
 	public ITAdmin() {
@@ -29,10 +28,6 @@ public class ITAdmin implements Serializable {
 	public ITAdmin(String name) {
 		super();
 		this.name = name;
-	}
-
-	public int getId() {
-		return adminId;
 	}
 
 	public String getName() {

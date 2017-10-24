@@ -6,26 +6,26 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "JC_STUDENTS")
-public class Student implements Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorValue("Student")
+public class Student extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@Id
-	@SequenceGenerator(name = "studentid_sequence", sequenceName = "studentid", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "studentid_sequence")
 
-	private int studentId;
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -41,15 +41,12 @@ public class Student implements Serializable {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private List<Grade> gradeList;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private User user;
-
 	public Student() {
 		super();
 	}
 
 	public Student(String firstName, String lastName, String address, int phoneNumber, Date dOB, char gender,
-			String email, List<Course> courseList, List<Grade> gradeList, User user) {
+			String email, List<Course> courseList, List<Grade> gradeList) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -60,11 +57,6 @@ public class Student implements Serializable {
 		this.email = email;
 		this.courseList = courseList;
 		this.gradeList = gradeList;
-		this.user = user;
-	}
-
-	public int getStudentId() {
-		return studentId;
 	}
 
 	public String getFirstName() {
@@ -131,19 +123,11 @@ public class Student implements Serializable {
 		this.gradeList = gradeList;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	@Override
 	public String toString() {
-		return "Student [id=" + studentId + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
+		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
 				+ ", phoneNumber=" + phoneNumber + ", dOB=" + dOB + ", gender=" + gender + ", email=" + email
-				+ ", user=" + user + "]";
+				+ "]";
 	}
 
 }
