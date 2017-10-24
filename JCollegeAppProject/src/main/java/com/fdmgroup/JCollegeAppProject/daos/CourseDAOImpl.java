@@ -69,6 +69,7 @@ public class CourseDAOImpl implements CourseDAO {
 	public List<Course> getAllCoursesByDepartment(Department department) {
 		EntityManager manager = factory.createEntityManager();
 		TypedQuery<Course> query = manager.createQuery("FROM Course c WHERE c.department=?", Course.class);
+		query.setParameter(1, department);
 		List<Course> courseList = query.getResultList();
 		manager.close();
 		return courseList;
