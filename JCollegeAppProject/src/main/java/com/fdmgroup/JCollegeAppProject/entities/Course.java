@@ -19,8 +19,10 @@ import javax.persistence.Table;
 public class Course implements Serializable {
 
 	@Id
-	private String courseName;
+	@SequenceGenerator(name = "courseid_sequence", sequenceName = "courseid", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "courseid_sequence")
 	private int courseCode;
+	private String courseName;
 	private String courseInfo;
 	private Date startDate;
 	private Date endDate;
@@ -36,11 +38,10 @@ public class Course implements Serializable {
 		super();
 	}
 
-	public Course(String courseName, int courseCode, String courseInfo, Date startDate, Date endDate,
+	public Course(String courseName, String courseInfo, Date startDate, Date endDate,
 			String studentsEnrolled, Department department, Professor professor) {
 		super();
 		this.courseName = courseName;
-		this.courseCode = courseCode;
 		this.courseInfo = courseInfo;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -59,10 +60,6 @@ public class Course implements Serializable {
 
 	public int getCourseCode() {
 		return courseCode;
-	}
-
-	public void setCourseCode(int courseCode) {
-		this.courseCode = courseCode;
 	}
 
 	public String getCourseInfo() {

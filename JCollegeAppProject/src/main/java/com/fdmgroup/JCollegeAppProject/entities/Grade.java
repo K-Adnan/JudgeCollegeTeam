@@ -14,8 +14,8 @@ import javax.persistence.Table;
 public class Grade implements Serializable {
 
 	@Id
-	@SequenceGenerator(name = "itadminid_sequence", sequenceName = "itadminid", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "itadminid_sequence")
+	@SequenceGenerator(name = "gradeid_sequence", sequenceName = "gradeid", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gradeid_sequence")
 	private int gradeId;
 	private Student student;
 	private Professor professor;

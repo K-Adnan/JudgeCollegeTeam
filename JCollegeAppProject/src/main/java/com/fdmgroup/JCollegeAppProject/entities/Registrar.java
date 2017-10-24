@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +18,8 @@ public class Registrar implements Serializable {
 	private Profile profile;
 	
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name = "registrarid_sequence", sequenceName = "registrarid", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "registrarid_sequence")
 	private int registrarId;
 	private String firstName;
 	private String lastName;
