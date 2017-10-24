@@ -15,7 +15,8 @@ public class Profile implements Serializable {
 	private String username;
 	private String password;
 	private Date registrationDate;
-
+	private String role;
+	
 	public Profile() {
 		this.registrationDate = new Date();
 	}
@@ -44,6 +45,14 @@ public class Profile implements Serializable {
 
 	public Date getRegistrationDate() {
 		return registrationDate;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }
