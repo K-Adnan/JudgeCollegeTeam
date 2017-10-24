@@ -11,6 +11,17 @@ import com.fdmgroup.JCollegeAppProject.entities.Grade;
 public class GradeDAOImpl implements GradeDAO {
 	
 	private EntityManagerFactory factory;
+	
+	
+
+	public GradeDAOImpl(EntityManagerFactory factory) {
+		super();
+		this.factory = factory;
+	}
+
+	public GradeDAOImpl() {
+		super();
+	}
 
 	@Override
 	public void addGrade(Grade grade) {

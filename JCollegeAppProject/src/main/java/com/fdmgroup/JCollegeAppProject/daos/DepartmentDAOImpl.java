@@ -11,35 +11,44 @@ import com.fdmgroup.JCollegeAppProject.entities.Department;
 public class DepartmentDAOImpl implements DepartmentDAO {
 	
 	private EntityManagerFactory factory;
-
+	
+		
+	public DepartmentDAOImpl(EntityManagerFactory factory) {
+		super();
+		this.factory = factory;
+	}
+	public DepartmentDAOImpl() {
+		super();
+	}
+	@Override
 	public void addDepartment(Department department) {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 		manager.persist(department);
 		manager.getTransaction().commit();
 	}
-
+	@Override
 	public void updateDepartment(Department department) {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 		manager.merge(department);
 		manager.getTransaction().commit();
 	}
-
-	public void removeDepartment(int id) {
+	@Override
+	public void removeDepartment(int departmentId) {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
-		Department department = manager.find(Department.class, id);
+		Department department = manager.find(Department.class, departmentId);
 		manager.remove(department);
 		manager.getTransaction().commit();
 	}
-
-	public Department getDepartment(int id) {
+	@Override
+	public Department getDepartment(int departmentId) {
 		EntityManager manager = factory.createEntityManager();
-		Department department = manager.find(Department.class, id);
+		Department department = manager.find(Department.class, departmentId);
 		return department;
 	}
-
+	@Override
 	public List<Department> getAllDepartment() {
 		EntityManager manager = factory.createEntityManager();
 		TypedQuery<Department> query = manager.createQuery("select d from Department d", Department.class);
