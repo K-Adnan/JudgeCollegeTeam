@@ -6,4 +6,4 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 
-<%--Use <%@ include file="PageDirectives.jsp" %> in every jsp used to use thse directives template --%>
+<%--Use <%@ include file="PageDirectives.jsp" %> in every jsp used to use these directives template --%>
