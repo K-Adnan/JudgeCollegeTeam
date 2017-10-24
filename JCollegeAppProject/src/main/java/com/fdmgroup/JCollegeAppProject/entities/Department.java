@@ -2,15 +2,18 @@ package com.fdmgroup.JCollegeAppProject.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "DEPARTMENTS")
+@Table(name = "JC_DEPARTMENTS")
 public class Department {
 	
 	@Id
@@ -18,8 +21,15 @@ public class Department {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "departmentid_sequence")
 	private int departmentId;
 	private String departmentName;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "department")
 	private List<Course> listOfCourses;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "department")
 	private List<Professor> listOfProfessors;
+	
+	public Department(){
+	}
+	
 	public String getDepartmentName() {
 		return departmentName;
 	}

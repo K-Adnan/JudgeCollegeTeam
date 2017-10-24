@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="REGISTRARS")
+@Table(name="JC_REGISTRARS")
 public class Registrar implements Serializable {
 	
 	@OneToOne

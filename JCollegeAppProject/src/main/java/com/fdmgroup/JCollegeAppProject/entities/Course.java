@@ -15,7 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "COURSES")
+@Table(name = "JC_COURSES")
 public class Course implements Serializable {
 
 	@Id

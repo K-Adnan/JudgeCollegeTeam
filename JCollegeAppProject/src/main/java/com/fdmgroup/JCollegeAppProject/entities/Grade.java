@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "COURSES")
+@Table(name = "JC_GRADES")
 public class Grade implements Serializable {
 
 	@Id
