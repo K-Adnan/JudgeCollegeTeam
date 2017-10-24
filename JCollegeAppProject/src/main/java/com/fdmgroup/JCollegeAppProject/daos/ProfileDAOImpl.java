@@ -30,9 +30,9 @@ public class ProfileDAOImpl implements ProfileDAO {
 	}
 
 	@Override
-	public void removeProfile(int profileId) {
+	public void removeProfile(String username) {
 		EntityManager manager = factory.createEntityManager();
-		Profile profile = manager.find(Profile.class, profileId);
+		Profile profile = manager.find(Profile.class, username);
 		manager.getTransaction().begin();
 		manager.remove(profile);
 		manager.getTransaction().commit();
@@ -47,9 +47,9 @@ public class ProfileDAOImpl implements ProfileDAO {
 	}
 
 	@Override
-	public Profile getProfile(int profileId) {
+	public Profile getProfile(String username) {
 		EntityManager manager = factory.createEntityManager();
-		Profile profile = manager.find(Profile.class, profileId);
+		Profile profile = manager.find(Profile.class, username);
 		manager.close();
 		return profile;
 	}
