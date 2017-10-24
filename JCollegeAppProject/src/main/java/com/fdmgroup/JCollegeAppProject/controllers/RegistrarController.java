@@ -42,4 +42,12 @@ public class RegistrarController {
 		return "CourseUpdate";
 	}
 	
+	@RequestMapping("/courseAdding")
+	public String courseAdding(Course course, Model model, int courseId){
+		courseDAO.addCourse(course);
+		model.addAttribute("message", "Course added successfully!");
+		model.addAttribute("course",course);
+		logger.info("Course is added :"+courseId);
+		return "CourseAdding";
+	}
 }
