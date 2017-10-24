@@ -15,7 +15,7 @@ public class Registrar {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	private int registrarId;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -33,7 +33,7 @@ public class Registrar {
 		this.email = email;
 	}
 	public int getId() {
-		return id;
+		return registrarId;
 	}
 	public String getFirstName() {
 		return firstName;

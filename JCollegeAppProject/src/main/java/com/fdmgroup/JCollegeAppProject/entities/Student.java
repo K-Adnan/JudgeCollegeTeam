@@ -29,7 +29,7 @@ public class Student implements Serializable{
 sequenceName="studentid", initialValue=1, allocationSize=1)
 @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="studentid_sequence")
 
-private int id;	
+private int studentId;
 private String firstName;
 private String lastName;
 private String address;
@@ -75,8 +75,8 @@ public Student(String firstName, String lastName, String address, int phoneNumbe
 
 
 
-public int getId() {
-	return id;
+public int getStudentId() {
+	return studentId;
 }
 
 

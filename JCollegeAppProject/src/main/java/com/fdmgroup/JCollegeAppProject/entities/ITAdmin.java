@@ -20,7 +20,7 @@ public class ITAdmin implements Serializable{
 	sequenceName="itadminid", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="itadminid_sequence")
 
-	private int id;
+	private int adminId;
 	private String name;
 	public ITAdmin() {
 		super();
@@ -34,7 +34,7 @@ public class ITAdmin implements Serializable{
 	}
 
 	public int getId() {
-		return id;
+		return adminId;
 	}
 
 	public String getName() {
