@@ -28,10 +28,18 @@ public class RegistrarController {
 		courseDAO.removeCourse(courseId);
 		model.addAttribute("course", course);
 		model.addAttribute("message", "Course is cancelled!");
-		logger.trace("Course is cancelled :"+courseId);
-		return "index";
+		logger.info("Course is cancelled :"+courseId);
+		return "CourseCancellation";
 	}
 	
-	
+	@RequestMapping("/courseUpdate")
+	public String courseUpdate(@RequestParam int courseId, Model model){
+		Course course = courseDAO.getCourse(courseId);
+		courseDAO.updateCourse(course);
+		model.addAttribute("course", course);
+		model.addAttribute("message", "Course is cancelled!");
+		logger.info("Course is updated :"+courseId);
+		return "CourseUpdate";
+	}
 	
 }
