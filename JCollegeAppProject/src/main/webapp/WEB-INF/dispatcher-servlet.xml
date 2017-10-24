@@ -26,9 +26,14 @@
                      <constructor-arg value="DemoPersistence"/>     
        </bean>             
        
-       <bean id="managerDAO" class="com.fdmgroup.SoloProjectFINAL.daos.ManagerDAOImp"/>
-       <bean id="donorDAO" class="com.fdmgroup.SoloProjectFINAL.daos.DonorDAOImp"/>
-       <bean id="projectDAO" class="com.fdmgroup.SoloProjectFINAL.daos.ProjectDAOImp"/>
+       <bean id="departmentDAO" class="com.fdmgroup.JCollegeAppProject.daos.DepartmentDAOImpl"/>
+       <bean id="profileDAO" class="com.fdmgroup.JCollegeAppProject.daos.ProfileDAOImpl"/>
+       <bean id="studentDAO" class="com.fdmgroup.JCollegeAppProject.daos.StudentDAOImpl"/>
+       <bean id="professorDAO" class="com.fdmgroup.JCollegeAppProject.daos.ProfessorDAOImpl"/>
+       <bean id="registrarDAO" class="com.fdmgroup.JCollegeAppProject.daos.RegistrarDAOImpl"/>
+       <bean id="courseDAO" class="com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl"/>
+       <bean id="itadminDAO" class="com.fdmgroup.JCollegeAppProject.daos.ItAdminDAOImpl"/>
+       <bean id="gradeDAO" class="com.fdmgroup.JCollegeAppProject.daos.GradeDAOImpl"/>
 
 
 
