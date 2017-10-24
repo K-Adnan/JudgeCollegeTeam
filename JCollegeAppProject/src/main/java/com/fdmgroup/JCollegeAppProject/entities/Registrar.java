@@ -1,5 +1,7 @@
 package com.fdmgroup.JCollegeAppProject.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="REGISTRARS")
-public class Registrar {
+public class Registrar implements Serializable {
 	
 	@OneToOne
 	private Profile profile;
@@ -19,6 +21,9 @@ public class Registrar {
 	private String firstName;
 	private String lastName;
 	private String email;
+	
+	public Registrar(){
+	}
 	
 	public Profile getProfile() {
 		return profile;

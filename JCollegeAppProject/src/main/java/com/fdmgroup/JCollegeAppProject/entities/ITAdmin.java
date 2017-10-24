@@ -10,24 +10,22 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table  (name = "ITADMINS")
-public class ITAdmin implements Serializable{
+@Table(name = "ITADMINS")
+public class ITAdmin implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="itadminid_sequence",
-	sequenceName="itadminid", initialValue=1, allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="itadminid_sequence")
+	@SequenceGenerator(name = "itadminid_sequence", sequenceName = "itadminid", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "itadminid_sequence")
 
 	private int adminId;
 	private String name;
+
 	public ITAdmin() {
 		super();
-		
 	}
-	
-	
+
 	public ITAdmin(String name) {
 		super();
 		this.name = name;
@@ -40,17 +38,14 @@ public class ITAdmin implements Serializable{
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	@Override
 	public String toString() {
 		return "ITAdmin [name=" + name + "]";
 	}
-	
-	
-	
-	
+
 }

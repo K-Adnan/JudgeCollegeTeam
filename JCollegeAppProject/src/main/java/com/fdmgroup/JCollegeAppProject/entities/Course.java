@@ -34,7 +34,6 @@ public class Course implements Serializable {
 
 	public Course() {
 		super();
-
 	}
 
 	public Course(String courseName, int courseCode, String courseInfo, Date startDate, Date endDate,
