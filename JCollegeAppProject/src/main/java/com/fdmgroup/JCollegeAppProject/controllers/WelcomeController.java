@@ -31,9 +31,7 @@ public class WelcomeController {
 			}
 			logger.trace("loginfailure ");
 			return "//homepage with pop up";
-			
 		}
-				
 	}
 	
 }
