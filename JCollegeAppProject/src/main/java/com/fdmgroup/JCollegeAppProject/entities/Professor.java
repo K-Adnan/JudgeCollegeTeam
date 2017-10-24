@@ -31,7 +31,7 @@ public class Professor implements Serializable {
 	private String email;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Profile profile;
+	private User user;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Course course;
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -44,7 +44,7 @@ public class Professor implements Serializable {
 	}
 
 	public Professor(int professorId, String firstName, String lastName, String address, int phone, int fax,
-			String email, Profile profile, Course course, Department department, List<Grade> gradeList) {
+			String email, User user, Course course, Department department, List<Grade> gradeList) {
 		super();
 		this.professorId = professorId;
 		this.firstName = firstName;
@@ -53,7 +53,7 @@ public class Professor implements Serializable {
 		this.phone = phone;
 		this.fax = fax;
 		this.email = email;
-		this.profile = profile;
+		this.user = user;
 		this.course = course;
 		this.department = department;
 		this.gradeList = gradeList;
@@ -115,12 +115,12 @@ public class Professor implements Serializable {
 		this.email = email;
 	}
 
-	public Profile getProfile() {
-		return profile;
+	public User getUser() {
+		return user;
 	}
 
-	public void setProfile(Profile profile) {
-		this.profile = profile;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Course getCourse() {

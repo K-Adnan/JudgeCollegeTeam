@@ -8,59 +8,59 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fdmgroup.JCollegeAppProject.entities.Profile;
+import com.fdmgroup.JCollegeAppProject.entities.User;
 
-public class ProfileDAOImpl implements ProfileDAO {
+public class UserDAOImpl implements UserDAO {
 
 	@Autowired
 	private EntityManagerFactory factory;
 
-	public ProfileDAOImpl() {
+	public UserDAOImpl() {
 	}
 
-	public ProfileDAOImpl(EntityManagerFactory factory) {
+	public UserDAOImpl(EntityManagerFactory factory) {
 		this.factory = factory;
 	}
 
-	public void addProfile(Profile profile) {
+	public void addUser(User user) {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
-		manager.persist(profile);
+		manager.persist(user);
 		manager.getTransaction().commit();
 	}
 
 	@Override
-	public void removeProfile(String username) {
+	public void removeUser(String username) {
 		EntityManager manager = factory.createEntityManager();
-		Profile profile = manager.find(Profile.class, username);
+		User user = manager.find(User.class, username);
 		manager.getTransaction().begin();
-		manager.remove(profile);
+		manager.remove(user);
 		manager.getTransaction().commit();
 	}
 
 	@Override
-	public void updateProfile(Profile profile) {
+	public void updateUser(User user) {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
-		manager.merge(profile);
+		manager.merge(user);
 		manager.getTransaction().commit();
 	}
 
 	@Override
-	public Profile getProfile(String username) {
+	public User getUser(String username) {
 		EntityManager manager = factory.createEntityManager();
-		Profile profile = manager.find(Profile.class, username);
+		User user = manager.find(User.class, username);
 		manager.close();
-		return profile;
+		return user;
 	}
 
 	@Override
-	public List<Profile> getAllProfiles() {
+	public List<User> getAllUsers() {
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Profile> query = manager.createQuery("FROM Profile p", Profile.class);
-		List<Profile> profileList = query.getResultList();
+		TypedQuery<User> query = manager.createQuery("FROM User p", User.class);
+		List<User> userList = query.getResultList();
 		manager.close();
-		return profileList;
+		return userList;
 	}
 
 }

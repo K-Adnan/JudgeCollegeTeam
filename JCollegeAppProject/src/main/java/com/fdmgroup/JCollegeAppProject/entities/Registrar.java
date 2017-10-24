@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Registrar implements Serializable {
 	
 	@OneToOne
-	private Profile profile;
+	private User user;
 	
 	@Id
 	@SequenceGenerator(name = "registrarid_sequence", sequenceName = "registrarid", initialValue = 1, allocationSize = 1)
@@ -28,11 +28,11 @@ public class Registrar implements Serializable {
 	public Registrar(){
 	}
 	
-	public Profile getProfile() {
-		return profile;
+	public User getUser() {
+		return user;
 	}
-	public void setProfile(Profile profile) {
-		this.profile = profile;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getEmail() {
 		return email;
