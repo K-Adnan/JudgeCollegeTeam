@@ -12,8 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -44,14 +42,14 @@ public class Student implements Serializable {
 	private List<Grade> gradeList;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Profile profile;
+	private User user;
 
 	public Student() {
 		super();
 	}
 
 	public Student(String firstName, String lastName, String address, int phoneNumber, Date dOB, char gender,
-			String email, List<Course> courseList, List<Grade> gradeList, Profile profile) {
+			String email, List<Course> courseList, List<Grade> gradeList, User user) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -62,7 +60,7 @@ public class Student implements Serializable {
 		this.email = email;
 		this.courseList = courseList;
 		this.gradeList = gradeList;
-		this.profile = profile;
+		this.user = user;
 	}
 
 	public int getStudentId() {
@@ -133,19 +131,19 @@ public class Student implements Serializable {
 		this.gradeList = gradeList;
 	}
 
-	public Profile getProfile() {
-		return profile;
+	public User getUser() {
+		return user;
 	}
 
-	public void setProfile(Profile profile) {
-		this.profile = profile;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
 		return "Student [id=" + studentId + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
 				+ ", phoneNumber=" + phoneNumber + ", dOB=" + dOB + ", gender=" + gender + ", email=" + email
-				+ ", profile=" + profile + "]";
+				+ ", user=" + user + "]";
 	}
 
 }

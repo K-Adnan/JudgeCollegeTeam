@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "JC_PROFILES")
-public class Profile implements Serializable {
+public class User implements Serializable {
 
 	@Id
 	private String username;
@@ -17,11 +17,11 @@ public class Profile implements Serializable {
 	private Date registrationDate;
 	private String role;
 	
-	public Profile() {
+	public User() {
 		this.registrationDate = new Date();
 	}
 
-	public Profile(String username, String password) {
+	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
 		this.registrationDate = new Date();
