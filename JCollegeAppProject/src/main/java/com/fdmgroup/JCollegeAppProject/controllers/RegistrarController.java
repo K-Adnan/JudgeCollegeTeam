@@ -22,6 +22,10 @@ public class RegistrarController {
 		super();
 	}
 	
+	public RegistrarController(CourseDAOImpl cDAO) {
+		this.courseDAO = cDAO;
+	}
+	
 	@RequestMapping("/courseCancellation")
 	public String courseCancellation(@RequestParam int courseId, Model model, Course course) {
 		courseDAO.getCourse(courseId);
@@ -43,7 +47,8 @@ public class RegistrarController {
 	}
 	
 	@RequestMapping("/courseAdding")
-	public String courseAdding(Course course, Model model, int courseId){
+	public String courseAdding(Model model, int courseId){
+		Course course = courseDAO.getCourse(courseId);
 		courseDAO.addCourse(course);
 		model.addAttribute("message", "Course added successfully!");
 		model.addAttribute("course",course);
