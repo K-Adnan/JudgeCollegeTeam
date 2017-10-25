@@ -10,11 +10,11 @@ public interface ProfessorDAO {
 
 	public void addProfessor(Professor professor);
 
-	public void removeProfessor(int professorId);
+	public void removeProfessor(String username);
 
 	public void updateProfessor(Professor professor);
 
-	public Professor getProfessor(int professorId);
+	public Professor getProfessor(String username);
 
 	public List<Professor> getAllProfessors();
 
