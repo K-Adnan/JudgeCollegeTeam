@@ -13,7 +13,7 @@
 <a href = "/JCollegeAppProject/logout">Logout</a>
 <br />
 <br />
-<a href = "AddUser"> Add User </a>
+<a href = "AddStudent"> Add Student </a>
 <br />
 <br />
 <a href = "ViewUsers"> View Users</a>
