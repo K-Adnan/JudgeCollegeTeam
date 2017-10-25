@@ -52,7 +52,6 @@ public class CourseDAOImpl implements CourseDAO {
 	public Course getCourse(int courseCode) {
 		EntityManager manager = factory.createEntityManager();
 		Course course = manager.find(Course.class, courseCode);
-		manager.close();
 		return course;
 	}
 

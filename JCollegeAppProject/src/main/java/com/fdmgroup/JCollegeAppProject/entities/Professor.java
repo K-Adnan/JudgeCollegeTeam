@@ -1,24 +1,17 @@
 package com.fdmgroup.JCollegeAppProject.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -30,7 +23,7 @@ public class Professor extends User implements Serializable {
 	private int fax;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy="professor")
-	private Set<Course> courses=new TreeSet<Course>();
+	private Set<Course> courses=new HashSet<Course>();
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Department department;
 //	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

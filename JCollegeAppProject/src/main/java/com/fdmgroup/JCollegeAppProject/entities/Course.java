@@ -103,6 +103,10 @@ public class Course implements Serializable {
 
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
+		if (professor != null){
+			professor.addCourse(this);
+		}
+		
 	}
 
 	@Override
