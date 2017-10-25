@@ -18,10 +18,10 @@
 <a href = "ViewCourses"> View Courses </a>
 <br />
 <br />
-<a href = "ViewOwnCourses"> View Enrolled Course</a>
+<a href = "ViewJoinedCourses"> View Joined Course</a>
 <br />
 <br />
-
+<a href = "ViewProfile"> View Profile</a>
 
 </body>
 </html>

@@ -4,22 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home Screen</title>
+<title>Insert title here</title>
 </head>
 <body>
 
-<h2>Professor Home Page</h2>
-
-<a href="/JCollegeAppProject/logout">Logout</a>
-
-<br />
-<br />
-<a href = "ViewCourses"> View Courses </a>
-<br />
-<br />
-<a href = "ViewTaughtCourses"> View Assigned Courses</a>
-<br />
-<br />
-<a href = "ViewProfile"> View Profile</a>
 </body>
 </html>

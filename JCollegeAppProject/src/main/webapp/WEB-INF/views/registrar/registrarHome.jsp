@@ -8,18 +8,20 @@
 </head>
 <body>
 
-<h2>Professor Home Page</h2>
+<h2>Registrar Home Page</h2>
 
-<a href="/JCollegeAppProject/logout">Logout</a>
-
+<a href = "/JCollegeAppProject/logout">Logout</a>
 <br />
 <br />
-<a href = "ViewCourses"> View Courses </a>
+<a href = "NewCourse"> New Course </a>
 <br />
 <br />
-<a href = "ViewTaughtCourses"> View Assigned Courses</a>
+<a href = "RemoveCourse"> Remove Course</a>
 <br />
 <br />
-<a href = "ViewProfile"> View Profile</a>
+<a href = "UpdateUser"> Update User</a>
+<br />
+<br />
+<a href = "ManagerAbsence"> Manager Absence </a>
 </body>
 </html>
