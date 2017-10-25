@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAO;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
+import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
+import com.fdmgroup.JCollegeAppProject.entities.Student;
 
 @Controller
 public class RegistrarController {
@@ -24,6 +26,8 @@ public class RegistrarController {
 	private CourseDAO courseDao;
 	@Autowired
 	private ProfessorDAO professorDao;
+	@Autowired
+	private StudentDAO studentDao;
 	
 	
 	public RegistrarController() {
@@ -43,20 +47,20 @@ public class RegistrarController {
 		List<Professor> professorList = professorDao.getAllProfessors();
 		
 		Course course = courseList.get(0);
+		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
+		model.addAttribute("studentList", studentList);
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("course", course);
 		model.addAttribute("professorList", professorList);
 		return "registrar/Courses";
 	}
 	
-	@RequestMapping("/courseCancellation")
-	public String courseCancellation(@RequestParam int courseId, Model model, Course course) {
-		courseDao.getCourse(courseId);
-		courseDao.removeCourse(courseId);
-		model.addAttribute("course", course);
+	@RequestMapping("/registrar/cancelCourse")
+	public String courseCancellation(@RequestParam int code, Model model) {
+		courseDao.removeCourse(code);
 		model.addAttribute("message", "Course is cancelled!");
-		logger.info("Course is cancelled :"+courseId);
-		return "CourseCancellation";
+		logger.info("Course is cancelled :" + code);
+		return "redirect:Courses";
 	}
 	
 	@RequestMapping("/registrar/updateProfessor")
@@ -98,6 +102,8 @@ public class RegistrarController {
 		List<Course> courseList = courseDao.getAllCourses();
 		List<Professor> professorList = professorDao.getAllProfessors();
 		
+		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
+		model.addAttribute("studentList", studentList);
 		model.addAttribute("course",course);
 		model.addAttribute("courseList", courseList);
 		logger.info("Course is chosen :"+courseId);

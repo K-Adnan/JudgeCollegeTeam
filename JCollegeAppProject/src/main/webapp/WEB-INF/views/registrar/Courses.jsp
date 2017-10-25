@@ -15,7 +15,7 @@
 </div>
 <h2> Judge College </h2>
 
-<form align="right" name="form1" method="post" action="log_out.php">
+<form align="right" name="form1" method="post" action="../logout">
   <label class="logoutLblPos">
   <input name="submit2" type="submit" id="submit2" value="Logout">
   </label>
@@ -77,11 +77,21 @@
 	</tr>
 	</table>
 
-<form action="cancelCourse">
-    <label>
+<form action="cancelCourse?courseId=${course.courseCode}">
+  <input type="hidden" name="code" value="${course.courseCode}"/>
   <input name="cancelCourse" type="submit" value="Cancel Course">
-  </label>
 </form>	
+
+<table>
+<tr>
+	<th>Student Id</th>
+	<th>Name</th>
+</tr>
+	<c:forEach items="${studentList}" var="s">
+		<td> ${s.username}</td>
+		<td> ${s.firstName} ${s.lastName}</td>
+	</c:forEach>
+</table>
 
 </body>
 </html>
