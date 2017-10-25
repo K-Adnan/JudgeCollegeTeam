@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAOImpl;
@@ -64,6 +65,15 @@ public class ProfessorController {
 	}
 	
 	
+	@RequestMapping("/professor/professorHome")
+	public String goToProfessorHome(@RequestParam String username, HttpSession session) {
+		session.setAttribute("username", username);
+		return "professor/professorHome";
+
+	}
+	
+	
+	
 	@RequestMapping("/professor/logout") //
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -71,27 +81,13 @@ public class ProfessorController {
 
 	}
 	
-	@RequestMapping("/professor/showStudents")
-	public String goToShowStudents(Model model) {
-		List<Student> studentList = studentDao.getAllStudents();
-		model.addAttribute("studentList", studentList);
-		return "professor/ShowStudents";
-
-	}
-	
-	
-	@RequestMapping("/professor/processShowStudents")
-	public String processShowStudents() {
-		studentDao.getAllStudents();	
-		return "professor/ShowStudents";
-	}
 	
 	
 	@RequestMapping("/professor/showCourses")
 	public String goToShowCourses(Model model) {
 		List<Course> courseList = courseDao.getAllCourses();
 		model.addAttribute("courseList", courseList);
-		return "professor/Courses";
+		return "professor/professorViewCourses";
 
 	}
 
@@ -99,10 +95,41 @@ public class ProfessorController {
 	@RequestMapping("/professor/processShowCourses")
 	public String processShowCourses() {
 		courseDao.getAllCourses();	
-		return "professor/ShowCourses";
+		return "professor/professorViewCourses";
+	}
+	
+	@RequestMapping("/professor/processChooseCourse")
+	public String processChooseCourse() {
+		
+		return "professor/professorViewCourses";
 	}
 	
 	
+	
+	
+	
+	
+//	@RequestMapping("/professor/showStudents")
+//	public String goToShowStudents(Model model) {
+//		List<Student> studentList = studentDao.getAllStudents();
+//		model.addAttribute("studentList", studentList);
+//		return "professor/ShowStudents";
+//
+//	}
+//	
+//	
+//	@RequestMapping("/professor/processShowStudents")
+//	public String processShowStudents() {
+//		studentDao.getAllStudents();	
+//		return "professor/ShowStudents";
+//	}
+	
+	
+	
+	
+	
+	
+
 	
 	
 }
