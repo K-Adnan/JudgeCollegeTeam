@@ -18,6 +18,11 @@ public class WelcomeController {
 		super();
 	}
 	
+	@RequestMapping("/")
+	public String goToIndex(){
+		return "index";
+	}
+	
 	@RequestMapping("/login")
 	public String login(HttpSession session, HttpServletRequest request, Principal principal){
 		String userID = principal.getName();
