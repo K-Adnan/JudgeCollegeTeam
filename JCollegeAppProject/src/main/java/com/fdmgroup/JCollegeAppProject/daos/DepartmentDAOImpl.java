@@ -6,10 +6,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fdmgroup.JCollegeAppProject.entities.Department;
 
 public class DepartmentDAOImpl implements DepartmentDAO {
 	
+	@Autowired
 	private EntityManagerFactory factory;
 	
 		
@@ -49,7 +52,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 		return department;
 	}
 	@Override
-	public List<Department> getAllDepartment() {
+	public List<Department> getAllDepartments() {
 		EntityManager manager = factory.createEntityManager();
 		TypedQuery<Department> query = manager.createQuery("select d from Department d", Department.class);
 		List<Department> departmentList = query.getResultList();

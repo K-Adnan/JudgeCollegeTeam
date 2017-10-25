@@ -3,10 +3,13 @@ package com.fdmgroup.JCollegeAppProject.daos;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fdmgroup.JCollegeAppProject.entities.ITAdmin;
 
 public class ITAdminDAOImpl implements ITAdminDAO {
 
+	@Autowired
 	private EntityManagerFactory factory;
 
 	public ITAdminDAOImpl(EntityManagerFactory factory) {
@@ -18,9 +21,10 @@ public class ITAdminDAOImpl implements ITAdminDAO {
 		super();
 	}
 	@Override
-	public ITAdmin getITAdmin(int ITAdminId) {
+	public ITAdmin getITAdmin(String username) {
 		EntityManager manager = factory.createEntityManager();
-		ITAdmin itadmin = manager.find(ITAdmin.class, ITAdminId);
+		ITAdmin itadmin = manager.find(ITAdmin.class, username);
+		manager.close();
 		return itadmin;
 	}
 

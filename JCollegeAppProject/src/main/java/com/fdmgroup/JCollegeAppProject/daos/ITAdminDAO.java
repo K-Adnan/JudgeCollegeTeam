@@ -4,6 +4,6 @@ import com.fdmgroup.JCollegeAppProject.entities.ITAdmin;
 
 public interface ITAdminDAO {
 
-	public ITAdmin getITAdmin(int ITAdminId);
+	public ITAdmin getITAdmin(String username);
 
 }

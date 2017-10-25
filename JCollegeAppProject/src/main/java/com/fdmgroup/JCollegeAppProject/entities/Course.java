@@ -19,6 +19,8 @@ import javax.persistence.Table;
 @Table(name = "JC_COURSES")
 public class Course implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@SequenceGenerator(name = "courseid_sequence", sequenceName = "courseid", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "courseid_sequence")
@@ -27,7 +29,7 @@ public class Course implements Serializable {
 	private String courseInfo;
 	private Date startDate;
 	private Date endDate;
-	private String studentsEnrolled;
+	
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Department department;
@@ -40,14 +42,12 @@ public class Course implements Serializable {
 		super();
 	}
 
-	public Course(String courseName, String courseInfo, Date startDate, Date endDate,
-			String studentsEnrolled, Department department, Professor professor) {
+	public Course(String courseName, String courseInfo, Date startDate, Date endDate, Department department, Professor professor) {
 		super();
 		this.courseName = courseName;
 		this.courseInfo = courseInfo;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.studentsEnrolled = studentsEnrolled;
 		this.department = department;
 		this.professor = professor;
 	}
@@ -88,13 +88,6 @@ public class Course implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public String getStudentsEnrolled() {
-		return studentsEnrolled;
-	}
-
-	public void setStudentsEnrolled(String studentsEnrolled) {
-		this.studentsEnrolled = studentsEnrolled;
-	}
 
 	public Department getDepartment() {
 		return department;
@@ -114,9 +107,11 @@ public class Course implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Course [courseName=" + courseName + ", courseCode=" + courseCode + ", courseInfo=" + courseInfo
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", studentsEnrolled=" + studentsEnrolled
-				+ ", professor=" + professor + "]";
+		return "Course [courseCode=" + courseCode + ", courseName=" + courseName + ", courseInfo=" + courseInfo
+				+ ", startDate=" + startDate + ", endDate=" + endDate + ", department=" + department + ", professor="
+				+ professor + "]";
 	}
+
+	
 
 }

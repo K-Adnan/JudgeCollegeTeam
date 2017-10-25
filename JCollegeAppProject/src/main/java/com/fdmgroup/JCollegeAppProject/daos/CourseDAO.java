@@ -9,11 +9,11 @@ public interface CourseDAO {
 
 	public void addCourse(Course course);
 
-	public void removeCourse(int courseId);
+	public void removeCourse(int courseCode);
 
 	public void updateCourse(Course course);
 
-	public Course getCourse(int courseId);
+	public Course getCourse(int courseCode);
 
 	public List<Course> getAllCourses();
 

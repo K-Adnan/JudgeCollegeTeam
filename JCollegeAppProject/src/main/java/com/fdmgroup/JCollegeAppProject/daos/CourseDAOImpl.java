@@ -32,9 +32,9 @@ public class CourseDAOImpl implements CourseDAO {
 	}
 
 	@Override
-	public void removeCourse(int courseId) {
+	public void removeCourse(int courseCode) {
 		EntityManager manager = factory.createEntityManager();
-		Course course = manager.find(Course.class, courseId);
+		Course course = manager.find(Course.class, courseCode);
 		manager.getTransaction().begin();
 		manager.remove(course);
 		manager.getTransaction().commit();
@@ -49,9 +49,9 @@ public class CourseDAOImpl implements CourseDAO {
 	}
 
 	@Override
-	public Course getCourse(int courseId) {
+	public Course getCourse(int courseCode) {
 		EntityManager manager = factory.createEntityManager();
-		Course course = manager.find(Course.class, courseId);
+		Course course = manager.find(Course.class, courseCode);
 		manager.close();
 		return course;
 	}
@@ -68,7 +68,7 @@ public class CourseDAOImpl implements CourseDAO {
 	@Override
 	public List<Course> getAllCoursesByDepartment(Department department) {
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Course> query = manager.createQuery("FROM Course c WHERE c.department=?", Course.class);
+		TypedQuery<Course> query = manager.createQuery("SELECT c FROM Course c WHERE c.department=?", Course.class);
 		query.setParameter(1, department);
 		List<Course> courseList = query.getResultList();
 		manager.close();

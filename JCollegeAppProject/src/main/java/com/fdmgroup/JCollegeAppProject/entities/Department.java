@@ -1,5 +1,6 @@
 package com.fdmgroup.JCollegeAppProject.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "JC_DEPARTMENTS")
-public class Department {
+public class Department implements Serializable {
+	
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@SequenceGenerator(name = "departmentid_sequence", sequenceName = "departmentid", initialValue = 1, allocationSize = 1)

@@ -10,6 +10,6 @@ public interface DepartmentDAO {
 	public void updateDepartment (Department department);
 	public void removeDepartment (int departmentId);
 	public Department getDepartment (int departmentId);
-	public List<Department> getAllDepartment();
+	public List<Department> getAllDepartments();
 
 }
