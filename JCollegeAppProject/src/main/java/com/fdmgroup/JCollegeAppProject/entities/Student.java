@@ -3,11 +3,14 @@ package com.fdmgroup.JCollegeAppProject.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +18,12 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fdmgroup.JCollegeAppProject.utilities.Gender;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -26,45 +32,32 @@ public class Student extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String firstName;
-	private String lastName;
 	private String address;
-	private int phoneNumber;
+	private String phoneNumber;
 	@Column(name = "DATE_OF_BIRTH")
 	private Date dOB;
-	private char gender;
-	private String email;
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private List<Course> courseList;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	private List<Grade> gradeList;
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REMOVE}, mappedBy="student", orphanRemoval=true)
+	private Set<Grade> gradeList;
 
 	public Student() {
 		super();
 	}
 
-	public Student(String firstName, String lastName, String address, int phoneNumber, Date dOB, char gender,
-			String email, List<Course> courseList, List<Grade> gradeList) {
+	public Student(String address, String phoneNumber, Date dOB, Gender gender,
+			List<Course> courseList, Set<Grade> gradeList) {
 		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.dOB = dOB;
 		this.gender = gender;
-		this.email = email;
 		this.courseList = courseList;
 		this.gradeList = gradeList;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
 	}
 
 	public String getAddress() {
@@ -75,11 +68,11 @@ public class Student extends User implements Serializable {
 		this.address = address;
 	}
 
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -91,22 +84,16 @@ public class Student extends User implements Serializable {
 		this.dOB = dOB;
 	}
 
-	public char getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(char gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
+//	public void setGender(String genderValue) {
+//		this.gender = Gender.valueOf(genderValue);
+//	}
 	public List<Course> getCourseList() {
 		return courseList;
 	}
@@ -115,19 +102,18 @@ public class Student extends User implements Serializable {
 		this.courseList = courseList;
 	}
 
-	public List<Grade> getGradeList() {
+	public Set<Grade> getGradeList() {
 		return gradeList;
 	}
 
-	public void setGradeList(List<Grade> gradeList) {
+	public void setGradeList(Set<Grade> gradeList) {
 		this.gradeList = gradeList;
 	}
 
 	@Override
 	public String toString() {
-		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-				+ ", phoneNumber=" + phoneNumber + ", dOB=" + dOB + ", gender=" + gender + ", email=" + email
-				+ "]";
+		return "Student [address=" + address
+				+ ", phoneNumber=" + phoneNumber + ", dOB=" + dOB + ", gender=" + gender + "]";
 	}
 
 }

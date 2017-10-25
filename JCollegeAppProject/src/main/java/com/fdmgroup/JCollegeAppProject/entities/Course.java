@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -32,6 +33,7 @@ public class Course implements Serializable {
 	private Department department;
 
 	@ManyToOne
+	@JoinColumn(name="PROFFESSOR_USERNAME")
 	private Professor professor;
 
 	public Course() {

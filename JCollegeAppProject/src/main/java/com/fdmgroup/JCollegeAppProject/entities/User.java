@@ -3,6 +3,7 @@ package com.fdmgroup.JCollegeAppProject.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,6 +11,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "JC_USERS")
+@DiscriminatorColumn(name="ROLE")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -20,7 +22,6 @@ public class User implements Serializable {
 	@Transient
 	private String confirmPassword;
 	private Date registrationDate;
-	private String role;
 	private String firstName;
 	private String lastName;
 	private String emailAddress;
@@ -54,14 +55,6 @@ public class User implements Serializable {
 
 	public Date getRegistrationDate() {
 		return registrationDate;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	public String getFirstName() {

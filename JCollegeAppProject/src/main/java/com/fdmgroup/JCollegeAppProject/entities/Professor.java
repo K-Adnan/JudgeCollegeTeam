@@ -2,6 +2,8 @@ package com.fdmgroup.JCollegeAppProject.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
@@ -23,52 +25,29 @@ import javax.persistence.Table;
 @DiscriminatorValue("Professor")
 public class Professor extends User implements Serializable {
 
-	private String firstName;
-	private String lastName;
 	private String address;
 	private int phone;
 	private int fax;
-	private String email;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	private Course course;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy="professor")
+	private Set<Course> courses=new TreeSet<Course>();
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Department department;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	private List<Grade> gradeList;
+//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+//	private List<Grade> gradeList;
 
 	public Professor() {
 		super();
 	}
 
-	public Professor(String firstName, String lastName, String address, int phone, int fax,
-			String email, Course course, Department department, List<Grade> gradeList) {
+	public Professor(String address, int phone, int fax,
+			Set<Course> course, Department department) {
 		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.address = address;
 		this.phone = phone;
 		this.fax = fax;
-		this.email = email;
-		this.course = course;
+		this.courses = course;
 		this.department = department;
-		this.gradeList = gradeList;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getAddress() {
@@ -95,20 +74,15 @@ public class Professor extends User implements Serializable {
 		this.fax = fax;
 	}
 
-	public String getEmail() {
-		return email;
+	public Set<Course> getCourse() {
+		return courses;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCourse(Set<Course> courses) {
+		this.courses = courses;
 	}
-
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
+	public void addCourse(Course course){
+		courses.add(course);
 	}
 
 	public Department getDepartment() {
@@ -118,13 +92,4 @@ public class Professor extends User implements Serializable {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
-
-	public List<Grade> getGradeList() {
-		return gradeList;
-	}
-
-	public void setGradeList(List<Grade> gradeList) {
-		this.gradeList = gradeList;
-	}
-
 }

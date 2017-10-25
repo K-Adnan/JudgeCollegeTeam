@@ -3,9 +3,13 @@ package com.fdmgroup.JCollegeAppProject.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -17,8 +21,13 @@ public class Grade implements Serializable {
 	@SequenceGenerator(name = "gradeid_sequence", sequenceName = "gradeid", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gradeid_sequence")
 	private int gradeId;
+	
+	@ManyToOne
+	@JoinColumn(name="STUDENT_USERNAME")
 	private Student student;
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Professor professor;
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Course course;
 	private char gradeValue;
 
