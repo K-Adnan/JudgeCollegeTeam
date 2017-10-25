@@ -9,7 +9,13 @@
 </head>
 <body>
 
-	<h1>Index Page</h1>
+	<h1>Judge College Registration System</h1>
+	
+	<form action="j_security_check" method="post">
+		Username : <input name="j_username" /> <br/>
+		Password: <input type="password" name="j_password"/><br/>
+		<input type="Submit" value="Login" />
+	</form>
 
 </body>
 </html>
