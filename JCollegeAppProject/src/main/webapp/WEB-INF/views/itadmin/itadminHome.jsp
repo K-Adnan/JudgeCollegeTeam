@@ -10,7 +10,15 @@
 
 <h2>IT Admin Home Page</h2>
 
-<a href="/JCollegeAppProject/logout">Logout</a>
+<a href = "/JCollegeAppProject/logout">Logout</a>
+<br />
+<br />
+<a href = "NewUser"> New User </a>
+<br />
+<br />
+<a href = "ViewUsers"> View Users</a>
+<br />
+<br />
 
 </body>
 </html>

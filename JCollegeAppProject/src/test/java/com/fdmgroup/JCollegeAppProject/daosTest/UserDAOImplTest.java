@@ -43,37 +43,22 @@ public class UserDAOImplTest {
 
 	@Test
 	public void testRemoveUserRemovesAUser() {
-		p
-         
-            causeDao.removeCause(cause);
-
-            verify(transaction).begin();
-            verify(transaction).commit();
-            verify(manager).remove(cause);
-
-		
-		
-		User user = new User();	
-		
+		User user = new User();
 		userDao.removeUser("luffy");
-		
+
 		verify(transaction).begin();
 		verify(transaction).commit();
 		verify(manager).remove(user);
-		
-
 	}
 
 	@Test
 	public void testGetUserGetsAUser() {
 		User user = new User();
 		when(manager.find(User.class, "Doflamingo")).thenReturn(user);
-		userDao.removeUser("Doflamingo");
-		
+
 		verify(transaction).begin();
 		verify(transaction).commit();
-		verify(manager).merge(user);
-		
+		verify(manager).find(User.class, "Doflamingo");
 
 	}
 
@@ -87,7 +72,6 @@ public class UserDAOImplTest {
 		verify(transaction).begin();
 		verify(transaction).commit();
 		verify(manager).merge(user);
-
 	}
 
 }
