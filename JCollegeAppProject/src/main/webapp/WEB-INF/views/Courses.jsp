@@ -10,22 +10,26 @@
 <link href="css/style.css" rel="stylesheet" media="all"> 
 </head>
 <body>
-<div class="img"> <%-- Logo --%>
+<div class="img"> 
 	<IMG HEIGHT="250" WIDTH="300" SRC=${http://www.pathwaysnetwork.co.uk/images/jeancarr-jc.jpg}>
 </div>
 <h2> Judge College </h2>
-Logout
-My Profile
-System Users
-Courses
-Timetable
-Grades
 
 <form align="right" name="form1" method="post" action="log_out.php">
   <label class="logoutLblPos">
-  <input name="submit2" type="submit" id="submit2" value="log out">
+  <input name="submit2" type="submit" id="submit2" value="Logout">
   </label>
 </form>
+
+<ul>
+    <li><a href="My Profile">My Profile</a></li>
+    <li><a href="System Users">System Users</a></li>
+    <li><a href="Courses">Courses</a></li>
+    <li><a href="Timetable">Timetable</a></li>
+    <li><a href="Grades">Grades</a></li>
+</ul>
+
+<div class="clearlist"></div>
 
 <h2> Course Catalogue</h2>
 

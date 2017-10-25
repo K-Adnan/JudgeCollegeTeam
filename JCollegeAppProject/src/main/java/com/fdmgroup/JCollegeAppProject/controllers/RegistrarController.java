@@ -26,6 +26,12 @@ public class RegistrarController {
 		this.courseDAO = cDAO;
 	}
 	
+	@RequestMapping("/Courses")
+	public String goToCourses(@RequestParam int courseId, Model model, Course course) {
+		logger.info("Client request to url : Courses");
+		return "Courses";
+	}
+	
 	@RequestMapping("/courseCancellation")
 	public String courseCancellation(@RequestParam int courseId, Model model, Course course) {
 		courseDAO.getCourse(courseId);
