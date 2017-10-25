@@ -83,7 +83,7 @@
       <security-constraint>
             <web-resource-collection>
                   <web-resource-name>IT Admin Pages</web-resource-name>
-                  <url-pattern>/admin/*</url-pattern>
+                  <url-pattern>/itadmin/*</url-pattern>
                   <http-method>POST</http-method>
                   <http-method>GET</http-method>
             </web-resource-collection>
