@@ -12,5 +12,14 @@
 
 <a href="/JCollegeAppProject/logout">Logout</a>
 
+<br />
+<br />
+<a href = "ViewCourses"> View Courses </a>
+<br />
+<br />
+<a href = "ViewTaughtCourses"> View Assigned Courses</a>
+<br />
+<br />
+
 </body>
 </html>
