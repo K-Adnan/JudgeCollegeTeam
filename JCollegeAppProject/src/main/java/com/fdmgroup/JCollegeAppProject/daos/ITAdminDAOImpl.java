@@ -27,5 +27,12 @@ public class ITAdminDAOImpl implements ITAdminDAO {
 		manager.close();
 		return itadmin;
 	}
+	
+	public void updateITAdmin(ITAdmin itAdmin){
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		manager.merge(itAdmin);
+		manager.getTransaction().commit();
+	}
 
 }

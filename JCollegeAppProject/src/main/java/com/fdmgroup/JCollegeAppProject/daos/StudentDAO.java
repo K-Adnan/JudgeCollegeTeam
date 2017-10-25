@@ -10,11 +10,11 @@ public interface StudentDAO {
 
 	public void addStudent(Student student);
 
-	public void removeStudent(int studentId);
+	public void removeStudent(String username);
 
 	public void updateStudent(Student student);
 
-	public Student getStudent(int studentId);
+	public Student getStudent(String username);
 
 	public List<Student> getAllStudents();
 

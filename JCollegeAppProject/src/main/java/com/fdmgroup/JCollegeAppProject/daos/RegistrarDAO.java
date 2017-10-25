@@ -4,6 +4,8 @@ import com.fdmgroup.JCollegeAppProject.entities.Registrar;
 
 public interface RegistrarDAO {
 
-	public Registrar getRegistrar(int registrarId);
+	public Registrar getRegistrar(String username);
+	
+	public void updateRegistrar(Registrar registrar);
 
 }

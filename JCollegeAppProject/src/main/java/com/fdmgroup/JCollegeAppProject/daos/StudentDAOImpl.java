@@ -34,9 +34,9 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
-	public void removeStudent(int studentId) {
+	public void removeStudent(String username) {
 		EntityManager manager = factory.createEntityManager();
-		Student student = manager.find(Student.class, studentId);
+		Student student = manager.find(Student.class, username);
 		manager.getTransaction().begin();
 		manager.remove(student);
 		manager.getTransaction().commit();
@@ -51,9 +51,9 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
-	public Student getStudent(int studentId) {
+	public Student getStudent(String username) {
 		EntityManager manager = factory.createEntityManager();
-		Student student = manager.find(Student.class, studentId);
+		Student student = manager.find(Student.class, username);
 		manager.close();
 		return student;
 	}
