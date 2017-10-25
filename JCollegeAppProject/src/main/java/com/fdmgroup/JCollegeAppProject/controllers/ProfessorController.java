@@ -16,6 +16,7 @@ import com.fdmgroup.JCollegeAppProject.daos.GradeDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAOImpl;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
+import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
 
 
@@ -99,33 +100,52 @@ public class ProfessorController {
 	}
 	
 	@RequestMapping("/professor/processChooseCourse")
-	public String processChooseCourse() {
+	public String processChooseCourse(Model model, int courseCode) {
+		
+		Course course = courseDao.getCourse(courseCode);
+		List<Course> courseList = courseDao.getAllCourses();	
+		model.addAttribute("course",course);
+		model.addAttribute("courseList", courseList);
+		logger.info("Course is chosen :"+courseCode);
 		
 		return "professor/professorViewCourses";
 	}
 	
+		
+	
+	@RequestMapping("/professor/showStudents")
+	public String goToShowStudents(Model model) {
+		List<Student> studentList = studentDao.getAllStudents();
+		model.addAttribute("studentList", studentList);
+		return "professor/ShowStudents";
+
+	}
 	
 	
+	@RequestMapping("/professor/processShowStudents")
+	public String processShowStudents() {
+		studentDao.getAllStudents();	
+		return "professor/ShowStudents";
+	}
 	
 	
-	
-//	@RequestMapping("/professor/showStudents")
-//	public String goToShowStudents(Model model) {
-//		List<Student> studentList = studentDao.getAllStudents();
-//		model.addAttribute("studentList", studentList);
-//		return "professor/ShowStudents";
-//
-//	}
-//	
-//	
-//	@RequestMapping("/professor/processShowStudents")
-//	public String processShowStudents() {
-//		studentDao.getAllStudents();	
-//		return "professor/ShowStudents";
-//	}
-	
-	
-	
+	@RequestMapping("/professor/editprofile")
+	public String goToEditProfilepage(Professor professor, Model model) {
+		professorDao.updateProfessor(professor);
+		model.addAttribute("message", "Details successfully updated");
+		return "professor/professorEditProfile";
+
+	}
+
+	 @RequestMapping("/donor/EditProfile")
+	 public String editProfile(Model model, HttpSession session){
+	 String username = (String)session.getAttribute("username");
+	 Professor professor = professorDao.getProfessor(username);
+//	 professor.setRole(professor);
+	 model.addAttribute("professor",professor);
+	 return "professor/professorEditProfile";
+	 }
+
 	
 	
 	

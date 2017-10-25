@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View Courses</title>
+<title>View Students</title>
 </head>
 <body>
 
-	<h2>Student Course Options</h2>
+	<h2>List of all students</h2>
 
 	<a href="/JCollegeAppProject/logout">Logout</a>
 
@@ -19,16 +19,14 @@
 	<table>
 		<tr>
 
-			<th>Course Code</th>
-			<th>Course Name</th>
-			<th>Course Info</th>
-			<th>Availability  </th>
-			<th>Start Date</th>
-			<th>End Date</th>
+			<th>Student Username</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Email Address</th>
 			
 		</tr>
 
-		<c:forEach items="${courseList}" var="c">
+		<c:forEach items="${studentList}" var="s">
 			<tr>
 				<th><a href="processChoseCourse?courseCode=${c.courseCode}">${c.courseCode}</a></th>
 				<th>${c.courseName}</th>
