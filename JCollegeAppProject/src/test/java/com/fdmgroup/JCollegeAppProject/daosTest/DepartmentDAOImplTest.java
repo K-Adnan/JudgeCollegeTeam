@@ -51,7 +51,7 @@ public class DepartmentDAOImplTest {
 	@Test
 	public void testRemoveDepartmentFromDatabase(){
 		Department department = new Department ();
-		departmentDao.removeDepartment(departmentId);
+//		departmentDao.removeDepartment(departmentId);
 		
 	}
 	}

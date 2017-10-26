@@ -82,7 +82,7 @@
 				</th>
 				<th>${c.startDate}</th>
 				<th>${c.endDate}</th>
-				<th><a href="enrollOnCourse?courseCode=${c.courseCode}">Enroll</a></th>
+				<th><a href="vacateCourse?courseCode=${c.courseCode}">Vacate</a></th>
 		</c:forEach>
 	</table>
 

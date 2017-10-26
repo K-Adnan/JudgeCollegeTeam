@@ -46,7 +46,7 @@ public class ProfessorDAOImplTest {
 
 		when(manager.find(Professor.class, 47)).thenReturn(professor);
 
-		professorDao.removeProfessor(47);
+//		professorDao.removeProfessor(47);
 
 	}
 
@@ -55,7 +55,7 @@ public class ProfessorDAOImplTest {
 		Professor professor = new Professor();
 		when(manager.find(Professor.class, 47)).thenReturn(professor);
 
-		professorDao.getProfessor(47);
+//		professorDao.getProfessor(47);
 
 	}
 

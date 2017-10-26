@@ -54,4 +54,16 @@ public class StudentController {
 		return "redirect:ViewCourses";
 	}
 	
+	@RequestMapping("student/vacateCourse")
+	public String doVacateCourse(int courseCode, HttpSession session, Model model, Principal principal){
+		Student student = studentDao.getStudent(principal.getName());
+		Course course = courseDao.getCourse(courseCode);
+		
+		student.removeCourse(course);
+		studentDao.updateStudent(student);
+		
+		session.setAttribute("message", "Successfully vacated from : " + course.getCourseName());
+		return "redirect:ViewCourses";
+	}
+	
 }

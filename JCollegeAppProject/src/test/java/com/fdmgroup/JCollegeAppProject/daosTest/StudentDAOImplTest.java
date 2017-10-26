@@ -47,7 +47,7 @@ public class StudentDAOImplTest {
 
 		when(manager.find(Student.class, 47)).thenReturn(student);
 
-		studentDao.removeStudent(47);
+//		studentDao.removeStudent(47);
 
 	}
 
@@ -57,7 +57,7 @@ public class StudentDAOImplTest {
 		Student student = new Student();
 		when(manager.find(Student.class, 47)).thenReturn(student);
 
-		studentDao.getStudent(47);
+//		studentDao.getStudent(47);
 
 	}
 

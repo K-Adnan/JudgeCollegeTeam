@@ -113,6 +113,17 @@ public class Student extends User implements Serializable {
 	public void addCourse(Course course){
 		courseList.add(course);
 	}
+	
+	public void removeCourse(Course course){
+		int index = 0;
+		// Iterating over all courses in course list until the course that is passed in, is found
+		for (int i=0;i<courseList.size();i++){
+			if (courseList.get(i).getCourseCode() == course.getCourseCode()){
+				index = i;	// Setting the index to be the course to be deleted
+			}
+		}
+		courseList.remove(index);
+	}
 
 	@Override
 	public String toString() {
