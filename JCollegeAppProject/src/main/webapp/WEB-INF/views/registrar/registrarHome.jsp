@@ -22,7 +22,7 @@
 </form>
 
 <ul>
-    <li><a href="My Profile">My Profile</a></li>
+    <li><a href="MyProfile">My Profile</a></li>
     <li><a href="System Users">System Users</a></li>
     <li><a href="Courses">Courses</a></li>
     <li><a href="Timetable">Timetable</a></li>

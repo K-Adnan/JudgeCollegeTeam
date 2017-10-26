@@ -1,5 +1,6 @@
 package com.fdmgroup.JCollegeAppProject.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAO;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
+import com.fdmgroup.JCollegeAppProject.daos.RegistrarDAO;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
+import com.fdmgroup.JCollegeAppProject.daos.UserDAO;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
+import com.fdmgroup.JCollegeAppProject.entities.Registrar;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
 
 @Controller
@@ -28,6 +32,8 @@ public class RegistrarController {
 	private ProfessorDAO professorDao;
 	@Autowired
 	private StudentDAO studentDao;
+	@Autowired
+	private RegistrarDAO registrarDao;
 	
 	
 	public RegistrarController() {
@@ -111,4 +117,11 @@ public class RegistrarController {
 		return "registrar/Courses";
 	}
 	
+	@RequestMapping("/registrar/MyProfile")
+	public String goToMyProfile(Principal principal, Model model) {
+		logger.info("Client request to url : MyProfile");
+		Registrar registrar = registrarDao.getRegistrar(principal.getName());
+		model.addAttribute("registrar", registrar);
+		return "registrar/MyProfile";
+	}
 }
