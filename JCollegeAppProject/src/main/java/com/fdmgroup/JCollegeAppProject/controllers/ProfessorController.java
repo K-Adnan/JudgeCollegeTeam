@@ -1,6 +1,7 @@
 package com.fdmgroup.JCollegeAppProject.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAOImpl;
@@ -65,11 +67,14 @@ public class ProfessorController {
 	}
 
 	@RequestMapping("/professor/viewCourses")
-	public String goToShowCourses(Model model) {
+	public String goToShowCourses(Model model, Principal principal) {
+		Professor professor = professorDao.getProfessor(principal.getName());
 		List<Course> courseList = courseDao.getAllCourses();
-		model.addAttribute("courseList", courseList);
-		return "professor/professorViewCourses";
+		List<Course> taughtCourseList = courseDao.getAllCoursesByProfessor(professor);
 
+		model.addAttribute("courseList", courseList);
+		model.addAttribute("taughtCourseList", taughtCourseList);
+		return "professor/professorViewCourses";
 	}
 
 	@RequestMapping("/professor/processViewCourses")
@@ -79,16 +84,15 @@ public class ProfessorController {
 	}
 
 	@RequestMapping("/professor/processChooseCourse")
-	public String processChooseCourse(Model model, int courseCode) {
-
+	public String processChooseCourse(Model model, int courseCode, Principal principal) {
+		Professor professor = professorDao.getProfessor(principal.getName());
+		
 		Course course = courseDao.getCourse(courseCode);
-		List<Course> courseList = courseDao.getAllCourses();
+		course.setProfessor(professor);
 		courseDao.updateCourse(course);
-		model.addAttribute("course", course);
-		model.addAttribute("courseList", courseList);
+		
 		logger.info("Course is chosen :" + courseCode);
-
-		return "professor/professorViewCourses";
+		return "redirect:viewCourses";
 	}
 
 	@RequestMapping("/professor/viewTaughtCourses")
@@ -107,14 +111,6 @@ public class ProfessorController {
 		Professor professor = professorDao.getProfessor(username);
 		courseDao.getAllCoursesByProfessor(professor);
 		return "professor/professorViewCourses";
-	}
-
-	@RequestMapping("/professor/viewStudents")
-	public String goToShowStudents(Model model) {
-		List<Student> studentList = studentDao.getAllStudents();
-		model.addAttribute("studentList", studentList);
-		return "professor/professorViewStudents";
-
 	}
 
 	@RequestMapping("/professor/processViewStudents")
@@ -163,6 +159,38 @@ public class ProfessorController {
 		professorDao.updateProfessor(professor);
 		
 		return "professor/professorEditProfile";
+	}
+	
+	
+	
+	@RequestMapping("/professor/unassignCourse")
+	public String doUnassignCourse(@RequestParam int courseCode, Model model, HttpSession session, Principal principal) {
+		Professor professor = professorDao.getProfessor(principal.getName());
+		Course course = courseDao.getCourse(courseCode);
+		course.setProfessor(null);
+		courseDao.updateCourse(course);
+		
+		return "redirect:viewCourses";
+	}
+	
+	@RequestMapping("/professor/viewStudents")
+	public String goToViewStudents(@RequestParam int courseCode, Model model, HttpSession session, Principal principal) {
+		Course course = courseDao.getCourse(courseCode);
+		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
+		List<Character> gradeList = new ArrayList<Character>();
+		gradeList.add('A');
+		gradeList.add('B');
+		gradeList.add('C');
+		gradeList.add('D');
+		gradeList.add('E');
+		gradeList.add('F');
+		gradeList.add('U');
+		gradeList.add(' ');
+		
+		model.addAttribute("gradeList", gradeList);
+		model.addAttribute("course", course);
+		model.addAttribute("studentList", studentList);
+		return "professor/professorViewStudentsOnTaughtCourse";
 	}
 
 }

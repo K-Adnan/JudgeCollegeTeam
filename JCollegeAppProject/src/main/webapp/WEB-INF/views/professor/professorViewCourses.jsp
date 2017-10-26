@@ -10,11 +10,7 @@
 <body>
 
 	<h2>Student Course Options</h2>
-
-	
-
 	<br /> ${username} please choose a course to teach.
-
 
 	<table>
 		<tr>
@@ -30,8 +26,8 @@
 
 		<c:forEach items="${courseList}" var="c">
 			<tr>
-				<th><a href="processOtherCourse?courseCode=${c.courseCode}">${c.courseCode}</a></th>
-				<th><a href="processOtherCourse?courseCode=${c.courseCode}">${c.courseName}</a></th>
+				<th>${c.courseCode}</th>
+				<th>${c.courseName}</th>
 				<th>${c.courseInfo}</th>
 			<th><c:choose>
 						<c:when test="${empty c.professor}">
@@ -45,13 +41,13 @@
 				<th>${c.endDate}</th>
 				<th>
 				<c:choose>
-									<c:when test="${empty c.professor.username }">
-										<a href="processChooseCourse?courseCode=${c.courseCode}"> Teach</a>
-									</c:when>
-									<c:otherwise>
-										
-									</c:otherwise>
-								</c:choose>
+					<c:when test="${empty c.professor.username }">
+						<a href="processChooseCourse?courseCode=${c.courseCode}"> Teach</a>
+					</c:when>
+					<c:otherwise>
+						
+					</c:otherwise>
+				</c:choose>
 				</th>
 		</c:forEach>
 	</table>
@@ -61,31 +57,26 @@
 <h2>My courses</h2>
 <table>
 		<tr>
-
 			<th>Course Code</th>
 			<th>Course Name</th>
 			<th>Course Info</th>
 			<th>Start Date</th>
 			<th>End Date</th>
-
 		</tr>
-
 
 		<c:forEach items="${taughtCourseList}" var="t">
 			<tr>
-				<th><a href="processChooseCourse?courseCode=${t.courseCode}">${t.courseCode}</a></th>
-				<th>${t.courseName}</th>
+				<th>${t.courseCode}</th>
+				<th><a href="viewStudents?courseCode=${t.courseCode}">${t.courseName}</a></th>
 				<th>${t.courseInfo}</th>
 				<th>${t.startDate}</th>
 				<th>${t.endDate}</th>
+				<th><a href="unassignCourse?courseCode=${t.courseCode}">Unassign</a></th>
 		</c:forEach>
 	</table>
 
 </br>
 <a href="professorHome"> Go back Home</a>
-
 <a href="/JCollegeAppProject/logout">Logout</a>
-
-
 </body>
 </html>

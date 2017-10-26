@@ -15,7 +15,7 @@
 	<br />
 	<br /> ${username} 
 	
-	${c.courseName} - ${c.courseInfo} - ${c.startDate}	- ${c.endDate}
+	${course.courseName} - ${course.courseInfo} - ${course.startDate}	- ${course.endDate}
 
 
 	<table>
@@ -31,11 +31,34 @@
 
 		<c:forEach items="${studentList}" var="s">
 			<tr>
-				<th>${s.username}</a></th>
+				<th>${s.username}</th>
 				<th>${s.firstName}</th>
 				<th>${s.lastName}</th>
-				<th>${s.email}</th>
-				<th><sf:input path="grade" value="${grade}"/></th>
+				<th>${s.emailAddress}</th>
+ 				<th>
+ 				<c:forEach items="${s.gradeList}" var="grade">
+ 				<form>
+					<select>
+					<c:choose>
+						<c:when test="${grade.course.courseCode eq course.courseCode }">
+							
+							<c:forEach items="${gradeList}" var="g">
+							  <c:choose>
+								<c:when test="${grade.gradeValue eq g }">
+									<option value="${g}" selected>${g}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${g}">${g}</option>
+								</c:otherwise>
+							  </c:choose>
+							</c:forEach>
+						 </c:when>
+						<c:otherwise> </c:otherwise>
+ 					</c:choose>
+ 					</select>
+				</form>
+ 				</c:forEach>
+ 				</th>
 		</c:forEach>
 	</table>
 	
