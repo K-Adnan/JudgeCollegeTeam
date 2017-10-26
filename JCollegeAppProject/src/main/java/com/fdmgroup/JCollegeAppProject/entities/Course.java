@@ -31,7 +31,7 @@ public class Course implements Serializable {
 	private Date startDate;
 	private Date endDate;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy="courseList")
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Set<Student> studentList;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)

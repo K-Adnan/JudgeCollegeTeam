@@ -39,8 +39,8 @@ public class Student extends User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-	private List<Course> courseList;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy="studentList")
+	private Set<Course> courseList;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REMOVE}, mappedBy="student", orphanRemoval=true)
 	private Set<Grade> gradeList;
@@ -50,7 +50,7 @@ public class Student extends User implements Serializable {
 	}
 
 	public Student(String address, String phoneNumber, Date dOB, Gender gender,
-			List<Course> courseList, Set<Grade> gradeList) {
+			Set<Course> courseList, Set<Grade> gradeList) {
 		super();
 		this.address = address;
 		this.phoneNumber = phoneNumber;
@@ -94,11 +94,11 @@ public class Student extends User implements Serializable {
 //	public void setGender(String genderValue) {
 //		this.gender = Gender.valueOf(genderValue);
 //	}
-	public List<Course> getCourseList() {
+	public Set<Course> getCourseList() {
 		return courseList;
 	}
 
-	public void setCourseList(List<Course> courseList) {
+	public void setCourseList(Set<Course> courseList) {
 		this.courseList = courseList;
 	}
 
@@ -117,12 +117,13 @@ public class Student extends User implements Serializable {
 	public void removeCourse(Course course){
 		int index = 0;
 		// Iterating over all courses in course list until the course that is passed in, is found
-		for (int i=0;i<courseList.size();i++){
-			if (courseList.get(i).getCourseCode() == course.getCourseCode()){
-				index = i;	// Setting the index to be the course to be deleted
-			}
-		}
-		courseList.remove(index);
+//		for (int i=0;i<courseList.size();i++){
+//			if (courseList.get(i).getCourseCode() == course.getCourseCode()){
+//				index = i;	// Setting the index to be the course to be deleted
+//			}
+//		}
+		courseList.remove(course);
+//		courseList.remove(index);
 	}
 
 	@Override
