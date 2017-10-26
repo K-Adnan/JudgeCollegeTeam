@@ -19,8 +19,8 @@ import javax.persistence.OneToMany;
 public class Professor extends User implements Serializable {
 
 	private String address;
-	private int phone;
-	private int fax;
+	private String phone;
+	private String fax;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy="professor")
 	private Set<Course> courses=new HashSet<Course>();
@@ -33,7 +33,7 @@ public class Professor extends User implements Serializable {
 		super();
 	}
 
-	public Professor(String address, int phone, int fax,
+	public Professor(String address, String phone, String fax,
 			Set<Course> course, Department department) {
 		super();
 		this.address = address;
@@ -51,19 +51,19 @@ public class Professor extends User implements Serializable {
 		this.address = address;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-	public int getFax() {
+	public String getFax() {
 		return fax;
 	}
 
-	public void setFax(int fax) {
+	public void setFax(String fax) {
 		this.fax = fax;
 	}
 
