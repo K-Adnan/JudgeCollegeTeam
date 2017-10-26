@@ -30,7 +30,6 @@ public class StudentController {
 	public StudentController() {
 	}
 	
-	
 	@RequestMapping("student/ViewCourses")
 	public String goToViewCourses(HttpSession session, Model model, Principal principal){
 		Student student = studentDao.getStudent(principal.getName());
@@ -50,7 +49,7 @@ public class StudentController {
 		student.addCourse(course);
 		studentDao.updateStudent(student);
 		
-		session.setAttribute("message", "Successfully enrolled on : " + course.getCourseName());
+		model.addAttribute("message", "Successfully enrolled on : " + course.getCourseName());
 		return "redirect:ViewCourses";
 	}
 	
@@ -62,8 +61,16 @@ public class StudentController {
 		student.removeCourse(course);
 		studentDao.updateStudent(student);
 		
-		session.setAttribute("message", "Successfully vacated from : " + course.getCourseName());
+		model.addAttribute("message", "Successfully vacated from : " + course.getCourseName());
 		return "redirect:ViewCourses";
+	}
+	
+	@RequestMapping("student/ViewProfile")
+	public String goToViewProfile(HttpSession session, Model model, Principal principal){
+		Student student = studentDao.getStudent(principal.getName());
+		
+		model.addAttribute("student", student);
+		return "student/studentViewProfile";
 	}
 	
 }

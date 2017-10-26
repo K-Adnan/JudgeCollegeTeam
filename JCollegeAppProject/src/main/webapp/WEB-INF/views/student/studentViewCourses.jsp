@@ -50,6 +50,9 @@
 		</c:forEach>
 	</table>
 	${message}
+		<br/>
+		<br/>
+		<br/>
 
 	Enrolled Courses
 	<table>
