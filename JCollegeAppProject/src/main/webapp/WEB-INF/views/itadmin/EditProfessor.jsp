@@ -10,44 +10,44 @@
 <body>
 
 <br />
-	<br />
+     <br />
 
-	<br /> ${message}
+     <br /> ${message}
 
-	<br />
-	<br /> edit the details of a professor
+     <br />
+     <br /> edit the details of a professor
 
-	<sf:form method="post" action="UpdateProfessor" modelAttribute="professor">
+     <sf:form method="post" action="UpdateProfessor" modelAttribute="professor">
 
-		
-		
+           
+           
 First Name: <sf:input path="firstName" value="${professor.firstName}" />
-		<br />
-		<br />
+           <br />
+           <br />
 Last Name: <br />
-		<sf:input path="lastName" value="${lastName}" />
-		<br />
+           <sf:input path="lastName" value="${lastName}" />
+           <br />
 User Name: <sf:input path="username"  value="${username}" />
-		<br />
-		<br />
-Email: 	<sf:input path="email"  value="${email}" />
-		<br />
-		<br />
+           <br />
+           <br />
+Email:     <sf:input path="email"  value="${email}" />
+           <br />
+           <br />
 Address <sf:input path="firstname" value="${professor.address}" />
-		<br />
-		<br />
+           <br />
+           <br />
 Phone: <sf:input path="phone"  value="${phone}" />
-		<br />
-		<br />
-Fax:  	<sf:input path="fax"  value="${fax}" />
-		<br />
-		<br />
-Role:	<sf:input path="role"  value="${role}" />
+           <br />
+           <br />
+Fax:       <sf:input path="fax"  value="${fax}" />
+           <br />
+           <br />
+Role: <sf:input path="role"  value="${role}" />
 
-		<input type="submit" value="Edit" />
-		
-	</sf:form>
-	
+           <input type="submit" value="Edit" />
+           
+     </sf:form>
+     
 
 <a href="HomePage"> Back To Home  </a>
 
