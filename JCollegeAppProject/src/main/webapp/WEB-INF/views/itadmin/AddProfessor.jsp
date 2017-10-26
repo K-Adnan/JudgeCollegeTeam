@@ -1,15 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add User</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<sf:form method="post" action="processAddStudent" modelAttribute="user">
-
-		 	 
+	<sf:form method="post" action="processAddProfessor" modelAttribute="user">		 	 
 		
 		Registration Date <sf:input type="date" path="user.registrationDate" />
 		
@@ -18,8 +16,7 @@
 		<br /> 
 		Last Name <sf:input type="text" path="user.lastName" />
 		<br />
-		
-		
+				
 		User Name <sf:input type="text" path="username" />
 		<br />
 		<br /> 
@@ -32,14 +29,14 @@
 		Email Address <sf:input type="text" path="user.emailAddress" />
 		<br />
 		<br />
-		Address <sf:input type="text" path="student.address" />
+		Address <sf:input type="text" path="professor.address" />
 
 		<br /> 
-		Phone Number <sf:input type="text" path="student.phoneNumber" />
+		Phone Number <sf:input type="text" path="professor.phone" />
 
 		<br /> 
 		
-		Date Of Birth <sf:input type="text" path="student.dob" />
+		Fax <sf:input type="text" path="professor.fax" />
 
 		<br /> 
 		

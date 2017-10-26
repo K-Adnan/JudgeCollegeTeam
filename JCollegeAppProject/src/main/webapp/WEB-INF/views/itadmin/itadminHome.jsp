@@ -16,6 +16,15 @@
 <a href = "AddStudent"> Add Student </a>
 <br />
 <br />
+<a href = "AddProfessor"> Add Professor </a>
+<br />
+<br />
+<a href = "AddRegistrar"> Add Registrar </a>
+<br />
+<br />
+<a href = "AddStudent"> Add Student </a>
+<br />
+<br />
 <a href = "ViewUsers"> View Users</a>
 <br />
 <br />
