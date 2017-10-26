@@ -17,7 +17,7 @@
             <tr>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Username</th>
+            <th>User Name</th>
                 <th>Address</th>
                 <th>Phone Number</th>
                 <th>Fax</th>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ include file="PageDirectives.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,9 +9,9 @@
 </head>
 <body>
 
-${username}
+	${username}
 
-<table>
+	<table>
 		<tr>
 
 			<th>Course Code</th>
@@ -22,6 +22,7 @@ ${username}
 
 		</tr>
 
+
 		<c:forEach items="${courseList}" var="c">
 			<tr>
 				<th><a href="processChoseCourse?courseCode=${c.courseCode}">${c.courseCode}</a></th>
@@ -31,7 +32,9 @@ ${username}
 				<th>${c.endDate}</th>
 		</c:forEach>
 	</table>
-
+	<br />
+	<br />
+	<a href="professorHome">back home</a>
 
 
 </body>

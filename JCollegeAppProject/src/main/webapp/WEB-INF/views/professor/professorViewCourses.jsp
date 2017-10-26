@@ -22,7 +22,7 @@
 			<th>Course Code</th>
 			<th>Course Name</th>
 			<th>Course Info</th>
-			<th>Availability  </th>
+			<th>Availability </th>
 			<th>Start Date</th>
 			<th>End Date</th>
 			
@@ -30,7 +30,7 @@
 
 		<c:forEach items="${courseList}" var="c">
 			<tr>
-				<th><a href="processChoseCourse?courseCode=${c.courseCode}">${c.courseCode}</a></th>
+				<th><a href="processOtherCourse?courseCode=${c.courseCode}">${c.courseCode}</a></th>
 				<th>${c.courseName}</th>
 				<th>${c.courseInfo}</th>
 				<th>if (${professor} = "null") {
@@ -41,7 +41,30 @@
 				<th>${c.endDate}</th>
 		</c:forEach>
 	</table>
+<br/>
+<br />
+<br />
+<table>
+		<tr>
 
+			<th>Course Code</th>
+			<th>Course Name</th>
+			<th>Course Info</th>
+			<th>Start Date</th>
+			<th>End Date</th>
+
+		</tr>
+
+
+		<c:forEach items="${courseList}" var="c">
+			<tr>
+				<th><a href="processChoseCourse?courseCode=${c.courseCode}">${c.courseCode}</a></th>
+				<th>${c.courseName}</th>
+				<th>${c.courseInfo}</th>
+				<th>${c.startDate}</th>
+				<th>${c.endDate}</th>
+		</c:forEach>
+	</table>
 
 </body>
 </html>
