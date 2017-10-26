@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ include file="PageDirectives.jsp"%>
+<%@ include file="../PageDirectives.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -30,7 +30,7 @@
 
 	<ul>
 		<div class="img">
-			<IMG HEIGHT="250" WIDTH="300"
+			<IMG HEIGHT="50" WIDTH="80"
 				SRC=http://www.pathwaysnetwork.co.uk/images/jeancarr-jc.jpg>
 		</div>
 		<h2>Judge College</h2>
@@ -43,8 +43,8 @@
 	</ul>
 
 	<ul>
-		<li><a href="My Profile">My Profile</a></li>
-		<li><a href="System Users">System Users</a></li>
+		<li><a href="MyProfile">My Profile</a></li>
+		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
 		<li><a href="Timetable">Timetable</a></li>
 		<li><a href="Grades">Grades</a></li>
@@ -54,18 +54,21 @@
 
 		<h2>Course Catalogue</h2>
 
-		<h5>
-			<a href="Show all courses">Show all courses</a>
-		</h5>
-
 		<c:forEach items="${courseList}" var="c">
 			<a href="processChooseCourse?courseId=${c.courseCode}">
 				${c.courseName}</a>
 			<br />
 		</c:forEach>
 
+	<form name="form1" method="post" action="AddCourse">
+			<label class="addCourse"> <input name="submit3"
+				type="submit" id="submit2" value="Add Course">
+			</label>
+		</form>
+
+<br /><br />
 		<table>
-			<caption>Course Details</caption>
+			<caption><b>Course Details</b></caption>
 			<tr>
 				<td>Course Name</td>
 				<td><input type="hidden" id="courseName" value="${course.courseName}">${course.courseName}</td>
@@ -104,12 +107,12 @@
 			<input type="hidden" name="code" value="${course.courseCode}" /> 
 			<input name="cancelCourse" type="submit" value="Cancel Course">
 		</form>
-
+<br /><br />
 		<table>
-			<caption align="left">Enrolled Students</caption>
+			<caption align="left"><b>Enrolled Students</b></caption>
 			<tr>
-				<th>Student Id</th>
-				<th>Name</th>
+				<td>Student Id</td>
+				<td>Name</td>
 			</tr>
 			<c:forEach items="${studentList}" var="s">
 				<td>${s.username}</td>

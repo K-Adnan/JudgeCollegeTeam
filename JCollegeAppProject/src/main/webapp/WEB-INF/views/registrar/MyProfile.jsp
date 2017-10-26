@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ include file="PageDirectives.jsp"%>
+<%@ include file="../PageDirectives.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -14,7 +14,7 @@
 
 	<ul>
 		<div class="img">
-			<IMG HEIGHT="250" WIDTH="300"
+			<IMG HEIGHT="50" WIDTH="80"
 				SRC=http://www.pathwaysnetwork.co.uk/images/jeancarr-jc.jpg>
 		</div>
 		<h2>Judge College</h2>
@@ -27,8 +27,8 @@
 	</ul>
 
 	<ul>
-		<li><a href="My Profile">My Profile</a></li>
-		<li><a href="System Users">System Users</a></li>
+		<li><a href="MyProfile">My Profile</a></li>
+		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
 		<li><a href="Timetable">Timetable</a></li>
 		<li><a href="Grades">Grades</a></li>

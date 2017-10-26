@@ -17,3 +17,7 @@ body {
 caption {
     text-align:left;
 }
+h2 a{
+	text-decoration: none;
+	color: black;}	
+}

@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAO;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl;
+import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAO;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
 import com.fdmgroup.JCollegeAppProject.daos.RegistrarDAO;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
-import com.fdmgroup.JCollegeAppProject.daos.UserDAO;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
+import com.fdmgroup.JCollegeAppProject.entities.Department;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Registrar;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
@@ -34,6 +35,8 @@ public class RegistrarController {
 	private StudentDAO studentDao;
 	@Autowired
 	private RegistrarDAO registrarDao;
+	@Autowired
+	private DepartmentDAO departmentDao;
 	
 	
 	public RegistrarController() {
@@ -43,6 +46,26 @@ public class RegistrarController {
 	public RegistrarController(CourseDAOImpl cDAO, ProfessorDAO professorDAO) {
 		this.courseDao = cDAO;
 		this.professorDao = professorDAO;
+	}
+	
+	@RequestMapping("/registrar/registrarHome")
+	public String GoToregistrarHome(){
+		logger.info("Client request to url : registrarHome");
+		return "registrar/registrarHome";
+	}
+	
+	@RequestMapping("/registrar/MyProfile")
+	public String GoToMyProfile(Principal principal, Model model) {
+		logger.info("Client request to url : MyProfile");
+		Registrar registrar = registrarDao.getRegistrar(principal.getName());
+		model.addAttribute("registrar", registrar);
+		return "registrar/MyProfile";
+	}
+
+	@RequestMapping("/registrar/SystemUsers")
+	public String GoToSystemUsers(){
+		logger.info("Client request to url : SystemUsers");
+		return "registrar/SystemUsers";
 	}
 	
 	@RequestMapping("/registrar/Courses")
@@ -92,16 +115,6 @@ public class RegistrarController {
 		return "registrar/Courses";
 	}
 	
-	@RequestMapping("/courseAdding")
-	public String courseAdding(Model model, int courseId){
-		Course course = courseDao.getCourse(courseId);
-		courseDao.addCourse(course);
-		model.addAttribute("message", "Course added successfully!");
-		model.addAttribute("course",course);
-		logger.info("Course is added :"+courseId);
-		return "CourseAdding";
-	}
-	
 	@RequestMapping("/registrar/processChooseCourse")
 	public String doChooseCourse(Model model, int courseId){
 		Course course = courseDao.getCourse(courseId);
@@ -117,11 +130,42 @@ public class RegistrarController {
 		return "registrar/Courses";
 	}
 	
-	@RequestMapping("/registrar/MyProfile")
-	public String goToMyProfile(Principal principal, Model model) {
-		logger.info("Client request to url : MyProfile");
-		Registrar registrar = registrarDao.getRegistrar(principal.getName());
-		model.addAttribute("registrar", registrar);
-		return "registrar/MyProfile";
+	@RequestMapping("/registrar/AddCourse")
+	public String GoToAddCourse(Model model, Course course){
+		List<Professor> professorList = professorDao.getAllProfessors();
+		List<Department> departmentList = departmentDao.getAllDepartments();
+		model.addAttribute("professorList", professorList);
+		model.addAttribute("departmentList", departmentList);
+		model.addAttribute("course",course);
+		logger.info("Client request to url : AddCourse");
+		return "registrar/AddCourse";
+	}
+	
+	@RequestMapping("/registrar/doAddCourse")
+	public String DoAddCourse(Model model, Course course){
+	List<Department> departmentList = departmentDao.getAllDepartments();
+	courseDao.addCourse(course);
+	model.addAttribute("departmentList", departmentList);
+	model.addAttribute("message", "Course added successfully!");
+	model.addAttribute("course",course);
+	List<Course> courseList = courseDao.getAllCourses();
+	model.addAttribute("courseList", courseList);
+	List<Professor> professorList = professorDao.getAllProfessors();
+	model.addAttribute("professorList", professorList);
+	//logger.info("Course is added : " +courseCode);
+	return "registrar/Courses";
+	}
+	
+	@RequestMapping("/registrar/Timetable")
+	public String GoToTimetable(){
+		logger.info("Client request to url : Timetable");
+		return "registrar/Timetable";
+	}
+	
+	@RequestMapping("/registrar/Grades")
+	public String GoToGrades(){
+		
+		logger.info("Client request to url : Grades");
+		return "registrar/Grades";
 	}
 }
