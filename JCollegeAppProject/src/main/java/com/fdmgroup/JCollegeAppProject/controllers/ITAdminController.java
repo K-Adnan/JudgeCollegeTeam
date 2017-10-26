@@ -1,5 +1,8 @@
 package com.fdmgroup.JCollegeAppProject.controllers;
 
+import java.security.Principal;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -24,8 +27,8 @@ public class ITAdminController {
 
 	private Logger logger = Logger.getLogger(getClass());
 
-	// @Autowired
-	// private UserDAO userDao;
+	 @Autowired
+	 private UserDAO userDao;
 	@Autowired
 	private StudentDAO studentDao;
 	@Autowired
@@ -95,6 +98,17 @@ public class ITAdminController {
 		model.addAttribute("message", "Professor added successfully");
 		return "itAdmin/HomePage";
 	}
+	
+	@RequestMapping("/itAdmin/viewProfessors")
+	public String goToViewProfessors(HttpSession session, Model model, Principal principal) {
+		Professor professor = professorDao.getProfessor(principal.getName());
+		List<User> professorList = userDao.getAllUsersByProfessor(professor);
+		
+		model.addAttribute("professorList", professorList);
+		
+		return "itAdmin/ViewProfessors";
+	}
+	
 
 	@RequestMapping("/itAdmin/removeProfessor")
 	public String goToRemoveProfessor(Model model) {
