@@ -26,7 +26,7 @@
 			<th>Last Name</th>
 			<th>Email Address</th>
 			<th>Grade </th>
-
+			<th> </th>
 		</tr>
 
 		<c:forEach items="${studentList}" var="s">
@@ -36,9 +36,19 @@
 				<th>${s.lastName}</th>
 				<th>${s.emailAddress}</th>
  				<th>
+			<select name="gradeDropdown">
+			  <c:choose>
+			  <%-- Display entire list when the student has no grades assigned to them --%>
+				<c:when test="${empty s.gradeList}">
+				<c:forEach items="${gradeList}" var="g">
+						<option value="${g}" selected>${g}</option>
+				</c:forEach>
+				</c:when>
+				
+				<%-- Display assigned grade as selected when the student has at least one grade assigned to them  --%>
+				<c:otherwise>
  				<c:forEach items="${s.gradeList}" var="grade">
  				<form>
-					<select>
 					<c:choose>
 						<c:when test="${grade.course.courseCode eq course.courseCode }">
 							
@@ -55,10 +65,13 @@
 						 </c:when>
 						<c:otherwise> </c:otherwise>
  					</c:choose>
- 					</select>
 				</form>
  				</c:forEach>
+				</c:otherwise>
+				</c:choose>
+ 			</select>
  				</th>
+ 				<th><a href="updateGrade?courseCode=${course.courseCode}&username=${s.username}&grade=${gradeDropdown}">Update</a></th>
 		</c:forEach>
 	</table>
 	

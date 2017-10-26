@@ -19,6 +19,7 @@ import com.fdmgroup.JCollegeAppProject.daos.GradeDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAOImpl;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
+import com.fdmgroup.JCollegeAppProject.entities.Grade;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
 
@@ -175,6 +176,36 @@ public class ProfessorController {
 	
 	@RequestMapping("/professor/viewStudents")
 	public String goToViewStudents(@RequestParam int courseCode, Model model, HttpSession session, Principal principal) {
+		Course course = courseDao.getCourse(courseCode);
+		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
+		List<Character> gradeList = new ArrayList<Character>();
+		gradeList.add('A');
+		gradeList.add('B');
+		gradeList.add('C');
+		gradeList.add('D');
+		gradeList.add('E');
+		gradeList.add('F');
+		gradeList.add('U');
+		gradeList.add(' ');
+		
+		model.addAttribute("gradeList", gradeList);
+		model.addAttribute("course", course);
+		model.addAttribute("studentList", studentList);
+		return "professor/professorViewStudentsOnTaughtCourse";
+	}
+	
+	@RequestMapping("/professor/updateGrade")
+	public String doUpdateGrade(int courseCode, String username, Character grade, Model model, HttpSession session, Principal principal) {
+//		Professor professor = professorDao.getProfessor(principal.getName());
+//		Student student = studentDao.getStudent(username);
+		
+//		Grade grade = new Grade();
+		System.out.println(courseCode);
+		System.out.println(username);
+		System.out.println(grade);
+		
+		
+		
 		Course course = courseDao.getCourse(courseCode);
 		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
 		List<Character> gradeList = new ArrayList<Character>();
