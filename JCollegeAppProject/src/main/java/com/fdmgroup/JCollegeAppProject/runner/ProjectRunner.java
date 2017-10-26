@@ -1,5 +1,7 @@
 package com.fdmgroup.JCollegeAppProject.runner;
 
+import java.util.List;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -17,7 +19,9 @@ public class ProjectRunner {
 		CourseDAO courseDao = new CourseDAOImpl(factory);
 		StudentDAO studentDao = new StudentDAOImpl(factory);
 		
-		System.out.println(studentDao.getAllStudentsByCourse(courseDao.getCourse(102)));
+		List<Course> list = courseDao.getAllNonEnrolledCoursesByStudent(studentDao.getStudent("student"));
+		System.out.println(list.size());
+		
 		
 		
 		factory.close();

@@ -109,6 +109,10 @@ public class Student extends User implements Serializable {
 	public void setGradeList(Set<Grade> gradeList) {
 		this.gradeList = gradeList;
 	}
+	
+	public void addCourse(Course course){
+		courseList.add(course);
+	}
 
 	@Override
 	public String toString() {

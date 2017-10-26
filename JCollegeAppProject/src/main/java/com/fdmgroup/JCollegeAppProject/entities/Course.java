@@ -2,6 +2,7 @@ package com.fdmgroup.JCollegeAppProject.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,8 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,6 +31,8 @@ public class Course implements Serializable {
 	private Date startDate;
 	private Date endDate;
 	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy="courseList")
+	private Set<Student> studentList;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Department department;
@@ -114,6 +117,19 @@ public class Course implements Serializable {
 		return "Course [courseCode=" + courseCode + ", courseName=" + courseName + ", courseInfo=" + courseInfo
 				+ ", startDate=" + startDate + ", endDate=" + endDate + ", department=" + department + ", professor="
 				+ professor + "]";
+	}
+	
+	public Set<Student> getStudentList() {
+		return studentList;
+	}
+	
+	public void setStudentList(Set<Student> studentList) {
+		this.studentList = studentList;
+	}
+	
+	public void addCourse(Student student){
+		studentList.add(student);
+		student.addCourse(this);
 	}
 
 	

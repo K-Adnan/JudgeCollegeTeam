@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Department;
+import com.fdmgroup.JCollegeAppProject.entities.Student;
 
 public class CourseDAOImpl implements CourseDAO {
 
@@ -69,6 +70,24 @@ public class CourseDAOImpl implements CourseDAO {
 		EntityManager manager = factory.createEntityManager();
 		TypedQuery<Course> query = manager.createQuery("SELECT c FROM Course c WHERE c.department=?", Course.class);
 		query.setParameter(1, department);
+		List<Course> courseList = query.getResultList();
+		manager.close();
+		return courseList;
+	}
+	
+	public List<Course> getAllCoursesByStudent(Student student) {
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Course> query = manager.createQuery("select c FROM Course as c join fetch c.studentList s WHERE s.username =?", Course.class);
+        query.setParameter(1, student.getUsername());
+		List<Course> courseList = query.getResultList();
+		manager.close();
+		return courseList;
+	}
+	
+	public List<Course> getAllNonEnrolledCoursesByStudent(Student student) {
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Course> query = manager.createQuery("select c FROM Course as c join fetch c.studentList s WHERE s.username != ?", Course.class);
+        query.setParameter(1, student.getUsername());
 		List<Course> courseList = query.getResultList();
 		manager.close();
 		return courseList;
