@@ -18,6 +18,7 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>User Name</th>
+            <th>Registration Date</th>
                 <th>Address</th>
                 <th>Phone Number</th>
                 <th>Fax</th>
@@ -26,14 +27,13 @@
             </tr>
             
                 <tr>
-                <th>${user.firstName}</th>
-                <th>${user.lastName}</th>
-                <th>${user.username}</th>
-                <th>${user.registrationDate}</th>
+                <th>${professor.firstName}</th>
+                <th>${professor.lastName}</th>
+                <th>${professor.username}</th>
+                <th>${professor.registrationDate}</th>
                     <th>${professor.address}</th>
                     <th>${professor.phone}</th>
                     <th>${professor.fax}</th>
-                    <th>${professor.course}</th>
                     <th>${professor.department}</th>
       
                 </tr>
@@ -52,8 +52,7 @@
 
 
 
-
-
+<a href="professorHome"> Go back Home</a>
 
 
 

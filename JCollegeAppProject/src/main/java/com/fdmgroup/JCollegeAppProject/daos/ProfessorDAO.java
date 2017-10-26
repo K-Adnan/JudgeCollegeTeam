@@ -21,5 +21,6 @@ public interface ProfessorDAO {
 	public Professor getProfessorByCourse(Course course);
 
 	public List<Professor> getAllProfessorsByDepartment(Department department);
+	
 
 }

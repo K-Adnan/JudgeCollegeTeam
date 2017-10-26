@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Department;
+import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
 
 public interface CourseDAO {
@@ -23,5 +24,7 @@ public interface CourseDAO {
 	public List<Course> getAllCoursesByStudent(Student student);
 	
 	public List<Course> getAllNonEnrolledCoursesByStudent(Student student);
+	
+	public List<Course>getAllCoursesByProfessor(Professor professor);
 
 }

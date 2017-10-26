@@ -11,9 +11,9 @@
 
 	<h2>Student Course Options</h2>
 
-	<a href="/JCollegeAppProject/logout">Logout</a>
+	
 
-	<br /> ${username} please chose a course to teach.
+	<br /> ${username} please choose a course to teach.
 
 
 	<table>
@@ -22,28 +22,43 @@
 			<th>Course Code</th>
 			<th>Course Name</th>
 			<th>Course Info</th>
-			<th>Availability </th>
+			<th>Taught by</th>
 			<th>Start Date</th>
 			<th>End Date</th>
-			
+			<th> </th>
 		</tr>
 
 		<c:forEach items="${courseList}" var="c">
 			<tr>
 				<th><a href="processOtherCourse?courseCode=${c.courseCode}">${c.courseCode}</a></th>
-				<th>${c.courseName}</th>
+				<th><a href="processOtherCourse?courseCode=${c.courseCode}">${c.courseName}</a></th>
 				<th>${c.courseInfo}</th>
-				<th>if (${professor} = "null") {
-        Available;
-    } else
-					{ ${professor}; }}</th>
+			<th><c:choose>
+						<c:when test="${empty c.professor}">
+							N/A
+						</c:when>
+						<c:otherwise>
+					${c.professor.firstName} ${c.professor.lastName}
+					</c:otherwise>
+					</c:choose></th>
 				<th>${c.startDate}</th>
 				<th>${c.endDate}</th>
+				<th>
+				<c:choose>
+									<c:when test="${empty c.professor.username }">
+										<a href="processChooseCourse?courseCode=${c.courseCode}"> Teach</a>
+									</c:when>
+									<c:otherwise>
+										
+									</c:otherwise>
+								</c:choose>
+				</th>
 		</c:forEach>
 	</table>
 <br/>
 <br />
 <br />
+<h2>My courses</h2>
 <table>
 		<tr>
 
@@ -56,15 +71,21 @@
 		</tr>
 
 
-		<c:forEach items="${courseList}" var="c">
+		<c:forEach items="${taughtCourseList}" var="t">
 			<tr>
-				<th><a href="processChoseCourse?courseCode=${c.courseCode}">${c.courseCode}</a></th>
-				<th>${c.courseName}</th>
-				<th>${c.courseInfo}</th>
-				<th>${c.startDate}</th>
-				<th>${c.endDate}</th>
+				<th><a href="processChooseCourse?courseCode=${t.courseCode}">${t.courseCode}</a></th>
+				<th>${t.courseName}</th>
+				<th>${t.courseInfo}</th>
+				<th>${t.startDate}</th>
+				<th>${t.endDate}</th>
 		</c:forEach>
 	</table>
+
+</br>
+<a href="professorHome"> Go back Home</a>
+
+<a href="/JCollegeAppProject/logout">Logout</a>
+
 
 </body>
 </html>

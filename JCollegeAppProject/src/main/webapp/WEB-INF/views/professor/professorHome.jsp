@@ -15,12 +15,15 @@
 
 <br />
 <br />
-<a href = "ViewCourses"> View Courses </a>
+<a href = "viewCourses"> View Courses </a>
 <br />
 <br />
-<a href = "ViewTaughtCourses"> View Assigned Courses</a>
+<a href = "viewStudents"> View Students</a>
 <br />
 <br />
-<a href = "ViewProfile"> View Profile</a>
+<a href = "viewTaughtCourses"> View Assigned Courses</a>
+<br />
+<br />
+<a href = "viewProfile"> View Profile</a>
 </body>
 </html>
