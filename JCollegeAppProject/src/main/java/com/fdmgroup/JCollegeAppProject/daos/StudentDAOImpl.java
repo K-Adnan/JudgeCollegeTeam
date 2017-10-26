@@ -81,7 +81,7 @@ public class StudentDAOImpl implements StudentDAO {
 	public List<Student> getAllStudentsByCourse(Course course) {
 		EntityManager manager = factory.createEntityManager();
 		TypedQuery<Student> query = manager.createQuery("select s FROM Student as s join fetch s.courseList c WHERE c.courseCode =?", Student.class);
-        query.setParameter(1, course.getCourseCode());
+        query.setParameter(1, course.getCourseCode());		//select c FROM Course as c join fetch c.studentList s WHERE s.username =?
 		List<Student> studentList = query.getResultList();
 		manager.close();
 		return studentList;

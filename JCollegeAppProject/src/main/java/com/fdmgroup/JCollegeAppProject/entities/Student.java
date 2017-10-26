@@ -39,7 +39,7 @@ public class Student extends User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy="studentList")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy="studentList")
 	private Set<Course> courseList;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REMOVE}, mappedBy="student", orphanRemoval=true)
@@ -91,9 +91,7 @@ public class Student extends User implements Serializable {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
-//	public void setGender(String genderValue) {
-//		this.gender = Gender.valueOf(genderValue);
-//	}
+
 	public Set<Course> getCourseList() {
 		return courseList;
 	}
@@ -112,6 +110,7 @@ public class Student extends User implements Serializable {
 	
 	public void addCourse(Course course){
 		courseList.add(course);
+		course.addStudent(this);
 	}
 	
 	public void removeCourse(Course course){
@@ -132,4 +131,5 @@ public class Student extends User implements Serializable {
 				+ ", phoneNumber=" + phoneNumber + ", dOB=" + dOB + ", gender=" + gender + "]";
 	}
 
+	
 }

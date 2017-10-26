@@ -8,5 +8,18 @@
 </head>
 <body>
 
+<h1>View Personal Details</h1>
+
+			<strong>Username :</strong> ${student.username}<br/>
+			<strong>First Name :</strong> ${student.firstName}<br/>
+			<strong>Last Name :</strong> ${student.lastName}<br/>
+			<strong>Address :</strong> ${student.address}<br/>
+			<strong>Phone Number :</strong> ${student.phoneNumber}<br/>
+			<strong>Date of Birth :</strong> ${student.dOB}<br/>
+			<strong>Gender :</strong> ${student.gender}<br/>
+			<strong>Email Address :</strong> ${student.emailAddress}<br/>
+
+<a href="editProfile">Edit Profile</a>
+
 </body>
 </html>

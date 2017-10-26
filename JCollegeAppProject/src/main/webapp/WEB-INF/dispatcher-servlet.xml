@@ -21,8 +21,9 @@
               <property name="suffix" value=".jsp" />
        </bean>
 
-<bean id="factory" class="javax.persistence.Persistence" factory-method="createEntityManagerFactory"> 
-                     <constructor-arg value="DemoPersistence"/>     
+	<bean id="factory" class="javax.persistence.Persistence"
+		factory-method="createEntityManagerFactory">
+		<constructor-arg value="DemoPersistence" />
        </bean>             
        
        <bean id="departmentDAO" class="com.fdmgroup.JCollegeAppProject.daos.DepartmentDAOImpl"/>

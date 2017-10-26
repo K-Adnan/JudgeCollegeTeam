@@ -31,7 +31,7 @@ public class Course implements Serializable {
 	private Date startDate;
 	private Date endDate;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	private Set<Student> studentList;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
@@ -127,11 +127,33 @@ public class Course implements Serializable {
 		this.studentList = studentList;
 	}
 	
-	public void addCourse(Student student){
+	public void addStudent(Student student){
 		studentList.add(student);
-		student.addCourse(this);
 	}
 
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + courseCode;
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Course other = (Course) obj;
+		if (courseCode != other.courseCode)
+			return false;
+		return true;
+	}
+
+	public void removeStudent(Student student) {
+		studentList.remove(student);
+	}
 }

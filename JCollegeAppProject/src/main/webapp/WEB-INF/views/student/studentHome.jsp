@@ -18,7 +18,7 @@
 <a href = "ViewCourses"> View Courses </a>
 <br />
 <br />
-<a href = "ViewJoinedCourses"> View Joined Course</a>
+<a href = "ViewGrades"> View Grades</a>
 <br />
 <br />
 <a href = "ViewProfile"> View Profile</a>
