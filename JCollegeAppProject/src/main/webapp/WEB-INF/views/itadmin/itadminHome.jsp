@@ -16,18 +16,29 @@
 <a href = "AddStudent"> Add Student </a>
 <br />
 <br />
+<a href = "EditProfessor">Edit Student</a>
+<br />
+<br />
 <a href = "AddProfessor"> Add Professor </a>
+<br />
+<br />
+<a href = "EditProfessor">Edit Professor</a>
 <br />
 <br />
 <a href = "AddRegistrar"> Add Registrar </a>
 <br />
 <br />
+<a href = "EditProfessor">Edit Registrar</a>
+<br />
+<br />
 <a href = "AddStudent"> Add IT Admin </a>
 <br />
 <br />
+<a href = "EditProfessor">Edit IT Admin</a>
+<br />
+<br />
 <a href = "ViewUsers"> View Users</a>
-<br />
-<br />
+
 
 </body>
 </html>
