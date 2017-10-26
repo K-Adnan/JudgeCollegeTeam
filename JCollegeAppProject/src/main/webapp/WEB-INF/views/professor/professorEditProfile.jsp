@@ -19,7 +19,7 @@ Edit your details below:
 		<br /> 
 		Fax <sf:input type="text" path="fax" value="${professor.fax}"/>
 		<br />
-		<input type="submit" value="Register">
+		<input type="submit" value="Edit">
 		
 		${message}
 		
