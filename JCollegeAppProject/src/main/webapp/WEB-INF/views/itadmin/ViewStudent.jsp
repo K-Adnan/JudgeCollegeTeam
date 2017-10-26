@@ -21,29 +21,31 @@
      <table>
            <tr>
 
-                <th>Professor User Name</th>
-                <th>Professor password</th>
+                <th>Student User Name</th>
+                <th>Student password</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Address</th>
-                <th>Phone</th>
-                <th> Fax </th>
+                <th>Phone Number</th>
+                <th>D.O.B</th>
+                 <th>Gender</th>
            </tr>
 
-           <c:forEach items="${professorList}" var="p">
+           <c:forEach items="${studentList}" var="s">
                 <tr>
-                     <th><a href="editProfessor?username="${p.username}>${p.username}</a></th>
+                     <th><a href="editStudent?username="${s.username}>${s.username}</a></th>
                      <th>${password}</th>
                      <th>${firstName}</th>
                      <th>${lastName}</th>
                      <th>${email}</th>
-                     <th>${p.address}</th>
-                     <th>${p.phone}</th>
-                     <th>${p.fax}</th>
+                     <th>${s.address}</th>
+                     <th>${s.phoneNumber}</th>
+                     <th>${s.dOB}</th>
+                     <th>${s.gender}</th>
                      <th>${role}</th>
                      
-                     <th><a href="enrollOnCourse?courseCode=${c.courseCode}">Enroll</a></th>
+             
            </c:forEach>
      
 

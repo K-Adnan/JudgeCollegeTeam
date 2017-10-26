@@ -69,6 +69,13 @@ public class ITAdminController {
 		model.addAttribute("message", "Student added successfully");
 		return "itAdmin/HomePage";
 	}
+	@RequestMapping("/itAdmin/viewStudents")
+	public String goToViewStudents(HttpSession session, Model model, Principal principal) {
+		Student student = studentDao.getStudent(principal.getName());
+		List<User> studentList = userDao.getAllUsersByStudent(student);
+		model.addAttribute("studentList", studentList);
+		return "itAdmin/ViewStudents";
+	}
 
 	@RequestMapping("/itAdmin/removeStudent")
 	public String goToRemoveStudent(Model model) {
@@ -103,9 +110,7 @@ public class ITAdminController {
 	public String goToViewProfessors(HttpSession session, Model model, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
 		List<User> professorList = userDao.getAllUsersByProfessor(professor);
-		
 		model.addAttribute("professorList", professorList);
-		
 		return "itAdmin/ViewProfessors";
 	}
 	
@@ -131,11 +136,18 @@ public class ITAdminController {
 		return "itAdmin/AddRegistrar";
 	}
 
-	@RequestMapping("/itAdmin/processAddRegistar")
+	@RequestMapping("/itAdmin/processAddRegistrar")
 	public String processAddRegistar(Model model, Registrar registrar) {
 		registrarDao.addRegistrar(registrar);
 		model.addAttribute("message", "Registrar added successfully");
 		return "itAdmin/HomePage";
+	}
+	@RequestMapping("/itAdmin/viewRegistrar")
+	public String goToViewRegistrar(HttpSession session, Model model, Principal principal) {
+		Registrar registrar = registrarDao.getRegistrar(principal.getName());
+		List<User> registrarList = userDao.getAllUsersByRegistrar(registrar);
+		model.addAttribute("registrarList", registrarList);
+		return "itAdmin/ViewRegistrar";
 	}
 
 	@RequestMapping("/itAdmin/removeRegistrar")
@@ -164,6 +176,13 @@ public class ITAdminController {
 		itadminDao.addITAdmin(itadmin);
 		model.addAttribute("message", "IT Admin added successfully");
 		return "itAdmin/HomePage";
+	}
+	@RequestMapping("/itAdmin/viewITAdmin")
+	public String goToViewITAdmin(HttpSession session, Model model, Principal principal) {
+		ITAdmin itadmin = itadminDao.getITAdmin(principal.getName());
+		List<User> itadminList = userDao.getAllUsersByITAdmin(itadmin);
+		model.addAttribute("itadminList", itadminList);
+		return "itAdmin/ViewITAdmin";
 	}
 
 	@RequestMapping("/itAdmin/removeITAdmin")
