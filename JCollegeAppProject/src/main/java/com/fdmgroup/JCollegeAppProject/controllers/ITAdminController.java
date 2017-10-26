@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAOImpl;
-import com.fdmgroup.JCollegeAppProject.daos.StudentDAOImpl;
-import com.fdmgroup.JCollegeAppProject.daos.UserDAOImpl;
+import com.fdmgroup.JCollegeAppProject.daos.ITAdminDAO;
+import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
+import com.fdmgroup.JCollegeAppProject.daos.RegistrarDAO;
+import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
+import com.fdmgroup.JCollegeAppProject.daos.UserDAO;
+import com.fdmgroup.JCollegeAppProject.entities.ITAdmin;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
+import com.fdmgroup.JCollegeAppProject.entities.Registrar;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
 import com.fdmgroup.JCollegeAppProject.entities.User;
 
@@ -20,64 +23,147 @@ import com.fdmgroup.JCollegeAppProject.entities.User;
 public class ITAdminController {
 
 	private Logger logger = Logger.getLogger(getClass());
-	
+
+	// @Autowired
+	// private UserDAO userDao;
 	@Autowired
-	private UserDAOImpl userDao;
+	private StudentDAO studentDao;
 	@Autowired
-	private StudentDAOImpl studentDao;
+	private ProfessorDAO professorDao;
 	@Autowired
-	private ProfessorDAOImpl professorDao;
-	
+	private RegistrarDAO registrarDao;
+	@Autowired
+	private ITAdminDAO itadminDao;
+
 	public ITAdminController() {
 		super();
-	}	
-	
-	public ITAdminController(UserDAOImpl userDAO) {
+	}
+
+	public ITAdminController(StudentDAO studentDao, ProfessorDAO professorDao, RegistrarDAO registrarDao,
+			ITAdminDAO itadminDao) {
 		super();
-		this.userDao = userDAO;
+		this.studentDao = studentDao;
+		this.professorDao = professorDao;
+		this.registrarDao = registrarDao;
+		this.itadminDao = itadminDao;
 	}
 
 	@RequestMapping("/itAdmin/HomePage")
-	public String ITAdminHomePage(HttpSession session, Model model){		
+	public String ITAdminHomePage(HttpSession session, Model model) {
 		return "itAdmin/HomePage";
 	}
+
 	@RequestMapping("/itAdmin/addStudent")
-	public String goToAddStudent (Model model){
-		Student student = new Student ();
-		model.addAttribute("student", student);		
+	public String goToAddStudent(Model model) {
+		Student student = new Student();
+		model.addAttribute("student", student);
 		return "itAdmin/AddStudent";
 	}
+
 	@RequestMapping("/itAdmin/processAddStudent")
-	public String processAddStudent (Model model, Student student){
+	public String processAddStudent(Model model, Student student) {
 		studentDao.addStudent(student);
-		model.addAttribute("message", "Student added successfully");		
+		model.addAttribute("message", "Student added successfully");
 		return "itAdmin/HomePage";
 	}
+
+	@RequestMapping("/itAdmin/removeStudent")
+	public String goToRemoveStudent(Model model) {
+		Student student = new Student();
+		model.addAttribute("student", student);
+		return "itAdmin/RemoveStudent";
+	}
+
+	@RequestMapping("/itAdmin/processRemoveStudent")
+	public String processRemoveStudent(Student student, Model model) {
+		studentDao.removeStudent(student.getUsername());
+		model.addAttribute("message2", "Student removed successfully");
+		return "itAdmin/HomePage";
+
+	}
+
 	@RequestMapping("/itAdmin/addProfessor")
-	public String goToAddProfessor (Model model){
-		Professor professor = new Professor ();
-		model.addAttribute("professor", professor);		
+	public String goToAddProfessor(Model model) {
+		Professor professor = new Professor();
+		model.addAttribute("professor", professor);
 		return "itAdmin/AddProfessor";
 	}
-	@RequestMapping("/itAdmin/processAddProfessor")
-	public String processAddProfessor (Model model, Professor professor){
-		professorDao.addProfessor(professor);
-		model.addAttribute("message", "Professor added successfully");		
-		return "itAdmin/HomePage";
-	}	
-	@RequestMapping("/itAdmin/removeUser")
-	public String goToRemoveUser (Model model){
-		User user = new User ();
-		model.addAttribute("user", user);
-		return "itAdmin/RemoveUser";
-	}
-	@RequestMapping("/itAdmin/processRemoveUser")
-	public String processRemoveUser(User user, Model model) {
-		userDao.removeUser(user.getUsername());
-		model.addAttribute("message2", "User removed successfully");
-		return "itAdmin/HomePage";
-		
-	}
-	
 
+	@RequestMapping("/itAdmin/processAddProfessor")
+	public String processAddProfessor(Model model, Professor professor) {
+		professorDao.addProfessor(professor);
+		model.addAttribute("message", "Professor added successfully");
+		return "itAdmin/HomePage";
+	}
+
+	@RequestMapping("/itAdmin/removeProfessor")
+	public String goToRemoveProfessor(Model model) {
+		Professor professor = new Professor();
+		model.addAttribute("professor", professor);
+		return "itAdmin/RemoveProfessor";
+	}
+
+	@RequestMapping("/itAdmin/processRemoveProfessor")
+	public String processRemoveProfessor(Professor professor, Model model) {
+		professorDao.removeProfessor(professor.getUsername());
+		model.addAttribute("message2", "Professor removed successfully");
+		return "itAdmin/HomePage";
+
+	}
+	@RequestMapping("/itAdmin/addRegistrar")
+	public String goToAddRegistrar(Model model) {
+		Registrar registrar = new Registrar();
+		model.addAttribute("registrar", registrar);
+		return "itAdmin/AddRegistrar";
+	}
+
+	@RequestMapping("/itAdmin/processAddRegistar")
+	public String processAddRegistar(Model model, Registrar registrar) {
+		registrarDao.addRegistrar(registrar);
+		model.addAttribute("message", "Registrar added successfully");
+		return "itAdmin/HomePage";
+	}
+
+	@RequestMapping("/itAdmin/removeRegistrar")
+	public String goToRemoveRegistrar(Model model) {
+		Registrar registrar = new Registrar();
+		model.addAttribute("registrar", registrar);
+		return "itAdmin/RemoveProfessor";
+	}
+
+	@RequestMapping("/itAdmin/processRemoveRegistrar")
+	public String processRemoveRegistrar(Registrar registrar, Model model) {
+		registrarDao.removeRegistrar(registrar);
+		model.addAttribute("message2", "Registrar removed successfully");
+		return "itAdmin/HomePage";
+
+	}
+	@RequestMapping("/itAdmin/addITAdmin")
+	public String goToAddITAdmin(Model model) {
+		ITAdmin itadmin = new ITAdmin();
+		model.addAttribute("itadmin", itadmin);
+		return "itAdmin/AddITAdmin";
+	}
+
+	@RequestMapping("/itAdmin/processAddITAdmin")
+	public String processAddITadmin(Model model, ITAdmin itadmin) {
+		itadminDao.addITAdmin(itadmin);
+		model.addAttribute("message", "IT Admin added successfully");
+		return "itAdmin/HomePage";
+	}
+
+	@RequestMapping("/itAdmin/removeITAdmin")
+	public String goToRemoveITAdmin(Model model) {
+		ITAdmin itadmin = new ITAdmin();
+		model.addAttribute("itadmin", itadmin);
+		return "itAdmin/RemoveItAdmin";
+	}
+
+	@RequestMapping("/itAdmin/processRemoveITAdmin")
+	public String processRemoveITAdmin(ITAdmin itadmin, Model model) {
+		itadminDao.removeITAdmin(itadmin);
+		model.addAttribute("message2", "IT Admin removed successfully");
+		return "itAdmin/HomePage";
+
+	}
 }

@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Registrar;
 
 public class RegistrarDAOImpl implements RegistrarDAO {
@@ -34,5 +35,23 @@ public class RegistrarDAOImpl implements RegistrarDAO {
 		manager.merge(registrar);
 		manager.getTransaction().commit();
 	}
+	@Override
+	public void addRegistrar(Registrar registrar) {
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		manager.persist(registrar);
+		manager.getTransaction().commit();
+	}
+	@Override
+	public void removeRegistrar(Registrar registrar) {
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		manager.remove(registrar);
+		manager.getTransaction().commit();
+	}
+	
 
-}
+		
+	}
+
+

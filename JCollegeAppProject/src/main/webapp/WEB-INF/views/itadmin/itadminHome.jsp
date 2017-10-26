@@ -22,7 +22,7 @@
 <a href = "AddRegistrar"> Add Registrar </a>
 <br />
 <br />
-<a href = "AddStudent"> Add Student </a>
+<a href = "AddStudent"> Add IT Admin </a>
 <br />
 <br />
 <a href = "ViewUsers"> View Users</a>

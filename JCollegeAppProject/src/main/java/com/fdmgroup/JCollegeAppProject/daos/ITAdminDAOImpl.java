@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fdmgroup.JCollegeAppProject.entities.ITAdmin;
+import com.fdmgroup.JCollegeAppProject.entities.Professor;
 
 public class ITAdminDAOImpl implements ITAdminDAO {
 
@@ -32,6 +33,21 @@ public class ITAdminDAOImpl implements ITAdminDAO {
 		EntityManager manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 		manager.merge(itAdmin);
+		manager.getTransaction().commit();
+	}
+	@Override
+	public void addITAdmin(ITAdmin itAdmin) {
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		manager.persist(itAdmin);
+		manager.getTransaction().commit();
+	}
+
+	@Override
+	public void removeITAdmin(ITAdmin itAdmin) {
+		EntityManager manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+		manager.remove(itAdmin);
 		manager.getTransaction().commit();
 	}
 

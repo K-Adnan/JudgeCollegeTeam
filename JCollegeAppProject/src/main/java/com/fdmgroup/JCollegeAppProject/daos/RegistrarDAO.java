@@ -8,4 +8,8 @@ public interface RegistrarDAO {
 	
 	public void updateRegistrar(Registrar registrar);
 
+	public void addRegistrar(Registrar registrar);
+
+	public void removeRegistrar(Registrar registrar);
+
 }
