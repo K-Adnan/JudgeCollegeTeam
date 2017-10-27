@@ -12,12 +12,12 @@
 
 Edit your details below:
 
-	<sf:form method="post" action="editprofile" modelAttribute="professor">
-		Address <sf:input path="firstname" value="${professor.address}" />
+	<sf:form method="post" action="processEditProfile" modelAttribute="professor">
+		Address <sf:input path="address" value="${professor.address}" />
 		<br />
-		Phone Number <sf:input type="text" path="phone" value="${professor.phone}"/>
+		Phone Number <sf:input path="phone" value="${professor.phone}"/>
 		<br /> 
-		Fax <sf:input type="text" path="fax" value="${professor.fax}"/>
+		Fax <sf:input path="fax" value="${professor.fax}"/>
 		<br />
 		<input type="submit" value="Edit">
 		

@@ -9,6 +9,8 @@
 </head>
 <body>
 
+${message}
+
 <c:if test="${not empty username}">
  <div align="center">
 
@@ -44,7 +46,7 @@
 
 </c:if>
 
-<a href="professorEditProfile">Edit Contact information</a>
+<a href="editProfile">Edit Contact information</a>
 
 
 

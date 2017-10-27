@@ -18,12 +18,6 @@
 <a href = "viewCourses"> View Courses </a>
 <br />
 <br />
-<a href = "viewStudents"> View Students</a>
-<br />
-<br />
-<a href = "viewTaughtCourses"> View Assigned Courses</a>
-<br />
-<br />
 <a href = "viewProfile"> View Profile</a>
 </body>
 </html>
