@@ -26,7 +26,6 @@
                 <th>Professor password</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Email</th>
                 <th>Address</th>
                 <th>Phone</th>
                 <th> Fax </th>
@@ -38,7 +37,6 @@
                      <th>${p.password}</th>
                      <th>${p.firstName}</th>
                      <th>${p.lastName}</th>
-                     <th>${email}</th>
                      <th>${p.address}</th>
                      <th>${p.phone}</th>
                      <th>${p.fax}</th>

@@ -14,25 +14,25 @@
 <a href = "/JCollegeAppProject/logout">Logout</a>
 <br />
 <br />
-<a href = "AddStudent"> Add Student </a>
+<a href = "addStudent"> Add Student </a>
 <br />
 <br />
 <a href = "ViewStudents">Edit Student</a>
 <br />
 <br />
-<a href = "AddProfessor"> Add Professor </a>
+<a href = "addProfessor"> Add Professor </a>
 <br />
 <br />
 <a href = "viewProfessors">Edit Professor</a>
 <br />
 <br />
-<a href = "AddRegistrar"> Add Registrar </a>
+<a href = "addRegistrar"> Add Registrar </a>
 <br />
 <br />
 <a href = "ViewRegistrars">Edit Registrar</a>
 <br />
 <br />
-<a href = "AddStudent"> Add IT Admin </a>
+<a href = "addStudent"> Add IT Admin </a>
 <br />
 <br />
 <a href = "ViewITAdmins">Edit IT Admin</a>

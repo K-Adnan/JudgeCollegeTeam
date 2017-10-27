@@ -17,39 +17,37 @@
      <br />
      <br /> edit the details of a professor
 
-     <sf:form method="post" action="UpdateProfessor" modelAttribute="professor">
+     <sf:form method="post" action="processEditProfessor" modelAttribute="professor">
 
            
            
 First Name: <sf:input path="firstName" value="${professor.firstName}" />
            <br />
            <br />
-Last Name: <br />
-           <sf:input path="lastName" value="${lastName}" />
-           <br />
-User Name: <sf:input path="username"  value="${username}" />
+Last Name: <sf:input path="lastName" value="${professor.lastName}" />
            <br />
            <br />
-Email:     <sf:input path="email"  value="${email}" />
+User Name: <sf:input path="username"  value="${professor.username}" />
            <br />
            <br />
-Address <sf:input path="firstname" value="${professor.address}" />
+Address <sf:input path="address" value="${professor.address}" />
            <br />
            <br />
-Phone: <sf:input path="phone"  value="${phone}" />
+Phone: <sf:input path="phone"  value="${professor.phone}" />
            <br />
            <br />
-Fax:       <sf:input path="fax"  value="${fax}" />
+Fax:       <sf:input path="fax"  value="${professor.fax}" />
            <br />
            <br />
-Role: <sf:input path="role"  value="${role}" />
+
 
            <input type="submit" value="Edit" />
            
      </sf:form>
+     
      ${message}
      
-<a href="/itAdmin/processRemoveProfessor">Remove Professor</a>
+<a href="processRemoveProfessor?username=${professor.username}">Remove Professor</a>
 
 <a href="HomePage"> Back To Home  </a>
 
