@@ -58,7 +58,7 @@ public class WelcomeController {
 		}else if (request.isUserInRole("Registrar")){
 			return "redirect:registrar/home";
 		}else if (request.isUserInRole("ITAdmin")){
-			return "redirect:itadmin/home";
+			return "redirect:itAdmin/HomePage";
 		}
 		
 		return "redirect:/";

@@ -47,7 +47,9 @@ Role: <sf:input path="role"  value="${role}" />
            <input type="submit" value="Edit" />
            
      </sf:form>
+     ${message}
      
+<a href="/itAdmin/processRemoveProfessor">Remove Professor</a>
 
 <a href="HomePage"> Back To Home  </a>
 

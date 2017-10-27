@@ -9,22 +9,23 @@ import com.fdmgroup.JCollegeAppProject.entities.Student;
 import com.fdmgroup.JCollegeAppProject.entities.User;
 
 public interface UserDAO {
-	public void addUser(User profile);
+	
+     public void addUser(User profile);
 
-	public void removeUser(String username);
+     public void removeUser(String username);
 
-	public void updateUser(User profile);
+     public void updateUser(User profile);
 
-	public User getUser(String username);
+     public User getUser(String username);
 
-	public List<User> getAllUsers();
+     public List<User> getAllUsers();
 
-	public List<User> getAllUsersByProfessor(Professor professor);
+     public List<User> getAllProfessors();
 
-	public List<User> getAllUsersByStudent(Student student);
+     public List<User> getAllStudents();
 
-	public List<User> getAllUsersByRegistrar(Registrar registrar);
+     public List<User> getAllRegistrars();
 
-	public List<User> getAllUsersByITAdmin(ITAdmin itAdmin);
+     public List<User> getAllITAdmins();
 
 }
