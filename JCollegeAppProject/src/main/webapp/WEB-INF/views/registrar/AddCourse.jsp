@@ -39,7 +39,6 @@
 						<select name="departmentId">
 							<c:forEach items="${departmentList}" var="dep">
 								<option value="${dep.departmentId}">${dep.departmentName}</option>
-								<%----%>
 							</c:forEach>
 							<option value="" selected="selected"/>
 							</select>

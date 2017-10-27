@@ -35,10 +35,10 @@
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
 
 	<h2>My Profile</h2>
-				  <strong>Username :</strong> ${registrar.username}<br/>
-                  <strong>First Name :</strong> ${registrar.firstName}<br/>
-                  <strong>Last Name :</strong> ${registrar.lastName}<br/>
-                  <strong>Email Address :</strong> ${registrar.emailAddress}<br/>
+				  Username : ${registrar.username}<br/>
+                  First Name : ${registrar.firstName}<br/>
+                  Last Name : ${registrar.lastName}<br/>
+                  Email Address : ${registrar.emailAddress}<br/>
 	</div>
 </body>
 </html>
