@@ -129,26 +129,37 @@ public class ProfessorController {
 	}
 	
 	
+//	@RequestMapping("/professor/processViewProfile")
+//	public String processViewProfile(Model model,Principal principal) {
+//	
+//		Professor professor = professorDao.getProfessor(principal.getName());
+//		return "professor/professorViewProfile";
+//
+//	}
+//	
 	
-	@RequestMapping("/professor/editProfile")
+	
+	@RequestMapping("/professor/editprofile")
 	public String goToEditProfilepage(Model model, Principal principal) {
+		
 		Professor professor = professorDao.getProfessor(principal.getName());
+		
+		professorDao.updateProfessor(professor);
 		model.addAttribute("professor",professor);
+		model.addAttribute("message", "Details successfully updated");
 		return "professor/professorEditProfile";
 
 	}
 
-	@RequestMapping("/professor/processEditProfile")
-	public String editProfile(Model model, HttpSession session, Principal principal, Professor professor) {
-		Professor oldProfessor = professorDao.getProfessor(principal.getName());
-		oldProfessor.setAddress(professor.getAddress());
-		oldProfessor.setPhone(professor.getPhone());
-		oldProfessor.setFax(professor.getFax());
-		professorDao.updateProfessor(oldProfessor);
+	@RequestMapping("/donor/processEditProfile")
+	public String editProfile(Model model, HttpSession session, Principal principal) {
+		Professor professor = professorDao.getProfessor(principal.getName());
 		
-		model.addAttribute("professor", oldProfessor);
-		model.addAttribute("message", "Contact details successfully updated");
-		return "professor/professorViewProfile";
+		
+		
+		professorDao.updateProfessor(professor);
+		
+		return "professor/professorEditProfile";
 	}
 	
 	
@@ -184,18 +195,20 @@ public class ProfessorController {
 	}
 	
 	@RequestMapping("/professor/updateGrade")
-	public String doUpdateGrade(int courseCode, String username, Character grade, Model model, HttpSession session, Principal principal) {
-//		Professor professor = professorDao.getProfessor(principal.getName());
-//		Student student = studentDao.getStudent(username);
-		
-//		Grade grade = new Grade();
-		System.out.println(courseCode);
-		System.out.println(username);
-		System.out.println(grade);
-		
-		
-		
+	public String doUpdateGrade(@RequestParam int courseCode, @RequestParam String username, @RequestParam String gradeDropdown, Model model, HttpSession session, Principal principal) {
+		Professor professor = professorDao.getProfessor(principal.getName());
+		Student student = studentDao.getStudent(username);
 		Course course = courseDao.getCourse(courseCode);
+		
+		Grade newGrade = new Grade();
+		newGrade.setGradeValue(gradeDropdown.charAt(0));
+		newGrade.setStudent(student);
+		newGrade.setProfessor(professor);
+		newGrade.setCourse(course);
+		
+		student.addGrade(newGrade);
+		studentDao.updateStudent(student);
+		
 		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
 		List<Character> gradeList = new ArrayList<Character>();
 		gradeList.add('A');

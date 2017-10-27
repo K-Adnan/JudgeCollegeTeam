@@ -2,6 +2,7 @@ package com.fdmgroup.JCollegeAppProject.daos;
 
 import java.util.List;
 
+import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Grade;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
@@ -15,5 +16,6 @@ public interface GradeDAO {
 	public List <Grade> getAllGrades();
 	public List <Grade> getAllGradesByStudent(Student student);
 	public List <Grade> getAllGradesByProfessor(Professor professor);
+	public List<Grade> getAllGradesByCourse(Course course);
 }
 

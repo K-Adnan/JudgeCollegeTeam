@@ -36,6 +36,7 @@
 				<th>${s.lastName}</th>
 				<th>${s.emailAddress}</th>
  				<th>
+ 				<form method="post" action="updateGrade?courseCode=${course.courseCode}&username=${s.username}" >
 			<select name="gradeDropdown">
 			  <c:choose>
 			  <%-- Display entire list when the student has no grades assigned to them --%>
@@ -48,7 +49,6 @@
 				<%-- Display assigned grade as selected when the student has at least one grade assigned to them  --%>
 				<c:otherwise>
  				<c:forEach items="${s.gradeList}" var="grade">
- 				<form>
 					<c:choose>
 						<c:when test="${grade.course.courseCode eq course.courseCode }">
 							
@@ -63,20 +63,23 @@
 							  </c:choose>
 							</c:forEach>
 						 </c:when>
-						<c:otherwise> </c:otherwise>
+						<c:otherwise>
+						<c:forEach items="${gradeList}" var="g">
+							<option value="${g}" selected>${g}</option>
+						</c:forEach>
+						</c:otherwise>
  					</c:choose>
-				</form>
  				</c:forEach>
 				</c:otherwise>
 				</c:choose>
  			</select>
+ 					<input type="submit" value="Update"/>
+				</form>
  				</th>
- 				<th><a href="updateGrade?courseCode=${course.courseCode}&username=${s.username}&grade=${gradeDropdown}">Update</a></th>
+ 				<%--<th><a href="updateGrade?courseCode=${course.courseCode}&username=${s.username}&grade=${pageScope[gradeDropdown]}">Update</a></th> --%>
 		</c:forEach>
 	</table>
 	
-	
-	<a href="processChangeStudentGrades">Update Grades</a>
 	<br/>
 	<br/>
 	<a href="professorHome">back home</a>

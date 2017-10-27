@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Grade;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
@@ -83,8 +84,17 @@ public class GradeDAOImpl implements GradeDAO {
 	@Override
 	public List<Grade> getAllGradesByProfessor(Professor professor) {
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Grade> query = manager.createQuery("FROM Grades g WHERE g.professsor =?", Grade.class);
+		TypedQuery<Grade> query = manager.createQuery("FROM Grade g WHERE g.professsor =?", Grade.class);
 		query.setParameter(1, professor);
+		List <Grade> gradeList = query.getResultList();
+		manager.close();
+		return gradeList;
+	}
+	
+	public List<Grade> getAllGradesByCourse(Course course) {
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Grade> query = manager.createQuery("FROM Grade g WHERE g.course.courseCode =?", Grade.class);
+		query.setParameter(1, course.getCourseCode());
 		List <Grade> gradeList = query.getResultList();
 		manager.close();
 		return gradeList;

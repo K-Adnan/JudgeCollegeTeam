@@ -124,6 +124,10 @@ public class Student extends User implements Serializable {
 		courseList.remove(course);
 //		courseList.remove(index);
 	}
+	
+	public void addGrade(Grade grade){
+		gradeList.add(grade);
+	}
 
 	@Override
 	public String toString() {

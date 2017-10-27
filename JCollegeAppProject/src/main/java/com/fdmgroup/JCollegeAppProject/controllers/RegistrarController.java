@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAO;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAO;
+import com.fdmgroup.JCollegeAppProject.daos.GradeDAO;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
 import com.fdmgroup.JCollegeAppProject.daos.RegistrarDAO;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Department;
+import com.fdmgroup.JCollegeAppProject.entities.Grade;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Registrar;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
@@ -37,6 +39,8 @@ public class RegistrarController {
 	private RegistrarDAO registrarDao;
 	@Autowired
 	private DepartmentDAO departmentDao;
+	@Autowired
+	private GradeDAO gradeDao;
 	
 	
 	public RegistrarController() {
@@ -86,6 +90,14 @@ public class RegistrarController {
 	
 	@RequestMapping("/registrar/cancelCourse")
 	public String courseCancellation(@RequestParam int code, Model model) {
+		Course course = courseDao.getCourse(code);
+		List<Grade> gradeList = gradeDao.getAllGradesByCourse(course);
+		
+		for (int i=0;i<gradeList.size();i++){
+			Grade grade = gradeList.get(i);
+			gradeDao.removeGrade(grade.getGradeId());
+		}
+		
 		courseDao.removeCourse(code);
 		model.addAttribute("message", "Course is cancelled!");
 		logger.info("Course is cancelled :" + code);
