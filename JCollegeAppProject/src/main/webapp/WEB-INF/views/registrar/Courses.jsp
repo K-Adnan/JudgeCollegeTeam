@@ -44,10 +44,8 @@
 
 	<ul>
 		<li><a href="MyProfile">My Profile</a></li>
-		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
 		<li><a href="Timetable">Timetable</a></li>
-		<li><a href="Grades">Grades</a></li>
 	</ul>
 
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
@@ -115,8 +113,8 @@
 				<td>Name</td>
 			</tr>
 			<c:forEach items="${studentList}" var="s">
-				<td>${s.username}</td>
-				<td>${s.firstName}${s.lastName}</td>
+				<tr><td>${s.username}</td> 
+				<td>${s.firstName}${s.lastName}</td></tr>
 			</c:forEach>
 		</table>
 		

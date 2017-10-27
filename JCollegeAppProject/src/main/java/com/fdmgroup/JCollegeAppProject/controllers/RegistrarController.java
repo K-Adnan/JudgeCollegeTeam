@@ -131,23 +131,25 @@ public class RegistrarController {
 	}
 	
 	@RequestMapping("/registrar/AddCourse")
-	public String GoToAddCourse(Model model, Course course){
+	public String GoToAddCourse(Model model){
 		List<Professor> professorList = professorDao.getAllProfessors();
 		List<Department> departmentList = departmentDao.getAllDepartments();
 		model.addAttribute("professorList", professorList);
 		model.addAttribute("departmentList", departmentList);
+		Course course = new Course();
 		model.addAttribute("course",course);
 		logger.info("Client request to url : AddCourse");
 		return "registrar/AddCourse";
 	}
 	
 	@RequestMapping("/registrar/doAddCourse")
-	public String DoAddCourse(Model model, Course course){
-	List<Department> departmentList = departmentDao.getAllDepartments();
+	public String DoAddCourse(Model model, Course course,@RequestParam int departmentId){
+	Department department = departmentDao.getDepartment(departmentId);
+	course.setDepartment(department);
 	courseDao.addCourse(course);
-	model.addAttribute("departmentList", departmentList);
 	model.addAttribute("message", "Course added successfully!");
 	model.addAttribute("course",course);
+	
 	List<Course> courseList = courseDao.getAllCourses();
 	model.addAttribute("courseList", courseList);
 	List<Professor> professorList = professorDao.getAllProfessors();
