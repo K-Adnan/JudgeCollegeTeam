@@ -15,6 +15,9 @@
 	<form action="j_security_check" method="post">
 	<h2>Judge College Registration System</h2>
 	  <div class="imgcontainer">
+	<div class="message">
+		<p>${message}</p>
+	</div>
     <img src="https://image.ibb.co/j2Oa5m/Judge_College.png" alt="Avatar" class="avatar">
   </div>
   
