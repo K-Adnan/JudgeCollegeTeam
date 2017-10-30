@@ -1,10 +1,15 @@
 package com.fdmgroup.JCollegeAppProject.entities;
 
 import java.io.Serializable;
+import java.security.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,8 +18,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fdmgroup.JCollegeAppProject.utilities.Weekday;
 
 @Entity
 @Table(name = "JC_COURSES")
@@ -31,6 +39,9 @@ public class Course implements Serializable {
 	private Date startDate;
 	private Date endDate;
 	
+	@ElementCollection
+	private Map<Weekday, Calendar> lessons = new HashMap<Weekday, Calendar>();
+
 	@ManyToMany(cascade = CascadeType.MERGE)
 	private Set<Student> studentList;
 
@@ -42,7 +53,16 @@ public class Course implements Serializable {
 	private Professor professor;
 
 	public Course() {
-		super();
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 13);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		
+		lessons.put(Weekday.MONDAY, calendar);
+		lessons.put(Weekday.TUESDAY, calendar);
+		lessons.put(Weekday.WEDNESDAY, calendar);
+		lessons.put(Weekday.THURSDAY, calendar);
+		lessons.put(Weekday.FRIDAY, calendar);
 	}
 
 	public Course(String courseName, String courseInfo, Date startDate, Date endDate, Department department, Professor professor) {
@@ -155,5 +175,13 @@ public class Course implements Serializable {
 
 	public void removeStudent(Student student) {
 		studentList.remove(student);
+	}
+
+	public Map<Weekday, Calendar> getLessons() {
+		return lessons;
+	}
+
+	public void setLessons(Map<Weekday, Calendar> lessons) {
+		this.lessons = lessons;
 	}
 }

@@ -1,8 +1,11 @@
 package com.fdmgroup.JCollegeAppProject.controllers;
 
 import java.security.Principal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +22,7 @@ import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Grade;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
+import com.fdmgroup.JCollegeAppProject.utilities.Weekday;
 
 @Controller
 public class StudentController {
@@ -157,6 +161,20 @@ public class StudentController {
 		model.addAttribute("enrolledCourses", enrolledCourseList);
 		model.addAttribute("courseList", courseList);
 		return "student/studentViewCourses";
+	}
+	
+	@RequestMapping("student/viewCourse")
+	public String goToViewCourse(@RequestParam int courseCode, Model model, Principal principal){
+		Course course = courseDao.getCourse(courseCode);
+		Map<Weekday, Calendar> map = course.getLessons();
+		
+		model.addAttribute("monday", new DecimalFormat("00").format(map.get(Weekday.MONDAY).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.MONDAY).get(Calendar.MINUTE)));
+		model.addAttribute("tuesday", new DecimalFormat("00").format(map.get(Weekday.TUESDAY).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.TUESDAY).get(Calendar.MINUTE)));
+		model.addAttribute("wednesday", new DecimalFormat("00").format(map.get(Weekday.WEDNESDAY).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.WEDNESDAY).get(Calendar.MINUTE)));
+		model.addAttribute("thursday", new DecimalFormat("00").format(map.get(Weekday.THURSDAY).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.THURSDAY).get(Calendar.MINUTE)));
+		model.addAttribute("friday", new DecimalFormat("00").format(map.get(Weekday.FRIDAY).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.FRIDAY).get(Calendar.MINUTE)));
+		model.addAttribute("map", map);
+		return "student/viewCourse";
 	}
 	
 }

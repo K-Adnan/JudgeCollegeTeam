@@ -35,7 +35,7 @@
 		<c:forEach items="${courseList}" var="c">
 			<tr>
 				<th>${c.courseCode}</th>
-				<th>${c.courseName}</th>
+				<th><a href="viewCourse?courseCode=${c.courseCode}">${c.courseName}</a></th>
 				<th>${c.department.departmentName}
 				<th>${c.courseInfo}</th>
 				<th>

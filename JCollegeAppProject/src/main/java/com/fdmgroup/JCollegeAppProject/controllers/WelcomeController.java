@@ -130,5 +130,16 @@ public class WelcomeController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/forgotPassword")
+	public String goToForgotPassword() {
+		return "forgotPassword";
+	}
+	
+	
+	@RequestMapping("/doResetPassword")
+	public String doResetPassword() {
+		return "confirmPasswordReset";
+	}
 
 }
