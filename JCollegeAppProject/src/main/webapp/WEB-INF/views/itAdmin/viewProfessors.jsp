@@ -45,6 +45,8 @@
                      <th><a href="RemoveProfessor?username=${p.username}">Remove Professor</a></th>
      
            </c:forEach>
+
+${message2}
      
 <a href="HomePage"> Back To Home  </a>
 

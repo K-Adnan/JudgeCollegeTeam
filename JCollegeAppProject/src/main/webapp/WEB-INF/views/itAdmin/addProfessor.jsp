@@ -8,28 +8,34 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<sf:form method="post" action="processAddUser" modelAttribute="user">		 	 
+	<sf:form method="post" action="processAddProfessor" modelAttribute="professor">		 	 
 		
 		
 		
-		User Name <sf:input type="text" path="user.username" />
+		User Name <sf:input type="text" path="username" />
 		<br />
 		<br /> 
-		Password <sf:password type="text" path="user.password" />
-		<br />
-		<br /> 
-		Confirm Password <sf:password type="text" path="confirmPassword" />
+		Password <sf:password  path="password" />
 		<br />
 		<br />
 		Email Address <sf:input type="text" path="emailAddress" />
 		<br />
 		<br />
 		First Name: <sf:input type="text" path="firstName"  />
-           <br />
-           <br />
-		Last Name: <br />
-           <sf:input type="text" path="lastName"  />
-           <br />
+        <br />
+        <br />
+		Last Name: <sf:input type="text" path="lastName"  />
+        <br />
+        <br />
+        Address <sf:input type="text" path="address" />
+        <br />
+        <br />
+        Phone <sf:input type="text" path="phone" />
+        <br />
+        <br />
+        Fax <sf:input type="text" path="fax" />
+        <br />
+        <br />
 		
 		
 		

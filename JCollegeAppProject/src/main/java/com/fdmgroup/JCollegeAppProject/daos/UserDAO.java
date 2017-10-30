@@ -8,6 +8,7 @@ import com.fdmgroup.JCollegeAppProject.entities.Registrar;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
 import com.fdmgroup.JCollegeAppProject.entities.User;
 
+
 public interface UserDAO {
 	
      public void addUser(User profile);

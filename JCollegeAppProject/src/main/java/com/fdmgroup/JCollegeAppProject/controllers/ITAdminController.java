@@ -106,7 +106,7 @@ public class ITAdminController {
 	public String processAddProfessor(Model model, Professor professor) {
 		professorDao.addProfessor(professor);
 		model.addAttribute("message", "Professor added successfully");
-		return "itAdmin/HomePage";
+		return "itAdmin/itAdminHome";
 	}
 
 	@RequestMapping("/itAdmin/viewProfessors")
@@ -117,31 +117,12 @@ public class ITAdminController {
 		return "itAdmin/viewProfessors";
 	}
 
-	@RequestMapping("/itAdmin/editProfessor")
-	public String goToEditProfilepage(Model model, Professor professor) {
-		professor = professorDao.getProfessor(professor.getUsername());
+	@RequestMapping("/itAdmin/removeProfessor")
+	public String goToRemoveProfessor(Model model) {
+		Professor professor = new Professor();
 		model.addAttribute("professor", professor);
 		return "itAdmin/EditProfessor";
-
 	}
-
-	@RequestMapping("/itAdmin/processEditProfessor")
-	public String editProfile(Model model, Professor professor) {
-		professor = professorDao.getProfessor(professor.getUsername());
-
-		professorDao.updateProfessor(professor);
-
-		model.addAttribute("professor", professor);
-		model.addAttribute("message", "professor details successfully updated");
-		return "itAdmin/viewProfessors";
-	}
-
-//	@RequestMapping("/itAdmin/removeProfessor")
-//	public String goToRemoveProfessor(Model model) {
-//		Professor professor = new Professor();
-//		model.addAttribute("professor", professor);
-//		return "itAdmin/EditProfessor";
-//	}
 
 	@RequestMapping("/itAdmin/processRemoveProfessor")
 	public String processRemoveProfessor(@RequestParam String username, Model model) {
