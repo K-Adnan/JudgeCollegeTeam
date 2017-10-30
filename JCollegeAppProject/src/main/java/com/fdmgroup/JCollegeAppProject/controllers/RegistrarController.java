@@ -5,10 +5,13 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAO;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl;
@@ -17,12 +20,14 @@ import com.fdmgroup.JCollegeAppProject.daos.GradeDAO;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
 import com.fdmgroup.JCollegeAppProject.daos.RegistrarDAO;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
+import com.fdmgroup.JCollegeAppProject.daos.UserDAO;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Department;
 import com.fdmgroup.JCollegeAppProject.entities.Grade;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Registrar;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
+import com.fdmgroup.JCollegeAppProject.entities.User;
 
 @Controller
 public class RegistrarController {
@@ -41,15 +46,18 @@ public class RegistrarController {
 	private DepartmentDAO departmentDao;
 	@Autowired
 	private GradeDAO gradeDao;
+	@Autowired
+	private UserDAO userDao;
 	
 	
 	public RegistrarController() {
 		super();
 	}
 	
-	public RegistrarController(CourseDAOImpl cDAO, ProfessorDAO professorDAO) {
+	public RegistrarController(CourseDAOImpl cDAO, ProfessorDAO professorDAO, StudentDAO studentDAO) {
 		this.courseDao = cDAO;
 		this.professorDao = professorDAO;
+		this.studentDao = studentDAO;
 	}
 	
 	@RequestMapping("/registrar/MyProfile")
@@ -61,13 +69,49 @@ public class RegistrarController {
 	}
 
 	@RequestMapping("/registrar/SystemUsers")
-	public String GoToSystemUsers(){
+	public String GoToSystemUsers(Model model){
 		logger.info("Client request to url : SystemUsers");
+		
+		List<User> userList = userDao.getAllUsers();
+		model.addAttribute("userList", userList);
+		
 		return "registrar/SystemUsers";
 	}
 	
+	@RequestMapping("/registrar/ViewAndUpdate")
+	public String doChooseUser(Model model, @RequestParam String username){
+		User user = userDao.getUser(username);
+		Professor professor = professorDao.getProfessor(username);
+		Student student = studentDao.getStudent(username);
+		
+		model.addAttribute("user", user);
+		model.addAttribute("professor", professor);
+		model.addAttribute("student", student);
+		
+		logger.info("User is chosen :"+username);
+		return "registrar/ViewAndUpdate";
+	}
+	
+	@RequestMapping("/registrar/RemoveUser")
+	public String doRemoveUser(Model model, @RequestParam String username, RedirectAttributes ra){
+		User user = userDao.getUser(username);
+		List<User> userList = userDao.getAllUsers();
+		
+		userDao.removeUser(username);
+		
+		ra.addFlashAttribute("message", "User is removed!");
+		logger.info("User is removed :"+username);
+		return "redirect:SystemUser";
+	}
+	
+	@RequestMapping("/registrar/EditInformation")
+	public String EditInformation(Model model, String username){
+		logger.info("Information are edited :"+username);
+		return "registrar/EditInformation";
+	}
+	
 	@RequestMapping("/registrar/Courses")
-	public String goToCourses(Model model) {
+	public String goToCourses(Model model, @ModelAttribute("message") String message) {
 		logger.info("Client request to url : Courses");
 		
 		List<Course> courseList = courseDao.getAllCourses();
@@ -79,11 +123,12 @@ public class RegistrarController {
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("course", course);
 		model.addAttribute("professorList", professorList);
+		model.addAttribute("message",message);
 		return "registrar/Courses";
 	}
 	
 	@RequestMapping("/registrar/cancelCourse")
-	public String courseCancellation(@RequestParam int code, Model model) {
+	public String courseCancellation(@RequestParam int code, Model model, RedirectAttributes ra) {
 		Course course = courseDao.getCourse(code);
 		List<Grade> gradeList = gradeDao.getAllGradesByCourse(course);
 		
@@ -93,7 +138,7 @@ public class RegistrarController {
 		}
 		
 		courseDao.removeCourse(code);
-		model.addAttribute("message", "Course is cancelled!");
+		ra.addFlashAttribute("message", "Course is cancelled!");
 		logger.info("Course is cancelled :" + code);
 		return "redirect:Courses";
 	}

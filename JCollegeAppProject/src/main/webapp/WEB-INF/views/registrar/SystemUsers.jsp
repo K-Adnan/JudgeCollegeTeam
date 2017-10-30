@@ -6,8 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>My Profile</title>
-<link href="../css/style.css" rel="stylesheet" media="all">
+<title>System Users</title>
+<link href="../css/style.css" rel="stylesheet" media="all">#
+<style type="text/css">
+      table tr input { opacity:0; float:right }
+      table tr:hover input { opacity:1 }
+</style> 
+    
 </head>
 
 <body>
@@ -34,12 +39,29 @@
 	</ul>
 
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-
-	<h2>My Profile</h2>
-				  Username : ${registrar.username}<br/>
-                  First Name : ${registrar.firstName}<br/>
-                  Last Name : ${registrar.lastName}<br/>
-                  Email Address : ${registrar.emailAddress}<br/>
+	
+	<table class="table1">
+		<tr>
+			<td>Username</td>
+			<td>Name</td>
+		</tr>
+		<c:forEach items="${userList}" var="u">
+			<tr><td>${u.username}</td> 
+			<td>${u.firstName}${u.lastName} </td>
+			
+			<td><form name="form3" method="post" action="ViewAndUpdate">
+			<input type="hidden" name="username" value="${u.username}" /> 
+			<input name="submit3" type="submit" id="submit3" value="View and Update">
+			</form></td>
+			
+			<td><form name="form4" method="post" action="RemoveUser">
+			<input type="hidden" name="username" value="${u.username}" /> 
+			<input name="submit4" type="submit" id="submit4" value="Remove">
+			</form></td></tr>
+			
+		</c:forEach>
+		
+	</table> 
 	</div>
 </body>
 </html>

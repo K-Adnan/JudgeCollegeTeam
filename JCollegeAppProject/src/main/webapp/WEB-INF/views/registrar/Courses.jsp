@@ -28,6 +28,11 @@
 
 <body>
 
+<c:if test="${message eq 'Course is cancelled!'}">
+	<script>
+		alert("Successfully removed course!");
+	</script>
+</c:if>
 	<ul>
 		<div class="img">
 			<IMG HEIGHT="50" WIDTH="80"
@@ -44,6 +49,7 @@
 
 	<ul>
 		<li><a href="MyProfile">My Profile</a></li>
+		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
 		<li><a href="Timetable">Timetable</a></li>
 	</ul>
@@ -62,7 +68,7 @@
 			<label class="addCourse"> <input name="submit3"
 				type="submit" id="submit2" value="Add Course">
 			</label>
-		</form>
+	</form>
 
 <br /><br />
 		<table>

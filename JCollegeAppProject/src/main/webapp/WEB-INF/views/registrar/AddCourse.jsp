@@ -24,6 +24,7 @@
 	</ul>
 	<ul>
 		<li><a href="MyProfile">My Profile</a></li>
+		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
 		<li><a href="Timetable">Timetable</a></li>
 	</ul>
