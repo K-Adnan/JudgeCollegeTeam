@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -184,6 +185,11 @@ public class StudentController {
 		Student student = studentDao.getStudent(principal.getName());
 		
 		Set<Course> courseList = student.getCourseList();
+		List<Course> courseArrayList = new ArrayList<Course>();
+		for (Course course : courseList){
+			courseArrayList.add(course);
+		}
+		
 		
 		model.addAttribute("courseList", courseList);
 		return "student/viewTimetable";

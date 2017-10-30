@@ -221,9 +221,15 @@ public class ProfessorController {
 		model.addAttribute("studentList", studentList);
 		return "professor/professorViewStudentsOnTaughtCourse";
 	}
-
 	
-	
+	@RequestMapping("/professor/viewStudent")
+	public String goToViewStudent(@RequestParam String username, Model model, HttpSession session, Principal principal) {
+		
+		Student student = studentDao.getStudent(username);
+		
+		model.addAttribute("student", student);
+		return "professor/viewStudent";
+	}
 	
 	
 	

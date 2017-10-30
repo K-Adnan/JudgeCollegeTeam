@@ -27,7 +27,7 @@
 
 		<c:forEach items="${studentList}" var="s">
 			<tr>
-				<th>${s.username}</th>
+				<th><a href="viewStudent?username=${s.username}">${s.username}</a></th>
 				<th>${s.firstName}</th>
 				<th>${s.lastName}</th>
 				<th>${s.emailAddress}</th>
