@@ -11,8 +11,7 @@
 
 		 	 
 		
-		Registration Date <sf:input type="date" path="user.registrationDate" />
-		
+	
 		First Name <sf:input type="text" path="user.firstName" />
 		<br />
 		<br /> 
@@ -25,9 +24,6 @@
 		Password <sf:password path="password" />
 		<br />
 		<br /> 
-		Confirm Password <sf:password path="confirmPassword" />
-		<br />
-		<br />
 		Email Address <sf:input type="text" path="user.emailAddress" />
 		<br />
 		<br />

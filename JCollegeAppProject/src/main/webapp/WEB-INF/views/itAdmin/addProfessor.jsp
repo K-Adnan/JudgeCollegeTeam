@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Add Professor</title>
 </head>
 <body>
 	<sf:form method="post" action="processAddProfessor" modelAttribute="professor">		 	 
@@ -18,15 +18,15 @@
 		Password <sf:password  path="password" />
 		<br />
 		<br />
-		Email Address <sf:input type="text" path="emailAddress" />
-		<br />
-		<br />
 		First Name: <sf:input type="text" path="firstName"  />
         <br />
         <br />
 		Last Name: <sf:input type="text" path="lastName"  />
         <br />
         <br />
+        Email Address <sf:input type="text" path="emailAddress" />
+		<br />
+		<br />
         Address <sf:input type="text" path="address" />
         <br />
         <br />

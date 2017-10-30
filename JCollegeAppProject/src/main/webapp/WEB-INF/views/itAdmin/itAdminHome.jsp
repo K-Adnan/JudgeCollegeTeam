@@ -39,7 +39,10 @@
 <br />
 <br />
 <a href = "ViewUsers"> View Users</a>
+<br>
+<br>
 
+${message}
 
 </body>
 </html>
