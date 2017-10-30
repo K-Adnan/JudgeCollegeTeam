@@ -113,7 +113,7 @@ public class WelcomeController {
 		Registrar registrar = registrarDao.getRegistrar(username);
 		registrar.setNoOfIncorrectAttempts(0);
 		registrarDao.updateRegistrar(registrar);
-		return "redirect:Courses";
+		return "redirect:MyProfile";
 	}
 
 	@RequestMapping("/itadmin/home")
