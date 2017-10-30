@@ -44,6 +44,7 @@
                      <th>${s.dOB}</th>
                      <th>${s.gender}</th>
                      <th>${role}</th>
+                     <th><a href="RemoveStudent?username=${s.username}">Remove Student</a></th>
                      
              
            </c:forEach>

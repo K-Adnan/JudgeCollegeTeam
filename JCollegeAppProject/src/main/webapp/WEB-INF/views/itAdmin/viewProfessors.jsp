@@ -29,6 +29,8 @@
                 <th>Address</th>
                 <th>Phone</th>
                 <th> Fax </th>
+                <th> remove professor </th>
+                
            </tr>
 
            <c:forEach items="${professorList}" var="p">
@@ -40,8 +42,7 @@
                      <th>${p.address}</th>
                      <th>${p.phone}</th>
                      <th>${p.fax}</th>
-                     <th>${role}</th>
-                     
+                     <th><a href="RemoveProfessor?username=${p.username}">Remove Professor</a></th>
      
            </c:forEach>
      
