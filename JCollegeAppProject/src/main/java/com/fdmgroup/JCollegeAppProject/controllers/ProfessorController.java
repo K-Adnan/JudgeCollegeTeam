@@ -200,14 +200,21 @@ public class ProfessorController {
 		Student student = studentDao.getStudent(username);
 		Course course = courseDao.getCourse(courseCode);
 		
-		Grade newGrade = new Grade();
-		newGrade.setGradeValue(gradeDropdown.charAt(0));
-		newGrade.setStudent(student);
-		newGrade.setProfessor(professor);
-		newGrade.setCourse(course);
+		Grade grade = gradeDao.getGradeForStudentForCourse(course, student);
 		
-		student.addGrade(newGrade);
-		studentDao.updateStudent(student);
+		if (grade != null){
+			grade.setGradeValue(gradeDropdown.charAt(0));
+			gradeDao.updateGrade(grade);
+		}else{
+			Grade newGrade = new Grade();
+			newGrade.setGradeValue(gradeDropdown.charAt(0));
+			newGrade.setStudent(student);
+			newGrade.setProfessor(professor);
+			newGrade.setCourse(course);
+			student.addGrade(newGrade);
+			studentDao.updateStudent(student);
+		}
+		
 		
 		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
 		List<Character> gradeList = new ArrayList<Character>();

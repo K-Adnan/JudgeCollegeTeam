@@ -17,5 +17,6 @@ public interface GradeDAO {
 	public List <Grade> getAllGradesByStudent(Student student);
 	public List <Grade> getAllGradesByProfessor(Professor professor);
 	public List<Grade> getAllGradesByCourse(Course course);
+	public Grade getGradeForStudentForCourse(Course course, Student student);
 }
 

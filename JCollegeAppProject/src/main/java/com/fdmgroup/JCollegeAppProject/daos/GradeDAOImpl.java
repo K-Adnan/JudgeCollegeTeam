@@ -99,5 +99,19 @@ public class GradeDAOImpl implements GradeDAO {
 		manager.close();
 		return gradeList;
 	}
+	
+	public Grade getGradeForStudentForCourse(Course course, Student student){
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Grade> query = manager.createQuery("FROM Grade g WHERE g.course.courseCode =? AND g.student.username =?", Grade.class);
+		query.setParameter(1, course.getCourseCode());
+		query.setParameter(2, student.getUsername());
+		List<Grade> listOfGrades = query.getResultList();
+		
+		Grade grade = null;
+		if (listOfGrades.size() > 0){
+			grade = query.getResultList().get(0);
+		}
+		return grade;
+	}
 
 }

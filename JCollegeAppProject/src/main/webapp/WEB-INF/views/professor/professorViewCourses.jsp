@@ -66,7 +66,7 @@
 
 		<c:forEach items="${taughtCourseList}" var="t">
 			<tr>
-				<th>${t.courseCode}</th>
+				<th><a href="viewStudents?courseCode=${t.courseCode}">${t.courseCode}</a></th>
 				<th><a href="viewStudents?courseCode=${t.courseCode}">${t.courseName}</a></th>
 				<th>${t.courseInfo}</th>
 				<th>${t.startDate}</th>
@@ -75,7 +75,6 @@
 		</c:forEach>
 	</table>
 
-</br>
 <a href="professorHome"> Go back Home</a>
 <a href="/JCollegeAppProject/logout">Logout</a>
 </body>
