@@ -124,26 +124,26 @@ public class ProfessorController {
 		return "professor/professorViewProfile";
 	}
 	
-	@RequestMapping("/professor/editprofile")
+	@RequestMapping("/professor/editProfile")
 	public String goToEditProfilepage(Model model, Principal principal) {
 		
-		Professor professor = professorDao.getProfessor(principal.getName());
-		
+		Professor professor = professorDao.getProfessor(principal.getName());	
 		professorDao.updateProfessor(professor);
 		model.addAttribute("professor",professor);
-		model.addAttribute("message", "Details successfully updated");
 		return "professor/professorEditProfile";
-
 	}
 
-	@RequestMapping("/donor/processEditProfile")
-	public String editProfile(Model model, HttpSession session, Principal principal) {
-		Professor professor = professorDao.getProfessor(principal.getName());
-		
-		
-		
-		professorDao.updateProfessor(professor);
-		
+	@RequestMapping("/professor/processEditProfile")
+	public String editProfile(Model model, HttpSession session, Principal principal, Professor professor) {
+		Professor oldProfessor = professorDao.getProfessor(principal.getName());
+	
+		oldProfessor.setAddress(professor.getAddress());
+		oldProfessor.setPhone(professor.getPhone());
+		oldProfessor.setFax(professor.getFax());
+		oldProfessor.setEmailAddress(professor.getEmailAddress());
+	
+		professorDao.updateProfessor(oldProfessor);
+		model.addAttribute("message", "Details successfully updated");
 		return "professor/professorEditProfile";
 	}
 	

@@ -17,6 +17,8 @@ Edit your details below:
 		<br />
 		Phone Number <sf:input path="phone" value="${professor.phone}"/>
 		<br /> 
+		Email Address  <sf:input path="emailAddress" value="${professor.emailAddress}"/>
+		<br /> 
 		Fax <sf:input path="fax" value="${professor.fax}"/>
 		<br />
 		<input type="submit" value="Edit">

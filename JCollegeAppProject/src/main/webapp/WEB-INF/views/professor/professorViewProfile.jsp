@@ -23,6 +23,7 @@ ${message}
             <th>Registration Date</th>
                 <th>Address</th>
                 <th>Phone Number</th>
+                <th> Email Address </th>
                 <th>Fax</th>
                 <th>Department</th>
             
@@ -35,8 +36,9 @@ ${message}
                 <th>${professor.registrationDate}</th>
                     <th>${professor.address}</th>
                     <th>${professor.phone}</th>
+                    <th>${professor.emailAddress}</th>
                     <th>${professor.fax}</th>
-                    <th>${professor.department}</th>
+                    <th>${professor.department.departmentName}</th>
       
                 </tr>
             
