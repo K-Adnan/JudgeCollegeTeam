@@ -104,7 +104,7 @@ public class StudentController {
 		oldStudent.setEmailAddress(student.getEmailAddress());
 		
 		studentDao.updateStudent(oldStudent);
-		
+		model.addAttribute("student", oldStudent);		
 		return "student/studentViewProfile";
 	}
 	

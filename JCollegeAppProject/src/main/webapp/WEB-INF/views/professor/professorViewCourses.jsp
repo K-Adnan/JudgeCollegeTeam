@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@ include file="PageDirectives.jsp"%>
+	<%@ include file="../PageDirectives.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +11,6 @@
 <body>
 
 	<h2>Student Course Options</h2>
-	<br /> ${username} please choose a course to teach.
 
 	<table>
 		<tr>
@@ -21,6 +21,8 @@
 			<th>Taught by</th>
 			<th>Start Date</th>
 			<th>End Date</th>
+			<th>Number of Students</th>
+			
 			<th> </th>
 		</tr>
 
@@ -39,6 +41,7 @@
 					</c:choose></th>
 				<th>${c.startDate}</th>
 				<th>${c.endDate}</th>
+				<th>${fn:length(c.studentList)}</th>
 				<th>
 				<c:choose>
 					<c:when test="${empty c.professor.username }">

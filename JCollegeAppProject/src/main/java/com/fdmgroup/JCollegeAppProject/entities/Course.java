@@ -42,7 +42,7 @@ public class Course implements Serializable {
 	@ElementCollection(fetch=FetchType.EAGER)
 	private Map<String, Calendar> lessons = new HashMap<String, Calendar>();
 
-	@ManyToMany(cascade = CascadeType.MERGE)
+	@ManyToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
 	private Set<Student> studentList;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
