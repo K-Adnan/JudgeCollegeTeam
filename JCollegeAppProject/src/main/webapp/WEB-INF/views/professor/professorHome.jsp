@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="../css/professor.css" rel="stylesheet" type="text/css">
 <title>Home Screen</title>
 </head>
 <body>
@@ -13,11 +14,11 @@
 
 <a href="/JCollegeAppProject/logout">Logout</a>
 
-<br />
-<br />
-<a href = "viewCourses"> View Courses </a>
-<br />
-<br />
-<a href = "viewProfile"> View Profile</a>
+<ul>
+  <li><a href = "viewCourses"> My Courses </a></li>
+  <li><a href = "viewProfile"> My Profile</a></li>
+</ul>
+
+
 </body>
 </html>

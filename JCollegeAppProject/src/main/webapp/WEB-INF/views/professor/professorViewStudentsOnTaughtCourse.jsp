@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<h2>List of all students</h2>
+	<h2>List of all students enrolled on ${course.courseName}</h2>
 
 	<a href="/JCollegeAppProject/logout">Logout</a>
 
@@ -22,7 +22,7 @@
 			<th>Last Name</th>
 			<th>Email Address</th>
 			<th>Grade</th>
-			<th> </th>
+			<th> New Comment </th>
 		</tr>
 
 		<c:forEach items="${studentList}" var="s">
@@ -65,23 +65,34 @@
 						</c:forEach>
 						</c:otherwise>
  					</c:choose>
+					<th><input name="gradeComment" value="${grade.gradeComment }"/> </th>
  				</c:forEach>
 				</c:otherwise>
 				</c:choose>
  			</select>
  					<input type="submit" value="Update"/>
+					
 				</form>
  				</th>
  				<%--<th><a href="updateGrade?courseCode=${course.courseCode}&username=${s.username}&grade=${pageScope[gradeDropdown]}">Update</a></th> --%>
+	
+	
 		</c:forEach>
+	
+	
+	
 	</table>
 	
 	<br/>
 	<br/>
-	<a href="professorHome">back home</a>
+	
+	<a href="viewCourses">back to My Courses</a>
+	
+	<br/>
+	<br/>
 	
 	
-
+<a href="professorHome">back Home</a>
 
 </body>
 </html>

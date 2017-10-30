@@ -148,7 +148,6 @@ public class ProfessorController {
 	}
 	
 	
-	
 	@RequestMapping("/professor/unassignCourse")
 	public String doUnassignCourse(@RequestParam int courseCode, Model model, HttpSession session, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
@@ -180,7 +179,7 @@ public class ProfessorController {
 	}
 	
 	@RequestMapping("/professor/updateGrade")
-	public String doUpdateGrade(@RequestParam int courseCode, @RequestParam String username, @RequestParam String gradeDropdown, Model model, HttpSession session, Principal principal) {
+	public String doUpdateGrade(@RequestParam int courseCode, @RequestParam String username, @RequestParam String gradeDropdown, @RequestParam String gradeComment, Model model, HttpSession session, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
 		Student student = studentDao.getStudent(username);
 		Course course = courseDao.getCourse(courseCode);
@@ -189,7 +188,7 @@ public class ProfessorController {
 		
 		if (grade != null){
 			grade.setGradeValue(gradeDropdown.charAt(0));
-			
+			grade.setGradeComment(gradeComment);
 			if (gradeDropdown.charAt(0) == ' '){
 				gradeDao.removeGrade(grade.getGradeId());
 			}else{
@@ -223,4 +222,12 @@ public class ProfessorController {
 		return "professor/professorViewStudentsOnTaughtCourse";
 	}
 
+	
+	
+	
+	
+	
+	
+
+	
 }
