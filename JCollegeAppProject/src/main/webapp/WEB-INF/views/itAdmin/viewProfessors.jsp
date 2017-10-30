@@ -42,7 +42,7 @@
                      <th>${p.address}</th>
                      <th>${p.phone}</th>
                      <th>${p.fax}</th>
-                     <th><a href="RemoveProfessor?username=${p.username}">Remove Professor</a></th>
+                     <th><a href="processRemoveProfessor?username=${p.username}">Remove Professor</a></th>
      
            </c:forEach>
 
