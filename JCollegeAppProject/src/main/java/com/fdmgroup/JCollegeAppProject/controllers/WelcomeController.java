@@ -61,7 +61,7 @@ public class WelcomeController {
 			user.setNoOfIncorrectAttempts(user.getNoOfIncorrectAttempts() + 1);
 			if (user.getNoOfIncorrectAttempts() < 3) {
 				model.addAttribute("message",
-						"The date you entered is wrong.\nPlease provide a valid username and password for entry into the C-Registration System.");
+						"The data you entered is wrong.\nPlease provide a valid username and password for entry into the C-Registration System.");
 			} else {
 				model.addAttribute("message",
 						"You have entered incorrect details on 3 occasions. Your account has been locked. Please contact IT Support.");
@@ -75,6 +75,14 @@ public class WelcomeController {
 	public String goToLogin(Model model, HttpSession session, Principal principal, HttpServletRequest request) {
 
 		session.setAttribute("username", principal.getName());
+		User user = userDao.getUser(principal.getName());
+		
+		if (user.getNoOfIncorrectAttempts() >= 3){
+			session.invalidate();
+			model.addAttribute("message",
+					"You have entered incorrect details on 3 occasions. Your account has been locked. Please contact IT Support.");
+			return "index";
+		}
 
 		if (request.isUserInRole("Student")) {
 			return "redirect:student/home";
