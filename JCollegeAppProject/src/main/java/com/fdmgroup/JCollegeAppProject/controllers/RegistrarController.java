@@ -52,12 +52,6 @@ public class RegistrarController {
 		this.professorDao = professorDAO;
 	}
 	
-	@RequestMapping("/registrar/registrarHome")
-	public String GoToregistrarHome(){
-		logger.info("Client request to url : registrarHome");
-		return "registrar/registrarHome";
-	}
-	
 	@RequestMapping("/registrar/MyProfile")
 	public String GoToMyProfile(Principal principal, Model model) {
 		logger.info("Client request to url : MyProfile");

@@ -36,14 +36,14 @@
 		<sf:label path="department" class="col-lg-3 control-label">Department :</sf:label>
 		<div class="col-lg-8">
 		<div class="ui-select">
-						<select name="departmentId">
-							<c:forEach items="${departmentList}" var="dep">
-								<option value="${dep.departmentId}">${dep.departmentName}</option>
-							</c:forEach>
-							<option value="" selected="selected"/>
-							</select>
-				</div>
-			</div>
+				<select name="departmentId">
+					<c:forEach items="${departmentList}" var="dep">
+						<option value="${dep.departmentId}">${dep.departmentName}</option>
+					</c:forEach>
+						<option value="" selected="selected"/>
+				</select>
+		</div>
+		</div>
 		</div>
 		<sf:input path="" type="submit" value="Add Course" />
 	</sf:form>	
