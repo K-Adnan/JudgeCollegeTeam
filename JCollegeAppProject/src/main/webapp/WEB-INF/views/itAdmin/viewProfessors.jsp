@@ -35,7 +35,7 @@
 
            <c:forEach items="${professorList}" var="p">
                 <tr>
-                     <th><a href="editProfessor?username=${p.username}">${p.username}</a></th>
+                     <th>${p.username}</a></th>
                      <th>${p.password}</th>
                      <th>${p.firstName}</th>
                      <th>${p.lastName}</th>
