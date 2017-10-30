@@ -19,6 +19,7 @@ import com.fdmgroup.JCollegeAppProject.daos.GradeDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAOImpl;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
+import com.fdmgroup.JCollegeAppProject.entities.Department;
 import com.fdmgroup.JCollegeAppProject.entities.Grade;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
@@ -70,17 +71,12 @@ public class ProfessorController {
 	@RequestMapping("/professor/viewCourses")
 	public String goToShowCourses(Model model, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
-		List<Course> courseList = courseDao.getAllCourses();
+		Department department = professor.getDepartment();
+		List<Course> courseList = courseDao.getAllCoursesByDepartment(department);
 		List<Course> taughtCourseList = courseDao.getAllCoursesByProfessor(professor);
 
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("taughtCourseList", taughtCourseList);
-		return "professor/professorViewCourses";
-	}
-
-	@RequestMapping("/professor/processViewCourses")
-	public String processShowCourses() {
-		courseDao.getAllCourses();
 		return "professor/professorViewCourses";
 	}
 
@@ -127,17 +123,6 @@ public class ProfessorController {
 		model.addAttribute("professor", professor);
 		return "professor/professorViewProfile";
 	}
-	
-	
-//	@RequestMapping("/professor/processViewProfile")
-//	public String processViewProfile(Model model,Principal principal) {
-//	
-//		Professor professor = professorDao.getProfessor(principal.getName());
-//		return "professor/professorViewProfile";
-//
-//	}
-//	
-	
 	
 	@RequestMapping("/professor/editprofile")
 	public String goToEditProfilepage(Model model, Principal principal) {
@@ -204,7 +189,12 @@ public class ProfessorController {
 		
 		if (grade != null){
 			grade.setGradeValue(gradeDropdown.charAt(0));
-			gradeDao.updateGrade(grade);
+			
+			if (gradeDropdown.charAt(0) == ' '){
+				gradeDao.removeGrade(grade.getGradeId());
+			}else{
+				gradeDao.updateGrade(grade);
+			}
 		}else{
 			Grade newGrade = new Grade();
 			newGrade.setGradeValue(gradeDropdown.charAt(0));

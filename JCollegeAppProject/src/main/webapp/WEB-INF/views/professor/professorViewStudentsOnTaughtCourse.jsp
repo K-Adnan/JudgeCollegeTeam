@@ -12,10 +12,6 @@
 	<h2>List of all students</h2>
 
 	<a href="/JCollegeAppProject/logout">Logout</a>
-	<br />
-	<br /> ${username} 
-	
-	${course.courseName} - ${course.courseInfo} - ${course.startDate}	- ${course.endDate}
 
 
 	<table>
@@ -25,7 +21,7 @@
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Email Address</th>
-			<th>Grade </th>
+			<th>Grade</th>
 			<th> </th>
 		</tr>
 

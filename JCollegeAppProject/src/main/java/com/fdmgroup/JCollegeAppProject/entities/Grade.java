@@ -32,6 +32,7 @@ public class Grade implements Serializable {
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Course course;
 	private char gradeValue;
+	private String gradeComment;
 
 	public Grade() {
 
@@ -71,6 +72,14 @@ public class Grade implements Serializable {
 
 	public int getGradeId() {
 		return gradeId;
+	}
+
+	public String getGradeComment() {
+		return gradeComment;
+	}
+
+	public void setGradeComment(String gradeComment) {
+		this.gradeComment = gradeComment;
 	}
 
 }
