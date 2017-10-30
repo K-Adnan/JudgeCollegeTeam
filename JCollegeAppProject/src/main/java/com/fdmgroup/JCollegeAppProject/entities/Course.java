@@ -39,8 +39,8 @@ public class Course implements Serializable {
 	private Date startDate;
 	private Date endDate;
 	
-	@ElementCollection
-	private Map<Weekday, Calendar> lessons = new HashMap<Weekday, Calendar>();
+	@ElementCollection(fetch=FetchType.EAGER)
+	private Map<String, Calendar> lessons = new HashMap<String, Calendar>();
 
 	@ManyToMany(cascade = CascadeType.MERGE)
 	private Set<Student> studentList;
@@ -54,15 +54,17 @@ public class Course implements Serializable {
 
 	public Course() {
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 13);
+		calendar.set(2017,9,30);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 		
-		lessons.put(Weekday.MONDAY, calendar);
-		lessons.put(Weekday.TUESDAY, calendar);
-		lessons.put(Weekday.WEDNESDAY, calendar);
-		lessons.put(Weekday.THURSDAY, calendar);
-		lessons.put(Weekday.FRIDAY, calendar);
+		lessons.put(Weekday.MONDAY.name(), calendar);
+		lessons.put(Weekday.TUESDAY.name(), calendar);
+		lessons.put(Weekday.WEDNESDAY.name(), calendar);
+		lessons.put(Weekday.THURSDAY.name(), calendar);
+		lessons.put(Weekday.FRIDAY.name(), calendar);
 	}
 
 	public Course(String courseName, String courseInfo, Date startDate, Date endDate, Department department, Professor professor) {
@@ -177,11 +179,11 @@ public class Course implements Serializable {
 		studentList.remove(student);
 	}
 
-	public Map<Weekday, Calendar> getLessons() {
+	public Map<String, Calendar> getLessons() {
 		return lessons;
 	}
 
-	public void setLessons(Map<Weekday, Calendar> lessons) {
+	public void setLessons(Map<String, Calendar> lessons) {
 		this.lessons = lessons;
 	}
 }

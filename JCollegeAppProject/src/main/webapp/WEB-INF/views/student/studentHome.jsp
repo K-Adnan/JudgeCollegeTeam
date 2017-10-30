@@ -22,6 +22,9 @@
 <br />
 <br />
 <a href = "ViewProfile"> View Profile</a>
+<br/>
+<br/>
+<a href = "viewTimetable"> View Timetable</a>
 
 </body>
 </html>

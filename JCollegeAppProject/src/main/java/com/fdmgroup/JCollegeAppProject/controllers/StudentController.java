@@ -4,8 +4,10 @@ import java.security.Principal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -166,15 +168,25 @@ public class StudentController {
 	@RequestMapping("student/viewCourse")
 	public String goToViewCourse(@RequestParam int courseCode, Model model, Principal principal){
 		Course course = courseDao.getCourse(courseCode);
-		Map<Weekday, Calendar> map = course.getLessons();
+		Map<String, Calendar> map = course.getLessons();
 		
-		model.addAttribute("monday", new DecimalFormat("00").format(map.get(Weekday.MONDAY).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.MONDAY).get(Calendar.MINUTE)));
-		model.addAttribute("tuesday", new DecimalFormat("00").format(map.get(Weekday.TUESDAY).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.TUESDAY).get(Calendar.MINUTE)));
-		model.addAttribute("wednesday", new DecimalFormat("00").format(map.get(Weekday.WEDNESDAY).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.WEDNESDAY).get(Calendar.MINUTE)));
-		model.addAttribute("thursday", new DecimalFormat("00").format(map.get(Weekday.THURSDAY).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.THURSDAY).get(Calendar.MINUTE)));
-		model.addAttribute("friday", new DecimalFormat("00").format(map.get(Weekday.FRIDAY).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.FRIDAY).get(Calendar.MINUTE)));
+		model.addAttribute("monday", new DecimalFormat("00").format(map.get(Weekday.MONDAY.name()).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.MONDAY.name()).get(Calendar.MINUTE)));
+		model.addAttribute("tuesday", new DecimalFormat("00").format(map.get(Weekday.TUESDAY.name()).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.TUESDAY.name()).get(Calendar.MINUTE)));
+		model.addAttribute("wednesday", new DecimalFormat("00").format(map.get(Weekday.WEDNESDAY.name()).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.WEDNESDAY.name()).get(Calendar.MINUTE)));
+		model.addAttribute("thursday", new DecimalFormat("00").format(map.get(Weekday.THURSDAY.name()).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.THURSDAY.name()).get(Calendar.MINUTE)));
+		model.addAttribute("friday", new DecimalFormat("00").format(map.get(Weekday.FRIDAY.name()).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.FRIDAY.name()).get(Calendar.MINUTE)));
 		model.addAttribute("map", map);
 		return "student/viewCourse";
+	}
+	
+	@RequestMapping("student/viewTimetable")
+	public String goToViewTimetable(HttpSession session, Model model, Principal principal){
+		Student student = studentDao.getStudent(principal.getName());
+		
+		Set<Course> courseList = student.getCourseList();
+		
+		model.addAttribute("courseList", courseList);
+		return "student/viewTimetable";
 	}
 	
 }
