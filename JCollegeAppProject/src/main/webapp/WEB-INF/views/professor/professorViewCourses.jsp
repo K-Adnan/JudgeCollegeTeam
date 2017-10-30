@@ -71,7 +71,7 @@
 				<th>${t.courseInfo}</th>
 				<th>${t.startDate}</th>
 				<th>${t.endDate}</th>
-				<th><a href="unassignCourse?courseCode=${t.courseCode}">Unassign</a></th>
+				<th><a href="unassignCourse?courseCode=${t.courseCode}">Remove Course</a></th>
 		</c:forEach>
 	</table>
 

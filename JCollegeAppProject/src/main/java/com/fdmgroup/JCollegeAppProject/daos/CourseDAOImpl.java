@@ -103,6 +103,17 @@ public class CourseDAOImpl implements CourseDAO {
 			manager.close();	
 			return courseList;
 		}
+	
+	@Override
+	public List<Course> getCourseByName(String name){
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Course> query = manager.createQuery("SELECT c FROM Course c WHERE c.courseName like ? or c.department.departmentName like ?", Course.class);
+		query.setParameter(1, "%" + name + "%");
+		query.setParameter(2, "%" + name + "%");
+		List<Course> courseList = query.getResultList();
+		manager.close();
+		return courseList;
+	}
 
 	}
 

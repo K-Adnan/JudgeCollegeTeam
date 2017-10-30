@@ -1,6 +1,7 @@
 package com.fdmgroup.JCollegeAppProject.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -136,6 +137,26 @@ public class StudentController {
 		model.addAttribute("gradeList", listOfGrades);
 		
 		return "student/viewGrades";
+	}
+	
+	@RequestMapping("student/searchCourse")
+	public String doSearchCourse(@RequestParam String search, Model model, Principal principal){
+		Student student = studentDao.getStudent(principal.getName());
+		List<Course> enrolledCourseList = courseDao.getAllCoursesByStudent(student);
+		
+		List<Course> courseList = null;
+		try{
+			int code = Integer.parseInt(search);
+			Course course = courseDao.getCourse(code);
+			courseList = new ArrayList<Course>();
+			courseList.add(course);
+		}catch(NumberFormatException n){
+			courseList = courseDao.getCourseByName(search);
+		}
+		
+		model.addAttribute("enrolledCourses", enrolledCourseList);
+		model.addAttribute("courseList", courseList);
+		return "student/studentViewCourses";
 	}
 	
 }

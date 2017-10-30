@@ -11,16 +11,19 @@
 
 	<h2>Student Course Options</h2>
 
-	<a href="/JCollegeAppProject/logout">Logout</a>
+	<a href="/JCollegeAppProject/logout">Logout</a><br/>
+	<a href="ViewCourses">Show All Available Courses</a>
 
-	<br /> ${username} please chose a course to enroll on
-
+	<form action="searchCourse" method="post">
+		<input name="search" width="50px" placeholder="Search for Course"/>
+		<input type="submit" value="Go!"/>
+	</form>
 
 	<table>
 		<tr>
-
 			<th>Course Code</th>
 			<th>Course Name</th>
+			<th>Department</th>
 			<th>Course Info</th>
 			<th>Professor</th>
 			<th>Start Date</th>
@@ -33,6 +36,7 @@
 			<tr>
 				<th>${c.courseCode}</th>
 				<th>${c.courseName}</th>
+				<th>${c.department.departmentName}
 				<th>${c.courseInfo}</th>
 				<th>
 				<c:choose>
@@ -46,7 +50,7 @@
 				</th>
 				<th>${c.startDate}</th>
 				<th>${c.endDate}</th>
-				<th><a href="enrollOnCourse?courseCode=${c.courseCode}">Enroll</a></th>
+				<th><a href="enrollOnCourse?courseCode=${c.courseCode}&courseName=${c.courseName}">Enroll</a></th>
 		</c:forEach>
 	</table>
 	${message}
@@ -54,7 +58,7 @@
 		<br/>
 		<br/>
 
-	Enrolled Courses
+	My Courses
 	<table>
 		<tr>
 
@@ -85,7 +89,7 @@
 				</th>
 				<th>${c.startDate}</th>
 				<th>${c.endDate}</th>
-				<th><a href="vacateCourse?courseCode=${c.courseCode}">Vacate</a></th>
+				<th><a href="vacateCourse?courseCode=${c.courseCode}">Remove Course</a></th>
 		</c:forEach>
 	</table>
 

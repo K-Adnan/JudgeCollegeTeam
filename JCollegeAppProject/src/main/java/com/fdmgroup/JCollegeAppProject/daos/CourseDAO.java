@@ -27,4 +27,6 @@ public interface CourseDAO {
 	
 	public List<Course>getAllCoursesByProfessor(Professor professor);
 
+	List<Course> getCourseByName(String name);
+
 }
