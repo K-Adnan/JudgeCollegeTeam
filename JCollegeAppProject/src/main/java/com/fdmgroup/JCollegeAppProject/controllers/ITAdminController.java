@@ -194,7 +194,24 @@ public class ITAdminController {
 		model.addAttribute("itAdminList", itAdminList);
 		model.addAttribute("message", "IT Admin removed successfully");
 		return "itAdmin/viewItAdmins";
-
+	}
+	
+	@RequestMapping("/itAdmin/viewBlockedUsers")
+	public String goToBlockedUsers(Model model) {
+		List<User> userList = userDao.getAllBlockedUsers();
+		model.addAttribute("userList", userList);
+		return "itAdmin/blockedUsers";
+	}
+	
+	@RequestMapping("/itAdmin/processUnblockUser")
+	public String processUnblockUser(@RequestParam String username, Model model) {
+		User user = userDao.getUser(username);
+		user.setNoOfIncorrectAttempts(0);
+		userDao.updateUser(user);
+		
+		List<User> userList = userDao.getAllBlockedUsers();
+		model.addAttribute("userList", userList);
+		return "itAdmin/blockedUsers";
 	}
 
 }

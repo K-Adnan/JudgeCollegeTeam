@@ -28,5 +28,7 @@ public interface UserDAO {
      public List<User> getAllRegistrars();
 
      public List<User> getAllITAdmins();
+     
+     public List<User> getAllBlockedUsers();
 
 }

@@ -32,7 +32,7 @@
 <a href = "viewItAdmins">View IT Admins</a>
 <br />
 <br />
-
+<a href = "viewBlockedUsers">View Blocked Users</a>
 
 ${message}
 

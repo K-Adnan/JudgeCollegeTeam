@@ -177,6 +177,7 @@ public class StudentController {
 		model.addAttribute("thursday", new DecimalFormat("00").format(map.get(Weekday.THURSDAY.name()).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.THURSDAY.name()).get(Calendar.MINUTE)));
 		model.addAttribute("friday", new DecimalFormat("00").format(map.get(Weekday.FRIDAY.name()).get(Calendar.HOUR_OF_DAY)) + ":" + new DecimalFormat("00").format(map.get(Weekday.FRIDAY.name()).get(Calendar.MINUTE)));
 		model.addAttribute("map", map);
+		model.addAttribute("course", course);
 		return "student/viewCourse";
 	}
 	
