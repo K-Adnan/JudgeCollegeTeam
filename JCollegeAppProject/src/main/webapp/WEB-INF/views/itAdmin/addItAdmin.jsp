@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Professor</title>
+<title>Add IT Admin</title>
 </head>
 <body>
 	<sf:form method="post" action="processAddItAdmin" modelAttribute="itAdmin">		 	 
@@ -29,7 +29,7 @@
 		<br />
 		
 	
-		<input type="submit" value="Register ItAdmin">
+		<input type="submit" value="Register It Admin">
 	</sf:form>
 
 </body>

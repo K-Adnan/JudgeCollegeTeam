@@ -8,7 +8,7 @@
 <title>Add Registrar</title>
 </head>
 <body>
-<sf:form method="post" action="processAddRegistrar" modelAttribute="user">
+<sf:form method="post" action="processAddRegistrar" modelAttribute="registrar">
 
 		 	 
 		

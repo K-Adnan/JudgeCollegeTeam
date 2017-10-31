@@ -44,8 +44,9 @@ public class ITAdminDAOImpl implements ITAdminDAO {
 	}
 
 	@Override
-	public void removeITAdmin(ITAdmin itAdmin) {
+	public void removeITAdmin(String username) {
 		EntityManager manager = factory.createEntityManager();
+		ITAdmin itAdmin = manager.find(ITAdmin.class, username);
 		manager.getTransaction().begin();
 		manager.remove(itAdmin);
 		manager.getTransaction().commit();

@@ -48,7 +48,7 @@ ${message}
      
            </c:forEach>
 </table>
-${message2}
+
      
 <a href="HomePage"> Back To Home  </a>
  <a href="/JCollegeAppProject/logout">Logout</a>

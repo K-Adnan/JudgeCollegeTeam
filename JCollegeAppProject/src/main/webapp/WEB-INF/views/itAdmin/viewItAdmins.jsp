@@ -6,11 +6,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home Screen</title>
+<title>View It Admins</title>
 </head>
 <body>
 
-     <h2>All ITAdmins</h2>
+
+${message}
+
+
+<a href = "addItAdmin"> Add IT Admin </a>
+<br />
+<br />
+
+     <h2>All IT Admins</h2>
 
 
      <br /> ${username}
@@ -26,19 +34,21 @@
                 <th>Remove IT Admin</th>
            </tr>
 
-           <c:forEach items="${itadminList}" var="i">
+           <c:forEach items="${itAdminList}" var="i">
                   <tr>
                      <th><a>${i.username}</a></th>
                      <th>${i.password}</th>
                      <th>${i.firstName}</th>
                      <th>${i.lastName}</th>
-                     <th>${i.email}</th>
-                     <th><a href="processRemoveITAdmin?username=${i.username}">Remove IT Admin</a></th>
+                     <th>${i.emailAddress}</th>
+                     <th><a href="processRemoveItAdmin?username=${i.username}">Remove IT Admin</a></th>
      
                      
            </c:forEach>
-     
+     </table>
      <a href="HomePage"> Back To Home  </a>
+     <br/>
+     <br/>
      <a href="/JCollegeAppProject/logout">Logout </a>
 
 

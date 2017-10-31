@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fdmgroup.JCollegeAppProject.daos.ITAdminDAO;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
@@ -68,8 +67,10 @@ public class ITAdminController {
 	@RequestMapping("/itAdmin/processAddStudent")
 	public String processAddStudent(Model model, Student student) {
 		studentDao.addStudent(student);
+		List<User> studentList = userDao.getAllStudents();
+		model.addAttribute("studentList", studentList);
 		model.addAttribute("message", "Student added successfully");
-		return "itAdmin/itAdminHome";
+		return "itAdmin/viewStudents";
 	}
 
 	@RequestMapping("/itAdmin/viewStudents")
@@ -90,7 +91,6 @@ public class ITAdminController {
 		return "itAdmin/viewStudents";
 
 	}
-	
 
 	@RequestMapping("/itAdmin/addProfessor")
 	public String goToAddProfessor(Model model) {
@@ -102,8 +102,10 @@ public class ITAdminController {
 	@RequestMapping("/itAdmin/processAddProfessor")
 	public String processAddProfessor(Model model, Professor professor) {
 		professorDao.addProfessor(professor);
+		List<User> studentList = userDao.getAllStudents();
+		model.addAttribute("studentList", studentList);
 		model.addAttribute("message", "Professor added successfully");
-		return "itAdmin/itAdminHome";
+		return "itAdmin/viewProfessors";
 	}
 
 	@RequestMapping("/itAdmin/viewProfessors")
@@ -119,7 +121,7 @@ public class ITAdminController {
 		professorDao.removeProfessor(username);
 		List<User> professorList = userDao.getAllProfessors();
 		model.addAttribute("professorList", professorList);
-		model.addAttribute("message2", "Professor removed successfully");
+		model.addAttribute("message", "Professor removed successfully");
 		return "itAdmin/viewProfessors";
 
 	}
@@ -135,7 +137,7 @@ public class ITAdminController {
 	public String processAddRegistar(Model model, Registrar registrar) {
 		registrarDao.addRegistrar(registrar);
 		model.addAttribute("message", "Registrar added successfully");
-		return "itAdmin/itAdminHome";
+		return "itAdmin/viewRegistrars";
 	}
 
 	@RequestMapping("/itAdmin/viewRegistrars")
@@ -146,17 +148,10 @@ public class ITAdminController {
 		return "itAdmin/viewRegistrars";
 	}
 
-	@RequestMapping("/itAdmin/removeRegistrar")
-	public String goToRemoveRegistrar(Model model) {
-		Registrar registrar = new Registrar();
-		model.addAttribute("registrar", registrar);
-		return "itAdmin/RemoveProfessor";
-	}
-
 	@RequestMapping("/itAdmin/processRemoveRegistrar")
 	public String processRemoveRegistrar(Registrar registrar, Model model) {
 		registrarDao.removeRegistrar(registrar);
-		model.addAttribute("message2", "Registrar removed successfully");
+		model.addAttribute("message", "Registrar removed successfully");
 		return "itAdmin/HomePage";
 
 	}
@@ -165,14 +160,17 @@ public class ITAdminController {
 	public String goToAddITAdmin(Model model) {
 		ITAdmin itAdmin = new ITAdmin();
 		model.addAttribute("itAdmin", itAdmin);
+
 		return "itAdmin/addItAdmin";
 	}
 
-	@RequestMapping("/itAdmin/processAddITAdmin")
+	@RequestMapping("/itAdmin/processAddItAdmin")
 	public String processAddITadmin(Model model, ITAdmin itAdmin) {
 		itAdminDao.addITAdmin(itAdmin);
+		List<User> itAdminList = userDao.getAllITAdmins();
+		model.addAttribute("itAdminList", itAdminList);
 		model.addAttribute("message", "IT Admin added successfully");
-		return "itAdmin/itAdminHome";
+		return "itAdmin/viewItAdmins";
 	}
 
 	@RequestMapping("/itAdmin/viewItAdmins")
@@ -183,18 +181,14 @@ public class ITAdminController {
 		return "itAdmin/viewItAdmins";
 	}
 
-	@RequestMapping("/itAdmin/removeItAdmin")
-	public String goToRemoveITAdmin(Model model) {
-		ITAdmin itadmin = new ITAdmin();
-		model.addAttribute("itadmin", itadmin);
-		return "itAdmin/RemoveItAdmin";
-	}
-
 	@RequestMapping("/itAdmin/processRemoveItAdmin")
-	public String processRemoveITAdmin(ITAdmin itAdmin, Model model) {
-		itAdminDao.removeITAdmin(itAdmin);
+	public String processRemoveITAdmin(@RequestParam String username, Model model) {
+		itAdminDao.removeITAdmin(username);
+		List<User> itAdminList = userDao.getAllITAdmins();
+		model.addAttribute("itAdminList", itAdminList);
 		model.addAttribute("message", "IT Admin removed successfully");
-		return "itAdmin/viewITAdmins";
+		return "itAdmin/viewItAdmins";
 
 	}
+
 }
