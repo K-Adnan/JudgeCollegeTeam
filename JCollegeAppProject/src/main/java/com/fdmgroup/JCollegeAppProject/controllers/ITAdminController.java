@@ -12,11 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAO;
 import com.fdmgroup.JCollegeAppProject.daos.ITAdminDAO;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
 import com.fdmgroup.JCollegeAppProject.daos.RegistrarDAO;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
 import com.fdmgroup.JCollegeAppProject.daos.UserDAO;
+import com.fdmgroup.JCollegeAppProject.entities.Department;
 import com.fdmgroup.JCollegeAppProject.entities.ITAdmin;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Registrar;
@@ -38,6 +40,8 @@ public class ITAdminController {
 	private RegistrarDAO registrarDao;
 	@Autowired
 	private ITAdminDAO itAdminDao;
+	@Autowired
+	private DepartmentDAO departmentDao;
 
 	public ITAdminController() {
 		super();
@@ -94,17 +98,23 @@ public class ITAdminController {
 
 	@RequestMapping("/itAdmin/addProfessor")
 	public String goToAddProfessor(Model model) {
+		List<Department> listOfDepartments = departmentDao.getAllDepartments();
 		Professor professor = new Professor();
 		model.addAttribute("professor", professor);
+		model.addAttribute("departmentList", listOfDepartments);
 		return "itAdmin/addProfessor";
 	}
 
 	@RequestMapping("/itAdmin/processAddProfessor")
-	public String processAddProfessor(Model model, Professor professor) {
+	public String processAddProfessor(@RequestParam int departmentId, Model model, Professor professor) {
+		Department department = departmentDao.getDepartment(departmentId);
+		professor.setDepartment(department);
 		professorDao.addProfessor(professor);
 		List<User> studentList = userDao.getAllStudents();
 		model.addAttribute("studentList", studentList);
 		model.addAttribute("message", "Professor added successfully");
+		List<User> professorList = userDao.getAllProfessors();
+		model.addAttribute("professorList", professorList);
 		return "itAdmin/viewProfessors";
 	}
 

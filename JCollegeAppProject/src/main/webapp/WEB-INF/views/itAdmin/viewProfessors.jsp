@@ -31,6 +31,7 @@ ${message}
                 <th>Address</th>
                 <th>Phone</th>
                 <th>Fax</th>
+                <th>Department</th>
                 <th>Remove Professor</th>
                 
            </tr>
@@ -44,6 +45,7 @@ ${message}
                      <th>${p.address}</th>
                      <th>${p.phone}</th>
                      <th>${p.fax}</th>
+                     <th>${p.department.departmentName}</th>
                      <th><a href="processRemoveProfessor?username=${p.username}">Remove Professor</a></th>
      
            </c:forEach>
