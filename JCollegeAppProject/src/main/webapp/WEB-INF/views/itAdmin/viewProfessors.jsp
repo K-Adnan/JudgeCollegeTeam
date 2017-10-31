@@ -37,7 +37,7 @@ ${message}
 
            <c:forEach items="${professorList}" var="p">
                 <tr>
-                     <th><a>${p.username}</a></th>
+                     <th>${p.username}</th>
                      <th>${p.password}</th>
                      <th>${p.firstName}</th>
                      <th>${p.lastName}</th>
@@ -47,7 +47,7 @@ ${message}
                      <th><a href="processRemoveProfessor?username=${p.username}">Remove Professor</a></th>
      
            </c:forEach>
-
+</table>
 ${message2}
      
 <a href="HomePage"> Back To Home  </a>
