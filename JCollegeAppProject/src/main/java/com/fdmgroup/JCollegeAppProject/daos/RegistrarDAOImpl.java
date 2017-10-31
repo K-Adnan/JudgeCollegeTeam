@@ -43,8 +43,9 @@ public class RegistrarDAOImpl implements RegistrarDAO {
 		manager.getTransaction().commit();
 	}
 	@Override
-	public void removeRegistrar(Registrar registrar) {
+	public void removeRegistrar(String username) {
 		EntityManager manager = factory.createEntityManager();
+		Registrar registrar = manager.find(Registrar.class, username);
 		manager.getTransaction().begin();
 		manager.remove(registrar);
 		manager.getTransaction().commit();

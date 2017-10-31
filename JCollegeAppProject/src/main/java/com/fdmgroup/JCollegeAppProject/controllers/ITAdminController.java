@@ -136,6 +136,8 @@ public class ITAdminController {
 	@RequestMapping("/itAdmin/processAddRegistrar")
 	public String processAddRegistar(Model model, Registrar registrar) {
 		registrarDao.addRegistrar(registrar);
+		List<User> registrarList = userDao.getAllRegistrars();
+		model.addAttribute("registrarList", registrarList);
 		model.addAttribute("message", "Registrar added successfully");
 		return "itAdmin/viewRegistrars";
 	}
@@ -147,12 +149,16 @@ public class ITAdminController {
 		model.addAttribute("registrarList", registrarList);
 		return "itAdmin/viewRegistrars";
 	}
+	
+		
 
 	@RequestMapping("/itAdmin/processRemoveRegistrar")
-	public String processRemoveRegistrar(Registrar registrar, Model model) {
-		registrarDao.removeRegistrar(registrar);
+	public String processRemoveRegistrar(@RequestParam String username, Model model) {
+		registrarDao.removeRegistrar(username);
+		List<User> registrarList = userDao.getAllRegistrars();
+		model.addAttribute("registrarList", registrarList);
 		model.addAttribute("message", "Registrar removed successfully");
-		return "itAdmin/HomePage";
+		return "itAdmin/viewRegistrars";
 
 	}
 
