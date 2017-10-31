@@ -5,17 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Home Screen</title>
 </head>
 <body>
 
-<title>Select Professor</title>
-</head>
-<body>
+<a href = "addProfessor"> Add Professor </a>
+<br />
+<br />
 
      <h2>All Professors</h2>
-
-     <a href="/JCollegeAppProject/logout">Logout</a>
 
      <br /> ${username}
 
@@ -28,14 +26,14 @@
                 <th>Last Name</th>
                 <th>Address</th>
                 <th>Phone</th>
-                <th> Fax </th>
-                <th> remove professor </th>
+                <th>Fax</th>
+                <th>Remove Professor</th>
                 
            </tr>
 
            <c:forEach items="${professorList}" var="p">
                 <tr>
-                     <th>${p.username}</a></th>
+                     <th><a>${p.username}</a></th>
                      <th>${p.password}</th>
                      <th>${p.firstName}</th>
                      <th>${p.lastName}</th>
@@ -49,6 +47,7 @@
 ${message2}
      
 <a href="HomePage"> Back To Home  </a>
+ <a href="/JCollegeAppProject/logout">Logout</a>
 
 </body>
 </html>

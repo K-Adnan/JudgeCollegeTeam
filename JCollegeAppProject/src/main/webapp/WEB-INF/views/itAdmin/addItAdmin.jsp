@@ -8,7 +8,7 @@
 <title>Add Professor</title>
 </head>
 <body>
-	<sf:form method="post" action="processAddProfessor" modelAttribute="professor">		 	 
+	<sf:form method="post" action="processAddItAdmin" modelAttribute="itAdmin">		 	 
 		
 		
 		
@@ -27,21 +27,9 @@
         Email Address <sf:input type="text" path="emailAddress" />
 		<br />
 		<br />
-        Address <sf:input type="text" path="address" />
-        <br />
-        <br />
-        Phone <sf:input type="text" path="phone" />
-        <br />
-        <br />
-        Fax <sf:input type="text" path="fax" />
-        <br />
-        <br />
-		<br />  
-		<br />
-		<br />
 		
 	
-		<input type="submit" value="Register Professor">
+		<input type="submit" value="Register ItAdmin">
 	</sf:form>
 
 </body>

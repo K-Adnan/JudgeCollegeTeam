@@ -38,19 +38,19 @@ public class ITAdminController {
 	@Autowired
 	private RegistrarDAO registrarDao;
 	@Autowired
-	private ITAdminDAO itadminDao;
+	private ITAdminDAO itAdminDao;
 
 	public ITAdminController() {
 		super();
 	}
 
 	public ITAdminController(StudentDAO studentDao, ProfessorDAO professorDao, RegistrarDAO registrarDao,
-			ITAdminDAO itadminDao) {
+			ITAdminDAO itAdminDao) {
 		super();
 		this.studentDao = studentDao;
 		this.professorDao = professorDao;
 		this.registrarDao = registrarDao;
-		this.itadminDao = itadminDao;
+		this.itAdminDao = itAdminDao;
 	}
 
 	@RequestMapping("/itAdmin/HomePage")
@@ -62,14 +62,14 @@ public class ITAdminController {
 	public String goToAddStudent(Model model) {
 		Student student = new Student();
 		model.addAttribute("student", student);
-		return "itAdmin/AddStudent";
+		return "itAdmin/addStudent";
 	}
 
 	@RequestMapping("/itAdmin/processAddStudent")
 	public String processAddStudent(Model model, Student student) {
 		studentDao.addStudent(student);
 		model.addAttribute("message", "Student added successfully");
-		return "itAdmin/HomePage";
+		return "itAdmin/itAdminHome";
 	}
 
 	@RequestMapping("/itAdmin/viewStudents")
@@ -79,13 +79,13 @@ public class ITAdminController {
 		model.addAttribute("studentList", studentList);
 		return "itAdmin/ViewStudents";
 	}
-
-	@RequestMapping("/itAdmin/removeStudent")
-	public String goToRemoveStudent(Model model) {
-		Student student = new Student();
-		model.addAttribute("student", student);
-		return "itAdmin/RemoveStudent";
-	}
+//
+//	@RequestMapping("/itAdmin/removeStudent")
+//	public String goToRemoveStudent(Model model) {
+//		Student student = new Student();
+//		model.addAttribute("student", student);
+//		return "itAdmin/RemoveStudent";
+//	}
 
 	@RequestMapping("/itAdmin/processRemoveStudent")
 	public String processRemoveStudent(Student student, Model model) {
@@ -138,22 +138,22 @@ public class ITAdminController {
 	public String goToAddRegistrar(Model model) {
 		Registrar registrar = new Registrar();
 		model.addAttribute("registrar", registrar);
-		return "itAdmin/AddRegistrar";
+		return "itAdmin/addRegistrar";
 	}
 
 	@RequestMapping("/itAdmin/processAddRegistrar")
 	public String processAddRegistar(Model model, Registrar registrar) {
 		registrarDao.addRegistrar(registrar);
 		model.addAttribute("message", "Registrar added successfully");
-		return "itAdmin/HomePage";
+		return "itAdmin/itAdminHome";
 	}
 
-	@RequestMapping("/itAdmin/viewRegistrar")
+	@RequestMapping("/itAdmin/viewRegistrars")
 	public String goToViewRegistrar(HttpSession session, Model model, Principal principal) {
 		Registrar registrar = registrarDao.getRegistrar(principal.getName());
 		List<User> registrarList = userDao.getAllRegistrars();
 		model.addAttribute("registrarList", registrarList);
-		return "itAdmin/ViewRegistrar";
+		return "itAdmin/viewRegistrars";
 	}
 
 	@RequestMapping("/itAdmin/removeRegistrar")
@@ -171,40 +171,40 @@ public class ITAdminController {
 
 	}
 
-	@RequestMapping("/itAdmin/addITAdmin")
+	@RequestMapping("/itAdmin/addItAdmin")
 	public String goToAddITAdmin(Model model) {
-		ITAdmin itadmin = new ITAdmin();
-		model.addAttribute("itadmin", itadmin);
-		return "itAdmin/AddITAdmin";
+		ITAdmin itAdmin = new ITAdmin();
+		model.addAttribute("itAdmin", itAdmin);
+		return "itAdmin/addItAdmin";
 	}
 
 	@RequestMapping("/itAdmin/processAddITAdmin")
-	public String processAddITadmin(Model model, ITAdmin itadmin) {
-		itadminDao.addITAdmin(itadmin);
+	public String processAddITadmin(Model model, ITAdmin itAdmin) {
+		itAdminDao.addITAdmin(itAdmin);
 		model.addAttribute("message", "IT Admin added successfully");
-		return "itAdmin/HomePage";
+		return "itAdmin/itAdminHome";
 	}
 
-	@RequestMapping("/itAdmin/viewITAdmin")
+	@RequestMapping("/itAdmin/viewItAdmins")
 	public String goToViewITAdmin(HttpSession session, Model model, Principal principal) {
-		ITAdmin itadmin = itadminDao.getITAdmin(principal.getName());
-		List<User> itadminList = userDao.getAllITAdmins();
-		model.addAttribute("itadminList", itadminList);
-		return "itAdmin/ViewITAdmin";
+		ITAdmin itAdmin = itAdminDao.getITAdmin(principal.getName());
+		List<User> itAdminList = userDao.getAllITAdmins();
+		model.addAttribute("itAdminList", itAdminList);
+		return "itAdmin/viewItAdmins";
 	}
 
-	@RequestMapping("/itAdmin/removeITAdmin")
+	@RequestMapping("/itAdmin/removeItAdmin")
 	public String goToRemoveITAdmin(Model model) {
 		ITAdmin itadmin = new ITAdmin();
 		model.addAttribute("itadmin", itadmin);
 		return "itAdmin/RemoveItAdmin";
 	}
 
-	@RequestMapping("/itAdmin/processRemoveITAdmin")
-	public String processRemoveITAdmin(ITAdmin itadmin, Model model) {
-		itadminDao.removeITAdmin(itadmin);
-		model.addAttribute("message2", "IT Admin removed successfully");
-		return "itAdmin/HomePage";
+	@RequestMapping("/itAdmin/processRemoveItAdmin")
+	public String processRemoveITAdmin(ITAdmin itAdmin, Model model) {
+		itAdminDao.removeITAdmin(itAdmin);
+		model.addAttribute("message", "IT Admin removed successfully");
+		return "itAdmin/viewITAdmins";
 
 	}
 }

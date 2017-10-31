@@ -190,7 +190,6 @@ public class StudentController {
 			courseArrayList.add(course);
 		}
 		
-		
 		model.addAttribute("courseList", courseList);
 		return "student/viewTimetable";
 	}

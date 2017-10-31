@@ -6,8 +6,12 @@
 	width: 250px;
 }
 
-th {
-	border-bottom: 1px solid grey;
+th, td {
+	border: 1px solid grey;
+}
+
+table {
+	border: 1px solid grey;
 }
 
 .courseName {

@@ -3,6 +3,7 @@ package com.fdmgroup.JCollegeAppProject.controllers;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -227,13 +228,41 @@ public class ProfessorController {
 		
 		Student student = studentDao.getStudent(username);
 		
+		Set<Course> courseList = student.getCourseList();
+		List<Course> courseArrayList = new ArrayList<Course>();
+		for (Course course : courseList){
+			courseArrayList.add(course);
+		}
+		
+		model.addAttribute("courseList", courseList);
 		model.addAttribute("student", student);
 		return "professor/viewStudent";
 	}
 	
 	
 	
+	@RequestMapping("/professor/viewGrades")
+	public String goToViewGrades(Model model, Principal principal) {
+		Professor professor = professorDao.getProfessor(principal.getName());
+		Department department = professor.getDepartment();
+		List<Course> courseList = courseDao.getAllCoursesByDepartment(department);
+		List<Course> taughtCourseList = courseDao.getAllCoursesByProfessor(professor);
+		
+		model.addAttribute("courseList", courseList);
+		model.addAttribute("taughtCourseList", taughtCourseList);
+		
+		return "professor/grades";
+	}
 	
-
+	@RequestMapping("/professor/viewTimetable")
+	public String goToViewTimetable(Model model, Principal principal) {
+		Professor professor = professorDao.getProfessor(principal.getName());
+		
+		List<Course> courseList = courseDao.getAllCoursesByProfessor(professor);
+		
+		model.addAttribute("courseList", courseList);
+		
+		return "professor/timetable";
+	}
 	
 }

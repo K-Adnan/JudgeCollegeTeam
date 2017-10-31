@@ -7,10 +7,13 @@
 <title>Home Screen</title>
 </head>
 <body>
+<a href = "addRegistrar"> Add Registrars</a>
+<br />
+<br />
 
      <h2>All Registrars</h2>
 
-     <a href="/JCollegeAppProject/logout">Logout</a>
+ 
 
      <br /> ${username}
 
@@ -22,17 +25,21 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
+                <th>Remove IT Admin</th>
            </tr>
 
            <c:forEach items="${registrarList}" var="r">
                 <tr>
-                     <th><a href="editRegistrar?username="${r.username}>${r.username}</a></th>
-                     <th>${password}</th>
-                     <th>${firstName}</th>
-                     <th>${lastName}</th>
-                     <th>${email}</th>
+                    
+                     <th>${r.password}</th>
+                     <th>${r.firstName}</th>
+                     <th>${r.lastName}</th>
+                     <th>${r.email}</th>
+                      <th><a href="processRemoveRegistrar?username="${r.username}>${r.username}"> Remove Registrar</a></th>
            </c:forEach>
-     
+  
+       <a href="HomePage"> Back To Home  </a>
+     <a href="/JCollegeAppProject/logout">Logout</a>
 
 
 </body>

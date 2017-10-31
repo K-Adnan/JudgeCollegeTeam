@@ -8,32 +8,23 @@
 <title>Add Professor</title>
 </head>
 <body>
-	<sf:form method="post" action="processAddStudent"
-		modelAttribute="student">		 	 
+	<sf:form method="post" action="processAddStudent" modelAttribute="student">		 	 
 		
 		
 	
-		
-		First Name <sf:input type="text" path="user.firstName" />
-		<br />
-		<br /> 
-		Last Name <sf:input type="text" path="user.lastName" />
-		<br />
-		
-		
 		User Name <sf:input type="text" path="username" />
 		<br />
 		<br /> 
 		Password <sf:password path="password" />
 		<br />
+		<br />		
+		First Name <sf:input type="text" path="firstName" />
+		<br />
+		<br /> 
+		Last Name <sf:input type="text" path="lastName" />
+		<br />
 		<br />
 		Email Address <sf:input type="text" path="emailAddress" />
-		<br />
-		<br />
-		First Name: <sf:input type="text" path="firstName" />
-		<br />
-		<br />
-		Last Name: <sf:input type="text" path="lastName" />
 		<br />
 		<br />
         Address: <sf:input type="text" path="address" />
@@ -51,18 +42,13 @@
 			<sf:option value="undisclosed"> undisclosed </sf:option>
 
 		</sf:select>
-
-
-
-
 		<br />
-
-
+		<br />
+		<br />
 		<br />
 		<br />
 
-
-		<input type="submit" value="RegisterUser">
+		<input type="submit" value="Register Student">
 	</sf:form>
 
 </body>
