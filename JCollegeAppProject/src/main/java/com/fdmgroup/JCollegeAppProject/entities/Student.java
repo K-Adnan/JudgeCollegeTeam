@@ -1,16 +1,13 @@
 package com.fdmgroup.JCollegeAppProject.entities;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -42,8 +39,8 @@ public class Student extends User implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REMOVE}, mappedBy="student", orphanRemoval=true)
 	private Set<Grade> gradeList;
 	
-	@ElementCollection(fetch=FetchType.EAGER)
-	private Map<Calendar, String> absenses = new HashMap<Calendar, String>();
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REMOVE}, mappedBy="student", orphanRemoval=true)
+	private Set<Absence> absenceList = new HashSet<Absence>();
 
 	public Student() {
 		super();
@@ -128,6 +125,18 @@ public class Student extends User implements Serializable {
 	public void addGrade(Grade grade){
 		gradeList.add(grade);
 	}
+	
+	public Set<Absence> getAbsenseList() {
+		return absenceList;
+	}
+
+	public void setAbsenseList(Set<Absence> absenseList) {
+		this.absenceList = absenseList;
+	}
+	
+	public void addAbsense(Absence absense){
+		absenceList.add(absense);
+	}
 
 	@Override
 	public String toString() {
@@ -135,17 +144,4 @@ public class Student extends User implements Serializable {
 				+ ", phoneNumber=" + phoneNumber + ", dOB=" + dOB + ", gender=" + gender + "]";
 	}
 
-	public Map<Calendar, String> getAbsenses() {
-		return absenses;
-	}
-
-	public void setAbsenses(Map<Calendar, String> absenses) {
-		this.absenses = absenses;
-	}
-	
-	public void addAbsense(Calendar calendar, String reason){
-		absenses.put(calendar, reason);
-	}
-
-	
 }
