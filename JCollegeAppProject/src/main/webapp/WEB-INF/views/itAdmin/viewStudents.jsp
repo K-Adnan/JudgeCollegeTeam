@@ -16,6 +16,11 @@
 
 
      <br /> ${username}
+     
+     
+     <a href = "addStudent"> Add Student </a>
+<br />
+<br />
 
      <table>
            <tr>

@@ -7,6 +7,9 @@
 <title>Home Screen</title>
 </head>
 <body>
+<a href = "addRegistrar"> Add Registrars</a>
+<br />
+<br />
 
      <h2>All Registrars</h2>
 

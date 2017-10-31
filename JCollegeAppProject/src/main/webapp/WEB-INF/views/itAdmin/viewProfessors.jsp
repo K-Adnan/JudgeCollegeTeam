@@ -9,6 +9,10 @@
 </head>
 <body>
 
+<a href = "addProfessor"> Add Professor </a>
+<br />
+<br />
+
      <h2>All Professors</h2>
 
      <br /> ${username}

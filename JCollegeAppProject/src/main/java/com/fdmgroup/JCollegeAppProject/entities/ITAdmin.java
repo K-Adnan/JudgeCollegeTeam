@@ -4,13 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -18,7 +13,6 @@ import javax.persistence.Table;
 public class ITAdmin extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
 
 	public ITAdmin() {
 		super();
