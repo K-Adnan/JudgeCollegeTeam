@@ -154,12 +154,14 @@ public class RegistrarController {
 
 	@RequestMapping("/registrar/EditInformationStud")
 	public String EditInformationStud(Model model, String username){
+		
 		logger.info("Information are edited :"+username);
 		return "registrar/EditInformationStud";
 	}
 	
 	@RequestMapping("/registrar/EditInformationProf")
 	public String EditInformationProf(Model model, String username){
+		
 		logger.info("Information are edited :"+username);
 		return "registrar/EditInformationStud";
 	}

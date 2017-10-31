@@ -37,25 +37,24 @@
 	<h2>Edit Information</h2>
 
 	<sf:form method="post" action="processEditProfessor" modelAttribute="professor">
-First Name: <sf:input path="firstName" value="${professor.firstName}" />
+First Name <sf:input path="firstName" value="${professor.firstName}" />
            <br /> <br />
-Last Name: <sf:input path="lastName" value="${professor.lastName}" />
-           <br />
-           <br />
-User Name: <sf:input path="username"  value="${professor.username}" />
+Last Name <sf:input path="lastName" value="${professor.lastName}" />
            <br />
            <br />
 Address <sf:input path="address" value="${professor.address}" />
            <br />
            <br />
-Phone: <sf:input path="phone"  value="${professor.phone}" />
+Phone Number <sf:input path="phone"  value="${professor.phone}" />
            <br />
            <br />
-Fax:       <sf:input path="fax"  value="${professor.fax}" />
+Fax      <sf:input path="fax"  value="${professor.fax}" />
            <br />
            <br />
-
-
+Email address   <sf:input path="emailAddress"  value="${professor.emailAddress}" />
+           <br />
+           <br />   
+                 
            <input type="submit" value="Edit" />
            
      </sf:form>
