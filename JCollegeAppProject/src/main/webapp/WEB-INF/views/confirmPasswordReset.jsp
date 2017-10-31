@@ -12,7 +12,7 @@
 <body>
 
 	
-	Your password has been reset.
+	An email has been sent to you with the new login credentials.
 	<a href="index">Click here</a> to login again
 
 </body>

@@ -1,17 +1,13 @@
 package com.fdmgroup.JCollegeAppProject.entities;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,8 +16,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fdmgroup.JCollegeAppProject.utilities.Gender;
 
@@ -35,21 +29,18 @@ public class Student extends User implements Serializable {
 	private String address;
 	private String phoneNumber;
 	@Column(name = "DATE_OF_BIRTH")
-	@Temporal(TemporalType.DATE)
 	private Date dOB;
-	private String dobString;
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
-	private String genderString;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy="studentList")
 	private Set<Course> courseList;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REMOVE}, mappedBy="student", orphanRemoval=true)
 	private Set<Grade> gradeList;
 	
-	@ElementCollection(fetch=FetchType.EAGER)
-	private Map<Calendar, String> absenses = new HashMap<Calendar, String>();
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REMOVE}, mappedBy="student", orphanRemoval=true)
+	private Set<Absence> absenceList = new HashSet<Absence>();
 
 	public Student() {
 		super();
@@ -65,7 +56,6 @@ public class Student extends User implements Serializable {
 		this.courseList = courseList;
 		this.gradeList = gradeList;
 	}
-
 
 	public String getAddress() {
 		return address;
@@ -146,24 +136,6 @@ public class Student extends User implements Serializable {
 	
 	public void addAbsense(Absence absense){
 		absenceList.add(absense);
-	}
-	
-	public String getGenderString() {
-		return genderString;
-	}
-
-	public void setGenderString(String genderString) {
-		this.genderString = genderString;
-		gender = Gender.valueOf(genderString.toUpperCase());
-	}
-
-	public String getDobString() {
-		return dobString;
-	}
-
-	public void setDobString(String dobString) {
-		this.dobString = dobString;
-		dOB = new Date(Date.parse(dobString));
 	}
 
 	@Override

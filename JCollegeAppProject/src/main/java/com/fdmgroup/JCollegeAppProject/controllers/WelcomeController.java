@@ -1,6 +1,7 @@
 package com.fdmgroup.JCollegeAppProject.controllers;
 
 import java.security.Principal;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Registrar;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
 import com.fdmgroup.JCollegeAppProject.entities.User;
+import com.fdmgroup.JCollegeAppProject.utilities.RandomString;
 
 @Controller
 public class WelcomeController {
@@ -146,7 +148,17 @@ public class WelcomeController {
 	
 	
 	@RequestMapping("/doResetPassword")
-	public String doResetPassword() {
+	public String doResetPassword(@RequestParam String username) {
+		User user = userDao.getUser(username);
+		
+		if (user != null){
+			RandomString randomString = new RandomString(12, new Random(), RandomString.alphanum);
+			String newPassword = randomString.nextString();
+			
+			user.setPassword(newPassword);
+			userDao.updateUser(user);
+		}
+		
 		return "confirmPasswordReset";
 	}
 

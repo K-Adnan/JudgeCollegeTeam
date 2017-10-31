@@ -27,6 +27,9 @@
 		<label><b>Password</b></label>
 		<input type="password" placeholder="Enter Password" name="j_password" required>
 		<button type="Submit">Login</button>
+		<div class="forgotContainer">
+			<span class="psw"><a href="forgotPassword">Forgot password?</a></span>
+		</div>
 	</div>
 	</form>
 
