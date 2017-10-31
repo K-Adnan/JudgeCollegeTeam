@@ -9,6 +9,10 @@
 </head>
 <body>
 
+
+${message}
+
+
 <a href = "addProfessor"> Add Professor </a>
 <br />
 <br />

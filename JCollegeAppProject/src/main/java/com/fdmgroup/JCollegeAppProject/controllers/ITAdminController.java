@@ -79,21 +79,18 @@ public class ITAdminController {
 		model.addAttribute("studentList", studentList);
 		return "itAdmin/viewStudents";
 	}
-//
-//	@RequestMapping("/itAdmin/removeStudent")
-//	public String goToRemoveStudent(Model model) {
-//		Student student = new Student();
-//		model.addAttribute("student", student);
-//		return "itAdmin/RemoveStudent";
-//	}
 
 	@RequestMapping("/itAdmin/processRemoveStudent")
-	public String processRemoveStudent(Student student, Model model) {
-		studentDao.removeStudent(student.getUsername());
-		model.addAttribute("message2", "Student removed successfully");
-		return "itAdmin/HomePage";
+	public String processRemoveStudent(@RequestParam String username, Model model) {
+		studentDao.removeStudent(username);
+		List<User> studentList = userDao.getAllStudents();
+		model.addAttribute("studentList", studentList);
+
+		model.addAttribute("message", "Student removed successfully");
+		return "itAdmin/viewStudents";
 
 	}
+	
 
 	@RequestMapping("/itAdmin/addProfessor")
 	public String goToAddProfessor(Model model) {
@@ -116,13 +113,6 @@ public class ITAdminController {
 		model.addAttribute("professorList", professorList);
 		return "itAdmin/viewProfessors";
 	}
-
-//	@RequestMapping("/itAdmin/removeProfessor")
-//	public String goToRemoveProfessor(Model model) {
-//		Professor professor = new Professor();
-//		model.addAttribute("professor", professor);
-//		return "itAdmin/EditProfessor";
-//	}
 
 	@RequestMapping("/itAdmin/processRemoveProfessor")
 	public String processRemoveProfessor(@RequestParam String username, Model model) {
