@@ -100,7 +100,7 @@
 		</table>
 	
 	<p>Absences</p>
-		<form name="AddAbsence" method="post" action="AddAbsence">
+		<form name="AddAbsence" method="post" action="AddAbsence?username=${student.username}">
 			<label class="AddAbsenceLblPos"> <input name="AddAbsence" type="submit" value="Add Absence">
 			</label>
 		</form>

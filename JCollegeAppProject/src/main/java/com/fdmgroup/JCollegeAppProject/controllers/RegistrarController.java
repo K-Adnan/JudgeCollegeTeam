@@ -1,7 +1,9 @@
 package com.fdmgroup.JCollegeAppProject.controllers;
 
 import java.security.Principal;
-import java.util.Iterator;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fdmgroup.JCollegeAppProject.daos.AbsenceDAO;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAO;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAO;
@@ -24,6 +27,7 @@ import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
 import com.fdmgroup.JCollegeAppProject.daos.RegistrarDAO;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
 import com.fdmgroup.JCollegeAppProject.daos.UserDAO;
+import com.fdmgroup.JCollegeAppProject.entities.Absence;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Department;
 import com.fdmgroup.JCollegeAppProject.entities.Grade;
@@ -51,6 +55,8 @@ public class RegistrarController {
 	private GradeDAO gradeDao;
 	@Autowired
 	private UserDAO userDao;
+	@Autowired
+	private AbsenceDAO absenceDao;
 
 
 	public RegistrarController() {
@@ -283,4 +289,46 @@ public class RegistrarController {
 		logger.info("Client request to url : Grades");
 		return "registrar/Grades";
 	}
+	
+	@RequestMapping("/registrar/AddAbsence")
+	public String GoToAddAbsence(@RequestParam String username, Model model){
+
+		Calendar cal = Calendar.getInstance();
+		int month = cal.get(Calendar.MONTH) + 1;
+		String date = cal.get(Calendar.DATE) + "/" + month + "/" + cal.get(Calendar.YEAR);
+		
+		model.addAttribute("username", username);
+		logger.info("Client request to url : Grades");
+		model.addAttribute("date", date);
+		return "registrar/AddAbsence";
+	}
+	
+	@RequestMapping("/registrar/doAddAbsence")
+	public String doAddAbsence(@RequestParam String username, @RequestParam String reason,@RequestParam String dateOfAbsence, Model model){
+		Student student = studentDao.getStudent(username);
+		System.out.println("Username is: "+ username);
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		Absence absence = new Absence();
+		try {
+			calendar.setTime(sf.parse(dateOfAbsence));
+			absence.setDateOfAbsence(calendar);
+			System.out.println("Date is : " + calendar.get(Calendar.DATE));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		absence.setReasonForAbsence(reason);
+		absence.setStudent(student);
+		absenceDao.addAbsence(absence);
+
+		model.addAttribute("username", username);
+		logger.info("Client request to url : Grades");
+		List<Course> courseList = courseDao.getAllCoursesByStudent(student);
+		model.addAttribute("student", student);
+		model.addAttribute("courseList", courseList);
+		return "registrar/ViewAndUpdateStud";
+	}
+	
 }

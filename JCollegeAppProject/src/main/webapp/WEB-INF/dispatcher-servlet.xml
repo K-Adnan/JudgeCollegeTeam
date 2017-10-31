@@ -34,5 +34,6 @@
        <bean id="courseDAO" class="com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl"/>
        <bean id="itadminDAO" class="com.fdmgroup.JCollegeAppProject.daos.ITAdminDAOImpl"/>
        <bean id="gradeDAO" class="com.fdmgroup.JCollegeAppProject.daos.GradeDAOImpl"/>
+       <bean id="absenceDAO" class="com.fdmgroup.JCollegeAppProject.daos.AbsenceDAOImpl"/>
 </beans>
 
