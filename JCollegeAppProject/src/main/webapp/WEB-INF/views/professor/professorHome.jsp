@@ -17,6 +17,8 @@
 <ul>
   <li><a href = "viewCourses"> My Courses </a></li>
   <li><a href = "viewProfile"> My Profile</a></li>
+  <li><a href = "viewGrades"> Grades</a></li>
+  <li><a href = "viewTimetable"> Timetable</a></li>
 </ul>
 
 

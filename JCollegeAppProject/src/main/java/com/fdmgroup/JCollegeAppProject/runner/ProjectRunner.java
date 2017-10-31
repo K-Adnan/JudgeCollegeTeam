@@ -1,11 +1,17 @@
 package com.fdmgroup.JCollegeAppProject.runner;
 
+import java.util.List;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAO;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl;
+import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
+import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAOImpl;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
+import com.fdmgroup.JCollegeAppProject.entities.Professor;
+
 
 public class ProjectRunner {
 
@@ -20,13 +26,14 @@ public class ProjectRunner {
 //		Absence absence = absenceDao.getAbsence(1);
 //		System.out.println(absence.isAbsenceApproved());
 		
-		Course course = new Course();
-		course.setCourseName("Example Course");
-		
-		courseDao.addCourse(course);
-		
 //		GradeDAO gradeDao = new GradeDAOImpl(factory);
-//		ProfessorDAO professorDao = new ProfessorDAOImpl(factory);
+		ProfessorDAO professorDao = new ProfessorDAOImpl(factory);
+		
+		Professor professor = professorDao.getProfessor("professor");
+		
+		List<Course> courseList = courseDao.getAllCoursesByProfessor(professor);
+		
+		System.out.println(courseList);
 		
 //		Map<Weekday, Calendar> lessons = new HashMap<Weekday, Calendar>();
 //		

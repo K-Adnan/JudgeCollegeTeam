@@ -241,6 +241,29 @@ public class ProfessorController {
 	
 	
 	
+	@RequestMapping("/professor/viewGrades")
+	public String goToViewGrades(Model model, Principal principal) {
+		Professor professor = professorDao.getProfessor(principal.getName());
+		Department department = professor.getDepartment();
+		List<Course> courseList = courseDao.getAllCoursesByDepartment(department);
+		List<Course> taughtCourseList = courseDao.getAllCoursesByProfessor(professor);
+		
+		model.addAttribute("courseList", courseList);
+		model.addAttribute("taughtCourseList", taughtCourseList);
+		
+		return "professor/grades";
+	}
+	
+	@RequestMapping("/professor/viewTimetable")
+	public String goToViewTimetable(Model model, Principal principal) {
+		Professor professor = professorDao.getProfessor(principal.getName());
+		
+		List<Course> courseList = courseDao.getAllCoursesByProfessor(professor);
+		
+		model.addAttribute("courseList", courseList);
+		
+		return "professor/timetable";
+	}
 	
 
 	
