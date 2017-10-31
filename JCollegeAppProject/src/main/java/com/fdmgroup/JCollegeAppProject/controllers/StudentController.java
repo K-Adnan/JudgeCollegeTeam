@@ -44,6 +44,13 @@ public class StudentController {
 	public StudentController() {
 	}
 	
+	public StudentController(CourseDAO courseDao, StudentDAO studentDao, GradeDAO gradeDao) {
+		super();
+		this.courseDao = courseDao;
+		this.studentDao = studentDao;
+		this.gradeDao = gradeDao;
+	}
+
 	@RequestMapping("student/ViewCourses")
 	public String goToViewCourses(HttpSession session, Model model, Principal principal){
 		Student student = studentDao.getStudent(principal.getName());
