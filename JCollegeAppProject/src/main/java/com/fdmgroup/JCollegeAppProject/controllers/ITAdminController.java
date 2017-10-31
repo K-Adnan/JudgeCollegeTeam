@@ -77,7 +77,7 @@ public class ITAdminController {
 		Student student = studentDao.getStudent(principal.getName());
 		List<User> studentList = userDao.getAllStudents();
 		model.addAttribute("studentList", studentList);
-		return "itAdmin/ViewStudents";
+		return "itAdmin/viewStudents";
 	}
 //
 //	@RequestMapping("/itAdmin/removeStudent")

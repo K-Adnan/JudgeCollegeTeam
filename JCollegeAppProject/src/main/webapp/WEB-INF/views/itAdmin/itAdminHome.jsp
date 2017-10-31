@@ -9,11 +9,13 @@
 </head>
 <body>
 
-<h2>IT Admin Home Page</h2>
 
 <a href = "/JCollegeAppProject/logout">Logout</a>
 <br />
 <br />
+
+<h2>IT Admin Home Page</h2>
+
 
 <a href = "viewStudents">View Students</a>
 <br />
@@ -26,17 +28,14 @@
 <a href = "viewRegistrars">View Registrars</a>
 <br />
 <br />
-<a href = "addItAdmin"> Add IT Admin </a>
-<br />
-<br />
+
 <a href = "viewItAdmins">View IT Admins</a>
 <br />
 <br />
-<a href = "ViewUsers"> View Users</a>
-<br>
-<br>
+
 
 ${message}
 
 </body>
 </html>
+

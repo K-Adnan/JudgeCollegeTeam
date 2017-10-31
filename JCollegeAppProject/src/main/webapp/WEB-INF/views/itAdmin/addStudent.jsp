@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Professor</title>
+<title>Add Student</title>
 </head>
 <body>
 	<sf:form method="post" action="processAddStudent" modelAttribute="student">		 	 
@@ -30,11 +30,11 @@
         Address: <sf:input type="text" path="address" />
 		<br />
 		<br />
-		Date Of Birth: <sf:input type="text" path="dOB" />
+		Date Of Birth: <sf:input type="text" path="dobString" />
 		<br />
 		<br /> 
 		
-		Gender:   <sf:select path="gender">
+		Gender:   <sf:select path="genderString">
 
 
 			<sf:option value="male"> male </sf:option>
