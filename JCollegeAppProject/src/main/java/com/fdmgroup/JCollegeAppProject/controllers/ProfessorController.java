@@ -3,6 +3,7 @@ package com.fdmgroup.JCollegeAppProject.controllers;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -227,6 +228,13 @@ public class ProfessorController {
 		
 		Student student = studentDao.getStudent(username);
 		
+		Set<Course> courseList = student.getCourseList();
+		List<Course> courseArrayList = new ArrayList<Course>();
+		for (Course course : courseList){
+			courseArrayList.add(course);
+		}
+		
+		model.addAttribute("courseList", courseList);
 		model.addAttribute("student", student);
 		return "professor/viewStudent";
 	}
