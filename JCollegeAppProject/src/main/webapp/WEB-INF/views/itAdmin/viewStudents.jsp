@@ -14,7 +14,6 @@
 
      <h2>All Students</h2>
 
-     <a href="/JCollegeAppProject/logout">Logout</a>
 
      <br /> ${username}
 
@@ -49,7 +48,8 @@
              
            </c:forEach>
      
-
+     <a href="HomePage"> Back To Home  </a>
+     <a href="/JCollegeAppProject/logout">Logout</a>
 
 </body>
 </html>

@@ -36,20 +36,12 @@
         Fax <sf:input type="text" path="fax" />
         <br />
         <br />
-		
-		
-		
-
-
-
-		<br /> 
-	
-
+		<br />  
 		<br />
 		<br />
 		
 	
-		<input type="submit" value="RegisterUser">
+		<input type="submit" value="Register Professor">
 	</sf:form>
 
 </body>
