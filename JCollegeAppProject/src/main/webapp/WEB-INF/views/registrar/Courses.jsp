@@ -9,7 +9,6 @@
 <title>Courses</title>
 <link href="../css/style.css" rel="stylesheet" media="all">
 <script  type="text/javascript">
-	
 					function getConfirmation() {
 						var courseName = document.getElementById("courseName").value;
 						var isOk = confirm("Are you sure you want to update the course " + courseName + "?");

@@ -178,6 +178,10 @@ public class Course implements Serializable {
 	public void removeStudent(Student student) {
 		studentList.remove(student);
 	}
+	
+	public void removeProfessor(){
+		this.professor = null;
+	}
 
 	public Map<String, Calendar> getLessons() {
 		return lessons;

@@ -36,74 +36,41 @@
 		</form>
 	<h2>Profile Information</h2>
 	
-	<form align="right" name="form1" method="post" action="EditInformation">
+	<form name="form1" method="post" action="EditInformationProf">
 		<label class="EditInformationLblPos"> 
 			<input name="submit2" type="submit" id="submit2" value="Edit Information">
 		</label>
 	</form>
-	
+    
 	<table>
 		<tr>
 			<td>Username</td>
-			<td><input type="hidden" id="username" value="${user.username}">${user.username}</td>
+			<td><input type="hidden" id="username" value="${professor.username}">${professor.username}</td>
 		</tr>
 		<tr>
 			<td>First Name</td>
-			<td>${user.firstName}</td>
+			<td>${professor.firstName}</td>
 		</tr>
 		<tr>
 			<td>Last Name</td>
-			<td>${user.lastName}</td>
+			<td>${professor.lastName}</td>
 		</tr>
 		<tr>
-			<td>	
-			<c:choose>
-				<c:when test = "${Role eq Professor or Role eq Student}">
-         			Address
-      			</c:when>
-      		</c:choose>
-      		</td>
-			
-			<td>
-				<c:if test = "${Role eq Professor}">
-         			${professor.address}
-      			</c:if>
-      			<c:if test = "${Role eq Student}">
-         			${student.address}
-      			</c:if>
-      		</td>
-      		</tr>
-		
-		<tr><td>
-			<c:if test = "${Role eq Professor or Role eq Student}">
-         		<c:out value = "Phone Number" />
-         	</c:if>
-         </td> 
-         <td>
-         	<c:if test = "${Role eq Professor}">
-         		<c:out value = "${professor.phone}"/>
-      		</c:if>
-			<c:if test = "${Role eq Student}">
-         		<c:out value = "${student.phoneNumber}"/>
-      		</c:if>
-		</tr>
-		
-		<tr><td>
-			<c:choose>
-				<c:when test = "${Role eq Professor}">
-         			Fax
-      			</c:when>
-      			<c:otherwise> 
-      			
-      			</c:otherwise>
-      		</c:choose>
-		</td>
+			<td>Address</td>
+			<td>${professor.address}</td>
+      	</tr>
+		<tr>
+			<td>Phone Number</td> 
+        	<td>${professor.phone}</td>
+		<tr>
+			<td>Fax</td>
 			<td>${professor.fax}</td>
 		</tr>
 		<tr>
 			<td>Email address</td>
-			<td>${user.emailAddress}</td>
+			<td>${professor.emailAddress}</td>
 		</tr>
 	</table>
+	
 </body>
 </html>

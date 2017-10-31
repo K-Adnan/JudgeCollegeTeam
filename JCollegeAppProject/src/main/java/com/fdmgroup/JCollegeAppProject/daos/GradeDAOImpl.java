@@ -84,8 +84,8 @@ public class GradeDAOImpl implements GradeDAO {
 	@Override
 	public List<Grade> getAllGradesByProfessor(Professor professor) {
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Grade> query = manager.createQuery("FROM Grade g WHERE g.professsor =?", Grade.class);
-		query.setParameter(1, professor);
+		TypedQuery<Grade> query = manager.createQuery("FROM Grade g WHERE g.professor.username =?", Grade.class);
+		query.setParameter(1, professor.getUsername());
 		List <Grade> gradeList = query.getResultList();
 		manager.close();
 		return gradeList;

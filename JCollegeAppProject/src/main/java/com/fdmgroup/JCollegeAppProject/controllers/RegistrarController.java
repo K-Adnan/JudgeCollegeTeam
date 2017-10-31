@@ -1,11 +1,14 @@
 package com.fdmgroup.JCollegeAppProject.controllers;
 
 import java.security.Principal;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,7 +34,7 @@ import com.fdmgroup.JCollegeAppProject.entities.User;
 
 @Controller
 public class RegistrarController {
-	
+
 	private Logger logger=Logger.getLogger(getClass());
 
 	@Autowired
@@ -48,18 +51,18 @@ public class RegistrarController {
 	private GradeDAO gradeDao;
 	@Autowired
 	private UserDAO userDao;
-	
-	
+
+
 	public RegistrarController() {
 		super();
 	}
-	
+
 	public RegistrarController(CourseDAOImpl cDAO, ProfessorDAO professorDAO, StudentDAO studentDAO) {
 		this.courseDao = cDAO;
 		this.professorDao = professorDAO;
 		this.studentDao = studentDAO;
 	}
-	
+
 	@RequestMapping("/registrar/MyProfile")
 	public String GoToMyProfile(Principal principal, Model model) {
 		logger.info("Client request to url : MyProfile");
@@ -71,52 +74,109 @@ public class RegistrarController {
 	@RequestMapping("/registrar/SystemUsers")
 	public String GoToSystemUsers(Model model){
 		logger.info("Client request to url : SystemUsers");
-		
+
 		List<User> userList = userDao.getAllUsers();
 		model.addAttribute("userList", userList);
-		
+
 		return "registrar/SystemUsers";
 	}
-	
+
 	@RequestMapping("/registrar/ViewAndUpdate")
-	public String doChooseUser(Model model, @RequestParam String username){
+	public String doChooseUserP(Model model, HttpSession session, Principal principal, @RequestParam String username, HttpServletRequest request){
+		//		Role role = new Role();
+		//		Professor professor = professorDao.getProfessor(username);
+		//		Student student = studentDao.getStudent(username);
+		//		
+
+//		model.addAttribute("user", user);
+		
 		User user = userDao.getUser(username);
-		Professor professor = professorDao.getProfessor(username);
-		Student student = studentDao.getStudent(username);
-		
-		model.addAttribute("user", user);
-		model.addAttribute("professor", professor);
-		model.addAttribute("student", student);
-		
-		logger.info("User is chosen :"+username);
-		return "registrar/ViewAndUpdate";
+
+		if (user instanceof Student) {
+			Student student = (Student) user;
+			List<Course> courseList = courseDao.getAllCoursesByStudent(student);
+			model.addAttribute("courseList", courseList);
+			model.addAttribute("student", student);
+			return "registrar/ViewAndUpdateStud";
+		} else if (user instanceof Professor) {
+			Professor professor = (Professor) user;
+			model.addAttribute("professor", professor);
+			return "registrar/ViewAndUpdateProf";
+		}
+		return "redirect:SystemUsers";
 	}
-	
+
 	@RequestMapping("/registrar/RemoveUser")
 	public String doRemoveUser(Model model, @RequestParam String username, RedirectAttributes ra){
 		User user = userDao.getUser(username);
-		List<User> userList = userDao.getAllUsers();
+		if(user instanceof Student){
+			Student student = (Student) user;
+			List<Course> courseList = courseDao.getAllCoursesByStudent(student);
+			for(Course course : courseList){
+				course.removeStudent(student);
+//				courseDao.updateCourse(course);
+			}
+			studentDao.updateStudent(student);
+		}
+		else if(user instanceof Professor){
+			
+			Professor professor = (Professor) user;
+			professor.setCourse(null);
+			
+			List<Course> courseList = courseDao.getAllCoursesByProfessor(professor);
+			for(Course course : courseList){
+				course.removeProfessor();
+				courseDao.updateCourse(course);
+			}
+			
+			List<Grade> gradeList = gradeDao.getAllGradesByProfessor(professor);
+			for(Grade grade : gradeList){
+				grade.setProfessor(null);
+				gradeDao.updateGrade(grade);
+			}
+			Department department = professor.getDepartment();
+			if(department != null){
+			department.removeProfessor(professor);
+			}
+			
+			professorDao.updateProfessor(professor);
+		}
 		
 		userDao.removeUser(username);
 		
+		List<User> userList = userDao.getAllUsers();
+		model.addAttribute("user", user);
+		model.addAttribute("userList", userList);
 		ra.addFlashAttribute("message", "User is removed!");
 		logger.info("User is removed :"+username);
-		return "redirect:SystemUser";
+		return "redirect:SystemUsers";
 	}
-	
-	@RequestMapping("/registrar/EditInformation")
-	public String EditInformation(Model model, String username){
+
+	@RequestMapping("/registrar/EditInformationStud")
+	public String EditInformationStud(Model model, String username){
 		logger.info("Information are edited :"+username);
-		return "registrar/EditInformation";
+		return "registrar/EditInformationStud";
 	}
 	
+	@RequestMapping("/registrar/EditInformationProf")
+	public String EditInformationProf(Model model, String username){
+		logger.info("Information are edited :"+username);
+		return "registrar/EditInformationStud";
+	}
+
+	@RequestMapping("/registrar/RemoveFromCourse")
+	public String DoRemoveFromCourse(Model model, String courseName){
+		logger.info("User is removed from course :"+courseName);
+		return "redirect:ViewAndUpdate";
+	}
+
 	@RequestMapping("/registrar/Courses")
 	public String goToCourses(Model model, @ModelAttribute("message") String message) {
 		logger.info("Client request to url : Courses");
-		
+
 		List<Course> courseList = courseDao.getAllCourses();
 		List<Professor> professorList = professorDao.getAllProfessors();
-		
+
 		Course course = courseList.get(0);
 		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
 		model.addAttribute("studentList", studentList);
@@ -126,26 +186,26 @@ public class RegistrarController {
 		model.addAttribute("message",message);
 		return "registrar/Courses";
 	}
-	
+
 	@RequestMapping("/registrar/cancelCourse")
 	public String courseCancellation(@RequestParam int code, Model model, RedirectAttributes ra) {
 		Course course = courseDao.getCourse(code);
 		List<Grade> gradeList = gradeDao.getAllGradesByCourse(course);
-		
+
 		for (int i=0;i<gradeList.size();i++){
 			Grade grade = gradeList.get(i);
 			gradeDao.removeGrade(grade.getGradeId());
 		}
-		
+
 		courseDao.removeCourse(code);
 		ra.addFlashAttribute("message", "Course is cancelled!");
 		logger.info("Course is cancelled :" + code);
 		return "redirect:Courses";
 	}
-	
+
 	@RequestMapping("/registrar/updateProfessor")
 	public String courseUpdate(@RequestParam String professorUsername, @RequestParam int code, Model model){
-		
+
 		List<Course> courseList = courseDao.getAllCourses();
 		List<Professor> professorList = professorDao.getAllProfessors();
 		Course course = courseDao.getCourse(code);
@@ -156,22 +216,22 @@ public class RegistrarController {
 			course.setProfessor(professor);
 		}
 		courseDao.updateCourse(course);
-		
+
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("professorList", professorList);
 		model.addAttribute("course", course);
 		model.addAttribute("message", "Professer has been updated!");
-		
+
 		logger.info("Course is updated :" + code);
 		return "registrar/Courses";
 	}
-	
+
 	@RequestMapping("/registrar/processChooseCourse")
 	public String doChooseCourse(Model model, int courseId){
 		Course course = courseDao.getCourse(courseId);
 		List<Course> courseList = courseDao.getAllCourses();
 		List<Professor> professorList = professorDao.getAllProfessors();
-		
+
 		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
 		model.addAttribute("studentList", studentList);
 		model.addAttribute("course",course);
@@ -180,7 +240,7 @@ public class RegistrarController {
 		model.addAttribute("professorList", professorList);
 		return "registrar/Courses";
 	}
-	
+
 	@RequestMapping("/registrar/AddCourse")
 	public String GoToAddCourse(Model model){
 		List<Professor> professorList = professorDao.getAllProfessors();
@@ -192,32 +252,32 @@ public class RegistrarController {
 		logger.info("Client request to url : AddCourse");
 		return "registrar/AddCourse";
 	}
-	
+
 	@RequestMapping("/registrar/doAddCourse")
 	public String DoAddCourse(Model model, Course course,@RequestParam int departmentId){
-	Department department = departmentDao.getDepartment(departmentId);
-	course.setDepartment(department);
-	courseDao.addCourse(course);
-	model.addAttribute("message", "Course added successfully!");
-	model.addAttribute("course",course);
-	
-	List<Course> courseList = courseDao.getAllCourses();
-	model.addAttribute("courseList", courseList);
-	List<Professor> professorList = professorDao.getAllProfessors();
-	model.addAttribute("professorList", professorList);
-	//logger.info("Course is added : " +courseCode);
-	return "registrar/Courses";
+		Department department = departmentDao.getDepartment(departmentId);
+		course.setDepartment(department);
+		courseDao.addCourse(course);
+		model.addAttribute("message", "Course added successfully!");
+		model.addAttribute("course",course);
+
+		List<Course> courseList = courseDao.getAllCourses();
+		model.addAttribute("courseList", courseList);
+		List<Professor> professorList = professorDao.getAllProfessors();
+		model.addAttribute("professorList", professorList);
+		//logger.info("Course is added : " +courseCode);
+		return "registrar/Courses";
 	}
-	
+
 	@RequestMapping("/registrar/Timetable")
 	public String GoToTimetable(){
 		logger.info("Client request to url : Timetable");
 		return "registrar/Timetable";
 	}
-	
+
 	@RequestMapping("/registrar/Grades")
 	public String GoToGrades(){
-		
+
 		logger.info("Client request to url : Grades");
 		return "registrar/Grades";
 	}
