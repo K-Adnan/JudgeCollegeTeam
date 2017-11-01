@@ -545,4 +545,43 @@ public class RegistrarController {
 		departmentDao.addDepartment(department);
 		return "registrar/Departments";
 	}
+	
+	@RequestMapping("/registrar/viewEmptyCourses")
+	public String goToViewEmptyCourses(Model model){
+		
+		List<Course> allCourseList = courseDao.getAllCourses();
+		List<Course> courseList = new ArrayList<Course>();
+		
+		
+		for (Course course : allCourseList){
+			if (studentDao.getAllStudentsByCourse(course).size() < 3){
+				courseList.add(course);
+			}
+		}
+		
+		model.addAttribute("courseList", courseList);
+		return "registrar/EmptyCourses";
+	}
+	
+	@RequestMapping("/registrar/cancelEmptyCourse")
+	public String processCancelEmptyCourse(@RequestParam int courseCode, Model model){
+		Course course = courseDao.getCourse(courseCode);
+		List<Grade> gradeList = gradeDao.getAllGradesByCourse(course);
+
+		for (int i=0;i<gradeList.size();i++){
+			Grade grade = gradeList.get(i);
+			gradeDao.removeGrade(grade.getGradeId());
+		}
+		courseDao.removeCourse(courseCode);
+		
+		List<Course> allCourseList = courseDao.getAllCourses();
+		List<Course> courseList = new ArrayList<Course>();
+		for (Course eachCourse : allCourseList){
+			if (studentDao.getAllStudentsByCourse(eachCourse).size() < 3){
+				courseList.add(eachCourse);
+			}
+		}
+		model.addAttribute("courseList", courseList);
+		return "registrar/EmptyCourses";
+	}
 }

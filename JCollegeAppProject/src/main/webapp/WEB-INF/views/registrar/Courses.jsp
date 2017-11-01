@@ -62,6 +62,8 @@
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
 
 		<h2>Course Catalogue</h2>
+		
+		<a href="viewEmptyCourses">View Empty Courses</a><br/><br/>
 
 		<c:forEach items="${courseList}" var="c">
 			<a href="processChooseCourse?courseId=${c.courseCode}">
