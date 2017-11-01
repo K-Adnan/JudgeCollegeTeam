@@ -514,7 +514,6 @@ public class RegistrarController {
 		User user = userDao.getUser(username);
 		List<Course> courseList = null;
 		
-		
 		if (user instanceof Student){
 			courseList = courseDao.getAllCoursesByStudent((Student) user);
 		}else if (user instanceof Professor){
@@ -526,7 +525,7 @@ public class RegistrarController {
 		return "registrar/userTimetable";
 	}
 	
-	@RequestMapping("/registrar/departments")
+	@RequestMapping("/registrar/Departments")
 	public String goToDepartments(Model model){
 		List<Department> departmentList = departmentDao.getAllDepartments();
 		model.addAttribute("departmentList", departmentList);
@@ -582,6 +581,44 @@ public class RegistrarController {
 			}
 		}
 		model.addAttribute("courseList", courseList);
+		model.addAttribute("message5", "Empty course is cancelled!");
 		return "registrar/EmptyCourses";
+	}
+	
+	@RequestMapping("/registrar/searchCourse")
+	public String doSearchCourse(@RequestParam String search, Model model){
+		
+		List<Course> courseList = courseDao.getCourseByName(search);
+		List<Professor> professorList = professorDao.getAllProfessors();
+		
+		//Course course = courseList.get(0);
+		
+		model.addAttribute("courseList", courseList);
+
+		//List<Student> studentList = studentDao.getAllStudentsByCourse(course);
+		//model.addAttribute("studentList", studentList);
+		model.addAttribute("courseList", courseList);
+		//model.addAttribute("course", course);
+		model.addAttribute("professorList", professorList);
+		
+		return "registrar/Courses";
+	}
+	
+	@RequestMapping("/registrar/showAllCourses")
+	public String doShowAllCourses(Model model, @ModelAttribute("message") String message, @ModelAttribute("message2") String message2){
+			logger.info("Client request to url : Courses");
+
+			List<Course> courseList = courseDao.getAllCourses();
+			List<Professor> professorList = professorDao.getAllProfessors();
+
+			Course course = courseList.get(0);
+			List<Student> studentList = studentDao.getAllStudentsByCourse(course);
+			model.addAttribute("studentList", studentList);
+			model.addAttribute("courseList", courseList);
+			model.addAttribute("course", course);
+			model.addAttribute("professorList", professorList);
+			model.addAttribute("message",message);
+			model.addAttribute("message2",message2);
+		return "registrar/Courses";
 	}
 }

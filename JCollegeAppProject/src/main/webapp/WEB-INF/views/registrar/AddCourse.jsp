@@ -28,11 +28,16 @@
 		<li><a href="MyProfile">My Profile</a></li>
 		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
+		<li><a href="Departments">Departments</a></li>
 		<li><a href="Timetable">Timetable</a></li>
 		<li><a href="Grades">Grades</a></li>
 	</ul>
 
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
+	<form align="left" name="form1" method="post" action="Courses">
+			<label class="CoursesLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">
+			</label>
+		</form>
 	<h2>Add Course</h2>
 	<sf:form method="post" action="doAddCourse" modelAttribute="course">
 		 Course Name : <br /> <sf:input type="text" path="courseName" /> <br />

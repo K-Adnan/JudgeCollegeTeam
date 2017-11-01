@@ -9,18 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Courses</title>
 <link href="../css/style.css" rel="stylesheet" media="all">
-<script  type="text/javascript">
-					function getConfirmation() {
-						var courseName = document.getElementById("courseName").value;
-						var isOk = confirm("Are you sure you want to update the course " + courseName + "?");
-						return isOk;
-					}
-				</script>
 				
 				<script  type="text/javascript">
-					function getConfirmationForCancelling() {
+					function getConfirmationForCancellingEmpty() {
 						var courseName = document.getElementById("courseName").value;
-						var isOk = confirm("Are you sure you want to cancel the course " + courseName + "?");
+						var isOk = confirm("Are you sure you want to cancel the course?");
 						return isOk;
 					}
 				</script>
@@ -28,14 +21,9 @@
 
 <body>
 
-<c:if test="${message eq 'Course is cancelled!'}">
+<c:if test="${message5 eq 'Empty course is cancelled!'}">
 	<script>
 		alert("Successfully removed course!");
-	</script>
-</c:if>
-<c:if test="${message2 eq 'Course is added!'}">
-	<script>
-		alert("Successfully added course!");
 	</script>
 </c:if>
 	<ul>
@@ -56,12 +44,16 @@
 		<li><a href="MyProfile">My Profile</a></li>
 		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
+		<li><a href="Departments">Departments</a></li>
 		<li><a href="Timetable">Timetable</a></li>
 		<li><a href="Grades">Grades</a></li>
 	</ul>
 
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-
+	<form align="left" name="form1" method="post" action="Courses">
+			<label class="CoursesLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">
+			</label>
+		</form>
 		<h2>List of Courses with less than 3 Students</h2>
 		
 		<table>
@@ -74,13 +66,12 @@
 				<c:forEach items="${courseList}" var="c">
 				  <tr>
 					<td>${c.courseCode}</td>
-					<td>${c.courseName}</td>
+					<td><input type="hidden" id="courseName" value="${c.courseName}">${c.courseName}</td>
 					<td>${fn:length(c.studentList)}</td>
 					<td>
-					
-						<form name="CancelCourse" action="cancelEmptyCourse?courseCode=${c.courseCode}" onSubmit="return getConfirmationForCancelling()">
+						<form name="CancelEmptyCourse" action="cancelEmptyCourse?courseCode=${c.courseCode}" onSubmit="return getConfirmationForCancellingEmpty()">
 						<input type="hidden" name="courseCode" value="${c.courseCode}" />
-						<input name="cancelCourse" type="submit" value="Cancel Course">
+						<input name="cancelEmptyCourse" type="submit" value="Cancel Course">
 						</form>
 					
 					</td>

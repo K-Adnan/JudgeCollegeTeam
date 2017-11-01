@@ -37,6 +37,11 @@
 		alert("Successfully added course!");
 	</script>
 </c:if>
+<c:if test="${message3 eq 'Empty course is cancelled!'}">
+	<script>
+		alert("Successfully removed course!");
+	</script>
+</c:if>
 	<ul>
 		<div class="img">
 			<IMG HEIGHT="50" WIDTH="80"
@@ -55,6 +60,7 @@
 		<li><a href="MyProfile">My Profile</a></li>
 		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
+		<li><a href="Departments">Departments</a></li>
 		<li><a href="Timetable">Timetable</a></li>
 		<li><a href="Grades">Grades</a></li>
 	</ul>
@@ -63,8 +69,13 @@
 
 		<h2>Course Catalogue</h2>
 		
-		<a href="viewEmptyCourses">View Empty Courses</a><br/><br/>
-
+		<a href="showAllCourses">Show all courses</a><br/>
+		
+		<form action="searchCourse" method="post">
+				<input name="search" width="50px" placeholder="Search for Courses"/>
+				<input type="submit" value="Go!"/>
+		</form>
+		
 		<c:forEach items="${courseList}" var="c">
 			<a href="processChooseCourse?courseId=${c.courseCode}">
 				${c.courseName}</a>
@@ -76,6 +87,7 @@
 				type="submit" id="submit2" value="Add Course">
 			</label>
 	</form>
+	<a href="viewEmptyCourses">View Empty Courses</a><br/><br/>
 
 <br /><br />
 		<table>
@@ -114,7 +126,7 @@
 			</tr>
 		</table>
 
-		<form name="CancelCourse" action="cancelCourse?courseId=${course.courseCode}" onSubmit="return getConfirmationForCancelling()">
+		<form name="CancelCourse" action="cancelCourse?courseId=${course.courseCode}" onSubmit="return getConfirmationForCancellingEmpty()">
 			<input type="hidden" name="code" value="${course.courseCode}" /> 
 			<input name="cancelCourse" type="submit" value="Cancel Course">
 		</form>
