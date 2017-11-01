@@ -91,11 +91,9 @@ public class ProfessorController {
 	@RequestMapping("/professor/processChooseCourse")
 	public String processChooseCourse(Model model, int courseCode, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
-		
 		Course course = courseDao.getCourse(courseCode);
 		course.setProfessor(professor);
 		courseDao.updateCourse(course);
-		
 		logger.info("Course is chosen :" + courseCode);
 		return "redirect:viewCourses";
 	}

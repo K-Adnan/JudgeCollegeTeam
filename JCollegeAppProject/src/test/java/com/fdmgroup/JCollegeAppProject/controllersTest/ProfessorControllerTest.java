@@ -22,6 +22,7 @@ import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
+import com.fdmgroup.JCollegeAppProject.entities.Student;
 
 
 
@@ -45,6 +46,7 @@ public class ProfessorControllerTest {
     GradeDAO gradeDao;
     Professor professor;
     ArrayList<Course> courseList;
+    ArrayList<Student> studentList;
     Course course;
 	
 	@Before
@@ -61,6 +63,7 @@ public class ProfessorControllerTest {
         professor = mock(Professor.class);
         courseList = new ArrayList<Course>();
         course = mock(Course.class);
+        studentList = new ArrayList<Student>();
 	}
 	
 	
@@ -73,6 +76,42 @@ public class ProfessorControllerTest {
 	}
 	
 	@Test
-	public void test
+	public void testProcessChooseCourseAllowsYouToChooseACourse(){
+		when(principal.getName()).thenReturn(username);
+		when(professorDao.getProfessor(username)).thenReturn(professor);
+		when(courseDao.getCourse(courseCode)).thenReturn(course);
+		when(course.getCourseName()).thenReturn("Darryl");
+		assertEquals("redirect:viewCourses", professorController.processChooseCourse(model, courseCode, principal));		
+	}
+	
+	@Test
+	public void testGoToTaughtCoursesGoesToTheTaughtCourses() {
+		when(principal.getName()).thenReturn(username);
+        when(professorDao.getProfessor(username)).thenReturn(professor);
+        assertEquals("professor/professorViewCourses", professorController.goToTaughtCourses(model, session, principal));
+		}
+	
+	@Test
+	public void testProcessTaughtCoursesProcessesTheTaughtCourses(){
+		when(principal.getName()).thenReturn(username);
+        when(professorDao.getProfessor(username)).thenReturn(professor);
+        when(courseDao.getCourse(courseCode)).thenReturn(course);
+        when(course.getCourseName()).thenReturn("Chizh");
+        assertEquals("professor/professorViewCourses", professorController.processTaughtCourses(session, principal));
+		}
+	
+	@Test
+	public void testProcessShowStudentsShowsTheStudents(){
+		when(studentDao.getAllStudents()).thenReturn(studentList);
+		assertEquals("professor/professorViewStudents", professorController.processShowStudents());
+		}
+	
+	@Test
+	public void testViewProfileGoesToViewProfiles(){
+		when(principal.getName()).thenReturn(username);
+		when(professorDao.getProfessor(username)).thenReturn(professor);
+		assertEquals("professor/professorViewProfile", professorController.goToViewProfile(model, principal));
+	}
+	
 
 }
