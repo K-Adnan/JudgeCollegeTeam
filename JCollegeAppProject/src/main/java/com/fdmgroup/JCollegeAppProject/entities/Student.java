@@ -1,6 +1,8 @@
 package com.fdmgroup.JCollegeAppProject.entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -159,7 +161,19 @@ public class Student extends User implements Serializable {
 
             	public void setDobString(String dobString) {
             		this.dobString = dobString;
-            		dOB = new Date(Date.parse(dobString));
+            		System.out.println("%%%%%%%%%%%" + dobString);
+//            		dOB = new Date(Date.parse(dobString));
+            		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            		try {
+						dOB = sdf.parse(dobString);
+					} catch (ParseException e) {
+						SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MM-yyyy");
+						try {
+							dOB = sdf2.parse(dobString);
+						} catch (ParseException e1) {
+							e1.printStackTrace();
+						}
+					}
             	}
 
                 @Override

@@ -3,6 +3,7 @@ package com.fdmgroup.JCollegeAppProject.controllers;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.hibernate.cache.internal.OldNaturalIdCacheKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fdmgroup.JCollegeAppProject.daos.AbsenceDAO;
 import com.fdmgroup.JCollegeAppProject.daos.CourseDAO;
-import com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl;
 import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAO;
 import com.fdmgroup.JCollegeAppProject.daos.GradeDAO;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
@@ -161,24 +160,36 @@ public class RegistrarController {
 	}
 
 	@RequestMapping("/registrar/EditInformationStud")
-	public String EditInformationStud(Model model, HttpSession session){
-		
-		String username = (String) session.getAttribute("username");
+	public String EditInformationStud(@RequestParam String username, Model model, HttpSession session){
 		Student student = studentDao.getStudent(username);
-		model.addAttribute("student", student);
+		List<String> genders = new ArrayList<String>();
+		genders.add("MALE");
+		genders.add("FEMALE");
+		genders.add("UNDISCLOSED");
 		
+		model.addAttribute("student", student);
+		model.addAttribute("genders", genders);
 		return "registrar/EditInformationStud";
 	}
 	
-	@RequestMapping("/registrar/processEditStudent")
-	public String processEditStudent(Model model, HttpSession session){
+	@RequestMapping("/registrar/processEditStud")
+	public String processEditStudent(@RequestParam String dob, @RequestParam String gender, Student student, Model model, HttpSession session){
+		Student oldStudent = studentDao.getStudent(student.getUsername());
+		
+		student.setAbsenseList(oldStudent.getAbsenseList());
+		student.setCourseList(oldStudent.getCourseList());
+		student.setGradeList(oldStudent.getGradeList());
+		System.out.println("********** dob in controller " + dob);
+		student.setDobString(dob);
+		student.setGenderString(gender);
+		
+		studentDao.updateStudent(student);
 		
 		String username = (String) session.getAttribute("username");
-		Student student = studentDao.getStudent(username);
 		model.addAttribute("student", student);
 		
 		logger.info("Information are edited for"+username);
-		return "redirect:ViewAndUpdateStud";
+		return "registrar/ViewAndUpdateStud";
 	}
 	
 	@RequestMapping("/registrar/EditInformationProf")

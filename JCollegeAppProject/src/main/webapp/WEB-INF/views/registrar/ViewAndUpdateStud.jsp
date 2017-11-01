@@ -45,7 +45,7 @@
 		</form>
 	<h2>Profile Information</h2>
 	
-	<form name="form1" method="post" action="EditInformationStud">
+	<form name="form1" method="post" action="EditInformationStud?username=${student.username}">
 		<label class="EditInformationLblPos"> 
 			<input name="submit2" type="submit" id="submit2" value="Edit Information">
 		</label>
@@ -70,6 +70,9 @@
 		</tr><tr>
 			<td>Email address</td>
 			<td>${student.emailAddress}</td>
+		</tr><tr>
+			<td>Date of Birth</td>
+			<td><fmt:formatDate value="${student.dOB}" type="both" pattern="dd/MM/yyyy"/></td>
 		</tr>
 	</table>
 	<br/><br/>

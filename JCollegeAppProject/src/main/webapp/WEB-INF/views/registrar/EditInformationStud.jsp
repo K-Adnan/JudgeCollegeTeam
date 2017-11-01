@@ -36,7 +36,40 @@
 			</label>
 		</form>
 	<h2>Edit Information</h2>
-
+	<sf:form method="post" action="processEditStud" modelAttribute="student">
+			<sf:hidden path="username" value="${student.username}"/>
+			<sf:hidden path="password" value="${student.password }"/>
+			<sf:hidden path="registrationDate" value="${student.registrationDate }"/>
+			<sf:hidden path="noOfIncorrectAttempts" value="${student.noOfIncorrectAttempts }"/>
+	
+			First Name <br/> <sf:input type="text" path="firstName" />
+           <br/>
+ 			Last Name <br/> <sf:input type="text" path="lastName" />
+           <br/>
+           	Address <br/> <sf:input type="text" path="address" />
+           <br/>
+           	Phone Number <br/> <sf:input type="text" path="phoneNumber" />
+           <br/>
+            Email address <br/> <sf:input type="text" path="emailAddress" />
+           <br/>
+           Date of Birth <br/> <input name="dob" type="text" value="<fmt:formatDate value="${student.dOB}" type="both" pattern="dd/MM/yyyy"/>"/>
+           <br/>
+           Gender
+           <select name="gender">
+							<c:forEach items="${genders}" var="g">
+								<c:choose>
+									<c:when test="${student.genderString eq g}">
+										<option value="${student.gender}" selected>${student.gender}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${g}">${g}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+           </select>
+           <br/>
+           <input type="submit" value="Edit" />
+     </sf:form>
 	
 </body>
 </html>
