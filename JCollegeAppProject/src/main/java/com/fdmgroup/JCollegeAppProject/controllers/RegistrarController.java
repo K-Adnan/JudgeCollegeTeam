@@ -350,13 +350,22 @@ public class RegistrarController {
 	}
 	
 	@RequestMapping("/registrar/doAddAbsence")
-	public String doAddAbsence(@RequestParam String username, @RequestParam String reason,@RequestParam String dateOfAbsence, Model model){
+	public String doAddAbsence(@RequestParam String username, @RequestParam String reason,@RequestParam String dateOfAbsence, HttpServletRequest request, Model model){
 		Student student = studentDao.getStudent(username);
 		System.out.println("Username is: "+ username);
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
 		
 		Absence absence = new Absence();
+		
+		String approved = request.getParameter("approved");
+		
+		if (approved != null){
+			if (approved.equals("true")){
+				absence.setAbsenceApproved(true);
+			}
+		}
+		
 		try {
 			calendar.setTime(sf.parse(dateOfAbsence));
 			absence.setDateOfAbsence(calendar);
