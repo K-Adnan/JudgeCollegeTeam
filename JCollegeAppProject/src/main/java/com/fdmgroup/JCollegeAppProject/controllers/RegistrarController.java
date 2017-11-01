@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.hibernate.cache.internal.OldNaturalIdCacheKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -181,24 +182,33 @@ public class RegistrarController {
 	}
 	
 	@RequestMapping("/registrar/EditInformationProf")
-	public String EditInformationProf(Model model, HttpSession session){
+	public String EditInformationProf(@RequestParam String username, Model model, HttpSession session){
+		List<Department> departmentList = departmentDao.getAllDepartments();
 		
-		String username = (String) session.getAttribute("username");
 		Professor professor = professorDao.getProfessor(username);
+		model.addAttribute("departmentList", departmentList);
 		model.addAttribute("professor", professor);
 		
 		return "registrar/EditInformationProf";
 	}
 	
 	@RequestMapping("/registrar/processEditProf")
-	public String processEditProf(Professor professor, Model model, String username){
+	public String processEditProf(Professor professor, @RequestParam int departmentId, Model model){
+		String username = professor.getUsername();
+		Professor oldProfessor = professorDao.getProfessor(username);
+		professor.setCourse(oldProfessor.getCourse());
 		
+		Department department = departmentDao.getDepartment(departmentId);
+		if (department == null){
+			professor.setDepartment(null);
+		}else{
+			professor.setDepartment(department);
+		}
 		professorDao.updateProfessor(professor);
 		model.addAttribute("professor", professor);
 		
-		
-		logger.info("Information are edited for "+username);
-		return "redirect:ViewAndUpdateProf";
+		logger.info("Information are edited for " + professor.getUsername());
+		return "registrar/ViewAndUpdateProf";
 	}
 
 	@RequestMapping("/registrar/RemoveFromCourse")

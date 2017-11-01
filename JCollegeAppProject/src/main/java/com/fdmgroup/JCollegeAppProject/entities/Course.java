@@ -45,7 +45,7 @@ public class Course implements Serializable {
 	@ManyToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
 	private Set<Student> studentList;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Department department;
 
 	@ManyToOne

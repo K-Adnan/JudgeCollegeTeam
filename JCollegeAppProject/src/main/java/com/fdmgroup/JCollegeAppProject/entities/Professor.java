@@ -22,7 +22,7 @@ public class Professor extends User implements Serializable {
 	private String phone;
 	private String fax;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy="professor")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="professor")
 	private Set<Course> courses=new HashSet<Course>();
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Department department;
