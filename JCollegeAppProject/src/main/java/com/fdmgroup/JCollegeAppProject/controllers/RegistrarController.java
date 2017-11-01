@@ -421,7 +421,16 @@ public class RegistrarController {
 	}
 
 	@RequestMapping("/registrar/Timetable")
-	public String GoToTimetable(){
+	public String GoToTimetable(Model model){
+		List<User> userList = userDao.getAllProfessors();
+		List<Student> studentList = studentDao.getAllStudents();
+		
+		for (Student student : studentList){
+			userList.add(student);
+		}
+		
+		model.addAttribute("userList", userList);
+		
 		logger.info("Client request to url : Timetable");
 		return "registrar/Timetable";
 	}
@@ -441,6 +450,23 @@ public class RegistrarController {
 		List<User> userList = userDao.getUserByName(search);
 		model.addAttribute("userList", userList);
 		return "registrar/SystemUsers";
+	}
+	
+	@RequestMapping("/registrar/userTimetable")
+	public String goToUserTimetable(@RequestParam String username, Model model){
+		User user = userDao.getUser(username);
+		List<Course> courseList = null;
+		
+		
+		if (user instanceof Student){
+			courseList = courseDao.getAllCoursesByStudent((Student) user);
+		}else if (user instanceof Professor){
+			courseList = courseDao.getAllCoursesByProfessor((Professor) user);
+		}
+		
+		model.addAttribute("courseList", courseList);
+		model.addAttribute("user", user);
+		return "registrar/userTimetable";
 	}
 	
 }

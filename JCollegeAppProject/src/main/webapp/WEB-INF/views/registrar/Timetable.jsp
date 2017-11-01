@@ -38,6 +38,20 @@
 
 	<h2>Timetable</h2>
 	
+	<table>
+		<tr>
+			<th>Username</th>
+			<th>Full Name</th>
+		</tr>
+		<c:forEach items="${userList}" var="u">
+				<tr>
+					<td><a href="userTimetable?username=${u.username}">${u.username}</a></td>
+					<td>${u.firstName} ${u.lastName}</td>
+				</tr>
+
+			</c:forEach>
+	</table>
+	
 	</div>
 </body>
 </html>
