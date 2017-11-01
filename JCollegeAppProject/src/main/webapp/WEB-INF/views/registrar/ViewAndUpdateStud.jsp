@@ -35,6 +35,7 @@
 		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
 		<li><a href="Timetable">Timetable</a></li>
+		<li><a href="Grades">Grades</a></li>
 	</ul>
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
 	
@@ -54,31 +55,19 @@
 		<tr>
 			<td>Username</td>
 			<td><input type="hidden" id="username" value="${student.username}">${student.username}</td>
-		</tr>
-		<tr>
+		</tr><tr>
 			<td>First Name</td>
 			<td>${student.firstName}</td>
-		</tr>
-		<tr>
+		</tr><tr>
 			<td>Last Name</td>
 			<td>${student.lastName}</td>
-		</tr>
-		<tr>
-			<td>	
-         			Address
-      		</td>
-			<td>
-         			${student.address}
-      		</td>
-      		</tr>
-		
-		<tr><td>
-         		Phone Number
-         </td> 
-         <td>
-         		${student.phoneNumber}
-		</tr>
-		<tr>
+		</tr><tr>
+			<td>Address</td>
+			<td>${student.address}</td>
+      	</tr><tr>
+			<td>Phone Number</td> 
+        	<td>${student.phoneNumber}</td>
+		</tr><tr>
 			<td>Email address</td>
 			<td>${student.emailAddress}</td>
 		</tr>
@@ -89,12 +78,10 @@
 			<c:forEach items="${courseList}" var="c">
 				<tr>
 				<td>${c.courseName}</td> 
-				<td>
-				<form name="RemoveFromCourse" action="RemoveFromCourse?username=${user.username}" onSubmit="return getConfRemoveFromCourse()">
+				<td><form name="RemoveFromCourse" action="RemoveFromCourse?username=${user.username}" onSubmit="return getConfRemoveFromCourse()">
 					<input type="hidden" name="username" value="${user.username}" /> 
 					<input name="removeFromCourse" type="submit" value="Remove from Course">
-				</form>
-				</td>
+				</form></td>
 				</tr>
 			</c:forEach>
 		</table>
