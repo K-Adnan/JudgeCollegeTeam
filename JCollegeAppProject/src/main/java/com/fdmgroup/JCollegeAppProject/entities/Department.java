@@ -28,7 +28,7 @@ public class Department implements Serializable {
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "department")
 	private List<Course> listOfCourses;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "department")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
 	private List<Professor> listOfProfessors;
 	
 	public Department(){

@@ -14,11 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fdmgroup.JCollegeAppProject.daos.CourseDAOImpl;
-import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAOImpl;
-import com.fdmgroup.JCollegeAppProject.daos.GradeDAOImpl;
+import com.fdmgroup.JCollegeAppProject.daos.CourseDAO;
+import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAO;
+import com.fdmgroup.JCollegeAppProject.daos.GradeDAO;
+import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAOImpl;
-import com.fdmgroup.JCollegeAppProject.daos.StudentDAOImpl;
+import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Department;
 import com.fdmgroup.JCollegeAppProject.entities.Grade;
@@ -31,29 +32,35 @@ public class ProfessorController {
 	private Logger logger = Logger.getLogger(getClass());
 
 	@Autowired
-	private ProfessorDAOImpl professorDao;
+	private ProfessorDAO professorDao;
+	
+	@Autowired
+	private StudentDAO studentDao;
+
+	@Autowired
+	private DepartmentDAO departmentDao;
+
+	@Autowired
+	private GradeDAO gradeDao;
+
+	@Autowired
+	private CourseDAO courseDao;
 
 	public ProfessorController() {
-		super();
+	}	
 
-	}
-
-	public ProfessorController(ProfessorDAOImpl professorDao) {
+	public ProfessorController(ProfessorDAO professorDao, StudentDAO studentDao, DepartmentDAO departmentDao,
+			GradeDAO gradeDao, CourseDAO courseDao) {
 		super();
 		this.professorDao = professorDao;
+		this.studentDao = studentDao;
+		this.departmentDao = departmentDao;
+		this.gradeDao = gradeDao;
+		this.courseDao = courseDao;
 	}
 
-	@Autowired
-	private StudentDAOImpl studentDao;
 
-	@Autowired
-	private DepartmentDAOImpl departmentDao;
 
-	@Autowired
-	private GradeDAOImpl gradeDao;
-
-	@Autowired
-	private CourseDAOImpl courseDao;
 
 	@RequestMapping("/professor/professorHome")
 	public String goToProfessorHome() {
@@ -84,11 +91,9 @@ public class ProfessorController {
 	@RequestMapping("/professor/processChooseCourse")
 	public String processChooseCourse(Model model, int courseCode, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
-		
 		Course course = courseDao.getCourse(courseCode);
 		course.setProfessor(professor);
 		courseDao.updateCourse(course);
-		
 		logger.info("Course is chosen :" + courseCode);
 		return "redirect:viewCourses";
 	}

@@ -34,6 +34,11 @@
 	<h2>Edit Information</h2>
 
 	<sf:form method="post" action="processEditProf" modelAttribute="professor">
+			<sf:hidden path="username" value="${professor.username}"/>
+			<sf:hidden path="password" value="${professor.password }"/>
+			<sf:hidden path="registrationDate" value="${professor.registrationDate }"/>
+			<sf:hidden path="noOfIncorrectAttempts" value="${professor.noOfIncorrectAttempts }"/>
+	
 			First Name <br/> <sf:input type="text" path="firstName" />
            <br/>
  			Last Name <br/> <sf:input type="text" path="lastName" />
@@ -46,6 +51,20 @@
            <br/>
             Email address <br/> <sf:input type="text" path="emailAddress" />
            <br/>
+           
+           Department<br/> 
+           <select name="departmentId">
+							<c:forEach items="${departmentList}" var="d">
+								<c:choose>
+									<c:when test="${professor.department.departmentId eq d.departmentId}">
+										<option value="${d.departmentId}" selected>${d.departmentName}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${d.departmentId}">${d.departmentName}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+           </select><br/>
            <sf:input path="" type="submit" value="Edit" />
      </sf:form>
 	

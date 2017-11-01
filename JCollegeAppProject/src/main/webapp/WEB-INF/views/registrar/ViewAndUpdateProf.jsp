@@ -37,7 +37,7 @@
 		</form>
 	<h2>Profile Information</h2>
 	
-	<form name="form1" method="post" action="EditInformationProf">
+	<form name="form1" method="post" action="EditInformationProf?username=${professor.username}">
 		<label class="EditInformationLblPos"> 
 			<input name="submit2" type="submit" id="submit2" value="Edit Information">
 		</label>
@@ -70,6 +70,10 @@
 		<tr>
 			<td>Email address</td>
 			<td>${professor.emailAddress}</td>
+		</tr>
+		<tr>
+			<td>Department</td>
+			<td>${professor.department.departmentName}</td>
 		</tr>
 	</table>
 	
