@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>My Profile</title>
+<title>Grades</title>
 <link href="../css/style.css" rel="stylesheet" media="all">
 </head>
 
@@ -36,11 +36,8 @@
 
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
 
-	<h2>My Profile</h2>
-				  Username : ${registrar.username}<br/>
-                  First Name : ${registrar.firstName}<br/>
-                  Last Name : ${registrar.lastName}<br/>
-                  Email Address : ${registrar.emailAddress}<br/>
+	<h2>Grades</h2>
+	
 	</div>
 </body>
 </html>

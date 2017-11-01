@@ -23,7 +23,7 @@ table tr:hover input {
 	function getConfRemoveUser() {
 		
 		var userid = document.getElementById("usernameid").value;
-		alert(userid);
+		<%--alert(userid);--%>
 		var isOk = confirm("Are you sure you want to remove the user ?");
 		return isOk;
 	}
@@ -55,6 +55,7 @@ table tr:hover input {
 		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
 		<li><a href="Timetable">Timetable</a></li>
+		<li><a href="Grades">Grades</a></li>
 	</ul>
 
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">

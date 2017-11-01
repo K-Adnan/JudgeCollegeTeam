@@ -27,6 +27,7 @@
 		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
 		<li><a href="Timetable">Timetable</a></li>
+		<li><a href="Grades">Grades</a></li>
 	</ul>
 
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">

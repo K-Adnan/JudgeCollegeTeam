@@ -27,36 +27,26 @@
 		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
 		<li><a href="Timetable">Timetable</a></li>
+		<li><a href="Grades">Grades</a></li>
 	</ul>
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
 	
-	<form align="centre" name="form1" method="post" action="SystemUsers">
-			<label class="SystemUsersLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">
-			</label>
-		</form>
 	<h2>Edit Information</h2>
 
-	<sf:form method="post" action="processEditProfessor" modelAttribute="professor">
-First Name <sf:input path="firstName" value="${professor.firstName}" />
-           <br /> <br />
-Last Name <sf:input path="lastName" value="${professor.lastName}" />
-           <br />
-           <br />
-Address <sf:input path="address" value="${professor.address}" />
-           <br />
-           <br />
-Phone Number <sf:input path="phone"  value="${professor.phone}" />
-           <br />
-           <br />
-Fax      <sf:input path="fax"  value="${professor.fax}" />
-           <br />
-           <br />
-Email address   <sf:input path="emailAddress"  value="${professor.emailAddress}" />
-           <br />
-           <br />   
-                 
-           <input type="submit" value="Edit" />
-           
+	<sf:form method="post" action="processEditProf" modelAttribute="professor">
+			First Name <br/> <sf:input type="text" path="firstName" />
+           <br/>
+ 			Last Name <br/> <sf:input type="text" path="lastName" />
+           <br/>
+           	Address <br/> <sf:input type="text" path="address" />
+           <br/>
+           	Phone Number <br/> <sf:input type="text" path="phone" />
+           <br/>
+            Fax <br/> <sf:input type="text" path="fax" />
+           <br/>
+            Email address <br/> <sf:input type="text" path="emailAddress" />
+           <br/>
+           <sf:input path="" type="submit" value="Edit" />
      </sf:form>
 	
 </body>
