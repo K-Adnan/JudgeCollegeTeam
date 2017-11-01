@@ -18,4 +18,6 @@ public interface AbsenceDAO {
 
 	public Absence getAbsence(int absenceId);
 
+	List<Absence> getAbsencesByStudent(Student student);
+
 }

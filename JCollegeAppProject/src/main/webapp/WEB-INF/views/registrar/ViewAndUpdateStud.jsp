@@ -98,12 +98,30 @@
 				</tr>
 			</c:forEach>
 		</table>
-	
+		
+		
 	<p>Absences</p>
+		
 		<form name="AddAbsence" method="post" action="AddAbsence?username=${student.username}">
 			<label class="AddAbsenceLblPos"> <input name="AddAbsence" type="submit" value="Add Absence">
 			</label>
 		</form>
+		
+		<table>
+				<tr>
+					<th>Date of Absence</th>
+					<th>Reason of Absence</th>
+					<th>Approved</th>
+				</tr>
+			<c:forEach items="${absenceList}" var="a">
+				<tr>
+				<td><fmt:formatDate value="${a.dateOfAbsence.time}" type="both" pattern="dd/MM/yyyy"/></td>
+				<td>${a.reasonForAbsence}</td>
+				<td>${a.absenceApproved}</td>
+				</tr> 
+			</c:forEach>
+		</table>
+	
 	
 </body>
 </html>
