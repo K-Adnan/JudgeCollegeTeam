@@ -9,8 +9,7 @@
                             http://www.springframework.org/schema/mvc
                             http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-       <context:component-scan
-              base-package="com.fdmgroup.JCollegeAppProject.controllers" />
+       <context:component-scan base-package="com.fdmgroup.JCollegeAppProject.controllers" />
      <mvc:resources mapping="/css/**" location="/css/"/>
      <mvc:annotation-driven/>
        <bean
@@ -37,7 +36,7 @@
        <bean id="absenceDAO" class="com.fdmgroup.JCollegeAppProject.daos.AbsenceDAOImpl"/>
        
        
-       <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+     <!--    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
 		<property name="username" value="username" />
@@ -53,7 +52,7 @@
 
 	<bean id="mailMail" class="com.fdmgroup.JCollegeAppProject.utilities">
 		<property name="mailSender" ref="mailSender" />
-	</bean>
+	</bean>-->
        
        
        

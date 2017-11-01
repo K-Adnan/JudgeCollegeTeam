@@ -55,6 +55,7 @@
            Date of Birth <br/> <input name="dob" type="text" value="<fmt:formatDate value="${student.dOB}" type="both" pattern="dd/MM/yyyy"/>"/>
            <br/>
            Gender
+           <br/>
            <select name="gender">
 							<c:forEach items="${genders}" var="g">
 								<c:choose>
