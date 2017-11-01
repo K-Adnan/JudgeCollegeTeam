@@ -169,12 +169,12 @@ public class TestRegistrarController {
         
         @Test
         public void test_EditInformationStud_ReturnsRegistrarEditInformationStud(){
-                assertEquals("registrar/EditInformationStud", registrarController.EditInformationStud(model, username));
+                assertEquals("registrar/EditInformationStud", registrarController.EditInformationStud(model, session));
         }
         
         @Test
         public void test_DoRemoveFromCourse_ReturnsRedirectViewAndUpdate(){
-                assertEquals("redirect:ViewAndUpdate", registrarController.DoRemoveFromCourse(model, "ABC"));
+                assertEquals("redirect:ViewAndUpdateStud", registrarController.DoRemoveFromCourse(username, model, "ABC"));
         }
         
         @Test
@@ -259,7 +259,7 @@ public class TestRegistrarController {
         
         @Test
         public void test_EditInformationProf_ReturnsRegistrarEditInformationStud(){
-                assertEquals("registrar/EditInformationStud", registrarController.EditInformationProf(model, username));
+                assertEquals("registrar/EditInformationProf", registrarController.EditInformationProf(model, session));
         }
         
         @Test

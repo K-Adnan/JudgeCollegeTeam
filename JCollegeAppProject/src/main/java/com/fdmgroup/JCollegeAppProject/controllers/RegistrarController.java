@@ -63,10 +63,18 @@ public class RegistrarController {
 		super();
 	}
 
-	public RegistrarController(CourseDAOImpl cDAO, ProfessorDAO professorDAO, StudentDAO studentDAO) {
-		this.courseDao = cDAO;
-		this.professorDao = professorDAO;
-		this.studentDao = studentDAO;
+	public RegistrarController(CourseDAO courseDao, ProfessorDAO professorDao, StudentDAO studentDao,
+			RegistrarDAO registrarDao, DepartmentDAO departmentDao, GradeDAO gradeDao, UserDAO userDao,
+			AbsenceDAO absenceDao) {
+		super();
+		this.courseDao = courseDao;
+		this.professorDao = professorDao;
+		this.studentDao = studentDao;
+		this.registrarDao = registrarDao;
+		this.departmentDao = departmentDao;
+		this.gradeDao = gradeDao;
+		this.userDao = userDao;
+		this.absenceDao = absenceDao;
 	}
 
 	@RequestMapping("/registrar/MyProfile")
