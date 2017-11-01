@@ -35,5 +35,34 @@
        <bean id="itadminDAO" class="com.fdmgroup.JCollegeAppProject.daos.ITAdminDAOImpl"/>
        <bean id="gradeDAO" class="com.fdmgroup.JCollegeAppProject.daos.GradeDAOImpl"/>
        <bean id="absenceDAO" class="com.fdmgroup.JCollegeAppProject.daos.AbsenceDAOImpl"/>
+       
+       
+       <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="username" />
+		<property name="password" value="password" />
+
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="mailMail" class="com.fdmgroup.JCollegeAppProject.utilities">
+		<property name="mailSender" ref="mailSender" />
+	</bean>
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
 </beans>
 

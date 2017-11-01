@@ -6,9 +6,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="../css/professor.css" rel="stylesheet" type="text/css">
 <title>View Courses</title>
 </head>
 <body>
+
+
+		
+		<ul>
+  <li><a href = "viewCourses"> Courses </a></li>
+  <li><a href = "viewProfile"> My Profile</a></li>
+</ul>
+	
+		<a href="/JCollegeAppProject/logout" class = logoutLblPos>Logout</a>
 
 	<h2>Student Course Options</h2>
 
@@ -78,7 +88,5 @@
 		</c:forEach>
 	</table>
 
-<a href="professorHome"> Go back Home</a>
-<a href="/JCollegeAppProject/logout">Logout</a>
 </body>
 </html>

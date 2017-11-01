@@ -5,13 +5,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="../css/professor.css" rel="stylesheet" type="text/css">
 <title>View Students</title>
 </head>
 <body>
 
-	<h2>List of all students enrolled on ${course.courseName}</h2>
 
-	<a href="/JCollegeAppProject/logout">Logout</a>
+
+<a href="/JCollegeAppProject/logout" class = logoutLblPos>Logout</a>
+
+
+		
+		<ul>
+  <li><a href = "viewCourses"> Courses </a></li>
+  <li><a href = "viewProfile"> My Profile</a></li>
+</ul>
+	
+		
+	
+
+
+
+	<h2>List of all students enrolled on ${course.courseName}</h2>
 
 
 	<table>
@@ -85,14 +100,18 @@
 	
 	<br/>
 	<br/>
-	
-	<a href="viewCourses">back to My Courses</a>
-	
-	<br/>
-	<br/>
+
 	
 	
 <a href="professorHome">back Home</a>
+
+
+
+
+
+
+
+
 
 </body>
 </html>
