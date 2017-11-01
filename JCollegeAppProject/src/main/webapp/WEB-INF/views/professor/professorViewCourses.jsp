@@ -27,7 +27,6 @@
 
 			<th>Course Code</th>
 			<th>Course Name</th>
-			<th>Course Info</th>
 			<th>Taught by</th>
 			<th>Start Date</th>
 			<th>End Date</th>
@@ -40,7 +39,6 @@
 			<tr>
 				<th>${c.courseCode}</th>
 				<th>${c.courseName}</th>
-				<th>${c.courseInfo}</th>
 			<th><c:choose>
 						<c:when test="${empty c.professor}">
 							N/A
@@ -72,7 +70,6 @@
 		<tr>
 			<th>Course Code</th>
 			<th>Course Name</th>
-			<th>Course Info</th>
 			<th>Start Date</th>
 			<th>End Date</th>
 		</tr>
@@ -81,12 +78,14 @@
 			<tr>
 				<th><a href="viewStudents?courseCode=${t.courseCode}">${t.courseCode}</a></th>
 				<th><a href="viewStudents?courseCode=${t.courseCode}">${t.courseName}</a></th>
-				<th>${t.courseInfo}</th>
 				<th>${t.startDate}</th>
 				<th>${t.endDate}</th>
 				<th><a href="unassignCourse?courseCode=${t.courseCode}">Remove Course</a></th>
 		</c:forEach>
 	</table>
 
+
+
+<a href="professorHome">back home</a>
 </body>
 </html>

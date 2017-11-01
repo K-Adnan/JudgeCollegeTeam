@@ -38,6 +38,7 @@
 			<th>Email Address</th>
 			<th>Grade</th>
 			<th> New Comment </th>
+			
 		</tr>
 
 		<c:forEach items="${studentList}" var="s">
@@ -55,6 +56,8 @@
 				<c:forEach items="${gradeList}" var="g">
 						<option value="${g}" selected>${g}</option>
 				</c:forEach>
+				<th><input name="gradeComment" value=""/> </th>
+				<th><input type="submit" value="Update"/></th>
 				</c:when>
 				
 				<%-- Display assigned grade as selected when the student has at least one grade assigned to them  --%>
@@ -62,7 +65,7 @@
  				<c:forEach items="${s.gradeList}" var="grade">
 					<c:choose>
 						<c:when test="${grade.course.courseCode eq course.courseCode }">
-							
+							<c:set var="tester" value="has"/>
 							<c:forEach items="${gradeList}" var="g">
 							  <c:choose>
 								<c:when test="${grade.gradeValue eq g }">
@@ -73,24 +76,29 @@
 								</c:otherwise>
 							  </c:choose>
 							</c:forEach>
+					<th><input name="gradeComment" value="${grade.gradeComment }"/> </th>
+					<th><input type="submit" value="Update"/></th>
 						 </c:when>
 						<c:otherwise>
 						<c:forEach items="${gradeList}" var="g">
 							<option value="${g}" selected>${g}</option>
 						</c:forEach>
+						<c:choose>
+							<c:when test="${tester ne 'has' }">
+								<th><input name="gradeComment" value=""/> </th>
+								<th><input type="submit" value="Update"/></th>
+							</c:when>
+						</c:choose>
 						</c:otherwise>
  					</c:choose>
-					<th><input name="gradeComment" value="${grade.gradeComment }"/> </th>
  				</c:forEach>
 				</c:otherwise>
 				</c:choose>
  			</select>
- 					<input type="submit" value="Update"/>
-					
+ 					
 				</form>
  				</th>
  				<%--<th><a href="updateGrade?courseCode=${course.courseCode}&username=${s.username}&grade=${pageScope[gradeDropdown]}">Update</a></th> --%>
-	
 	
 		</c:forEach>
 	

@@ -1,4 +1,4 @@
-package com.fdmgroup.JCollegeAppProject.controllers;
+ package com.fdmgroup.JCollegeAppProject.controllers;
 
 import java.security.Principal;
 import java.util.ArrayList;

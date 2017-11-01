@@ -13,7 +13,7 @@
 
 	<a href="/JCollegeAppProject/logout">Logout</a>
 
-	<br /> ${username} please chose a course to edit.
+	<br /> ${username} please choose a course to edit.
 
 
 	<sf:form method="post" action="EditCourse" modelAttribute="course">

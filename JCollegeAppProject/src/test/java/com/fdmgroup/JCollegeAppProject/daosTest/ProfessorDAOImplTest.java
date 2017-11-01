@@ -6,6 +6,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -29,8 +32,8 @@ public class ProfessorDAOImplTest {
 	private EntityTransaction transaction;
 	private ProfessorDAOImpl professorDao;
 	private Professor professor;
+	private TypedQuery <Professor> pquery;
 	
-//	private TypedQuery <Manager> mquery;
 //	private TypedQuery <Donor> dquery;
 
 	
@@ -43,6 +46,8 @@ public class ProfessorDAOImplTest {
 		when(factory.createEntityManager()).thenReturn(manager); 
 		when(manager.getTransaction()).thenReturn(transaction);
 		professorDao = new ProfessorDAOImpl (factory);
+		professor = mock(Professor.class);
+        pquery = mock(TypedQuery.class);
 		
 	}
 	
@@ -92,7 +97,7 @@ public class ProfessorDAOImplTest {
 															
 		Professor p = new Professor();
 		
-		when(manager.find(Professor.class, 1)).thenReturn(p);
+		when(manager.find(Professor.class, "username")).thenReturn(p);
 		
 		Professor professorRetrieved = professorDao.getProfessor("username");
 	
@@ -100,6 +105,47 @@ public class ProfessorDAOImplTest {
 
 	}
 
+	
+	 @Test
+	    public void test_getAllProfessors_invokesCreateQuery() {
+	        List<Professor> list = new ArrayList<Professor>();
+	        when(manager.createQuery("From Professor p", Professor.class)).thenReturn(pquery);
+	        when(pquery.getResultList()).thenReturn(list);
+	        // Act
+	        professorDao.getAllProfessors();
+	        // Assert
+	        verify(manager).createQuery("From Professor p",Professor.class);
+	 }
+
+	       
+	    
+	    @Test
+	    public void test_getAllProfessors_returns_NewList() { 
+	    
+	        List<Professor> list = new ArrayList<Professor>();
+	        when(manager.createQuery("From Professor p",Professor.class)).thenReturn(pquery);
+	        when(pquery.getResultList()).thenReturn(list); 
+	        // Act
+	        professorDao.getAllProfessors(); 
+	        // Assert
+	        verify(manager).createQuery("From Professor p",Professor.class);
+	        assertEquals(pquery.getResultList(),list);
+	 
+	    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
