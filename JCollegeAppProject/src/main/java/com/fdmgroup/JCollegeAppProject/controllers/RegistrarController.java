@@ -89,12 +89,6 @@ public class RegistrarController {
 
 	@RequestMapping("/registrar/ViewAndUpdate")
 	public String doChooseUserP(Model model, HttpSession session, Principal principal, @RequestParam String username, HttpServletRequest request){
-		//		Role role = new Role();
-		//		Professor professor = professorDao.getProfessor(username);
-		//		Student student = studentDao.getStudent(username);
-		//		
-
-//		model.addAttribute("user", user);
 		
 		User user = userDao.getUser(username);
 
@@ -120,7 +114,6 @@ public class RegistrarController {
 			List<Course> courseList = courseDao.getAllCoursesByStudent(student);
 			for(Course course : courseList){
 				course.removeStudent(student);
-//				courseDao.updateCourse(course);
 			}
 			studentDao.updateStudent(student);
 		}
@@ -159,23 +152,60 @@ public class RegistrarController {
 	}
 
 	@RequestMapping("/registrar/EditInformationStud")
-	public String EditInformationStud(Model model, String username){
+	public String EditInformationStud(Model model, HttpSession session){
 		
-		logger.info("Information are edited :"+username);
+		String username = (String) session.getAttribute("username");
+		Student student = studentDao.getStudent(username);
+		model.addAttribute("student", student);
+		
 		return "registrar/EditInformationStud";
 	}
 	
-	@RequestMapping("/registrar/EditInformationProf")
-	public String EditInformationProf(Model model, String username){
+	@RequestMapping("/registrar/processEditStudent")
+	public String processEditStudent(Model model, HttpSession session){
 		
-		logger.info("Information are edited :"+username);
-		return "registrar/EditInformationStud";
+		String username = (String) session.getAttribute("username");
+		Student student = studentDao.getStudent(username);
+		model.addAttribute("student", student);
+		
+		logger.info("Information are edited for"+username);
+		return "redirect:ViewAndUpdateStud";
+	}
+	
+	@RequestMapping("/registrar/EditInformationProf")
+	public String EditInformationProf(Model model, HttpSession session){
+		
+		String username = (String) session.getAttribute("username");
+		Professor professor = professorDao.getProfessor(username);
+		model.addAttribute("professor", professor);
+		
+		return "registrar/EditInformationProf";
+	}
+	
+	@RequestMapping("/registrar/processEditProf")
+	public String processEditProf(Professor professor, Model model, String username){
+		
+		professorDao.updateProfessor(professor);
+		model.addAttribute("professor", professor);
+		
+		
+		logger.info("Information are edited for "+username);
+		return "redirect:ViewAndUpdateProf";
 	}
 
 	@RequestMapping("/registrar/RemoveFromCourse")
-	public String DoRemoveFromCourse(Model model, String courseName){
+	public String DoRemoveFromCourse(@RequestParam String username, Model model, String courseName){
+		
+		User user = userDao.getUser(username);
+			Student student = (Student) user;
+			List<Course> courseList = courseDao.getAllCoursesByStudent(student);
+			for(Course course : courseList){
+				course.removeStudent(student);
+			}
+			studentDao.updateStudent(student);
+		
 		logger.info("User is removed from course :"+courseName);
-		return "redirect:ViewAndUpdate";
+		return "redirect:ViewAndUpdateStud";
 	}
 
 	@RequestMapping("/registrar/Courses")
@@ -276,19 +306,6 @@ public class RegistrarController {
 		//logger.info("Course is added : " +courseCode);
 		return "registrar/Courses";
 	}
-
-	@RequestMapping("/registrar/Timetable")
-	public String GoToTimetable(){
-		logger.info("Client request to url : Timetable");
-		return "registrar/Timetable";
-	}
-
-	@RequestMapping("/registrar/Grades")
-	public String GoToGrades(){
-
-		logger.info("Client request to url : Grades");
-		return "registrar/Grades";
-	}
 	
 	@RequestMapping("/registrar/AddAbsence")
 	public String GoToAddAbsence(@RequestParam String username, Model model){
@@ -329,6 +346,19 @@ public class RegistrarController {
 		model.addAttribute("student", student);
 		model.addAttribute("courseList", courseList);
 		return "registrar/ViewAndUpdateStud";
+	}
+
+	@RequestMapping("/registrar/Timetable")
+	public String GoToTimetable(){
+		logger.info("Client request to url : Timetable");
+		return "registrar/Timetable";
+	}
+
+	@RequestMapping("/registrar/Grades")
+	public String GoToGrades(){
+
+		logger.info("Client request to url : Grades");
+		return "registrar/Grades";
 	}
 	
 }
