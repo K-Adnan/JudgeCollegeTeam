@@ -526,4 +526,23 @@ public class RegistrarController {
 		return "registrar/userTimetable";
 	}
 	
+	@RequestMapping("/registrar/departments")
+	public String goToDepartments(Model model){
+		List<Department> departmentList = departmentDao.getAllDepartments();
+		model.addAttribute("departmentList", departmentList);
+		return "registrar/Departments";
+	}
+	
+	@RequestMapping("/registrar/addDepartment")
+	public String goToAddDepartment(Model model){
+		return "registrar/AddDepartment";
+	}
+	
+	@RequestMapping("/registrar/doAddDepartment")
+	public String doAddDepartment(@RequestParam String departmentName, Model model){
+		Department department = new Department();
+		department.setDepartmentName(departmentName);
+		departmentDao.addDepartment(department);
+		return "registrar/Departments";
+	}
 }

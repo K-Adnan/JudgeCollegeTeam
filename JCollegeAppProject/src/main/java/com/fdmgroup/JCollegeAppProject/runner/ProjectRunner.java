@@ -1,14 +1,11 @@
 package com.fdmgroup.JCollegeAppProject.runner;
 
-import java.util.List;
-
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.fdmgroup.JCollegeAppProject.daos.UserDAO;
-import com.fdmgroup.JCollegeAppProject.daos.UserDAOImpl;
-import com.fdmgroup.JCollegeAppProject.entities.User;
-
+import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAO;
+import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAOImpl;
+import com.fdmgroup.JCollegeAppProject.entities.Department;
 
 public class ProjectRunner {
 
@@ -19,13 +16,18 @@ public class ProjectRunner {
 //		CourseDAO courseDao = new CourseDAOImpl(factory);
 //		StudentDAO studentDao = new StudentDAOImpl(factory);
 //		AbsenceDAO absenceDao = new AbsenceDAOImpl(factory);
-		UserDAO userDao = new UserDAOImpl(factory);
+//		UserDAO userDao = new UserDAOImpl(factory);
+		DepartmentDAO depDao = new DepartmentDAOImpl(factory);
+		Department dep = new Department();
+		dep.setDepartmentName("Biology");
 		
-		List<User> list = userDao.getAllBlockedUsers();
+		depDao.addDepartment(dep);
 		
-		for (User user : list){
-			System.out.println(user.getUsername());
-		}
+//		List<User> list = userDao.getAllBlockedUsers();
+		
+//		for (User user : list){
+//			System.out.println(user.getUsername());
+//		}
 //		
 //		Student student = studentDao.getStudent("ABC");
 //		Absence absence = absenceDao.getAbsence(1);
