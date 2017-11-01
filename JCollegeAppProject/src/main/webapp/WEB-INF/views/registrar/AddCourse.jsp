@@ -9,9 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Add Course</title>
 <link href="../css/style.css" rel="stylesheet" media="all">
+
 </head>
 
 <body>
+
 	<ul>
 		<div class="img">
 			<IMG HEIGHT="50" WIDTH="80" SRC=http://www.pathwaysnetwork.co.uk/images/jeancarr-jc.jpg>
@@ -47,6 +49,44 @@
 		</div>
 		</div>
 		</div>
+		
+		Monday :<br/>
+		<select name="monday">
+					<c:forEach items="${timeList}" var="t">
+						<option value="${t}">${t}</option>
+					</c:forEach>
+		</select><br/>
+		
+		Tuesday :<br/>
+		<select name="tuesday">
+					<c:forEach items="${timeList}" var="t">
+						<option value="${t}">${t}</option>
+					</c:forEach>
+		</select><br/>
+		
+		Wednesday :<br/>
+		<select name="wednesday">
+					<c:forEach items="${timeList}" var="t">
+						<option value="${t}">${t}</option>
+					</c:forEach>
+		</select><br/>
+		
+		Thursday :<br/>
+		<select name="thursday">
+					<c:forEach items="${timeList}" var="t">
+						<option value="${t}">${t}</option>
+					</c:forEach>
+		</select><br/>
+		
+		Friday :<br/>
+		<select name="friday">
+					<c:forEach items="${timeList}" var="t">
+						<option value="${t}">${t}</option>
+					</c:forEach>
+		</select><br/>
+		
+		
+		
 		<sf:input path="" type="submit" value="Add Course" />
 	</sf:form>	
 	</div>

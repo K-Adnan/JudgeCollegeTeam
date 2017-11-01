@@ -53,6 +53,8 @@ public class Course implements Serializable {
 	private Professor professor;
 
 	public Course() {
+		
+		for(int i=0;i<5;i++){
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(2017,9,30);
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -60,11 +62,12 @@ public class Course implements Serializable {
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
 		
-		lessons.put(Weekday.MONDAY.name(), calendar);
-		lessons.put(Weekday.TUESDAY.name(), calendar);
-		lessons.put(Weekday.WEDNESDAY.name(), calendar);
-		lessons.put(Weekday.THURSDAY.name(), calendar);
-		lessons.put(Weekday.FRIDAY.name(), calendar);
+		lessons.put( Weekday.values()[i].name(), calendar);
+		}
+//		lessons.put(Weekday.TUESDAY.name(), calendar);
+//		lessons.put(Weekday.WEDNESDAY.name(), calendar);
+//		lessons.put(Weekday.THURSDAY.name(), calendar);
+//		lessons.put(Weekday.FRIDAY.name(), calendar);
 	}
 
 	public Course(String courseName, String courseInfo, Date startDate, Date endDate, Department department, Professor professor) {

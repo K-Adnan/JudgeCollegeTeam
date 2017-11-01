@@ -5,7 +5,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -270,7 +272,7 @@ public class RegistrarController {
 	}
 
 	@RequestMapping("/registrar/Courses")
-	public String goToCourses(Model model, @ModelAttribute("message") String message) {
+	public String goToCourses(Model model, @ModelAttribute("message") String message, @ModelAttribute("message2") String message2) {
 		logger.info("Client request to url : Courses");
 
 		List<Course> courseList = courseDao.getAllCourses();
@@ -283,6 +285,7 @@ public class RegistrarController {
 		model.addAttribute("course", course);
 		model.addAttribute("professorList", professorList);
 		model.addAttribute("message",message);
+		model.addAttribute("message2",message2);
 		return "registrar/Courses";
 	}
 
@@ -344,6 +347,19 @@ public class RegistrarController {
 	public String GoToAddCourse(Model model){
 		List<Professor> professorList = professorDao.getAllProfessors();
 		List<Department> departmentList = departmentDao.getAllDepartments();
+		List<String> timeList = new ArrayList<String>();
+		
+		timeList.add("");
+		timeList.add("09:00");
+		timeList.add("10:00");
+		timeList.add("11:00");
+		timeList.add("12:00");
+		timeList.add("13:00");
+		timeList.add("14:00");
+		timeList.add("15:00");
+		timeList.add("16:00");
+		
+		model.addAttribute("timeList", timeList);
 		model.addAttribute("professorList", professorList);
 		model.addAttribute("departmentList", departmentList);
 		Course course = new Course();
@@ -353,9 +369,49 @@ public class RegistrarController {
 	}
 
 	@RequestMapping("/registrar/doAddCourse")
-	public String DoAddCourse(Model model, Course course,@RequestParam int departmentId){
+	public String DoAddCourse(Model model, Course course, @RequestParam int departmentId, @RequestParam String monday, @RequestParam String tuesday, @RequestParam String wednesday, @RequestParam String thursday, @RequestParam String friday){
 		Department department = departmentDao.getDepartment(departmentId);
 		course.setDepartment(department);
+		
+		Calendar mondayTime = course.getLessons().get("MONDAY");
+		if (!monday.equals("")){
+			mondayTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(monday.split(":")[0]));
+			mondayTime.set(Calendar.MINUTE, Integer.parseInt(monday.split(":")[1]));
+		}
+		
+		Calendar tuesdayTime = course.getLessons().get("TUESDAY");
+		if (!tuesday.equals("")){
+			tuesdayTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(tuesday.split(":")[0]));
+			tuesdayTime.set(Calendar.MINUTE, Integer.parseInt(tuesday.split(":")[1]));
+		}
+		
+		Calendar wednesdayTime = course.getLessons().get("WEDNESDAY");
+		if (!wednesday.equals("")){
+			wednesdayTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(wednesday.split(":")[0]));
+			wednesdayTime.set(Calendar.MINUTE, Integer.parseInt(wednesday.split(":")[1]));
+		}
+		
+		Calendar thursdayTime = course.getLessons().get("THURSDAY");
+		if (!thursday.equals("")){
+			thursdayTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(thursday.split(":")[0]));
+			thursdayTime.set(Calendar.MINUTE, Integer.parseInt(thursday.split(":")[1]));
+		}
+		
+		Calendar fridayTime = course.getLessons().get("FRIDAY");
+		if (!friday.equals("")){
+			fridayTime.set(Calendar.HOUR_OF_DAY, Integer.parseInt(friday.split(":")[0]));
+			fridayTime.set(Calendar.MINUTE, Integer.parseInt(friday.split(":")[1]));
+		}
+			
+		Map<String, Calendar> map = new HashMap<String, Calendar>();
+		map.put("MONDAY", mondayTime);
+		map.put("TUESDAY", tuesdayTime);
+		map.put("WEDNESDAY", wednesdayTime);
+		map.put("THURSDAY", thursdayTime);
+		map.put("FRIDAY", fridayTime);
+		
+		course.setLessons(map);
+		
 		courseDao.addCourse(course);
 		model.addAttribute("message", "Course added successfully!");
 		model.addAttribute("course",course);
@@ -365,6 +421,7 @@ public class RegistrarController {
 		List<Professor> professorList = professorDao.getAllProfessors();
 		model.addAttribute("professorList", professorList);
 		//logger.info("Course is added : " +courseCode);
+		model.addAttribute("message2", "Course is added!");
 		return "registrar/Courses";
 	}
 	

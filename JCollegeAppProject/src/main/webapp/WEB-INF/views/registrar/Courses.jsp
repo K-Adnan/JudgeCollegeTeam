@@ -32,6 +32,11 @@
 		alert("Successfully removed course!");
 	</script>
 </c:if>
+<c:if test="${message2 eq 'Course is added!'}">
+	<script>
+		alert("Successfully added course!");
+	</script>
+</c:if>
 	<ul>
 		<div class="img">
 			<IMG HEIGHT="50" WIDTH="80"
