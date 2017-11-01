@@ -12,35 +12,22 @@
 		
 		
 		
-		User Name <sf:input type="text" path="username" />
-		<br />
-		<br /> 
-		Password <sf:password  path="password" />
-		<br />
-		<br />
-		First Name: <sf:input type="text" path="firstName"  />
-        <br />
-        <br />
-		Last Name: <sf:input type="text" path="lastName"  />
-        <br />
-        <br />
-        Email Address <sf:input type="text" path="emailAddress" />
-		<br />
-		<br />
-        Address <sf:input type="text" path="address" />
-        <br />
-        <br />
-        Phone <sf:input type="text" path="phone" />
-        <br />
-        <br />
-        Fax <sf:input type="text" path="fax" />
-        <br />
-        <br />
-		<br />  
-		<br />
-		<br />
-		
-	
+		User Name <sf:input type="text" path="username" /><br/>
+		Password <sf:password  path="password" /><br/>
+		First Name: <sf:input type="text" path="firstName"  /><br/>
+		Last Name: <sf:input type="text" path="lastName"  /><br/>
+        Email Address <sf:input type="text" path="emailAddress" /><br/>
+        Address <sf:input type="text" path="address" /><br/>
+        Phone <sf:input type="text" path="phone" /><br/>
+        Fax <sf:input type="text" path="fax" /><br/>
+        
+        Department
+		<select name="departmentId">
+        	<c:forEach items="${departmentList}" var="dep">
+				<option value="${dep.departmentId}">${dep.departmentName}</option>
+			</c:forEach>
+		</select>
+		<br/>
 		<input type="submit" value="Register Professor">
 	</sf:form>
 

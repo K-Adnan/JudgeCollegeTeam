@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fdmgroup.JCollegeAppProject.entities.Absence;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Department;
+import com.fdmgroup.JCollegeAppProject.entities.Grade;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
 
@@ -56,6 +57,16 @@ public class AbsenceDAOImpl implements AbsenceDAO {
 		EntityManager manager = factory.createEntityManager();
 		Absence absence = manager.find(Absence.class, absenceId);
 		return absence;
+	}
+	
+	@Override
+	public List<Absence> getAbsencesByStudent(Student student) {
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Absence> query = manager.createQuery("FROM Absence a WHERE a.student.username =?", Absence.class);
+		query.setParameter(1, student.getUsername());
+		
+		List<Absence> absenceList = query.getResultList();
+		return absenceList;
 	}
 
 }

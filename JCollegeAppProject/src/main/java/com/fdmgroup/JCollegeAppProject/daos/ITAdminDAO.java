@@ -10,6 +10,6 @@ public interface ITAdminDAO {
 	
 	public void addITAdmin (ITAdmin itAdmin);
 	
-	public void removeITAdmin (ITAdmin itAdmin);
+	public void removeITAdmin (String username);
 
 }

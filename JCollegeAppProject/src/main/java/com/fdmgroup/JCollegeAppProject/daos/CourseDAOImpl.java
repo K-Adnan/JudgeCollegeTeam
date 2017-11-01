@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Department;
+import com.fdmgroup.JCollegeAppProject.entities.Grade;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
 

@@ -9,6 +9,8 @@ import javax.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fdmgroup.JCollegeAppProject.entities.Department;
+import com.fdmgroup.JCollegeAppProject.entities.Grade;
+import com.fdmgroup.JCollegeAppProject.entities.Professor;
 
 public class DepartmentDAOImpl implements DepartmentDAO {
 	

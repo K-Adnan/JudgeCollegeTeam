@@ -28,7 +28,7 @@ public class Department implements Serializable {
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "department")
 	private List<Course> listOfCourses;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "department")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
 	private List<Professor> listOfProfessors;
 	
 	public Department(){
@@ -52,6 +52,16 @@ public class Department implements Serializable {
 	public void setListOfProfessors(List<Professor> listOfProfessors) {
 		this.listOfProfessors = listOfProfessors;
 	}
+	public void removeProfessor(Professor professor){
+		
+		for (int i=0; i<listOfProfessors.size();i++){
+			if (listOfProfessors.get(i).getUsername().equals(professor.getUsername())){
+				listOfProfessors.remove(i);
+			}
+		}
+		
+	}
+	
 	public int getDepartmentId() {
 		return departmentId;
 	}

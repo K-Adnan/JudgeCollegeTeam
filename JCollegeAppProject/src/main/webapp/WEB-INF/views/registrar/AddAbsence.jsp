@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Edit Information</title>
+<title>Add Course</title>
 <link href="../css/style.css" rel="stylesheet" media="all">
 </head>
 
@@ -28,14 +28,21 @@
 		<li><a href="Courses">Courses</a></li>
 		<li><a href="Timetable">Timetable</a></li>
 	</ul>
-	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-	
-	<form align="centre" name="form1" method="post" action="SystemUsers">
-			<label class="SystemUsersLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">
-			</label>
-		</form>
-	<h2>Edit Information</h2>
 
+	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
+	<h2>Add Absence</h2>
+
+	<form method="post" action="doAddAbsence?username=${username}" >
+	Username : ${username}<br/>
+	Date of Absence : <input type="text" name="dateOfAbsence" value="${date}"><br/>
 	
+	Reason : <input type="text" name="reason"><br/>
+	
+	Approved : <input type="checkbox" name="approved" value="true"><BR>
+	
+		<input type="submit" value="Add Absence"/>
+	</form>
+	
+	</div>
 </body>
 </html>

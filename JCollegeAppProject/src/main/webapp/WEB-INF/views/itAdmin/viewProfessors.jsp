@@ -9,6 +9,10 @@
 </head>
 <body>
 
+
+${message}
+
+
 <a href = "addProfessor"> Add Professor </a>
 <br />
 <br />
@@ -27,24 +31,26 @@
                 <th>Address</th>
                 <th>Phone</th>
                 <th>Fax</th>
+                <th>Department</th>
                 <th>Remove Professor</th>
                 
            </tr>
 
            <c:forEach items="${professorList}" var="p">
                 <tr>
-                     <th><a>${p.username}</a></th>
+                     <th>${p.username}</th>
                      <th>${p.password}</th>
                      <th>${p.firstName}</th>
                      <th>${p.lastName}</th>
                      <th>${p.address}</th>
                      <th>${p.phone}</th>
                      <th>${p.fax}</th>
+                     <th>${p.department.departmentName}</th>
                      <th><a href="processRemoveProfessor?username=${p.username}">Remove Professor</a></th>
      
            </c:forEach>
+</table>
 
-${message2}
      
 <a href="HomePage"> Back To Home  </a>
  <a href="/JCollegeAppProject/logout">Logout</a>

@@ -9,7 +9,6 @@
 <title>Courses</title>
 <link href="../css/style.css" rel="stylesheet" media="all">
 <script  type="text/javascript">
-	
 					function getConfirmation() {
 						var courseName = document.getElementById("courseName").value;
 						var isOk = confirm("Are you sure you want to update the course " + courseName + "?");
@@ -52,6 +51,7 @@
 		<li><a href="SystemUsers">System Users</a></li>
 		<li><a href="Courses">Courses</a></li>
 		<li><a href="Timetable">Timetable</a></li>
+		<li><a href="Grades">Grades</a></li>
 	</ul>
 
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">

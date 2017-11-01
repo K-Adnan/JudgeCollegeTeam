@@ -45,7 +45,7 @@ public class Course implements Serializable {
 	@ManyToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
 	private Set<Student> studentList;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Department department;
 
 	@ManyToOne
@@ -177,6 +177,10 @@ public class Course implements Serializable {
 
 	public void removeStudent(Student student) {
 		studentList.remove(student);
+	}
+	
+	public void removeProfessor(){
+		this.professor = null;
 	}
 
 	public Map<String, Calendar> getLessons() {

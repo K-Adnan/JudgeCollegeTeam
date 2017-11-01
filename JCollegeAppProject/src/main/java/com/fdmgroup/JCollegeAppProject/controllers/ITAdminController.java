@@ -11,13 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fdmgroup.JCollegeAppProject.daos.DepartmentDAO;
 import com.fdmgroup.JCollegeAppProject.daos.ITAdminDAO;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
 import com.fdmgroup.JCollegeAppProject.daos.RegistrarDAO;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
 import com.fdmgroup.JCollegeAppProject.daos.UserDAO;
+import com.fdmgroup.JCollegeAppProject.entities.Department;
 import com.fdmgroup.JCollegeAppProject.entities.ITAdmin;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Registrar;
@@ -39,6 +40,8 @@ public class ITAdminController {
 	private RegistrarDAO registrarDao;
 	@Autowired
 	private ITAdminDAO itAdminDao;
+	@Autowired
+	private DepartmentDAO departmentDao;
 
 	public ITAdminController() {
 		super();
@@ -68,8 +71,10 @@ public class ITAdminController {
 	@RequestMapping("/itAdmin/processAddStudent")
 	public String processAddStudent(Model model, Student student) {
 		studentDao.addStudent(student);
+		List<User> studentList = userDao.getAllStudents();
+		model.addAttribute("studentList", studentList);
 		model.addAttribute("message", "Student added successfully");
-		return "itAdmin/itAdminHome";
+		return "itAdmin/viewStudents";
 	}
 
 	@RequestMapping("/itAdmin/viewStudents")
@@ -79,34 +84,38 @@ public class ITAdminController {
 		model.addAttribute("studentList", studentList);
 		return "itAdmin/viewStudents";
 	}
-//
-//	@RequestMapping("/itAdmin/removeStudent")
-//	public String goToRemoveStudent(Model model) {
-//		Student student = new Student();
-//		model.addAttribute("student", student);
-//		return "itAdmin/RemoveStudent";
-//	}
 
 	@RequestMapping("/itAdmin/processRemoveStudent")
-	public String processRemoveStudent(Student student, Model model) {
-		studentDao.removeStudent(student.getUsername());
-		model.addAttribute("message2", "Student removed successfully");
-		return "itAdmin/HomePage";
+	public String processRemoveStudent(@RequestParam String username, Model model) {
+		studentDao.removeStudent(username);
+		List<User> studentList = userDao.getAllStudents();
+		model.addAttribute("studentList", studentList);
+
+		model.addAttribute("message", "Student removed successfully");
+		return "itAdmin/viewStudents";
 
 	}
 
 	@RequestMapping("/itAdmin/addProfessor")
 	public String goToAddProfessor(Model model) {
+		List<Department> listOfDepartments = departmentDao.getAllDepartments();
 		Professor professor = new Professor();
 		model.addAttribute("professor", professor);
+		model.addAttribute("departmentList", listOfDepartments);
 		return "itAdmin/addProfessor";
 	}
 
 	@RequestMapping("/itAdmin/processAddProfessor")
-	public String processAddProfessor(Model model, Professor professor) {
+	public String processAddProfessor(@RequestParam int departmentId, Model model, Professor professor) {
+		Department department = departmentDao.getDepartment(departmentId);
+		professor.setDepartment(department);
 		professorDao.addProfessor(professor);
+		List<User> studentList = userDao.getAllStudents();
+		model.addAttribute("studentList", studentList);
 		model.addAttribute("message", "Professor added successfully");
-		return "itAdmin/itAdminHome";
+		List<User> professorList = userDao.getAllProfessors();
+		model.addAttribute("professorList", professorList);
+		return "itAdmin/viewProfessors";
 	}
 
 	@RequestMapping("/itAdmin/viewProfessors")
@@ -117,19 +126,12 @@ public class ITAdminController {
 		return "itAdmin/viewProfessors";
 	}
 
-//	@RequestMapping("/itAdmin/removeProfessor")
-//	public String goToRemoveProfessor(Model model) {
-//		Professor professor = new Professor();
-//		model.addAttribute("professor", professor);
-//		return "itAdmin/EditProfessor";
-//	}
-
 	@RequestMapping("/itAdmin/processRemoveProfessor")
 	public String processRemoveProfessor(@RequestParam String username, Model model) {
 		professorDao.removeProfessor(username);
 		List<User> professorList = userDao.getAllProfessors();
 		model.addAttribute("professorList", professorList);
-		model.addAttribute("message2", "Professor removed successfully");
+		model.addAttribute("message", "Professor removed successfully");
 		return "itAdmin/viewProfessors";
 
 	}
@@ -144,8 +146,10 @@ public class ITAdminController {
 	@RequestMapping("/itAdmin/processAddRegistrar")
 	public String processAddRegistar(Model model, Registrar registrar) {
 		registrarDao.addRegistrar(registrar);
+		List<User> registrarList = userDao.getAllRegistrars();
+		model.addAttribute("registrarList", registrarList);
 		model.addAttribute("message", "Registrar added successfully");
-		return "itAdmin/itAdminHome";
+		return "itAdmin/viewRegistrars";
 	}
 
 	@RequestMapping("/itAdmin/viewRegistrars")
@@ -155,19 +159,16 @@ public class ITAdminController {
 		model.addAttribute("registrarList", registrarList);
 		return "itAdmin/viewRegistrars";
 	}
-
-	@RequestMapping("/itAdmin/removeRegistrar")
-	public String goToRemoveRegistrar(Model model) {
-		Registrar registrar = new Registrar();
-		model.addAttribute("registrar", registrar);
-		return "itAdmin/RemoveProfessor";
-	}
+	
+		
 
 	@RequestMapping("/itAdmin/processRemoveRegistrar")
-	public String processRemoveRegistrar(Registrar registrar, Model model) {
-		registrarDao.removeRegistrar(registrar);
-		model.addAttribute("message2", "Registrar removed successfully");
-		return "itAdmin/HomePage";
+	public String processRemoveRegistrar(@RequestParam String username, Model model) {
+		registrarDao.removeRegistrar(username);
+		List<User> registrarList = userDao.getAllRegistrars();
+		model.addAttribute("registrarList", registrarList);
+		model.addAttribute("message", "Registrar removed successfully");
+		return "itAdmin/viewRegistrars";
 
 	}
 
@@ -175,14 +176,17 @@ public class ITAdminController {
 	public String goToAddITAdmin(Model model) {
 		ITAdmin itAdmin = new ITAdmin();
 		model.addAttribute("itAdmin", itAdmin);
+
 		return "itAdmin/addItAdmin";
 	}
 
-	@RequestMapping("/itAdmin/processAddITAdmin")
+	@RequestMapping("/itAdmin/processAddItAdmin")
 	public String processAddITadmin(Model model, ITAdmin itAdmin) {
 		itAdminDao.addITAdmin(itAdmin);
+		List<User> itAdminList = userDao.getAllITAdmins();
+		model.addAttribute("itAdminList", itAdminList);
 		model.addAttribute("message", "IT Admin added successfully");
-		return "itAdmin/itAdminHome";
+		return "itAdmin/viewItAdmins";
 	}
 
 	@RequestMapping("/itAdmin/viewItAdmins")
@@ -193,18 +197,31 @@ public class ITAdminController {
 		return "itAdmin/viewItAdmins";
 	}
 
-	@RequestMapping("/itAdmin/removeItAdmin")
-	public String goToRemoveITAdmin(Model model) {
-		ITAdmin itadmin = new ITAdmin();
-		model.addAttribute("itadmin", itadmin);
-		return "itAdmin/RemoveItAdmin";
-	}
-
 	@RequestMapping("/itAdmin/processRemoveItAdmin")
-	public String processRemoveITAdmin(ITAdmin itAdmin, Model model) {
-		itAdminDao.removeITAdmin(itAdmin);
+	public String processRemoveITAdmin(@RequestParam String username, Model model) {
+		itAdminDao.removeITAdmin(username);
+		List<User> itAdminList = userDao.getAllITAdmins();
+		model.addAttribute("itAdminList", itAdminList);
 		model.addAttribute("message", "IT Admin removed successfully");
-		return "itAdmin/viewITAdmins";
-
+		return "itAdmin/viewItAdmins";
 	}
+	
+	@RequestMapping("/itAdmin/viewBlockedUsers")
+	public String goToBlockedUsers(Model model) {
+		List<User> userList = userDao.getAllBlockedUsers();
+		model.addAttribute("userList", userList);
+		return "itAdmin/blockedUsers";
+	}
+	
+	@RequestMapping("/itAdmin/processUnblockUser")
+	public String processUnblockUser(@RequestParam String username, Model model) {
+		User user = userDao.getUser(username);
+		user.setNoOfIncorrectAttempts(0);
+		userDao.updateUser(user);
+		
+		List<User> userList = userDao.getAllBlockedUsers();
+		model.addAttribute("userList", userList);
+		return "itAdmin/blockedUsers";
+	}
+
 }

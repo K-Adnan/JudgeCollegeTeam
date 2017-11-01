@@ -10,6 +10,8 @@
 <body>
 
 	<h2>View Course</h2>
+	
+	${course.courseInfo}
 
 	<a href="/JCollegeAppProject/logout">Logout</a><br/>
 
@@ -23,9 +25,6 @@
 			</tr>
 			<tr>
 				<td>
-					<c:forEach items="${courseList}" var="c">
-					
-					</c:forEach>
 				
 					<c:choose>
 						<c:when test="${monday eq '00:00'}">

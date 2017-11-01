@@ -8,7 +8,7 @@
 <title>Add Registrar</title>
 </head>
 <body>
-<sf:form method="post" action="processAddRegistrar" modelAttribute="user">
+<sf:form method="post" action="processAddRegistrar" modelAttribute="registrar">
 
 		 	 
 		
@@ -18,12 +18,12 @@
 		Password <sf:password path="password" />
 		<br />
 		<br /> 		
-		First Name <sf:input type="text" path="user.firstName" />
+		First Name <sf:input type="text" path="firstName" />
 		<br />
 		<br /> 
-		Last Name <sf:input type="text" path="user.lastName" />
+		Last Name <sf:input type="text" path="lastName" />
 		<br />
-		Email Address <sf:input type="text" path="user.emailAddress" />
+		Email Address <sf:input type="text" path="emailAddress" />
 		<br />
 		<br />
 		<br /> 

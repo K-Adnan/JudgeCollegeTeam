@@ -104,8 +104,15 @@ public class UserDAOImpl implements UserDAO {
            return userList;
      }
      
-     
-     
+     @Override
+     public List<User> getAllBlockedUsers(){
+    	 EntityManager manager = factory.createEntityManager();
+         TypedQuery<User> query = manager.createQuery("select u FROM User u WHERE u.noOfIncorrectAttempts > ?", User.class);
+         query.setParameter(1, 2);
+    	 List<User> userList = query.getResultList();
+    	 manager.clear();
+    	 return userList;
+     }
 
 }
 

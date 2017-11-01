@@ -13,6 +13,9 @@
 </head>
 <body>
 
+${message}
+
+
      <h2>All Students</h2>
 
 
@@ -39,17 +42,16 @@
 
            <c:forEach items="${studentList}" var="s">
                 <tr>
-                     <th><a href="editStudent?username="${s.username}>${s.username}</a></th>
-                     <th>${password}</th>
-                     <th>${firstName}</th>
-                     <th>${lastName}</th>
+                     <th>${s.username}</th>
+                     <th>${s.password}</th>
+                     <th>${s.firstName}</th>
+                     <th>${s.lastName}</th>
                      <th>${email}</th>
                      <th>${s.address}</th>
                      <th>${s.phoneNumber}</th>
                      <th>${s.dOB}</th>
                      <th>${s.gender}</th>
-                     <th>${role}</th>
-                     <th><a href="RemoveStudent?username=${s.username}">Remove Student</a></th>
+                     <th><a href="processRemoveStudent?username=${s.username}">Remove Student</a></th>
                      
              
            </c:forEach>
@@ -61,3 +63,17 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

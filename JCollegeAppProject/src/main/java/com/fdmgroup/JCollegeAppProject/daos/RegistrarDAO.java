@@ -10,6 +10,6 @@ public interface RegistrarDAO {
 
 	public void addRegistrar(Registrar registrar);
 
-	public void removeRegistrar(Registrar registrar);
+	public void removeRegistrar(String username);
 
 }
