@@ -105,6 +105,8 @@ public class RegistrarController {
 			List<Course> courseList = courseDao.getAllCoursesByStudent(student);
 			model.addAttribute("courseList", courseList);
 			model.addAttribute("student", student);
+			List<Absence> absenceList = absenceDao.getAbsencesByStudent(student);
+			model.addAttribute("absenceList", absenceList);
 			return "registrar/ViewAndUpdateStud";
 		} else if (user instanceof Professor) {
 			Professor professor = (Professor) user;
@@ -187,6 +189,8 @@ public class RegistrarController {
 		
 		String username = (String) session.getAttribute("username");
 		model.addAttribute("student", student);
+		List<Absence> absenceList = absenceDao.getAbsencesByStudent(student);
+		model.addAttribute("absenceList", absenceList);
 		
 		logger.info("Information are edited for"+username);
 		return "registrar/ViewAndUpdateStud";
@@ -223,18 +227,26 @@ public class RegistrarController {
 	}
 
 	@RequestMapping("/registrar/RemoveFromCourse")
-	public String DoRemoveFromCourse(@RequestParam String username, Model model, String courseName){
+	public String DoRemoveFromCourse(@RequestParam String username, @RequestParam int courseCode, Model model, String courseName){
+		Student student = studentDao.getStudent(username);
+		Course course = courseDao.getCourse(courseCode);
+		student.removeCourse(course);
+		course.removeStudent(student);
 		
-		User user = userDao.getUser(username);
-			Student student = (Student) user;
-			List<Course> courseList = courseDao.getAllCoursesByStudent(student);
-			for(Course course : courseList){
-				course.removeStudent(student);
-			}
-			studentDao.updateStudent(student);
+		studentDao.updateStudent(student);
+		courseDao.updateCourse(course);
+		
+		model.addAttribute("username", username);
+		logger.info("Client request to url : Grades");
+		List<Course> courseList = courseDao.getAllCoursesByStudent(student);
+		model.addAttribute("student", student);
+		model.addAttribute("courseList", courseList);
+		List<Absence> absenceList = absenceDao.getAbsencesByStudent(student);
+		model.addAttribute("absenceList", absenceList);
 		
 		logger.info("User is removed from course :"+courseName);
-		return "redirect:ViewAndUpdateStud";
+		
+		return "registrar/ViewAndUpdateStud";
 	}
 
 	@RequestMapping("/registrar/Courses")
@@ -383,6 +395,8 @@ public class RegistrarController {
 		List<Course> courseList = courseDao.getAllCoursesByStudent(student);
 		model.addAttribute("student", student);
 		model.addAttribute("courseList", courseList);
+		List<Absence> absenceList = absenceDao.getAbsencesByStudent(student);
+		model.addAttribute("absenceList", absenceList);
 		return "registrar/ViewAndUpdateStud";
 	}
 

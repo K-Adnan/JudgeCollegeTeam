@@ -81,8 +81,9 @@
 			<c:forEach items="${courseList}" var="c">
 				<tr>
 				<td>${c.courseName}</td> 
-				<td><form name="RemoveFromCourse" action="RemoveFromCourse?username=${user.username}" onSubmit="return getConfRemoveFromCourse()">
-					<input type="hidden" name="username" value="${user.username}" /> 
+				<td><form name="RemoveFromCourse" action="RemoveFromCourse" onSubmit="return getConfRemoveFromCourse()">
+					<input type="hidden" name="username" value="${student.username}" />
+					<input type="hidden" name="courseCode" value="${c.courseCode}" />  
 					<input name="removeFromCourse" type="submit" value="Remove from Course">
 				</form></td>
 				</tr>

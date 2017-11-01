@@ -24,7 +24,6 @@
 			<th>Course Code</th>
 			<th>Course Name</th>
 			<th>Department</th>
-			<th>Course Info</th>
 			<th>Professor</th>
 			<th>Start Date</th>
 			<th>End Date</th>
@@ -37,7 +36,6 @@
 				<th>${c.courseCode}</th>
 				<th><a href="viewCourse?courseCode=${c.courseCode}">${c.courseName}</a></th>
 				<th>${c.department.departmentName}
-				<th>${c.courseInfo}</th>
 				<th>
 				<c:choose>
 				<c:when test="${empty c.professor}">
@@ -64,7 +62,6 @@
 
 			<th>Course Code</th>
 			<th>Course Name</th>
-			<th>Course Info</th>
 			<th>Professor</th>
 			<th>Start Date</th>
 			<th>End Date</th>
@@ -76,7 +73,6 @@
 			<tr>
 				<th>${c.courseCode}</th>
 				<th>${c.courseName}</th>
-				<th>${c.courseInfo}</th>
 				<th>
 				<c:choose>
 				<c:when test="${empty c.professor}">
