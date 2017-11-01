@@ -427,8 +427,10 @@ public class RegistrarController {
 	}
 
 	@RequestMapping("/registrar/Grades")
-	public String GoToGrades(){
-
+	public String GoToGrades(Model model){
+		
+		List<Student> studentList = studentDao.getAllStudents();
+		model.addAttribute("studentList", studentList);
 		logger.info("Client request to url : Grades");
 		return "registrar/Grades";
 	}

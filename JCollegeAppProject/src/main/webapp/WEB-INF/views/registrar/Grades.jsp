@@ -38,6 +38,28 @@
 
 	<h2>Grades</h2>
 	
+	<table class="table1">
+			<tr>
+				<th>Username</th>
+				<th>Student Name</th>
+				<th>Grades</th>
+			</tr>
+			<c:forEach items="${studentList}" var="s">
+				<tr>
+					<td>${s.username}</td>
+					<td>${s.firstName} ${s.lastName}</td>
+					<td>
+						<c:forEach items="${s.gradeList}" var="g">
+							${g.course.courseName} (${g.gradeValue})<br/>
+						</c:forEach>
+					</td>
+				</tr>
+
+			</c:forEach>
+
+		</table>
+	
+	
 	</div>
 </body>
 </html>
