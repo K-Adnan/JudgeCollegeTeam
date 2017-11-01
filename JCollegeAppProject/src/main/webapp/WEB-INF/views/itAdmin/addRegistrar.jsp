@@ -12,18 +12,18 @@
 
 		 	 
 		
-		User Name <sf:input type="text" path="username" />
+		User Name <sf:input type="text" path="username" required="required" />
 		<br />
 		<br /> 
-		Password <sf:password path="password" />
+		Password <sf:password path="password" required="required"/>
 		<br />
 		<br /> 		
-		First Name <sf:input type="text" path="firstName" />
+		First Name <sf:input type="text" path="firstName" required="required" />
 		<br />
 		<br /> 
-		Last Name <sf:input type="text" path="lastName" />
+		Last Name <sf:input type="text" path="lastName" required="required" />
 		<br />
-		Email Address <sf:input type="text" path="emailAddress" />
+		Email Address <sf:input type="text" path="emailAddress" required="required" />
 		<br />
 		<br />
 		<br /> 

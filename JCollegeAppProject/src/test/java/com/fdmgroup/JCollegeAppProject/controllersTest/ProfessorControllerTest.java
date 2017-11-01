@@ -21,18 +21,18 @@ import com.fdmgroup.JCollegeAppProject.daos.GradeDAO;
 import com.fdmgroup.JCollegeAppProject.daos.ProfessorDAO;
 import com.fdmgroup.JCollegeAppProject.daos.StudentDAO;
 import com.fdmgroup.JCollegeAppProject.entities.Course;
+import com.fdmgroup.JCollegeAppProject.entities.Grade;
 import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
-
-
-
 
 public class ProfessorControllerTest {
 	
 	ProfessorController professorController;
 	String username;
 	int courseCode;
-
+	int gradeID;
+	String gradeComment;
+	String gradeDropdown;
 	
 	
 	@Mock
@@ -45,9 +45,12 @@ public class ProfessorControllerTest {
     DepartmentDAO departmentDao;
     GradeDAO gradeDao;
     Professor professor;
+    Student student;
     ArrayList<Course> courseList;
     ArrayList<Student> studentList;
     Course course;
+    Grade grade;
+   
 	
 	@Before
 	public void setUp(){
@@ -63,6 +66,7 @@ public class ProfessorControllerTest {
         professor = mock(Professor.class);
         courseList = new ArrayList<Course>();
         course = mock(Course.class);
+        student = mock(Student.class);
         studentList = new ArrayList<Student>();
 	}
 	
@@ -113,5 +117,69 @@ public class ProfessorControllerTest {
 		assertEquals("professor/professorViewProfile", professorController.goToViewProfile(model, principal));
 	}
 	
-
+	@Test
+	public void testGoToEditProfilePageGoesToViewEditPage(){
+		when(principal.getName()).thenReturn(username);
+		when(professorDao.getProfessor(username)).thenReturn(professor);
+		assertEquals("professor/professorEditProfile", professorController.goToEditProfilepage(model, principal));
+	}
+	
+	@Test
+	public void testEditProfileReturnsEditProfile(){
+		when(principal.getName()).thenReturn(username);
+		when(professorDao.getProfessor(username)).thenReturn(professor);
+		assertEquals("professor/professorEditProfile", professorController.editProfile(model, session, principal, professor));
+	}
+	
+	@Test
+	public void testUnassignCourseReturnsViewCourses(){
+		when(principal.getName()).thenReturn(username);
+		when(professorDao.getProfessor(username)).thenReturn(professor);
+		when(courseDao.getCourse(courseCode)).thenReturn(course);
+		when(course.getCourseName()).thenReturn("123");
+		assertEquals("redirect:viewCourses", professorController.doUnassignCourse(courseCode, model, session, principal));
+	}
+	
+	@Test
+	public void testGoToViewStudentReturnsProfessorViewStudentOnTaughtCourse(){
+		when(principal.getName()).thenReturn(username);
+		when(professorDao.getProfessor(username)).thenReturn(professor);
+		when(courseDao.getCourse(courseCode)).thenReturn(course);
+		assertEquals("professor/professorViewStudentsOnTaughtCourse", professorController.goToViewStudents(courseCode, model, session, principal));
+	}
+	
+	@Test
+	public void testDoUpdateGradeUpdatesTheGrades(){
+		when(principal.getName()).thenReturn(username);
+		when(professorDao.getProfessor(username)).thenReturn(professor);
+//		when(grade.setGradeValue(gradeDropdown.charAt(0)).thenReturn(grade));
+		assertEquals("professor/professorViewStudentsOnTaughtCourse", professorController.doUpdateGrade(courseCode, username, gradeDropdown, gradeComment, model, session, principal));			
+	}
+	
+	@Test
+	public void testViewStudentReturnsViewStudents(){
+		when(principal.getName()).thenReturn(username);
+		when(courseDao.getCourse(courseCode)).thenReturn(course);
+		when(studentDao.getStudent(username)).thenReturn(student);
+	
+		assertEquals("professor/viewStudent", professorController.goToViewStudent(username, model, session, principal));
+	}
+	
+	@Test
+	public void testViewGradesReturnsGrades(){
+		when(principal.getName()).thenReturn(username);
+		when(professorDao.getProfessor(username)).thenReturn(professor);
+		assertEquals("professor/grades", professorController.goToViewGrades(model, principal));
+	}
+	
+	@Test
+	public void testViewTimetableReturnsTimetableView(){
+		when(principal.getName()).thenReturn(username);
+		when(professorDao.getProfessor(username)).thenReturn(professor);
+		when(courseDao.getAllCoursesByProfessor(professor)).thenReturn(courseList);
+		assertEquals("professor/timetable", professorController.goToViewTimetable(model, principal));		
+	}
+		
+		
 }
+

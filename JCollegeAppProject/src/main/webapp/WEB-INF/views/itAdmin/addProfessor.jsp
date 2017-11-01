@@ -12,14 +12,14 @@
 		
 		
 		
-		User Name <sf:input type="text" path="username" /><br/>
-		Password <sf:password  path="password" /><br/>
-		First Name: <sf:input type="text" path="firstName"  /><br/>
-		Last Name: <sf:input type="text" path="lastName"  /><br/>
-        Email Address <sf:input type="text" path="emailAddress" /><br/>
-        Address <sf:input type="text" path="address" /><br/>
-        Phone <sf:input type="text" path="phone" /><br/>
-        Fax <sf:input type="text" path="fax" /><br/>
+		User Name <sf:input type="text" path="username" required="required" /><br/>
+		Password <sf:password  path="password" required="required" /><br/>
+		First Name: <sf:input type="text" path="firstName" required="required"  /><br/>
+		Last Name: <sf:input type="text" path="lastName" required="required"  /><br/>
+        Email Address <sf:input type="text" path="emailAddress" required="required" /><br/>
+        Address <sf:input type="text" path="address" required="required"/><br/>
+        Phone <sf:input type="text" path="phone" required="required" /><br/>
+        Fax <sf:input type="text" path="fax" required="required" /><br/>
         
         Department
 		<select name="departmentId">
