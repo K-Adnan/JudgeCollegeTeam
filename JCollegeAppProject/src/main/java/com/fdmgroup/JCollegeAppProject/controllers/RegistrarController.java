@@ -94,6 +94,26 @@ public class RegistrarController {
 
 		return "registrar/SystemUsers";
 	}
+	
+	@RequestMapping("/registrar/ShowProfessors")
+	public String GoToShowProfessors(Model model){
+		logger.info("Client request to url : SystemUsers");
+
+		List<User> userList = userDao.getAllProfessors();
+		model.addAttribute("userList", userList);
+
+		return "registrar/SystemUsers";
+	}
+	
+	@RequestMapping("/registrar/ShowStudents")
+	public String GoToShowStudents(Model model){
+		logger.info("Client request to url : SystemUsers");
+
+		List<User> userList = userDao.getAllStudents();
+		model.addAttribute("userList", userList);
+
+		return "registrar/SystemUsers";
+	}
 
 	@RequestMapping("/registrar/ViewAndUpdate")
 	public String doChooseUserP(Model model, HttpSession session, Principal principal, @RequestParam String username, HttpServletRequest request){
@@ -411,6 +431,14 @@ public class RegistrarController {
 
 		logger.info("Client request to url : Grades");
 		return "registrar/Grades";
+	}
+	
+	@RequestMapping("/registrar/searchUser")
+	public String doSearchUser(@RequestParam String search, Model model){
+		
+		List<User> userList = userDao.getUserByName(search);
+		model.addAttribute("userList", userList);
+		return "registrar/SystemUsers";
 	}
 	
 }

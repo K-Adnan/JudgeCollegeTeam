@@ -110,7 +110,19 @@ public class UserDAOImpl implements UserDAO {
          TypedQuery<User> query = manager.createQuery("select u FROM User u WHERE u.noOfIncorrectAttempts > ?", User.class);
          query.setParameter(1, 2);
     	 List<User> userList = query.getResultList();
-    	 manager.clear();
+    	 manager.close();
+    	 return userList;
+     }
+     
+     @Override
+     public List<User> getUserByName(String name){
+    	 EntityManager manager = factory.createEntityManager();
+         TypedQuery<User> query = manager.createQuery("select u FROM User u WHERE u.firstName like ? OR u.lastName like ? OR u.username like ?", User.class);
+         query.setParameter(1, "%" + name + "%");
+         query.setParameter(2, "%" + name + "%");
+         query.setParameter(3, "%" + name + "%");
+    	 List<User> userList = query.getResultList();
+    	 manager.close();
     	 return userList;
      }
 

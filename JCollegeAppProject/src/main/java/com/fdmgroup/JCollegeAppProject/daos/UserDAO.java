@@ -31,4 +31,6 @@ public interface UserDAO {
      
      public List<User> getAllBlockedUsers();
 
+     public List<User> getUserByName(String name);
+
 }

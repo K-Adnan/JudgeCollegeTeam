@@ -60,6 +60,14 @@ table tr:hover input {
 
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
 
+		<a href="SystemUsers">Show All Users</a><br/>
+		<a href="ShowProfessors">Show Professors</a><br/>
+		<a href="ShowStudents">Show Students</a><br/>
+		<form action="searchUser" method="post">
+				<input name="search" width="50px" placeholder="Search for User"/>
+				<input type="submit" value="Go!"/>
+		</form>
+
 		<table class="table1">
 			<tr>
 				<td>Username</td>
@@ -68,7 +76,7 @@ table tr:hover input {
 			<c:forEach items="${userList}" var="u">
 				<tr>
 					<td>${u.username}</td>
-					<td>${u.firstName}${u.lastName}</td>
+					<td>${u.firstName} ${u.lastName}</td>
 
 					<td>
 						<form name="ViewAndUpdate" method="post" action="ViewAndUpdate">
