@@ -17,10 +17,7 @@ ${message}
 
 
      <h2>All Students</h2>
-
-
-     <br /> ${username}
-     
+ 
      
      <a href = "addStudent"> Add Student </a>
 <br />

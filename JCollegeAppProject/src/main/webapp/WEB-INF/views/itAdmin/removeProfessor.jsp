@@ -17,7 +17,7 @@
 
      <a href="/JCollegeAppProject/logout">Logout</a>
 
-     <br /> ${username}
+ 
      
      
      are you sure you want to remove ${p.username}

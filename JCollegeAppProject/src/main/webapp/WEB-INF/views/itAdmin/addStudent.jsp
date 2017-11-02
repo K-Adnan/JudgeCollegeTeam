@@ -5,6 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<a href = "viewStudents">Back to View Students</a>
+<br/>
+<br/>
+
+${message}
+<br/>
+<br/>
 <title>Add Student</title>
 </head>
 <body>
@@ -12,19 +20,19 @@
 		
 		
 	
-		User Name <sf:input type="text" path="username" required="required" />
+		User Name: <sf:input type="text" path="username" required="required" />
 		<br />
 		<br /> 
-		Password <sf:password path="password" required="required" />
+		Password: <sf:password path="password" required="required" />
 		<br />
 		<br />		
-		First Name <sf:input type="text" path="firstName" required="required" />
+		First Name: <sf:input type="text" path="firstName" required="required" />
 		<br />
 		<br /> 
-		Last Name <sf:input type="text" path="lastName" required="required" />
+		Last Name: <sf:input type="text" path="lastName" required="required" />
 		<br />
 		<br />
-		Email Address <sf:input type="text" path="emailAddress" required="required" />
+		Email Address: <sf:input type="text" path="emailAddress" required="required" />
 		<br />
 		<br />
         Address: <sf:input type="text" path="address" required="required" />

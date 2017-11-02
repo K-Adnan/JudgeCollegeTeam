@@ -44,6 +44,16 @@ public class WelcomeController {
 	public WelcomeController() {
 		super();
 	}
+	
+	public WelcomeController(StudentDAO studentDao, ProfessorDAO professorDao, ITAdminDAO itAdminDao,
+			RegistrarDAO registrarDao, UserDAO userDao) {
+		super();
+		this.studentDao = studentDao;
+		this.professorDao = professorDao;
+		this.itAdminDao = itAdminDao;
+		this.registrarDao = registrarDao;
+		this.userDao = userDao;
+	}
 
 	@RequestMapping("/")
 	public String goToIndex() {

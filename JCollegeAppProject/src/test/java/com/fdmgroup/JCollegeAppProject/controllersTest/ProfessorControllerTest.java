@@ -28,11 +28,11 @@ import com.fdmgroup.JCollegeAppProject.entities.Student;
 public class ProfessorControllerTest {
 	
 	ProfessorController professorController;
-	String username;
+	String username = "USERNAME";
 	int courseCode;
 	int gradeID;
-	String gradeComment;
-	String gradeDropdown;
+	String gradeComment = "Comment";
+	String gradeDropdown = "ABC";
 	
 	
 	@Mock
@@ -152,6 +152,7 @@ public class ProfessorControllerTest {
 	public void testDoUpdateGradeUpdatesTheGrades(){
 		when(principal.getName()).thenReturn(username);
 		when(professorDao.getProfessor(username)).thenReturn(professor);
+		when(studentDao.getStudent(username)).thenReturn(student);
 //		when(grade.setGradeValue(gradeDropdown.charAt(0)).thenReturn(grade));
 		assertEquals("professor/professorViewStudentsOnTaughtCourse", professorController.doUpdateGrade(courseCode, username, gradeDropdown, gradeComment, model, session, principal));			
 	}

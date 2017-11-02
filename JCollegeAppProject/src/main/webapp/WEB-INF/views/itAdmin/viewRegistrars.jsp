@@ -22,8 +22,6 @@ ${message}
 
  
 
-     <br /> ${username}
-
      <table>
            <tr>
 

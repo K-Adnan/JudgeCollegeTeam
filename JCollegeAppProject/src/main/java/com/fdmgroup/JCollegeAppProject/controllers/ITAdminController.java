@@ -70,7 +70,13 @@ public class ITAdminController {
 
 	@RequestMapping("/itAdmin/processAddStudent")
 	public String processAddStudent(Model model, Student student) {
-		studentDao.addStudent(student);
+		try {
+			studentDao.addStudent(student);
+		} catch (Exception e) {
+			model.addAttribute("message", "Username is already in use. Please choose another Username!");
+			e.printStackTrace();
+			return "itAdmin/addStudent";
+		}
 		List<User> studentList = userDao.getAllStudents();
 		model.addAttribute("studentList", studentList);
 		model.addAttribute("message", "Student added successfully");
@@ -107,14 +113,16 @@ public class ITAdminController {
 
 	@RequestMapping("/itAdmin/processAddProfessor")
 	public String processAddProfessor(@RequestParam int departmentId, Model model, Professor professor) {
-		Department department = departmentDao.getDepartment(departmentId);
-		professor.setDepartment(department);
-		professorDao.addProfessor(professor);
-		List<User> studentList = userDao.getAllStudents();
-		model.addAttribute("studentList", studentList);
-		model.addAttribute("message", "Professor added successfully");
+		try {
+			professorDao.addProfessor(professor);
+		} catch (Exception e) {
+			model.addAttribute("message", "Username is already in use. Please choose another Username!");
+			e.printStackTrace();
+			return "itAdmin/addProfessor";
+		}
 		List<User> professorList = userDao.getAllProfessors();
 		model.addAttribute("professorList", professorList);
+		model.addAttribute("message", "Professor added successfully");
 		return "itAdmin/viewProfessors";
 	}
 
@@ -145,7 +153,13 @@ public class ITAdminController {
 
 	@RequestMapping("/itAdmin/processAddRegistrar")
 	public String processAddRegistar(Model model, Registrar registrar) {
-		registrarDao.addRegistrar(registrar);
+		try {
+			registrarDao.addRegistrar(registrar);
+		} catch (Exception e) {
+			model.addAttribute("message", "Username is already in use. Please choose another Username!");
+			e.printStackTrace();
+			return "itAdmin/addRegistrar";
+		}
 		List<User> registrarList = userDao.getAllRegistrars();
 		model.addAttribute("registrarList", registrarList);
 		model.addAttribute("message", "Registrar added successfully");
@@ -182,7 +196,13 @@ public class ITAdminController {
 
 	@RequestMapping("/itAdmin/processAddItAdmin")
 	public String processAddITadmin(Model model, ITAdmin itAdmin) {
-		itAdminDao.addITAdmin(itAdmin);
+		try {
+			itAdminDao.addITAdmin(itAdmin);
+		} catch (Exception e) {
+			model.addAttribute("message", "Username is already in use. Please choose another Username!");
+			e.printStackTrace();
+			return "itAdmin/addItAdmin";
+		}
 		List<User> itAdminList = userDao.getAllITAdmins();
 		model.addAttribute("itAdminList", itAdminList);
 		model.addAttribute("message", "IT Admin added successfully");

@@ -19,7 +19,6 @@ ${message}
 
      <h2>All Professors</h2>
 
-     <br /> ${username}
 
      <table>
            <tr>

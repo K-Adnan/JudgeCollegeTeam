@@ -5,21 +5,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<a href = "viewProfessors">Back to View Professors</a>
 <title>Add Professor</title>
+<br/>
+<br/>
+${message}
 </head>
 <body>
 	<sf:form method="post" action="processAddProfessor" modelAttribute="professor">		 	 
 		
 		
 		
-		User Name <sf:input type="text" path="username" required="required" /><br/>
-		Password <sf:password  path="password" required="required" /><br/>
+		User Name: <sf:input type="text" path="username" required="required" /><br/>
+		Password: <sf:password  path="password" required="required" /><br/>
 		First Name: <sf:input type="text" path="firstName" required="required"  /><br/>
 		Last Name: <sf:input type="text" path="lastName" required="required"  /><br/>
-        Email Address <sf:input type="text" path="emailAddress" required="required" /><br/>
-        Address <sf:input type="text" path="address" required="required"/><br/>
-        Phone <sf:input type="text" path="phone" required="required" /><br/>
-        Fax <sf:input type="text" path="fax" required="required" /><br/>
+        Email Address: <sf:input type="text" path="emailAddress" required="required" /><br/>
+        Address: <sf:input type="text" path="address" required="required"/><br/>
+        Phone: <sf:input type="text" path="phone" required="required" /><br/>
+        Fax: <sf:input type="text" path="fax" required="required" /><br/>
         
         Department
 		<select name="departmentId">

@@ -21,7 +21,6 @@ ${message}
      <h2>All IT Admins</h2>
 
 
-     <br /> ${username}
 
      <table>
            <tr>
