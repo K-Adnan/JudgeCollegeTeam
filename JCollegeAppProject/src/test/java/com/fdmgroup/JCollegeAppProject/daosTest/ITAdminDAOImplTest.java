@@ -33,9 +33,11 @@ public class ITAdminDAOImplTest {
 	private TypedQuery query;
 	private List list;
 	private User user;
+	private ITAdmin itAdmin;
 
 	@Before
 	public void setUp() {
+		itAdmin = mock(ITAdmin.class);
 		manager = mock(EntityManager.class);
 		factory = mock(EntityManagerFactory.class);
 		transaction = mock(EntityTransaction.class);
@@ -45,18 +47,26 @@ public class ITAdminDAOImplTest {
 		itadminDao = new ITAdminDAOImpl(factory);
 		
 	}
+	
 	@Test
 	public void testGetITAdminReturnsITAdmin(){
+		ITAdminDAOImpl i = new ITAdminDAOImpl();
 		itadminDao.getITAdmin(username);
-		verify(manager).find(User.class, username);
-		
-//	}
-//	@Test 
-//	public void testUpdateITAdminUpdatesITAdmin(){
-//		ITAdmin itadmin = new ITAdmin();
-//		itadminDao.updateITAdmin(itAdmin);
-//		verify(manager).merge(itadmin);
-//	}
+		verify(manager).find(ITAdmin.class, username);
+	}
 	
+	@Test
+	public void testGetITAdaminReturnsITAdmin(){
+		itadminDao.updateITAdmin(itAdmin);
+	}
+	
+	@Test
+	public void testGetITAdamianReturnsITAdmin(){
+		itadminDao.addITAdmin(itAdmin);
+	}
+	
+	@Test
+	public void testGetIaTAdamianReturnsITAdmin(){
+		itadminDao.removeITAdmin("ABC");
 	}
 }
