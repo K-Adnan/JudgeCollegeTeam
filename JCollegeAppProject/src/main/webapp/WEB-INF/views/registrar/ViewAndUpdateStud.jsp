@@ -15,6 +15,7 @@ body {
 	background-image: url();
 	background-repeat: repeat-x;
 }
+
 </style>
 </head>
 <body>
