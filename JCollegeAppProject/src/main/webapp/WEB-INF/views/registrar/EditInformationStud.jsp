@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Edit Infomation Stud</title>
 <link href="../css/Home.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 body {
@@ -46,7 +46,9 @@ body {
     </nav>
     <div class="mainContent">
       
-<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
+      ${message}
+      
+<div style="padding: 1px 16px; height: 1000px;">
 	
 	<form align="centre" name="form1" method="post" action="SystemUsers">
 			<label class="SystemUsersLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">

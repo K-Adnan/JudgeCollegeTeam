@@ -6,13 +6,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>My Profile</title>
 <link href="../css/Home.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 body {
 	background-color: #1A1A1A;
 	background-image: url();
 	background-repeat: repeat-x;
+}
+.profile {
+	background-color: #598cd9;
+	color: white;
+    width: 300px;
+    border: 5px solid white;
+    padding: 25px;
+    margin: 25px;
+	margin-left: auto;
+	margin-right: auto;
 }
 </style>
 </head>
@@ -44,16 +54,17 @@ body {
       </div>
     </nav>
     <div class="mainContent">
-      
+      			
 				<h2>My Profile</h2>
+				<div class="profile">
 				  Username : ${registrar.username}<br/>
                   First Name : ${registrar.firstName}<br/>
                   Last Name : ${registrar.lastName}<br/>
                   Email Address : ${registrar.emailAddress}<br/>
-      
-      
+                </div>
     </div>
   </div>
+  
   <footer> 
     <!-- This is the footer with default 3 divs -->
     <div><span style="line-height: 5px"> <p><strong>Judge College</strong></p>

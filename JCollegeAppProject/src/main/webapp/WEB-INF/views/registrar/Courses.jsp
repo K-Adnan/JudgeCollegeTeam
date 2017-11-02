@@ -6,28 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Courses</title>
 <link href="../css/Home.css" rel="stylesheet" type="text/css">
 <style type="text/css">
-body {
-	background-color: #1A1A1A;
-	background-image: url();
-	background-repeat: repeat-x;
-}
-<script  type="text/javascript">
-			function getConfirmation() {
-				var courseName = document.getElementById("courseName").value;
-				var isOk = confirm("Are you sure you want to update the course " + courseName + "?");
-				return isOk;
-			}
-	</script>
-	<script  type="text/javascript">
-			function getConfirmationForCancelling() {
-				var courseName = document.getElementById("courseName").value;
-				var isOk = confirm("Are you sure you want to cancel the course " + courseName + "?");
-				return isOk;
-			}
-	</script>
+	body {
+			background-color: #1A1A1A;
+			background-image: url();
+			background-repeat: repeat-x;
+		}
 	<style>
  		.allcourses #courses {
 			border="0";
@@ -96,8 +82,46 @@ body {
 		}
 		
 	</style>
+	<script  type="text/javascript">
+			function getConfirmation() {
+				var courseName = document.getElementById("courseName").value;
+				var isOk = confirm("Are you sure you want to update the course " + courseName + "?");
+				return isOk;
+			}
+	</script>
+	<script  type="text/javascript">
+			function getConfirmationForCancelling() {
+				var courseName = document.getElementById("courseName").value;
+				var isOk = confirm("Are you sure you want to cancel the course " + courseName + "?");
+				return isOk;
+			}
+	</script>
 </head>
 <body>
+ 	<c:if test="${message eq 'Course is cancelled!'}">
+  	<script>
+ 		alert("Successfully removed course!");
+  	</script>
+ 	</c:if> 
+
+	<c:if test="${message5 eq 'Empty course is cancelled!'}">
+  	<script>
+ 		alert("Successfully removed course!");
+  	</script>
+ 	</c:if> 
+ 	
+ 	<c:if test="${message eq 'Course added successfully!'}">
+  	<script>
+ 		alert("Successfully added course!");
+  	</script>
+ 	</c:if> 
+ 	
+ 	<c:if test="${message eq 'Professer has been updated!'}">
+  	<script>
+ 		alert("Successfully updated professor!");
+  	</script>
+ 	</c:if> 
+ 	
 <div id="mainWrapper">
   <header> 
     <!-- This is the header content. It contains Logo and links -->

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>System Users</title>
 <link href="../css/Home.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 body {
@@ -23,18 +23,24 @@ table tr input {
 table tr:hover input {
 	opacity: 1
 }
+.searchUser { text-align: left;
+}
 </style>
 <script type="text/javascript">
 	function getConfRemoveUser() {
-		
 		var userid = document.getElementById("usernameid").value;
-		<%--alert(userid);--%>
-		var isOk = confirm("Are you sure you want to remove the user ?");
+		var isOk = confirm("Are you sure you want to remove the user?");
 		return isOk;
 	}
 </script>
 </head>
 <body>
+ 	<c:if test="${message eq 'User is removed!'}">
+  	<script>
+ 		alert("User is removed!");
+  	</script>
+ 	</c:if> 
+ 	
 <div id="mainWrapper">
   <header> 
     <!-- This is the header content. It contains Logo and links -->
@@ -62,14 +68,19 @@ table tr:hover input {
       </div>
     </nav>
     <div class="mainContent">
-      
-<a href="SystemUsers">Show All Users</a><br/>
-		<a href="ShowProfessors">Show Professors</a><br/>
-		<a href="ShowStudents">Show Students</a><br/>
-		<form action="searchUser" method="post">
+    
+      	<div class="searchUser">
+      	<form action="searchUser" method="post">
 				<input name="search" width="50px" placeholder="Search for User"/>
 				<input type="submit" value="Go!"/>
 		</form>
+		</div>
+      
+		<a href="SystemUsers">Show All Users</a><br/>
+		<a href="ShowProfessors">Show Professors</a><br/>
+		<a href="ShowStudents">Show Students</a><br/>
+		
+	
 
 		<table class="table1">
 			<tr>
