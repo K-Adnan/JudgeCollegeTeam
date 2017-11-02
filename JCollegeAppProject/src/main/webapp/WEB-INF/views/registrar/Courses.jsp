@@ -6,9 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Courses</title>
-<link href="../css/style.css" rel="stylesheet" media="all">
-	<script  type="text/javascript">
+<title>Insert title here</title>
+<link href="../css/Home.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+body {
+	background-color: #1A1A1A;
+	background-image: url();
+	background-repeat: repeat-x;
+}
+<script  type="text/javascript">
 			function getConfirmation() {
 				var courseName = document.getElementById("courseName").value;
 				var isOk = confirm("Are you sure you want to update the course " + courseName + "?");
@@ -23,86 +29,126 @@
 			}
 	</script>
 	<style>
- 		#courses {
+ 		.allcourses #courses {
 			border="0";
 			border-color:#000000;
 			border-style: solid;
 			border-width: 0.5px;
 		}
-		#courses a {
+		.allcourses table a {
 			text-decoration: none;
 			color: black;
+			display: block;
+		}
+		
+		.allcourses table {
+			margin-top: 10px;
+		}
+		
+		.allcourses	 a:hover {
+		background-color: white;
 		}
 		#courses a:live { background:yellow;}
 		#courses a: visited {background:black;}
 		#courses a: hover { background:color;}
+		
+		.allcourses {
+			text-align: left;
+			width: 15%;
+			position: relative;
+			float: left;
+		}
+		
+		.allcourses table {
+			border="0";
+			border-color:#000000;
+			border-style: solid;
+			border-width: 0.5px;
+		}
+		
+		.search {
+			text-align: left;
+		}
+		
+		.coursedetails {
+			width: 40%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		.coursedetails table {
+			margin-top: -10px;
+			width: 70%;
+			margin-left: auto;
+			margin-right: auto;
+			border: 1px solid black;
+		}
+		
+		form {
+			position: relative;
+			display: inline;
+		}
+		
+		.buttonsdiv {
+			margin-top: 10px;
+			margin-right: 7%;
+			margin-bottom: 30px;
+		}
+		
 	</style>
-	
 </head>
-
 <body>
-<c:if test="${message eq 'Course is cancelled!'}">
-	<script>
-		alert("Successfully removed course!");
-	</script>
-</c:if>
-<c:if test="${message2 eq 'Course is added!'}">
-	<script>
-		alert("Successfully added course!");
-	</script>
-</c:if>
-<c:if test="${message3 eq 'Empty course is cancelled!'}">
-	<script>
-		alert("Successfully removed course!");
-	</script>
-</c:if>
-		<div class="img">
-			<IMG HEIGHT="50" WIDTH="80"
-				SRC=http://www.pathwaysnetwork.co.uk/images/jeancarr-jc.jpg>
-		</div>
-		<h2>Judge College</h2>
-
-		<form align="right" name="form1" method="post" action="../logout">
-			<label class="logoutLblPos"> <input name="submit2"
-				type="submit" id="submit2" value="Logout">
-			</label>
-		</form>
-
-	<ul>
-		<li><a href="MyProfile">My Profile</a></li>
-		<li><a href="SystemUsers">System Users</a></li>
-		<li><a href="Courses">Courses</a></li>
-		<li><a href="Departments">Departments</a></li>
-		<li><a href="Timetable">Timetable</a></li>
-		<li><a href="Grades">Grades</a></li>
-	</ul>
-
-		<h2>Course Catalogue</h2>
+<div id="mainWrapper">
+  <header> 
+    <!-- This is the header content. It contains Logo and links -->
+    <div id="logo"> 
+      <!-- Company Logo text --> 
+      <a href="../home"> <img src="../img/logo.png"/> </a></div>
+    <div id="headerLinks"><a href="../logout" title="Logout">Logout</a></div>
+    <div class="titletext">
+		  <h2>Judge College</h2>
+    </div>
+  </header>
+  <div id="content">
+    <nav class="sidebar"> 
+      <div id="menubar">
+      	<div class="menu">
+          <ul>
+                	<li><a href="MyProfile">My Profile</a></li>
+					<li><a href="SystemUsers">System Users</a></li>
+					<li><a href="Courses">Courses</a></li>
+					<li><a href="Departments">Departments</a></li>
+					<li><a href="Timetable">Timetable</a></li>
+					<li><a href="Grades">Grades</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="mainContent">
+      
+<h2>Course Catalogue</h2>
 		
-		<a href="showAllCourses">Show all courses</a><br/>
-		
+		<div class="search">
 		<form action="searchCourse" method="post">
 				<input name="search" width="50px" placeholder="Search for Courses"/>
 				<input type="submit" value="Go!"/>
 		</form>
+		</div>
 		
+		<div class="allcourses">
+		<a href="showAllCourses">Show all courses</a><br/>
+		<a href="viewEmptyCourses">View Empty Courses</a><br/><br/>
 		<table class="courses">
 		<c:forEach items="${courseList}" var="c">
 			<tr><td><a href="processChooseCourse?courseId=${c.courseCode}">
 				${c.courseName}</a> </td></tr>
 		</c:forEach>
 		</table>
+		</div>
 
-	<form name="form1" method="post" action="AddCourse">
-			<label class="addCourse"> <input name="submit3"
-				type="submit" id="submit2" value="Add Course">
-			</label>
-	</form>
-	
-	<a href="viewEmptyCourses">View Empty Courses</a><br/><br/>
-<br /><br />
+	  <div class="coursedetails">
+			<h3>Course Details</h3>
 		<table>
-			<caption><b>Course Details</b></caption>
 			<tr><td>Course Name</td>
 				<td><input type="hidden" id="courseName" value="${course.courseName}">${course.courseName}</td>
 			</tr>
@@ -133,14 +179,23 @@
 				<td>${course.department.departmentName}</td>
 			</tr>
 		</table>
-
+	  </div>
+		
+		<div class="buttonsdiv">
+		<form name="form1" method="post" action="AddCourse">
+			<label class="addCourse"> <input name="submit3"
+				type="submit" id="submit2" value="Add Course">
+			</label>
+		</form>
 		<form name="CancelCourse" action="cancelCourse?courseId=${course.courseCode}" onSubmit="return getConfirmationForCancelling()">
 			<input type="hidden" name="code" value="${course.courseCode}" /> 
 			<input name="cancelCourse" type="submit" value="Cancel Course">
 		</form>
-<br /><br />
+		</div>
+		
+		<div class="coursedetails">
+			<h3>Enrolled Students</h3>
 		<table>
-			<caption align="left"><b>Enrolled Students</b></caption>
 			<tr>
 				<td>Student Id</td>
 				<td>Name</td>
@@ -150,6 +205,28 @@
 				<td>${s.firstName}${s.lastName}</td></tr>
 			</c:forEach>
 		</table>
-		
+      	</div>
+      
+    </div>
+  </div>
+  <footer> 
+    <!-- This is the footer with default 3 divs -->
+    <div><span style="line-height: 5px"> <p><strong>Judge College</strong></p>
+      <p>Cottons Centre</p>
+      <p> Cottons Lane</p>
+      <p> London SE1 2QG</p></span>
+    </div>
+    <div id="2col">
+    	<span style="line-height: 10px"><p>Tel: 020 3141 5926</p> 
+    	<p>Email: info@judgecollege.co.uk</p></span>
+    </div>
+    <div>
+      <span style="line-height: 10px"><p>&copy; 2017 Judge College Inc.</p>
+      <p>All Rights Reserved</p></span>
+    </div>
+  </footer>
+</div>
+
+
 </body>
 </html>

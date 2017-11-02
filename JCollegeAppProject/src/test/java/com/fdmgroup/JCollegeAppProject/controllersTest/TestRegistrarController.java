@@ -169,12 +169,12 @@ public class TestRegistrarController {
         
         @Test
         public void test_EditInformationStud_ReturnsRegistrarEditInformationStud(){
-                assertEquals("registrar/EditInformationStud", registrarController.EditInformationStud(model, session));
+                assertEquals("registrar/EditInformationStud", registrarController.EditInformationStud(username, model, session));
         }
         
         @Test
         public void test_DoRemoveFromCourse_ReturnsRedirectViewAndUpdate(){
-                assertEquals("redirect:ViewAndUpdateStud", registrarController.DoRemoveFromCourse(username, model, "ABC"));
+                assertEquals("redirect:ViewAndUpdateStud", registrarController.DoRemoveFromCourse(username, courseCode, model, "ABC"));
         }
         
         @Test
@@ -182,7 +182,7 @@ public class TestRegistrarController {
                 List<Course> list = new ArrayList<Course>();
                 list.add(course);
                 when(courseDao.getAllCourses()).thenReturn(list);
-                assertEquals("registrar/Courses", registrarController.goToCourses(model, "ABC"));
+                assertEquals("registrar/Courses", registrarController.goToCourses(model, "ABC", "DEF"));
         }
         
         @Test
@@ -239,12 +239,12 @@ public class TestRegistrarController {
                 List<Professor> listP = new ArrayList<Professor>();
                 when(courseDao.getCourse(101)).thenReturn(course);
                 when(courseDao.getAllCourses()).thenReturn(list);
-                assertEquals("registrar/Courses", registrarController.DoAddCourse(model, course, 1));
+                assertEquals("registrar/Courses", registrarController.DoAddCourse(model, course, 1, "09:00", "09:00", "09:00", "09:00", "09:00"));
         }
         
         @Test
         public void test_GoToGrades_ReturnsRegistrarGrades(){
-                assertEquals("registrar/Grades", registrarController.GoToGrades());
+                assertEquals("registrar/Grades", registrarController.GoToGrades(model));
         }
         
         @Test
@@ -254,12 +254,12 @@ public class TestRegistrarController {
         
         @Test
         public void test_GoToAddTimetable_ReturnsRegistrarTimetable(){
-                assertEquals("registrar/Timetable", registrarController.GoToTimetable());
+                assertEquals("registrar/Timetable", registrarController.GoToTimetable(model));
         }
         
         @Test
         public void test_EditInformationProf_ReturnsRegistrarEditInformationStud(){
-                assertEquals("registrar/EditInformationProf", registrarController.EditInformationProf(model, session));
+                assertEquals("registrar/EditInformationProf", registrarController.EditInformationProf(username, model, session));
         }
         
         @Test
@@ -268,7 +268,7 @@ public class TestRegistrarController {
                 List<Professor> listP = new ArrayList<Professor>();
                 when(courseDao.getCourse(101)).thenReturn(course);
                 when(courseDao.getAllCourses()).thenReturn(list);
-                assertEquals("registrar/ViewAndUpdateStud", registrarController.doAddAbsence(username, "ABC", "11/11/2011", model));
+                assertEquals("registrar/ViewAndUpdateStud", registrarController.doAddAbsence(username, username, "09/09/2009", request, model));
         }
         
         @Test
@@ -277,7 +277,7 @@ public class TestRegistrarController {
                 List<Professor> listP = new ArrayList<Professor>();
                 when(courseDao.getCourse(101)).thenReturn(course);
                 when(courseDao.getAllCourses()).thenReturn(list);
-                assertEquals("registrar/ViewAndUpdateStud", registrarController.doAddAbsence(username, "ABC", "e11/11/2011", model));
+                assertEquals("registrar/ViewAndUpdateStud", registrarController.doAddAbsence(username, username, username, request, model));
         }
         
 }

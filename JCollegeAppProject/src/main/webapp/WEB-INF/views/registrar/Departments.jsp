@@ -6,36 +6,46 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Grades</title>
-<link href="../css/style.css" rel="stylesheet" media="all">
+<title>Insert title here</title>
+<link href="../css/Home.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+body {
+	background-color: #1A1A1A;
+	background-image: url();
+	background-repeat: repeat-x;
+}
+</style>
 </head>
-
 <body>
-
-	<ul>
-		<div class="img">
-			<IMG HEIGHT="50" WIDTH="80"
-				SRC=http://www.pathwaysnetwork.co.uk/images/jeancarr-jc.jpg>
-		</div>
-		<h2>Judge College</h2>
-
-		<form align="right" name="form1" method="post" action="../logout">
-			<label class="logoutLblPos"> <input name="submit2"
-				type="submit" id="submit2" value="Logout">
-			</label>
-		</form>
-	</ul>
-
-	<ul>
-		<li><a href="MyProfile">My Profile</a></li>
-		<li><a href="SystemUsers">System Users</a></li>
-		<li><a href="Courses">Courses</a></li>
-		<li><a href="Departments">Departments</a></li>
-		<li><a href="Timetable">Timetable</a></li>
-		<li><a href="Grades">Grades</a></li>
-	</ul>
-
-	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
+<div id="mainWrapper">
+  <header> 
+    <!-- This is the header content. It contains Logo and links -->
+    <div id="logo"> 
+      <!-- Company Logo text --> 
+      <a href="../home"> <img src="../img/logo.png"/> </a></div>
+    <div id="headerLinks"><a href="../logout" title="Logout">Logout</a></div>
+    <div class="titletext">
+		  <h2>Judge College</h2>
+    </div>
+  </header>
+  <div id="content">
+    <nav class="sidebar"> 
+      <div id="menubar">
+      	<div class="menu">
+          <ul>
+                	<li><a href="MyProfile">My Profile</a></li>
+					<li><a href="SystemUsers">System Users</a></li>
+					<li><a href="Courses">Courses</a></li>
+					<li><a href="Departments">Departments</a></li>
+					<li><a href="Timetable">Timetable</a></li>
+					<li><a href="Grades">Grades</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="mainContent">
+      
+<div style="padding: 1px 16px; height: 1000px;">
 
 	<h2>Departments</h2>
 	
@@ -55,8 +65,28 @@
 			</c:forEach>
 
 		</table>
-	
-	
-	</div>
+      
+      
+    </div>
+  </div>
+  <footer> 
+    <!-- This is the footer with default 3 divs -->
+    <div><span style="line-height: 5px"> <p><strong>Judge College</strong></p>
+      <p>Cottons Centre</p>
+      <p> Cottons Lane</p>
+      <p> London SE1 2QG</p></span>
+    </div>
+    <div id="2col">
+    	<span style="line-height: 10px"><p>Tel: 020 3141 5926</p> 
+    	<p>Email: info@judgecollege.co.uk</p></span>
+    </div>
+    <div>
+      <span style="line-height: 10px"><p>&copy; 2017 Judge College Inc.</p>
+      <p>All Rights Reserved</p></span>
+    </div>
+  </footer>
+</div>
+
+
 </body>
 </html>
