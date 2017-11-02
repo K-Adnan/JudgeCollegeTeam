@@ -49,8 +49,12 @@
 				<th>${s.emailAddress}</th>
  				<th>
  				<form method="post" action="updateGrade?courseCode=${course.courseCode}&username=${s.username}" >
-			<select name="gradeDropdown">
-			  <c:choose>
+			<!--  <select name="gradeDropdown"> -->
+			  <input name="gradeDropdown" type="text" value= "${grade.gradeValue}"> 
+			  
+			  
+			  
+			 <!--  <c:choose>
 			  <%-- Display entire list when the student has no grades assigned to them --%>
 				<c:when test="${empty s.gradeList}">
 				<c:forEach items="${gradeList}" var="g">
@@ -94,11 +98,14 @@
  				</c:forEach>
 				</c:otherwise>
 				</c:choose>
- 			</select>
+ 			<!-- </select> -->
  					
 				</form>
  				</th>
  				<%--<th><a href="updateGrade?courseCode=${course.courseCode}&username=${s.username}&grade=${pageScope[gradeDropdown]}">Update</a></th> --%>
+	
+	<th><input name="gradeComment" value="${grade.gradeComment}"/> </th>
+				<th><input type="submit" value="Update"/></th>
 	
 		</c:forEach>
 	
