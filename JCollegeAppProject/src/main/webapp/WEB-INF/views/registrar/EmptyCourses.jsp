@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Empty Courses</title>
 <link href="../css/Home.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 body {
@@ -16,6 +16,13 @@ body {
 	background-repeat: repeat-x;
 }
 </style>
+<script  type="text/javascript">
+			function getConfirmationForCancellingEmpty() {
+				var courseName = document.getElementById("courseName").value;
+				var isOk = confirm("Are you sure you want to cancel the course?");
+				return isOk;
+			}
+	</script>
 </head>
 <body>
 <c:if test="${message5 eq 'Empty course is cancelled!'}">

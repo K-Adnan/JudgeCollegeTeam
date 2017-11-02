@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Course</title>
+<title>Add Absence</title>
 <link href="../css/style.css" rel="stylesheet" media="all">
 </head>
 

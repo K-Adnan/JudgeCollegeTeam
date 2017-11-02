@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Grades</title>
+<title>View Department</title>
 <link href="../css/style.css" rel="stylesheet" media="all">
 </head>
 

@@ -203,7 +203,22 @@ public class RegistrarController {
 		student.setAbsenseList(oldStudent.getAbsenseList());
 		student.setCourseList(oldStudent.getCourseList());
 		student.setGradeList(oldStudent.getGradeList());
-		System.out.println("********** dob in controller " + dob);
+		
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			sdf.parse(dob);
+		}catch (ParseException p){
+			List<String> genders = new ArrayList<String>();
+			genders.add("MALE");
+			genders.add("FEMALE");
+			genders.add("UNDISCLOSED");
+			
+			model.addAttribute("student", student);
+			model.addAttribute("genders", genders);
+			model.addAttribute("message", "Please enter a valid Date of Birth");
+			return "registrar/EditInformationStud";
+		}
+		
 		student.setDobString(dob);
 		student.setGenderString(gender);
 		
@@ -272,7 +287,7 @@ public class RegistrarController {
 	}
 
 	@RequestMapping("/registrar/Courses")
-	public String goToCourses(Model model, @ModelAttribute("message") String message, @ModelAttribute("message2") String message2) {
+	public String goToCourses(Model model, @ModelAttribute("message") String message, @ModelAttribute("message2") String message2 , @ModelAttribute("message3") String message3) {
 		logger.info("Client request to url : Courses");
 
 		List<Course> courseList = courseDao.getAllCourses();
@@ -285,6 +300,7 @@ public class RegistrarController {
 		model.addAttribute("course", course);
 		model.addAttribute("professorList", professorList);
 		model.addAttribute("message",message);
+		model.addAttribute("message2",message2);
 		model.addAttribute("message2",message2);
 		return "registrar/Courses";
 	}
