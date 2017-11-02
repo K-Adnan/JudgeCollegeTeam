@@ -182,7 +182,7 @@ public class TestRegistrarController {
                 List<Course> list = new ArrayList<Course>();
                 list.add(course);
                 when(courseDao.getAllCourses()).thenReturn(list);
-                assertEquals("registrar/Courses", registrarController.goToCourses(model, "ABC", "DEF"));
+                assertEquals("registrar/Courses", registrarController.goToCourses(model, "ABC", "DEF", "GHI"));
         }
         
         @Test
@@ -278,6 +278,16 @@ public class TestRegistrarController {
                 when(courseDao.getCourse(101)).thenReturn(course);
                 when(courseDao.getAllCourses()).thenReturn(list);
                 assertEquals("registrar/ViewAndUpdateStud", registrarController.doAddAbsence(username, username, username, request, model));
+        }
+        
+        @Test
+        public void test_DoAddAbsence_ReturnsRegistrarViewAndUpdateStud1(){
+                List<Course> list = new ArrayList<Course>();
+                List<Professor> listP = new ArrayList<Professor>();
+                when(courseDao.getCourse(101)).thenReturn(course);
+                when(courseDao.getAllCourses()).thenReturn(list);
+                when(request.getParameter("approved")).thenReturn("true");
+                assertEquals("registrar/ViewAndUpdateStud", registrarController.doAddAbsence(username, username, "09/09/2009", request, model));
         }
         
 }
