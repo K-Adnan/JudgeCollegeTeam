@@ -43,16 +43,38 @@
 
 		<c:forEach items="${studentList}" var="s">
 			<tr>
-				<th><a href="viewStudent?username=${s.username}">${s.username}</a></th>
-				<th>${s.firstName}</th>
-				<th>${s.lastName}</th>
-				<th>${s.emailAddress}</th>
- 				<th>
- 				<form method="post" action="updateGrade?courseCode=${course.courseCode}&username=${s.username}" >
-			<!--  <select name="gradeDropdown"> -->
-			  <input name="gradeInput" type="text" value= "${grade.gradeValue}"> 
+				<td><a href="viewStudent?username=${s.username}">${s.username}</a></td>
+				<td>${s.firstName}</td>
+				<td>${s.lastName}</td>
+				<td>${s.emailAddress}</td>
+ 				
+					<!--  <select name="gradeDropdown"> -->
+					
+			 		 <c:forEach items="${s.gradeList}" var="grade">
+			 		 <c:set scope="request" var="grade" value="${grade }"/>
+ 				<sf:form method="post" action="updateGrade?courseCode=${course.courseCode}&username=${s.username}" modelAttribute="grade" >
+			 		 	
+			  			<c:if test="${grade.course.courseCode eq course.courseCode}"> 
+							<td> <sf:input path="gradeValue" type="text" value= "${grade.gradeValue}"/> </td>
+						 	<td> <sf:input path="gradeComment" value="${grade.gradeComment}"/> </td>
+							<td><input type="submit" value="Update"/></td>
+			  			</c:if>
+			  </sf:form>
+			  		</c:forEach>
+			  		
+ 				</tr>
+			  </c:forEach>
 			  
 			  
+				<!--   		<c:choose>
+							<c:when test="${tester eq 'has' }">
+			  			<th><input name="gradeComment" value="${comment}"/> </th>
+			  				</c:when>
+			  		</c:choose>  
+			  			
+			  			
+			  <c:set var="tester" value="has"/>
+						<c:set var="comment" value="${grade.gradeComment}"/> -->
 			  
 			 <!--  <c:choose>
 			  <%-- Display entire list when the student has no grades assigned to them --%>
@@ -100,14 +122,10 @@
 				</c:choose>
  			<!-- </select> -->
  					
-				</form>
- 				</th>
+				
  				<%--<th><a href="updateGrade?courseCode=${course.courseCode}&username=${s.username}&grade=${pageScope[gradeDropdown]}">Update</a></th> --%>
 	
-	<th><input name="gradeComment" value="${grade.gradeComment}"/> </th>
-				<th><input type="submit" value="Update"/></th>
-	
-		</c:forEach>
+		
 	
 	
 	

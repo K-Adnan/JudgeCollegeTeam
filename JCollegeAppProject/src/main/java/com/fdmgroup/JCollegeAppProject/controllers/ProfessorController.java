@@ -168,17 +168,7 @@ public class ProfessorController {
 	public String goToViewStudents(@RequestParam int courseCode, Model model, HttpSession session, Principal principal) {
 		Course course = courseDao.getCourse(courseCode);
 		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
-		List<Character> gradeList = new ArrayList<Character>();
-		gradeList.add('A');
-		gradeList.add('B');
-		gradeList.add('C');
-		gradeList.add('D');
-		gradeList.add('E');
-		gradeList.add('F');
-		gradeList.add('U');
-		gradeList.add(' ');
-		
-		model.addAttribute("gradeList", gradeList);
+	
 		model.addAttribute("course", course);
 		model.addAttribute("studentList", studentList);
 		return "professor/professorViewStudentsOnTaughtCourse";
@@ -229,7 +219,7 @@ public class ProfessorController {
 //	}
 	
 	@RequestMapping("/professor/updateGrade")
-	public String doUpdateGrade(@RequestParam int courseCode, @RequestParam String username, @RequestParam char gradeInput, @RequestParam String gradeComment, Model model, HttpSession session, Principal principal) {
+	public String doUpdateGrade(@RequestParam int courseCode, @RequestParam String username, @RequestParam String gradeInput, @RequestParam String gradeComment, Model model, HttpSession session, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
 		Student student = studentDao.getStudent(username);
 		Course course = courseDao.getCourse(courseCode);
@@ -237,16 +227,16 @@ public class ProfessorController {
 		Grade grade = gradeDao.getGradeForStudentForCourse(course, student);
 		
 		if (grade != null){
-			grade.setGradeValue(gradeInput);
+			grade.setGradeValue(gradeInput.charAt(0));
 			grade.setGradeComment(gradeComment);
-			if (gradeInput == ' '){
+			if (gradeInput.charAt(0) == ' '){
 				gradeDao.removeGrade(grade.getGradeId());
 			}else{
 				gradeDao.updateGrade(grade);
 			}
 		}else{
 			Grade newGrade = new Grade();
-			newGrade.setGradeValue(gradeInput);
+			newGrade.setGradeValue(gradeInput.charAt(0));
 			newGrade.setStudent(student);
 			newGrade.setProfessor(professor);
 			newGrade.setCourse(course);
