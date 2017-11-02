@@ -8,33 +8,39 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Courses</title>
 <link href="../css/style.css" rel="stylesheet" media="all">
-<script  type="text/javascript">
-					function getConfirmation() {
-						var courseName = document.getElementById("courseName").value;
-						var isOk = confirm("Are you sure you want to update the course " + courseName + "?");
-						return isOk;
-					}
-				</script>
-				
-				<script  type="text/javascript">
-					function getConfirmationForCancelling() {
-						var courseName = document.getElementById("courseName").value;
-						var isOk = confirm("Are you sure you want to cancel the course " + courseName + "?");
-						return isOk;
-					}
-				</script>
+	<script  type="text/javascript">
+			function getConfirmation() {
+				var courseName = document.getElementById("courseName").value;
+				var isOk = confirm("Are you sure you want to update the course " + courseName + "?");
+				return isOk;
+			}
+	</script>
+	<script  type="text/javascript">
+			function getConfirmationForCancelling() {
+				var courseName = document.getElementById("courseName").value;
+				var isOk = confirm("Are you sure you want to cancel the course " + courseName + "?");
+				return isOk;
+			}
+	</script>
+	<style>
+ 		#courses {
+			border="0";
+			border-color:#000000;
+			border-style: solid;
+			border-width: 0.5px;
+		}
+		#courses a {
+			text-decoration: none;
+			color: black;
+		}
+		#courses a:live { background:yellow;}
+		#courses a: visited {background:black;}
+		#courses a: hover { background:color;}
+	</style>
+	
 </head>
 
 <body>
- 
-       <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="About/">About</a></li>
-    <li><a class="selected" href="Contact/">Contact</a></li>
-  </ul>
-   
-
-
 <c:if test="${message eq 'Course is cancelled!'}">
 	<script>
 		alert("Successfully removed course!");
@@ -50,7 +56,6 @@
 		alert("Successfully removed course!");
 	</script>
 </c:if>
-	<ul>
 		<div class="img">
 			<IMG HEIGHT="50" WIDTH="80"
 				SRC=http://www.pathwaysnetwork.co.uk/images/jeancarr-jc.jpg>
@@ -62,7 +67,6 @@
 				type="submit" id="submit2" value="Logout">
 			</label>
 		</form>
-	</ul>
 
 	<ul>
 		<li><a href="MyProfile">My Profile</a></li>
@@ -73,8 +77,6 @@
 		<li><a href="Grades">Grades</a></li>
 	</ul>
 
-	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-
 		<h2>Course Catalogue</h2>
 		
 		<a href="showAllCourses">Show all courses</a><br/>
@@ -84,19 +86,19 @@
 				<input type="submit" value="Go!"/>
 		</form>
 		
-		<table>
+		<table class="courses">
 		<c:forEach items="${courseList}" var="c">
-			<tr><td><a href="processChooseCourse?courseId=${c.courseCode}"><span class="otherPage">
-				${c.courseName}</span></a> </td></tr>
+			<tr><td><a href="processChooseCourse?courseId=${c.courseCode}">
+				${c.courseName}</a> </td></tr>
 		</c:forEach>
 		</table>
-	
 
 	<form name="form1" method="post" action="AddCourse">
 			<label class="addCourse"> <input name="submit3"
 				type="submit" id="submit2" value="Add Course">
 			</label>
 	</form>
+	
 	<a href="viewEmptyCourses">View Empty Courses</a><br/><br/>
 <br /><br />
 		<table>
@@ -132,7 +134,7 @@
 			</tr>
 		</table>
 
-		<form name="CancelCourse" action="cancelCourse?courseId=${course.courseCode}" onSubmit="return getConfirmationForCancellingEmpty()">
+		<form name="CancelCourse" action="cancelCourse?courseId=${course.courseCode}" onSubmit="return getConfirmationForCancelling()">
 			<input type="hidden" name="code" value="${course.courseCode}" /> 
 			<input name="cancelCourse" type="submit" value="Cancel Course">
 		</form>
@@ -149,6 +151,5 @@
 			</c:forEach>
 		</table>
 		
-	</div>
 </body>
 </html>

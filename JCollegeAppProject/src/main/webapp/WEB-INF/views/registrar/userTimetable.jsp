@@ -30,7 +30,10 @@
 	</ul>
 
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
-
+<form align="left" name="form1" method="post" action="Timetable">
+			<label class="TimetableLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">
+			</label>
+		</form>
 <h2> Timetable for ${user.firstName} ${user.lastName}</h2>
 	<table>
 			<tr>

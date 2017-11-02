@@ -542,6 +542,9 @@ public class RegistrarController {
 		Department department = new Department();
 		department.setDepartmentName(departmentName);
 		departmentDao.addDepartment(department);
+		
+		List<Department> departmentList = departmentDao.getAllDepartments();
+		model.addAttribute("departmentList", departmentList);
 		return "registrar/Departments";
 	}
 	
@@ -550,7 +553,6 @@ public class RegistrarController {
 		
 		List<Course> allCourseList = courseDao.getAllCourses();
 		List<Course> courseList = new ArrayList<Course>();
-		
 		
 		for (Course course : allCourseList){
 			if (studentDao.getAllStudentsByCourse(course).size() < 3){
