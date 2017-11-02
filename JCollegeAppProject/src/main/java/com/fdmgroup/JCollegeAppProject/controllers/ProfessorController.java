@@ -184,8 +184,52 @@ public class ProfessorController {
 		return "professor/professorViewStudentsOnTaughtCourse";
 	}
 	
+//	@RequestMapping("/professor/updateGrade")
+//	public String doUpdateGrade(@RequestParam int courseCode, @RequestParam String username, @RequestParam String gradeDropdown, @RequestParam String gradeComment, Model model, HttpSession session, Principal principal) {
+//		Professor professor = professorDao.getProfessor(principal.getName());
+//		Student student = studentDao.getStudent(username);
+//		Course course = courseDao.getCourse(courseCode);
+//		
+//		Grade grade = gradeDao.getGradeForStudentForCourse(course, student);
+//		
+//		if (grade != null){
+//			grade.setGradeValue(gradeDropdown.charAt(0));
+//			grade.setGradeComment(gradeComment);
+//			if (gradeDropdown.charAt(0) == ' '){
+//				gradeDao.removeGrade(grade.getGradeId());
+//			}else{
+//				gradeDao.updateGrade(grade);
+//			}
+//		}else{
+//			Grade newGrade = new Grade();
+//			newGrade.setGradeValue(gradeDropdown.charAt(0));
+//			newGrade.setStudent(student);
+//			newGrade.setProfessor(professor);
+//			newGrade.setCourse(course);
+//			student.addGrade(newGrade);
+//			studentDao.updateStudent(student);
+//		}
+//		
+//		
+//		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
+//		List<Character> gradeList = new ArrayList<Character>();
+//		gradeList.add('A');
+//		gradeList.add('B');
+//		gradeList.add('C');
+//		gradeList.add('D');
+//		gradeList.add('E');
+//		gradeList.add('F');
+//		gradeList.add('U');
+//		gradeList.add(' ');
+//		
+//		model.addAttribute("gradeList", gradeList);
+//		model.addAttribute("course", course);
+//		model.addAttribute("studentList", studentList);
+//		return "professor/professorViewStudentsOnTaughtCourse";
+//	}
+	
 	@RequestMapping("/professor/updateGrade")
-	public String doUpdateGrade(@RequestParam int courseCode, @RequestParam String username, @RequestParam String gradeDropdown, @RequestParam String gradeComment, Model model, HttpSession session, Principal principal) {
+	public String doUpdateGrade(@RequestParam int courseCode, @RequestParam String username, @RequestParam char gradeInput, @RequestParam String gradeComment, Model model, HttpSession session, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
 		Student student = studentDao.getStudent(username);
 		Course course = courseDao.getCourse(courseCode);
@@ -193,16 +237,16 @@ public class ProfessorController {
 		Grade grade = gradeDao.getGradeForStudentForCourse(course, student);
 		
 		if (grade != null){
-			grade.setGradeValue(gradeDropdown.charAt(0));
+			grade.setGradeValue(gradeInput);
 			grade.setGradeComment(gradeComment);
-			if (gradeDropdown.charAt(0) == ' '){
+			if (gradeInput == ' '){
 				gradeDao.removeGrade(grade.getGradeId());
 			}else{
 				gradeDao.updateGrade(grade);
 			}
 		}else{
 			Grade newGrade = new Grade();
-			newGrade.setGradeValue(gradeDropdown.charAt(0));
+			newGrade.setGradeValue(gradeInput);
 			newGrade.setStudent(student);
 			newGrade.setProfessor(professor);
 			newGrade.setCourse(course);
@@ -210,23 +254,20 @@ public class ProfessorController {
 			studentDao.updateStudent(student);
 		}
 		
-		
 		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
-		List<Character> gradeList = new ArrayList<Character>();
-		gradeList.add('A');
-		gradeList.add('B');
-		gradeList.add('C');
-		gradeList.add('D');
-		gradeList.add('E');
-		gradeList.add('F');
-		gradeList.add('U');
-		gradeList.add(' ');
 		
-		model.addAttribute("gradeList", gradeList);
 		model.addAttribute("course", course);
 		model.addAttribute("studentList", studentList);
 		return "professor/professorViewStudentsOnTaughtCourse";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/professor/viewStudent")
 	public String goToViewStudent(@RequestParam String username, Model model, HttpSession session, Principal principal) {

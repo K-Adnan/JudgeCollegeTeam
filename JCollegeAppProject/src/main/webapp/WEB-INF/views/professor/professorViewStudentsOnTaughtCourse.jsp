@@ -50,7 +50,7 @@
  				<th>
  				<form method="post" action="updateGrade?courseCode=${course.courseCode}&username=${s.username}" >
 			<!--  <select name="gradeDropdown"> -->
-			  <input name="gradeDropdown" type="text" value= "${grade.gradeValue}"> 
+			  <input name="gradeInput" type="text" value= "${grade.gradeValue}"> 
 			  
 			  
 			  
