@@ -26,6 +26,14 @@
 </head>
 
 <body>
+ 
+       <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="About/">About</a></li>
+    <li><a class="selected" href="Contact/">Contact</a></li>
+  </ul>
+   
+
 
 <c:if test="${message eq 'Course is cancelled!'}">
 	<script>
@@ -76,11 +84,13 @@
 				<input type="submit" value="Go!"/>
 		</form>
 		
+		<table>
 		<c:forEach items="${courseList}" var="c">
-			<a href="processChooseCourse?courseId=${c.courseCode}">
-				${c.courseName}</a>
-			<br />
+			<tr><td><a href="processChooseCourse?courseId=${c.courseCode}"><span class="otherPage">
+				${c.courseName}</span></a> </td></tr>
 		</c:forEach>
+		</table>
+	
 
 	<form name="form1" method="post" action="AddCourse">
 			<label class="addCourse"> <input name="submit3"
@@ -88,20 +98,16 @@
 			</label>
 	</form>
 	<a href="viewEmptyCourses">View Empty Courses</a><br/><br/>
-
 <br /><br />
 		<table>
 			<caption><b>Course Details</b></caption>
-			<tr>
-				<td>Course Name</td>
+			<tr><td>Course Name</td>
 				<td><input type="hidden" id="courseName" value="${course.courseName}">${course.courseName}</td>
 			</tr>
-			<tr>
-				<td>Course Code</td>
+			<tr><td>Course Code</td>
 				<td>${course.courseCode}</td>
 			</tr>
-			<tr>
-				<td>Assigned Professor</td>
+			<tr><td>Assigned Professor</td>
 				<td>
 					<form name="updateProfForm" action="updateProfessor" onSubmit="return getConfirmation()">
 						<select name="professorUsername">

@@ -591,19 +591,19 @@ public class RegistrarController {
 		List<Course> courseList = courseDao.getCourseByName(search);
 		List<Professor> professorList = professorDao.getAllProfessors();
 		
-		//Course course = courseList.get(0);
+		if (courseList.size() > 0){
+			Course course = courseList.get(0);
+			List<Student> studentList = studentDao.getAllStudentsByCourse(course);
+			model.addAttribute("studentList", studentList);
+			model.addAttribute("course", course);
+		}
 		
 		model.addAttribute("courseList", courseList);
-
-		//List<Student> studentList = studentDao.getAllStudentsByCourse(course);
-		//model.addAttribute("studentList", studentList);
-		model.addAttribute("courseList", courseList);
-		//model.addAttribute("course", course);
 		model.addAttribute("professorList", professorList);
 		
 		return "registrar/Courses";
 	}
-	
+
 	@RequestMapping("/registrar/showAllCourses")
 	public String doShowAllCourses(Model model, @ModelAttribute("message") String message, @ModelAttribute("message2") String message2){
 			logger.info("Client request to url : Courses");
