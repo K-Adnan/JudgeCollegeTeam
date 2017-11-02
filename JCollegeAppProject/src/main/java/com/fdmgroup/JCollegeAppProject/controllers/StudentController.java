@@ -104,7 +104,7 @@ public class StudentController {
 	
 	@RequestMapping("student/updateProfile")
 	public String doUpdateProfile(Student student, Model model, Principal principal){
-		Student oldStudent = studentDao.getStudent(principal.getName());
+		Student oldStudent = studentDao.getStudent(student.getUsername());
 		
 		oldStudent.setAddress(student.getAddress());
 		oldStudent.setPhoneNumber(student.getPhoneNumber());

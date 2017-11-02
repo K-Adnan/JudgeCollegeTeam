@@ -370,6 +370,31 @@ public class RegistrarController {
 
 	@RequestMapping("/registrar/doAddCourse")
 	public String DoAddCourse(Model model, Course course, @RequestParam int departmentId, @RequestParam String monday, @RequestParam String tuesday, @RequestParam String wednesday, @RequestParam String thursday, @RequestParam String friday){
+		
+		if (departmentId == 0){
+			model.addAttribute("message", "Please select a Department");
+			List<Professor> professorList = professorDao.getAllProfessors();
+			List<Department> departmentList = departmentDao.getAllDepartments();
+			List<String> timeList = new ArrayList<String>();
+			
+			timeList.add("");
+			timeList.add("09:00");
+			timeList.add("10:00");
+			timeList.add("11:00");
+			timeList.add("12:00");
+			timeList.add("13:00");
+			timeList.add("14:00");
+			timeList.add("15:00");
+			timeList.add("16:00");
+			
+			model.addAttribute("timeList", timeList);
+			model.addAttribute("professorList", professorList);
+			model.addAttribute("departmentList", departmentList);
+			model.addAttribute("course",course);
+			logger.info("Client request to url : AddCourse");
+			return "registrar/AddCourse";
+		}
+		
 		Department department = departmentDao.getDepartment(departmentId);
 		course.setDepartment(department);
 		

@@ -76,20 +76,22 @@ public class CourseDAOImpl implements CourseDAO {
 		manager.close();
 		return courseList;
 	}
-	
+
 	public List<Course> getAllCoursesByStudent(Student student) {
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Course> query = manager.createQuery("select c FROM Course as c join fetch c.studentList s WHERE s.username =?", Course.class);
-        query.setParameter(1, student.getUsername());
+		TypedQuery<Course> query = manager
+				.createQuery("select c FROM Course as c join fetch c.studentList s WHERE s.username =?", Course.class);
+		query.setParameter(1, student.getUsername());
 		List<Course> courseList = query.getResultList();
 		manager.close();
 		return courseList;
 	}
-	
+
 	public List<Course> getAllNonEnrolledCoursesByStudent(Student student) {
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Course> query = manager.createQuery("select c FROM Course as c join fetch c.studentList s WHERE s.username !=?", Course.class);
-        query.setParameter(1, student.getUsername());
+		TypedQuery<Course> query = manager
+				.createQuery("select c FROM Course as c join fetch c.studentList s WHERE s.username !=?", Course.class);
+		query.setParameter(1, student.getUsername());
 		List<Course> courseList = query.getResultList();
 		manager.close();
 		return courseList;
@@ -97,29 +99,20 @@ public class CourseDAOImpl implements CourseDAO {
 
 	@Override
 	public List<Course> getAllCoursesByProfessor(Professor professor) {
-			EntityManager manager = factory.createEntityManager();
-			TypedQuery<Course> query = manager.createQuery("SELECT c FROM Course c WHERE c.professor.username=?", Course.class);
-			query.setParameter(1, professor.getUsername());
-			List<Course> courseList = query.getResultList();
-			manager.close();	
-			return courseList;
-		}
-	
-	@Override
-	public List<Course> getCourseByName(String name){
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Course> query = manager.createQuery("SELECT c FROM Course c WHERE c.courseName like ? or c.department.departmentName like ?", Course.class);
-		query.setParameter(1, "%" + name + "%");
-		query.setParameter(2, "%" + name + "%");
+		TypedQuery<Course> query = manager.createQuery("SELECT c FROM Course c WHERE c.professor.username=?",
+				Course.class);
+		query.setParameter(1, professor.getUsername());
 		List<Course> courseList = query.getResultList();
 		manager.close();
 		return courseList;
 	}
-	
+
 	@Override
-	public List<Course> getEmptyCourses(String name){
+	public List<Course> getCourseByName(String name) {
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Course> query = manager.createQuery("SELECT c FROM Course c WHERE c.courseName like ? or c.department.departmentName like ?", Course.class);
+		TypedQuery<Course> query = manager.createQuery(
+				"SELECT c FROM Course c WHERE c.courseName like ? or c.department.departmentName like ?", Course.class);
 		query.setParameter(1, "%" + name + "%");
 		query.setParameter(2, "%" + name + "%");
 		List<Course> courseList = query.getResultList();
@@ -127,5 +120,16 @@ public class CourseDAOImpl implements CourseDAO {
 		return courseList;
 	}
 
+	@Override
+	public List<Course> getEmptyCourses(String name) {
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Course> query = manager.createQuery(
+				"SELECT c FROM Course c WHERE c.courseName like ? or c.department.departmentName like ?", Course.class);
+		query.setParameter(1, "%" + name + "%");
+		query.setParameter(2, "%" + name + "%");
+		List<Course> courseList = query.getResultList();
+		manager.close();
+		return courseList;
 	}
 
+}

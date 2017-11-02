@@ -38,6 +38,7 @@
 			<label class="CoursesLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">
 			</label>
 		</form>
+		${message}
 	<h2>Add Course</h2>
 	<sf:form method="post" action="doAddCourse" modelAttribute="course">
 		 Course Name : <br /> <sf:input type="text" path="courseName" /> <br />
@@ -46,10 +47,10 @@
 		<div class="col-lg-8">
 		<div class="ui-select">
 				<select name="departmentId">
+						<option value="0" selected="selected"/>
 					<c:forEach items="${departmentList}" var="dep">
 						<option value="${dep.departmentId}">${dep.departmentName}</option>
 					</c:forEach>
-						<option value="" selected="selected"/>
 				</select>
 		</div>
 		</div>

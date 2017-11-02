@@ -46,14 +46,16 @@ public class ITAdminController {
 	public ITAdminController() {
 		super();
 	}
-
-	public ITAdminController(StudentDAO studentDao, ProfessorDAO professorDao, RegistrarDAO registrarDao,
-			ITAdminDAO itAdminDao) {
+	
+	public ITAdminController(UserDAO userDao, StudentDAO studentDao, ProfessorDAO professorDao,
+			RegistrarDAO registrarDao, ITAdminDAO itAdminDao, DepartmentDAO departmentDao) {
 		super();
+		this.userDao = userDao;
 		this.studentDao = studentDao;
 		this.professorDao = professorDao;
 		this.registrarDao = registrarDao;
 		this.itAdminDao = itAdminDao;
+		this.departmentDao = departmentDao;
 	}
 
 	@RequestMapping("/itAdmin/HomePage")

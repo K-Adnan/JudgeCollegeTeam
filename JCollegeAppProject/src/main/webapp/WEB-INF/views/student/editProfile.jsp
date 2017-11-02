@@ -48,6 +48,7 @@ ${message}
 
 <sf:form method="post" action="updateProfile" modelAttribute="student">
 	<h2 style="text-align:left"> Update Your Profile </h2>
+		<sf:hidden path="username" value="${student.username}"/>
 	<p style="text-align:left">Address : <sf:input size="50" path="address" value="${student.address}"/><br/></p>
 	<p style="text-align:left">Phone Number : <sf:input path="phoneNumber" value="${student.phoneNumber}"/></p>
 	<p style="text-align:left">Email Address : <sf:input path="emailAddress" value="${student.emailAddress}"/></p>
