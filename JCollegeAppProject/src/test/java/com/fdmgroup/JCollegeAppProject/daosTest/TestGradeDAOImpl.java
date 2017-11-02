@@ -16,7 +16,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.fdmgroup.JCollegeAppProject.daos.GradeDAOImpl;
+import com.fdmgroup.JCollegeAppProject.entities.Course;
 import com.fdmgroup.JCollegeAppProject.entities.Grade;
+import com.fdmgroup.JCollegeAppProject.entities.Professor;
 import com.fdmgroup.JCollegeAppProject.entities.Student;
 import com.fdmgroup.JCollegeAppProject.entities.User;
 
@@ -32,10 +34,14 @@ public class TestGradeDAOImpl {
 	private User user;
 	private Grade grade;
 	private Student student;
+	private Professor professor;
+	private Course course;
 
 	@Before
 	public void setUp() {
+		course = mock(Course.class);
 		manager = mock(EntityManager.class);
+		professor = mock(Professor.class);
 		grade = new Grade();
 		factory = mock(EntityManagerFactory.class);
 		transaction = mock(EntityTransaction.class);
@@ -103,6 +109,47 @@ public class TestGradeDAOImpl {
 		when(manager.createQuery("SELECT g FROM Grade g WHERE g.student=?", Grade.class)).thenReturn(query);
 		when(query.getResultList()).thenReturn(l);
 		gradeDao.getAllGradesByStudent(student);
+	}
+	
+	@Test
+	public void asdaaafa() {
+		List<Grade> l = new ArrayList<Grade>();
+		when(factory.createEntityManager()).thenReturn(manager);
+		when(manager.createQuery("FROM Grade g WHERE g.professor.username =?", Grade.class)).thenReturn(query);
+		when(query.getResultList()).thenReturn(l);
+		gradeDao.getAllGradesByProfessor(professor);
+	}
+	
+	@Test
+	public void asdaaaafa() {
+		List<Grade> l = new ArrayList<Grade>();
+		when(factory.createEntityManager()).thenReturn(manager);
+		when(manager.createQuery("FROM Grade g WHERE g.course.courseCode =?", Grade.class)).thenReturn(query);
+		when(query.getResultList()).thenReturn(l);
+		gradeDao.getAllGradesByCourse(course);
+	}
+	
+	@Test
+	public void asdaaaaafa() {
+		List<Grade> l = new ArrayList<Grade>();
+		when(factory.createEntityManager()).thenReturn(manager);
+		when(manager.createQuery("FROM Grade g WHERE g.course.courseCode =? AND g.student.username =?", Grade.class)).thenReturn(query);
+		when(query.getResultList()).thenReturn(l);
+		gradeDao.getGradeForStudentForCourse(course, student);
+	}
+	
+	@Test
+	public void asdaaabaafa() {
+		List<Grade> l = new ArrayList<Grade>();
+		l.add(grade);
+		l.add(new Grade());
+		l.add(new Grade());
+		l.add(new Grade());
+		l.add(new Grade());
+		when(factory.createEntityManager()).thenReturn(manager);
+		when(manager.createQuery("FROM Grade g WHERE g.course.courseCode =? AND g.student.username =?", Grade.class)).thenReturn(query);
+		when(query.getResultList()).thenReturn(l);
+		gradeDao.getGradeForStudentForCourse(course, student);
 	}
 
 }
