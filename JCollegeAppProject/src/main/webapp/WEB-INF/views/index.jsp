@@ -18,7 +18,7 @@
 	<div class="message">
 		<p>${message}</p>
 	</div>
-    <img src="https://image.ibb.co/j2Oa5m/Judge_College.png" alt="Avatar" class="avatar">
+    <img src="img/logo.png" alt="Avatar" class="avatar">
   </div>
   
 	<div class="container">

@@ -24,9 +24,16 @@ header {
 /* Logo placeholder*/
 #logo {
 	float: left;
-	width: 250px;
+	width: 127px;
+	height: 116px;
+	margin-left: 8%;
 	text-align: center;
 	color: rgba(255,255,255,1.00);
+}
+
+#logo img {
+	width: 100px;
+	height: 100px;
 }
 /* div for Links in header */
 #headerLinks {
@@ -34,7 +41,7 @@ header {
 	float: left;
 	width: calc( 100% - 250px );
 	text-align: right;
-	padding-top: 10px;
+	padding-top: 5px;
 	padding-bottom: 10px;
 	background-color: #F0F0F0;
 	color: #000000;
@@ -95,7 +102,7 @@ header {
 	color: rgba(146,146,146,1.00);
 	position: relative;
 	left: 0%;
-	margin-top: -20px;
+	margin-top: -50px;
 }
 /* Search field in sidebar */
 #content .sidebar #search {
@@ -121,6 +128,7 @@ header {
 	margin-right: auto;
 	background-color: #F0F0F0;
 	text-align: center;
+	margin-top: -10px;
 }
 /*menu elements */
 .menu ul li {
@@ -418,11 +426,12 @@ footer div a {
 	margin: 0;
 	text-align: center;
 }
+
 .sidebar #menubar .menu ul li a:hover {
 	color: rgba(59,54,54,1.00);
 	text-decoration: none;
 	font-weight: bold;
-	background-color: #9A9A9A; 
+	background-color: #9A9A9A;
 }
 /* Menu headings in sidebar */
 #menubar .menu h1 {
@@ -719,7 +728,7 @@ footer .footerlinks p {
 	padding-bottom: 21px;
 }
 /* Logo placeholder*/
-#mainWrapper header #logo {
+#mainWrapper header {
 	width: 100%;
 	text-align: center;
 }
@@ -810,6 +819,11 @@ header #headerLinks a {
 	background-color: #313131;
 	padding-right: 25px;
 	margin-right: 10px;
+}
+
+.titletext {
+	position: relative;
+	margin-top: 500px;
 }
 
 }
