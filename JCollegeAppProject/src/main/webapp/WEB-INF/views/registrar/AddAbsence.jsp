@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
 	<ul>
 		<div class="img">
 			<IMG HEIGHT="50" WIDTH="80" SRC=http://www.pathwaysnetwork.co.uk/images/jeancarr-jc.jpg>
@@ -32,6 +33,10 @@
 	</ul>
 
 	<div style="margin-left: 25%; padding: 1px 16px; height: 1000px;">
+	<form align="centre" name="form1" method="post" action="SystemUsers">
+			<label class="SystemUsersLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">
+			</label>
+		</form>
 	<h2>Add Absence</h2>
 
 	<form method="post" action="doAddAbsence?username=${username}" >
