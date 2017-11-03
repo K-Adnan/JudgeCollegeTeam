@@ -213,6 +213,7 @@ public class RegistrarController {
 			genders.add("FEMALE");
 			genders.add("UNDISCLOSED");
 			
+			
 			model.addAttribute("student", student);
 			model.addAttribute("genders", genders);
 			model.addAttribute("message", "Please enter a valid Date of Birth");
@@ -224,6 +225,8 @@ public class RegistrarController {
 		
 		studentDao.updateStudent(student);
 		
+		List<Course> courseList = courseDao.getAllCoursesByStudent(student);
+		model.addAttribute("courseList", courseList);
 		String username = (String) session.getAttribute("username");
 		model.addAttribute("student", student);
 		List<Absence> absenceList = absenceDao.getAbsencesByStudent(student);

@@ -101,9 +101,7 @@ table {
 			<th>Course Code</th>
 			<th>Course Name</th>
 			<th>Professor</th>
-			<th>Start Date</th>
-			<th>End Date</th>
-			<th>Enroll</th>
+			<th>Remove</th>
 
 		</tr>
 
@@ -121,12 +119,9 @@ table {
 			</c:otherwise>
 				</c:choose>
 				</th>
-				<th>${c.startDate}</th>
-				<th>${c.endDate}</th>
 				<th><a href="vacateCourse?courseCode=${c.courseCode}">Remove Course</a></th>
 		</c:forEach>
 	</table>
-      
       
     </div>
   </div>
