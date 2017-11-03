@@ -46,8 +46,6 @@ body {
 	
 	${course.courseInfo}
 
-	<a href="/JCollegeAppProject/logout">Logout</a><br/>
-
 		<table>
 			<tr>
 				<th>Monday</th>

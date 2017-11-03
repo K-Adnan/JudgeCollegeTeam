@@ -115,7 +115,7 @@ public class WelcomeController {
 		Student student = studentDao.getStudent(username);
 		student.setNoOfIncorrectAttempts(0);
 		studentDao.updateStudent(student);
-		return "student/studentHome";
+		return "redirect:studentViewProfile";
 	}
 
 	@RequestMapping("/professor/home")

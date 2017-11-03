@@ -16,17 +16,17 @@ body {
 td {
 	border: 1px solid grey;
 	width: 20%;
+	font-weight: bold;
 }
 
 th {
+	font-size: 10pt;
 	font-weight: normal;
 	border: 1px solid grey;
-	width: 15%;
 }
 
 table {
-	margin-left: -10%;
-	width: 120%;
+	margin-left: -5%;
 	border: 1px solid grey;
 }
 
@@ -76,6 +76,7 @@ table {
                 <td>Phone Number</td>
                 <td>D.O.B</td>
                  <td>Gender</td>
+                 <td>Remove</td>
            </tr>
 
            <c:forEach items="${studentList}" var="s">
