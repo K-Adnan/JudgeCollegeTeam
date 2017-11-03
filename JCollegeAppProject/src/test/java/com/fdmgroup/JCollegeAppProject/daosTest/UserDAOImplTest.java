@@ -72,6 +72,7 @@ public class UserDAOImplTest {
 
 	@Test
 	public void testUpdateUserUpdatesAUser() {
+		UserDAOImpl u = new UserDAOImpl();
 		User user = new User();
 		userDao.updateUser(user);
 		verify(manager).merge(user);
