@@ -135,6 +135,7 @@ public class RegistrarController {
 			model.addAttribute("professor", professor);
 			return "registrar/ViewAndUpdateProf";
 		}
+		logger.info("View and update user "+username);
 		return "redirect:SystemUsers";
 	}
 
@@ -193,6 +194,7 @@ public class RegistrarController {
 		
 		model.addAttribute("student", student);
 		model.addAttribute("genders", genders);
+		logger.info("Client request to url : EditInformationStud");
 		return "registrar/EditInformationStud";
 	}
 	
@@ -232,7 +234,7 @@ public class RegistrarController {
 		List<Absence> absenceList = absenceDao.getAbsencesByStudent(student);
 		model.addAttribute("absenceList", absenceList);
 		
-		logger.info("Information are edited for"+username);
+		logger.info("Information are edited for "+username);
 		return "registrar/ViewAndUpdateStud";
 	}
 	
@@ -244,6 +246,7 @@ public class RegistrarController {
 		model.addAttribute("departmentList", departmentList);
 		model.addAttribute("professor", professor);
 		
+		logger.info("Client request to url : EditInformationProf");
 		return "registrar/EditInformationProf";
 	}
 	
@@ -285,7 +288,6 @@ public class RegistrarController {
 		model.addAttribute("absenceList", absenceList);
 		
 		logger.info("User is removed from course :"+courseName);
-		
 		return "registrar/ViewAndUpdateStud";
 	}
 
@@ -410,7 +412,6 @@ public class RegistrarController {
 			model.addAttribute("professorList", professorList);
 			model.addAttribute("departmentList", departmentList);
 			model.addAttribute("course",course);
-			logger.info("Client request to url : AddCourse");
 			return "registrar/AddCourse";
 		}
 		
@@ -464,7 +465,7 @@ public class RegistrarController {
 		model.addAttribute("courseList", courseList);
 		List<Professor> professorList = professorDao.getAllProfessors();
 		model.addAttribute("professorList", professorList);
-		//logger.info("Course is added : " +courseCode);
+		logger.info("Course is added : " +course);
 		model.addAttribute("message2", "Course is added!");
 		return "registrar/Courses";
 	}
@@ -477,7 +478,7 @@ public class RegistrarController {
 		String date = cal.get(Calendar.DATE) + "/" + month + "/" + cal.get(Calendar.YEAR);
 		
 		model.addAttribute("username", username);
-		logger.info("Client request to url : Grades");
+		logger.info("Client request to url : AddAbsence");
 		model.addAttribute("date", date);
 		return "registrar/AddAbsence";
 	}
@@ -512,12 +513,12 @@ public class RegistrarController {
 		absenceDao.addAbsence(absence);
 
 		model.addAttribute("username", username);
-		logger.info("Client request to url : Grades");
 		List<Course> courseList = courseDao.getAllCoursesByStudent(student);
 		model.addAttribute("student", student);
 		model.addAttribute("courseList", courseList);
 		List<Absence> absenceList = absenceDao.getAbsencesByStudent(student);
 		model.addAttribute("absenceList", absenceList);
+		logger.info("Absence was added");
 		return "registrar/ViewAndUpdateStud";
 	}
 
@@ -550,6 +551,7 @@ public class RegistrarController {
 		
 		List<User> userList = userDao.getUserByName(search);
 		model.addAttribute("userList", userList);
+		logger.info("User was searched");
 		return "registrar/SystemUsers";
 	}
 	
@@ -566,6 +568,7 @@ public class RegistrarController {
 		
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("user", user);
+		logger.info("Timetable was shown for user : +user");
 		return "registrar/userTimetable";
 	}
 	
@@ -573,11 +576,13 @@ public class RegistrarController {
 	public String goToDepartments(Model model){
 		List<Department> departmentList = departmentDao.getAllDepartments();
 		model.addAttribute("departmentList", departmentList);
+		logger.info("Client request to url : Departments");
 		return "registrar/Departments";
 	}
 	
 	@RequestMapping("/registrar/addDepartment")
 	public String goToAddDepartment(Model model){
+		logger.info("Client request to url : addDepartments");
 		return "registrar/AddDepartment";
 	}
 	
@@ -589,6 +594,7 @@ public class RegistrarController {
 		
 		List<Department> departmentList = departmentDao.getAllDepartments();
 		model.addAttribute("departmentList", departmentList);
+		logger.info("Department was added");
 		return "registrar/Departments";
 	}
 	
@@ -605,6 +611,7 @@ public class RegistrarController {
 		}
 		
 		model.addAttribute("courseList", courseList);
+		logger.info("Client request to url : viewEmptyCourses");
 		return "registrar/EmptyCourses";
 	}
 	
@@ -628,6 +635,7 @@ public class RegistrarController {
 		}
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("message5", "Empty course is cancelled!");
+		logger.info("Empty course is cancelled");
 		return "registrar/EmptyCourses";
 	}
 	
@@ -646,7 +654,7 @@ public class RegistrarController {
 		
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("professorList", professorList);
-		
+		logger.info("Searching for a course");
 		return "registrar/Courses";
 	}
 
@@ -665,6 +673,7 @@ public class RegistrarController {
 			model.addAttribute("professorList", professorList);
 			model.addAttribute("message",message);
 			model.addAttribute("message2",message2);
+			logger.info("Client request to url : Courses");
 		return "registrar/Courses";
 	}
 }
