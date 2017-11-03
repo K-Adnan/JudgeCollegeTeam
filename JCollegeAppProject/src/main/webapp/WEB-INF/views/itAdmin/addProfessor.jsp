@@ -43,6 +43,8 @@ body {
     </nav>
     <div class="mainContent">
       
+      ${message} <br/> <br/>
+      
       <sf:form method="post" action="processAddProfessor" modelAttribute="professor">		 	 
 		
 		User Name: <sf:input type="text" path="username" required="required" /><br/>
