@@ -13,6 +13,16 @@ body {
 	background-image: url();
 	background-repeat: repeat-x;
 }
+td, th {
+	width: 20%;
+	border-right: 1px solid grey;
+}
+
+table {
+	margin-top: 10px;
+	margin-left: -5%;
+	border: 1px solid grey;
+}
 </style>
 </head>
 <body>
@@ -44,7 +54,6 @@ body {
       
 <h2>Student Course Options</h2>
 
-	<a href="/JCollegeAppProject/logout">Logout</a><br/>
 	<a href="ViewCourses">Show All Available Courses</a>
 
 	<form action="searchCourse" method="post">
@@ -58,18 +67,16 @@ body {
 			<th>Course Name</th>
 			<th>Department</th>
 			<th>Professor</th>
-			<th>Start Date</th>
-			<th>End Date</th>
 			<th>Enroll</th>
 
 		</tr>
 
 		<c:forEach items="${courseList}" var="c">
 			<tr>
-				<th>${c.courseCode}</th>
-				<th><a href="viewCourse?courseCode=${c.courseCode}">${c.courseName}</a></th>
-				<th>${c.department.departmentName}
-				<th>
+				<td>${c.courseCode}</td>
+				<td><a href="viewCourse?courseCode=${c.courseCode}">${c.courseName}</a></td>
+				<td>${c.department.departmentName}
+				<td>
 				<c:choose>
 				<c:when test="${empty c.professor}">
 				N/A
@@ -78,10 +85,8 @@ body {
 				${c.professor.firstName} ${c.professor.lastName}
 			</c:otherwise>
 				</c:choose>
-				</th>
-				<th>${c.startDate}</th>
-				<th>${c.endDate}</th>
-				<th><a href="enrollOnCourse?courseCode=${c.courseCode}&courseName=${c.courseName}">Enroll</a></th>
+				</td>
+				<th><a href="enrollOnCourse?courseCode=${c.courseCode}&courseName=${c.courseName}">Enroll</a></td>
 		</c:forEach>
 	</table>
 	${message}

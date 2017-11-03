@@ -59,6 +59,7 @@ body {
 		<br />
         Address: <sf:input type="text" path="address" required="required" />
 		<br />
+		Phone Number: <sf:input type="text" path="phoneNumber" required="required" />
 		<br />
 		Date Of Birth: <sf:input type="text" path="dobString" required="required" />
 		<br />

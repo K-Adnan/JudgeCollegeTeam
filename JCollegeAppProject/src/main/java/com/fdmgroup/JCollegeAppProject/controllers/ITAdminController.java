@@ -115,6 +115,9 @@ public class ITAdminController {
 
 	@RequestMapping("/itAdmin/processAddProfessor")
 	public String processAddProfessor(@RequestParam int departmentId, Model model, Professor professor) {
+		Department dep = departmentDao.getDepartment(departmentId);
+		professor.setDepartment(dep);
+		
 		try {
 			professorDao.addProfessor(professor);
 		} catch (Exception e) {

@@ -13,6 +13,23 @@ body {
 	background-image: url();
 	background-repeat: repeat-x;
 }
+td {
+	border: 1px solid grey;
+	width: 20%;
+	font-weight: bold;
+}
+
+th {
+	font-size: 10pt;
+	font-weight: normal;
+	border: 1px solid grey;
+}
+
+table {
+	margin-left: -5%;
+	border: 1px solid grey;
+}
+
 </style>
 </head>
 <body>
@@ -50,15 +67,16 @@ body {
      <table>
            <tr>
 
-                <th>Student User Name</th>
-                <th>Student password</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Phone Number</th>
-                <th>D.O.B</th>
-                 <th>Gender</th>
+                <td>Student User Name</td>
+                <td>Student password</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Email</td>
+                <td>Address</td>
+                <td>Phone Number</td>
+                <td>D.O.B</td>
+                 <td>Gender</td>
+                 <td>Remove</td>
            </tr>
 
            <c:forEach items="${studentList}" var="s">
@@ -67,7 +85,7 @@ body {
                      <th>${s.password}</th>
                      <th>${s.firstName}</th>
                      <th>${s.lastName}</th>
-                     <th>${email}</th>
+                     <th>${s.emailAddress}</th>
                      <th>${s.address}</th>
                      <th>${s.phoneNumber}</th>
                      <th>${s.dOB}</th>
