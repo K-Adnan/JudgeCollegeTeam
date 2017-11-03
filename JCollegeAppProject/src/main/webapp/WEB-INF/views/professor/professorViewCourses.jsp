@@ -6,19 +6,47 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="../css/professor.css" rel="stylesheet" type="text/css">
 <title>View Courses</title>
+<link href="../css/Home.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+
+body {
+	background-color: #1A1A1A;
+	background-image: url();
+	background-repeat: repeat-x;
+}
+</style>
+
+
 </head>
 <body>
+<div id="mainWrapper">
+  <header> 
+    <!-- This is the header content. It contains Logo and links -->
+    <div id="logo"> 
+      <!-- Company Logo text --> 
+      <a href="../home"> <img src="../img/logo.png"/> </a></div>
+    <div id="headerLinks"><a href="../logout" title="Logout">Logout</a></div>
+    <div class="titletext">
+		  <h2>Judge College</h2>
+    </div>
+  </header>
 
 
-		
-		<ul>
-  <li><a href = "viewCourses"> Courses </a></li>
-  <li><a href = "viewProfile"> My Profile</a></li>
-</ul>
-	
-		<a href="/JCollegeAppProject/logout" class = logoutLblPos>Logout</a>
+<div id="content">
+    <nav class="sidebar"> 
+      <div id="menubar">
+      	<div class="menu">
+          <ul>
+					<li><a href = "viewCourses">Courses</a></li>
+          			<li><a href = "viewProfile">My Profile</a></li>
+          			<li><a href = "viewTimetable">Timetable</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="mainContent">
+
 
 	<h2>Student Course Options</h2>
 
@@ -28,8 +56,6 @@
 			<th>Course Code</th>
 			<th>Course Name</th>
 			<th>Taught by</th>
-			<th>Start Date</th>
-			<th>End Date</th>
 			<th>Number of Students</th>
 			
 			<th> </th>
@@ -47,8 +73,6 @@
 					${c.professor.firstName} ${c.professor.lastName}
 					</c:otherwise>
 					</c:choose></th>
-				<th>${c.startDate}</th>
-				<th>${c.endDate}</th>
 				<th>${fn:length(c.studentList)}</th>
 				<th>
 				<c:choose>
@@ -70,22 +94,42 @@
 		<tr>
 			<th>Course Code</th>
 			<th>Course Name</th>
-			<th>Start Date</th>
-			<th>End Date</th>
 		</tr>
 
 		<c:forEach items="${taughtCourseList}" var="t">
 			<tr>
 				<th><a href="viewStudents?courseCode=${t.courseCode}">${t.courseCode}</a></th>
 				<th><a href="viewStudents?courseCode=${t.courseCode}">${t.courseName}</a></th>
-				<th>${t.startDate}</th>
-				<th>${t.endDate}</th>
 				<th><a href="unassignCourse?courseCode=${t.courseCode}">Remove Course</a></th>
 		</c:forEach>
 	</table>
 
+</div>
+</div>
 
 
-<a href="professorHome">back home</a>
+<footer> 
+    <!-- This is the footer with default 3 divs -->
+    <div><span style="line-height: 5px"> <p><strong>Judge College</strong></p>
+      <p>Cottons Centre</p>
+      <p> Cottons Lane</p>
+      <p> London SE1 2QG</p></span>
+    </div>
+    <div id="2col">
+    	<span style="line-height: 10px"><p>Tel: 020 3141 5926</p> 
+    	<p>Email: info@judgecollege.co.uk</p></span>
+    </div>
+    <div>
+      <span style="line-height: 10px"><p>&copy; 2017 Judge College Inc.</p>
+      <p>All Rights Reserved</p></span>
+    </div>
+  </footer>
+</div>
+
+
+
+
+
+
 </body>
 </html>

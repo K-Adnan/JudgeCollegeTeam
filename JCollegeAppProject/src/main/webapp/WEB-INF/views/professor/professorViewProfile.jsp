@@ -5,13 +5,71 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="../css/professor.css" rel="stylesheet" type="text/css">
 <title>Professor Profile Screen</title>
+<link href="../css/Home.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+body {
+	background-color: #1A1A1A;
+	background-image: url();
+	background-repeat: repeat-x;
+}
+</style>
 </head>
 <body>
 
-${message}
+<div id="mainWrapper">
+  <header> 
+    <!-- This is the header content. It contains Logo and links -->
+    <div id="logo"> 
+      <!-- Company Logo text --> 
+      <a href="../home"> <img src="../img/logo.png"/> </a></div>
+    <div id="headerLinks"><a href="../logout" title="Logout">Logout</a></div>
+    <div class="titletext">
+		  <h2>Judge College</h2>
+    </div>
+  </header>
 
+
+<div id="content">
+    <nav class="sidebar"> 
+      <div id="menubar">
+      	<div class="menu">
+          <ul>
+					<li><a href = "viewCourses">Courses</a></li>
+          			<li><a href = "viewProfile">My Profile</a></li>
+          			<li><a href = "viewTimetable">Timetable</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+
+
+    <div class="mainContent">
+
+<h1>My Profile Details</h1>
+
+<strong>Username:</strong> ${professor.username}<br/>
+			<strong>First Name:</strong> ${professor.firstName}<br/>
+			<strong>Last Name:</strong> ${professor.lastName}<br/>
+			<strong>Registration Date:</strong> ${professor.registrationDate}<br/>
+			<strong>Address:</strong> ${professor.address}<br/>
+			<strong>Phone Number:</strong> ${professor.phone}<br/>
+			<strong>Email Address:</strong> ${professor.emailAddress}<br/>
+			<strong>Fax:</strong> ${professor.fax}<br/>
+			<strong>Department:</strong> ${professor.department.departmentName}<br/>
+
+<a href="editProfile">Edit Contact Information</a>
+
+
+
+
+
+
+
+
+<!--  
 <c:if test="${not empty username}">
  <div align="center">
 
@@ -45,19 +103,37 @@ ${message}
             
         </table>
     </div>
-
-
-</c:if>
-
 <a href="editProfile">Edit Contact information</a>
 
+</c:if>
+-->
+
+</div>
+  </div>
+
+<footer> 
+    <!-- This is the footer with default 3 divs -->
+    <div><span style="line-height: 5px"> <p><strong>Judge College</strong></p>
+      <p>Cottons Centre</p>
+      <p> Cottons Lane</p>
+      <p> London SE1 2QG</p></span>
+    </div>
+    <div id="2col">
+    	<span style="line-height: 10px"><p>Tel: 020 3141 5926</p> 
+    	<p>Email: info@judgecollege.co.uk</p></span>
+    </div>
+    <div>
+      <span style="line-height: 10px"><p>&copy; 2017 Judge College Inc.</p>
+      <p>All Rights Reserved</p></span>
+    </div>
+  </footer>
+</div>
 
 
-<a href="/JCollegeAppProject/logout">Logout</a>
 
 
 
-<a href="professorHome"> Go back Home</a>
+
 
 
 

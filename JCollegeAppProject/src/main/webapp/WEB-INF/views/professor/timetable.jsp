@@ -7,13 +7,75 @@
 <head>
 <link href="../css/timetable.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home Screen</title>
+<title>My Timetable</title>
+<link href="../css/Home.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+
+body {
+	background-color: #1A1A1A;
+	background-image: url();
+	background-repeat: repeat-x;
+}
+
+.timetableItem {
+	background-color: #DADADA;
+	margin: 5px;
+	width: 90%;
+}
+
+td {
+	border: 1px solid grey;
+	width: 20%;
+}
+
+th {
+	border: 1px solid grey;
+	width: 15%;
+}
+
+table {
+	border: 1px solid grey;
+}
+
+.courseName {
+	text-align: center;
+	font-weight: bold;
+}
+</style>
+
 </head>
 <body>
-
-	<h2>View Timetable</h2>
-
-	<a href="/JCollegeAppProject/logout">Logout</a><br/>
+<div id="mainWrapper">
+  <header> 
+    <!-- This is the header content. It contains Logo and links -->
+    <div id="logo"> 
+      <!-- Company Logo text --> 
+      <a href="../home"> <img src="../img/logo.png"/> </a></div>
+    <div id="headerLinks"><a href="../logout" title="Logout">Logout</a></div>
+    <div class="titletext">
+		  <h2>Judge College</h2>
+    </div>
+  </header>
+  <div id="content">
+    <nav class="sidebar"> 
+      <div id="menubar">
+      	<div class="menu">
+          <ul>
+                	<li><a href = "viewCourses">Courses</a></li>
+          			<li><a href = "viewProfile">My Profile</a></li>
+          			<li><a href = "viewTimetable">Timetable</a></li>
+				
+          </ul>
+        </div>
+      </div>
+    </nav>
+     <div class="mainContent">
+     	<div style="padding: 1px 16px; height: 1000px;">
+<form align="left" name="form1" method="post" action="Timetable">
+			
+		</form>
+     
+	<h2>My Timetable</h2>
 
 	<table>
 			<tr>
@@ -809,5 +871,29 @@
 				</td>
 			</tr>
 	</table>
+	
+	 </div>
+  </div>
+	
+	  <footer> 
+    <!-- This is the footer with default 3 divs -->
+    <div><span style="line-height: 5px"> <p><strong>Judge College</strong></p>
+      <p>Cottons Centre</p>
+      <p> Cottons Lane</p>
+      <p> London SE1 2QG</p></span>
+    </div>
+    <div id="2col">
+    	<span style="line-height: 10px"><p>Tel: 020 3141 5926</p> 
+    	<p>Email: info@judgecollege.co.uk</p></span>
+    </div>
+    <div>
+      <span style="line-height: 10px"><p>&copy; 2017 Judge College Inc.</p>
+      <p>All Rights Reserved</p></span>
+    </div>
+  </footer>
+</div>
+	
+
+	
 </body>
 </html>
