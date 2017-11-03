@@ -14,6 +14,33 @@ body {
 	background-image: url();
 	background-repeat: repeat-x;
 }
+table {
+	width: 85%;
+	margin-left: auto;
+	margin-right: auto;
+	border="0";
+	border-color:#000000;
+	border-style: solid;
+	border-width: 0.5px;
+	}
+		
+table tr:nth-child(even){background-color: white}		
+		
+table td {
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	}
+		
+table td:first-child {
+	border-left: none;
+	}
+		
+table td:last-child {
+	border-right: none;
+	}
+				
+table tr:nth-child(even){background-color: white}		
+		
 </style>
 </head>
 <body>
@@ -51,14 +78,14 @@ body {
 	
 	<a href="addDepartment">Add new Department</a>
 	
-	<table class="table1">
-			<tr>
-				<th>Department ID</th>
+	<table class="table" style="border-collapse: collapse;">
+			<tr style="background-color: lightgrey; border:2px solid black;">
+				<th style="background-color: lightgrey; border:2px solid black;">Department ID</th>
 				<th>Department Name</th>
 			</tr>
 			<c:forEach items="${departmentList}" var="d">
 				<tr>
-					<td>${d.departmentId}</td>
+					<td >${d.departmentId}</td>
 					<td>${d.departmentName}</td>
 				</tr>
 

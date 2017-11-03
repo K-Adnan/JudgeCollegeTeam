@@ -15,6 +15,36 @@ body {
 	background-image: url();
 	background-repeat: repeat-x;
 }
+table {
+	margin-top: 10px;
+	border="0";
+	border-color:#000000;
+	border-style: solid;
+	border-width: 0.5px;
+	column-rule-style: solid;
+	}
+	
+table td {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+table td:first-child {
+    border-left: none;
+}
+
+table td:last-child {
+    border-right: none;
+}
+		
+table tr:nth-child(even){background-color: white}		
+
+.edit {
+			text-align: left;
+		}
+p { margin-bottom: -1px;
+}
+		
 </style>
 </head>
 <body>
@@ -50,17 +80,19 @@ body {
 			<label class="SystemUsersLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">
 			</label>
 		</form>
-	<h2>Profile Information</h2>
+	<h2 style="text-align: left;">Profile Information</h2>
 	
+	<div class="edit">
 	<form name="form1" method="post" action="EditInformationStud?username=${student.username}">
 		<label class="EditInformationLblPos"> 
 			<input name="submit2" type="submit" id="submit2" value="Edit Information">
 		</label>
 	</form>
+    </div>
     
-	<table>
-		<tr>
-			<td>Username</td>
+	<table class="table" style="border-collapse: collapse;">
+		<tr style="background-color: lightgrey; border:2px solid black;">
+			<td style="background-color: lightgrey; border:2px solid black;">Username</td>
 			<td><input type="hidden" id="username" value="${student.username}">${student.username}</td>
 		</tr><tr>
 			<td>First Name</td>
@@ -84,7 +116,8 @@ body {
 	</table>
 	<br/><br/>
 	
-	<table>
+	<p style="text-align: left;">Courses</p>
+	<table class="table" style="border-collapse: collapse;">
 			<c:forEach items="${courseList}" var="c">
 				<tr>
 				<td>${c.courseName}</td> 
@@ -98,17 +131,18 @@ body {
 		</table>
 		
 		
-	<p>Absences</p>
+	<p style="text-align: left;">Absences</p>
 		
+		<div class="edit">
 		<form name="AddAbsence" method="post" action="AddAbsence?username=${student.username}">
 			<label class="AddAbsenceLblPos"> <input name="AddAbsence" type="submit" value="Add Absence">
 			</label>
 		</form>
-		
-		<table>
-				<tr>
-					<th>Date of Absence</th>
-					<th>Reason of Absence</th>
+		</div>
+		<table class="table" style="border-collapse: collapse;">
+				<tr style="background-color: lightgrey; border:2px solid black;">
+					<th style="background-color: lightgrey; border:2px solid black;">Date of Absence</th>
+					<th style="background-color: lightgrey; border:2px solid black;">Reason of Absence</th>
 					<th>Approved</th>
 				</tr>
 			<c:forEach items="${absenceList}" var="a">

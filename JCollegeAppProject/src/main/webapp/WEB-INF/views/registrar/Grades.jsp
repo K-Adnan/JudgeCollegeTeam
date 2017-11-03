@@ -14,6 +14,33 @@ body {
 	background-image: url();
 	background-repeat: repeat-x;
 }
+table {
+	width: 85%;
+	border="0";
+	border-color:#000000;
+	border-style: solid;
+	border-width: 0.5px;
+	margin-left: auto;
+	margin-right: auto;
+	}
+		
+table tr:nth-child(even){background-color: white}		
+		
+table td {
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	}
+		
+table td:first-child {
+	border-left: none;
+	}
+		
+table td:last-child {
+	border-right: none;
+	}
+				
+table tr:nth-child(even){background-color: white}		
+
 </style>
 </head>
 <body>
@@ -49,10 +76,10 @@ body {
 
 	<h2>Grades</h2>
 	
-	<table class="table1">
-			<tr>
-				<th>Username</th>
-				<th>Student Name</th>
+	<table class="table" style="border-collapse: collapse;">
+			<tr style="background-color: lightgrey; border:2px solid black;">
+				<th style="background-color: lightgrey; border:2px solid black;">Username</th>
+				<th style="background-color: lightgrey; border:2px solid black;">Student Name</th>
 				<th>Grades</th>
 			</tr>
 			<c:forEach items="${studentList}" var="s">

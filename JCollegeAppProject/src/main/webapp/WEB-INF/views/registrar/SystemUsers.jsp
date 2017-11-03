@@ -23,8 +23,24 @@ table tr input {
 table tr:hover input {
 	opacity: 1
 }
+
+table tr:nth-child(even){background-color: white}
+
 .searchUser { text-align: left;
 }
+
+.allusers table {
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 15px;
+			text-align: left;
+			border="0";
+			border-color:#000000;
+			border-style: solid;
+			border-width: 0.5px;
+			width: 90%;
+		}
+		
 </style>
 <script type="text/javascript">
 	function getConfRemoveUser() {
@@ -77,42 +93,39 @@ table tr:hover input {
 		</div>
       
 		<a href="SystemUsers">Show All Users</a><br/>
-		<a href="ShowProfessors">Show Professors</a><br/>
-		<a href="ShowStudents">Show Students</a><br/>
+		<a href="ShowProfessors">Professors only</a><br/>
+		<a href="ShowStudents">Students only</a><br/>
 		
-	
-
-		<table class="table1">
-			<tr>
-				<td>Username</td>
-				<td>Name</td>
+		<div class="allusers">
+		<table class="table" style="border-collapse: collapse;">
+			<tr style="background-color: lightgrey; border:2px solid black;">
+				<td style="padding: 8px;"><b>Username</b></td>
+				<td style="padding: 8px;"><b>Name</b></td>
+				<td></td>
+				<td></td>
 			</tr>
 			<c:forEach items="${userList}" var="u">
 				<tr>
-					<td>${u.username}</td>
+					<td style="padding: 5px;">${u.username}</td>
 					<td>${u.firstName} ${u.lastName}</td>
 
-					<td>
+					<td style="padding: 4px;">
 						<form name="ViewAndUpdate" method="post" action="ViewAndUpdate">
 							<input type="hidden" name="username" value="${u.username}" /> <input
 								name="submit3" type="submit" id="submit3"
 								value="View and Update">
 						</form>
 					</td>
-
-					<td>
-					
+					<td style="padding: 4px;">
 						<form id="formRemove" action="RemoveUser" onsubmit="return getConfRemoveUser()">
 							<input type="hidden" id="usernameid" name="username" value="${u.username}" >
 							<input name="removeUser" type="submit" value="Remove">
 						</form>
 					</td>
 				</tr>
-
 			</c:forEach>
-
 		</table>
-      
+      </div>
       
     </div>
   </div>
