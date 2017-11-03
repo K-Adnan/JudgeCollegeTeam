@@ -1,4 +1,4 @@
- package com.fdmgroup.JCollegeAppProject.controllers;
+package com.fdmgroup.JCollegeAppProject.controllers;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class ProfessorController {
 
 	@Autowired
 	private ProfessorDAO professorDao;
-	
+
 	@Autowired
 	private StudentDAO studentDao;
 
@@ -47,7 +47,7 @@ public class ProfessorController {
 	private CourseDAO courseDao;
 
 	public ProfessorController() {
-	}	
+	}
 
 	public ProfessorController(ProfessorDAO professorDao, StudentDAO studentDao, DepartmentDAO departmentDao,
 			GradeDAO gradeDao, CourseDAO courseDao) {
@@ -58,9 +58,6 @@ public class ProfessorController {
 		this.gradeDao = gradeDao;
 		this.courseDao = courseDao;
 	}
-
-
-
 
 	@RequestMapping("/professor/professorHome")
 	public String goToProfessorHome() {
@@ -122,183 +119,125 @@ public class ProfessorController {
 		return "professor/professorViewStudents";
 	}
 
-	
 	@RequestMapping("/professor/viewProfile")
 	public String goToViewProfile(Model model, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
 		model.addAttribute("professor", professor);
 		return "professor/professorViewProfile";
 	}
-	
+
 	@RequestMapping("/professor/editProfile")
 	public String goToEditProfilepage(Model model, Principal principal) {
-		
-		Professor professor = professorDao.getProfessor(principal.getName());	
+
+		Professor professor = professorDao.getProfessor(principal.getName());
 		professorDao.updateProfessor(professor);
-		model.addAttribute("professor",professor);
+		model.addAttribute("professor", professor);
 		return "professor/professorEditProfile";
 	}
 
 	@RequestMapping("/professor/processEditProfile")
 	public String editProfile(Model model, HttpSession session, Principal principal, Professor professor) {
 		Professor oldProfessor = professorDao.getProfessor(principal.getName());
-	
+
 		oldProfessor.setAddress(professor.getAddress());
 		oldProfessor.setPhone(professor.getPhone());
 		oldProfessor.setFax(professor.getFax());
 		oldProfessor.setEmailAddress(professor.getEmailAddress());
-	
+
 		professorDao.updateProfessor(oldProfessor);
 		model.addAttribute("message", "Details successfully updated");
 		return "professor/professorEditProfile";
 	}
-	
-	
+
 	@RequestMapping("/professor/unassignCourse")
-	public String doUnassignCourse(@RequestParam int courseCode, Model model, HttpSession session, Principal principal) {
+	public String doUnassignCourse(@RequestParam int courseCode, Model model, HttpSession session,
+			Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
 		Course course = courseDao.getCourse(courseCode);
 		course.setProfessor(null);
 		courseDao.updateCourse(course);
-		
+
 		return "redirect:viewCourses";
 	}
-	
+
 	@RequestMapping("/professor/viewStudents")
-	public String goToViewStudents(@RequestParam int courseCode, Model model, HttpSession session, Principal principal) {
+	public String goToViewStudents(@RequestParam int courseCode, Model model, HttpSession session,
+			Principal principal) {
 		Course course = courseDao.getCourse(courseCode);
 		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
-	
+
 		model.addAttribute("course", course);
 		model.addAttribute("studentList", studentList);
 		return "professor/professorViewStudentsOnTaughtCourse";
 	}
-	
-//	@RequestMapping("/professor/updateGrade")
-//	public String doUpdateGrade(@RequestParam int courseCode, @RequestParam String username, @RequestParam String gradeDropdown, @RequestParam String gradeComment, Model model, HttpSession session, Principal principal) {
-//		Professor professor = professorDao.getProfessor(principal.getName());
-//		Student student = studentDao.getStudent(username);
-//		Course course = courseDao.getCourse(courseCode);
-//		
-//		Grade grade = gradeDao.getGradeForStudentForCourse(course, student);
-//		
-//		if (grade != null){
-//			grade.setGradeValue(gradeDropdown.charAt(0));
-//			grade.setGradeComment(gradeComment);
-//			if (gradeDropdown.charAt(0) == ' '){
-//				gradeDao.removeGrade(grade.getGradeId());
-//			}else{
-//				gradeDao.updateGrade(grade);
-//			}
-//		}else{
-//			Grade newGrade = new Grade();
-//			newGrade.setGradeValue(gradeDropdown.charAt(0));
-//			newGrade.setStudent(student);
-//			newGrade.setProfessor(professor);
-//			newGrade.setCourse(course);
-//			student.addGrade(newGrade);
-//			studentDao.updateStudent(student);
-//		}
-//		
-//		
-//		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
-//		List<Character> gradeList = new ArrayList<Character>();
-//		gradeList.add('A');
-//		gradeList.add('B');
-//		gradeList.add('C');
-//		gradeList.add('D');
-//		gradeList.add('E');
-//		gradeList.add('F');
-//		gradeList.add('U');
-//		gradeList.add(' ');
-//		
-//		model.addAttribute("gradeList", gradeList);
-//		model.addAttribute("course", course);
-//		model.addAttribute("studentList", studentList);
-//		return "professor/professorViewStudentsOnTaughtCourse";
-//	}
-	
+
 	@RequestMapping("/professor/updateGrade")
-	public String doUpdateGrade(@RequestParam int courseCode, @RequestParam String username, @RequestParam String gradeInput, @RequestParam String gradeComment, Model model, HttpSession session, Principal principal) {
+	public String doUpdateGrade(@RequestParam int courseCode, @RequestParam String gradeValue, @RequestParam String gradeComment, @RequestParam String username, Model model,
+		HttpSession session, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
 		Student student = studentDao.getStudent(username);
 		Course course = courseDao.getCourse(courseCode);
 		
-		Grade grade = gradeDao.getGradeForStudentForCourse(course, student);
+		Grade oldGrade = gradeDao.getGradeForStudentForCourse(course, student);
 		
-		if (grade != null){
-			grade.setGradeValue(gradeInput.charAt(0));
-			grade.setGradeComment(gradeComment);
-			if (gradeInput.charAt(0) == ' '){
-				gradeDao.removeGrade(grade.getGradeId());
-			}else{
-				gradeDao.updateGrade(grade);
-			}
-		}else{
-			Grade newGrade = new Grade();
-			newGrade.setGradeValue(gradeInput.charAt(0));
-			newGrade.setStudent(student);
-			newGrade.setProfessor(professor);
-			newGrade.setCourse(course);
-			student.addGrade(newGrade);
-			studentDao.updateStudent(student);
-		}
+		Grade grade = new Grade();
+		grade.setGradeValue(gradeValue.charAt(0));
+		grade.setGradeComment(gradeComment);
+		grade.setStudent(student);
+		grade.setProfessor(professor);
+		grade.setCourse(course);
+		student.addGrade(grade);
 		
+		gradeDao.removeGrade(oldGrade.getGradeId());
+		
+		gradeDao.addGrade(grade);
+
 		List<Student> studentList = studentDao.getAllStudentsByCourse(course);
-		
+
 		model.addAttribute("course", course);
 		model.addAttribute("studentList", studentList);
 		return "professor/professorViewStudentsOnTaughtCourse";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@RequestMapping("/professor/viewStudent")
-	public String goToViewStudent(@RequestParam String username, Model model, HttpSession session, Principal principal) {
-		
+	public String goToViewStudent(@RequestParam String username, Model model, HttpSession session,
+			Principal principal) {
+
 		Student student = studentDao.getStudent(username);
-		
+
 		Set<Course> courseList = student.getCourseList();
 		List<Course> courseArrayList = new ArrayList<Course>();
-		for (Course course : courseList){
+		for (Course course : courseList) {
 			courseArrayList.add(course);
 		}
-		
+
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("student", student);
 		return "professor/viewStudent";
 	}
-	
-	
-	
+
 	@RequestMapping("/professor/viewGrades")
 	public String goToViewGrades(Model model, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
 		Department department = professor.getDepartment();
 		List<Course> courseList = courseDao.getAllCoursesByDepartment(department);
 		List<Course> taughtCourseList = courseDao.getAllCoursesByProfessor(professor);
-		
+
 		model.addAttribute("courseList", courseList);
 		model.addAttribute("taughtCourseList", taughtCourseList);
-		
+
 		return "professor/grades";
 	}
-	
+
 	@RequestMapping("/professor/viewTimetable")
 	public String goToViewTimetable(Model model, Principal principal) {
 		Professor professor = professorDao.getProfessor(principal.getName());
-		
+
 		List<Course> courseList = courseDao.getAllCoursesByProfessor(professor);
-		
+
 		model.addAttribute("courseList", courseList);
-		
+
 		return "professor/timetable";
 	}
-	
+
 }

@@ -74,14 +74,14 @@ body {
 					
 			 		 <c:forEach items="${s.gradeList}" var="grade">
 			 		 <c:set scope="request" var="grade" value="${grade }"/>
- 				<sf:form method="post" action="updateGrade?courseCode=${course.courseCode}&username=${s.username}" modelAttribute="grade" >
+ 				<form method="post" action="updateGrade?courseCode=${course.courseCode}&username=${s.username}">
 			 		 	
 			  			<c:if test="${grade.course.courseCode eq course.courseCode}"> 
-							<td> <sf:input path="gradeValue" type="text" value= "${grade.gradeValue}"/> </td>
-						 	<td> <sf:input path="gradeComment" value="${grade.gradeComment}"/> </td>
+							<td> <input name="gradeValue" type="text" value= "${grade.gradeValue}"/> </td>
+						 	<td> <input name="gradeComment" value="${grade.gradeComment}"/> </td>
 							<td><input type="submit" value="Update"/></td>
 			  			</c:if>
-			  </sf:form>
+			  </form>
 			  		</c:forEach>
 			  		
  				</tr>
