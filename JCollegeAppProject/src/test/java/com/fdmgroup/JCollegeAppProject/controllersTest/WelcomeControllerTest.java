@@ -210,7 +210,7 @@ public class WelcomeControllerTest {
         public void test_GoToStudentHome(){
         	when(session.getAttribute("username")).thenReturn(username);
         	when(studentDao.getStudent(username)).thenReturn(student);
-        	assertEquals("student/studentHome", welcomeController.goToStudentHome(session));
+        	assertEquals("redirect:ViewProfile", welcomeController.goToStudentHome(session));
         }
         
         @Test
