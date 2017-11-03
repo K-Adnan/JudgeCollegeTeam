@@ -40,7 +40,7 @@
 		
 		.allcourses {
 			text-align: left;
-			width: 15%;
+			width: 20%;
 			position: relative;
 			float: left;
 		}
@@ -52,12 +52,14 @@
 			border-width: 0.5px;
 		}
 		
+		.allcourses table tr:nth-child(even){background-color: white}		
+		
 		.search {
 			text-align: left;
 		}
 		
 		.coursedetails {
-			width: 40%;
+			width: 60%;
 			margin-left: auto;
 			margin-right: auto;
 		}
@@ -70,9 +72,26 @@
 			border: 1px solid black;
 		}
 		
-		form {
-			position: relative;
-			display: inline;
+		.coursedetails table tr:nth-child(even){background-color: white}	
+		
+		.coursedetails table td {
+		    border-left: 1px solid #000;
+		    border-right: 1px solid #000;
+		}
+		
+		.coursedetails table td:first-child {
+		    border-left: none;
+		}
+		
+		.coursedetails table td:last-child {
+		    border-right: none;
+		}
+				
+		.coursedetails table tr:nth-child(even){background-color: white}		
+				
+				form {
+					position: relative;
+					display: inline;
 		}
 		
 		.buttonsdiv {
@@ -172,7 +191,7 @@
 
 	  <div class="coursedetails">
 			<h3>Course Details</h3>
-		<table>
+		<table class="table" style="border-collapse: collapse;">
 			<tr><td>Course Name</td>
 				<td><input type="hidden" id="courseName" value="${course.courseName}">${course.courseName}</td>
 			</tr>
@@ -219,9 +238,9 @@
 		
 		<div class="coursedetails">
 			<h3>Enrolled Students</h3>
-		<table>
-			<tr>
-				<td>Student Id</td>
+		<table class="table" style="border-collapse: collapse;">
+			<tr style="background-color: lightgrey; border:2px solid black;">
+				<td style="background-color: lightgrey; border:2px solid black;">Student Id</td>
 				<td>Name</td>
 			</tr>
 			<c:forEach items="${studentList}" var="s">

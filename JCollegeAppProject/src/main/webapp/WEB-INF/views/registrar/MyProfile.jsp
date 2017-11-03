@@ -15,8 +15,8 @@ body {
 	background-repeat: repeat-x;
 }
 .profile {
-	background-color: #598cd9;
-	color: white;
+	background-color: white;
+	color: black;
     width: 300px;
     border: 5px solid white;
     padding: 25px;

@@ -14,6 +14,33 @@ body {
 	background-image: url();
 	background-repeat: repeat-x;
 }
+table {
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	border="0";
+	border-color:#000000;
+	border-style: solid;
+	border-width: 0.5px;
+	}
+		
+table tr:nth-child(even){background-color: white}		
+		
+table td {
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	}
+		
+table td:first-child {
+	border-left: none;
+	}
+		
+table td:last-child {
+	border-right: none;
+	}
+				
+table tr:nth-child(even){background-color: white}		
+	
 </style>
 </head>
 <body>
@@ -44,12 +71,15 @@ body {
       </div>
     </nav>
     <div class="mainContent">
-      
+      <form align="left" name="form1" method="post" action="Courses">
+			<label class="CoursesLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">
+			</label>
+		</form>
 <h2>Timetable</h2>
 	
-	<table>
-		<tr>
-			<th>Username</th>
+	<table class="table" style="border-collapse: collapse;">
+		<tr style="background-color: lightgrey; border:2px solid black;">
+			<th style="background-color: lightgrey; border:2px solid black;">Username</th>
 			<th>Full Name</th>
 		</tr>
 		<c:forEach items="${userList}" var="u">
