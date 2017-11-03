@@ -14,6 +14,31 @@ body {
 	background-image: url();
 	background-repeat: repeat-x;
 }
+
+.timetableItem {
+	background-color: #DADADA;
+	margin: 5px;
+	width: 90%;
+}
+
+td {
+	border: 1px solid grey;
+	width: 20%;
+}
+
+th {
+	border: 1px solid grey;
+	width: 15%;
+}
+
+table {
+	border: 1px solid grey;
+}
+
+.courseName {
+	text-align: center;
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -44,8 +69,6 @@ body {
     <div class="mainContent">
       
 <h2>View Timetable</h2>
-
-	<a href="/JCollegeAppProject/logout">Logout</a><br/>
 
 	<table>
 			<tr>
