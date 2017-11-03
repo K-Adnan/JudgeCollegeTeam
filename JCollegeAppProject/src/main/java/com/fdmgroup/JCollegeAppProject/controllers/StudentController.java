@@ -66,8 +66,14 @@ public class StudentController {
 	public String doEnrollOnCourse(@RequestParam int courseCode, HttpSession session, Model model, Principal principal){
 		Student student = studentDao.getStudent(principal.getName());
 		Course course = courseDao.getCourse(courseCode);
-		System.out.println("************* Add course to student **************************");
 		student.addCourse(course);
+		
+		Grade grade = new Grade();
+		grade.setCourse(course);
+		grade.setStudent(student);
+		grade.setGradeValue(' ');
+		gradeDao.addGrade(grade);
+		
 		courseDao.updateCourse(course);
 		model.addAttribute("message", "Successfully enrolled on : " + course.getCourseName());
 		return "redirect:ViewCourses";

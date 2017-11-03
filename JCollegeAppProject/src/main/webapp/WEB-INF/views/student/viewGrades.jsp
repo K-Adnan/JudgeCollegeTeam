@@ -49,13 +49,19 @@ body {
 				<th>Course Name</th>
 				<th>Grade</th>
 				<th>Professor</th>
+				<th>Comment</th>
 			</tr>
 			<c:forEach items="${gradeList}" var="g">
+			<c:choose>
+			<c:when test="${g.gradeValue ne ' '.charAt(0) }">
 			  <tr>
 				<td>${g.course.courseName}</td>
 				<td>${g.gradeValue}</td>
 				<td>${g.professor.firstName} ${g.professor.lastName}</td>
+				<td>${g.gradeComment}</td>
 			  </tr>
+			  </c:when>
+			  </c:choose>
 			</c:forEach>
 		</table>
       
