@@ -13,6 +13,23 @@ body {
 	background-image: url();
 	background-repeat: repeat-x;
 }
+
+td {
+	border: 1px solid grey;
+	width: 20%;
+	font-weight: bold;
+}
+
+th {
+	font-size: 10pt;
+	font-weight: normal;
+	border: 1px solid grey;
+}
+
+table {
+	margin-left: -5%;
+	border: 1px solid grey;
+}
 </style>
 </head>
 <body>

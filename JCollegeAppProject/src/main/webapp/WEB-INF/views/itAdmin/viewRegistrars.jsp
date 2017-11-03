@@ -5,13 +5,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>View Registrars</title>
 <link href="../css/Home.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 body {
 	background-color: #1A1A1A;
 	background-image: url();
 	background-repeat: repeat-x;
+}
+
+td {
+	border: 1px solid grey;
+	width: 20%;
+	font-weight: bold;
+}
+
+th {
+	font-size: 10pt;
+	font-weight: normal;
+	border: 1px solid grey;
+}
+
+table {
+	margin-left: -5%;
+	border: 1px solid grey;
 }
 </style>
 </head>

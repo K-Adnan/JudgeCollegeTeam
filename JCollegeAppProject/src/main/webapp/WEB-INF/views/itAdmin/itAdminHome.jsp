@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>IT Admin Home</title>
 <link href="../css/Home.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 body {
@@ -46,22 +46,7 @@ body {
 			</nav>
 			<div class="mainContent">
 
-				${message} <br /> <br /> <a href="addStudent"> Add Student </a> <br />
-				<br />
-
-				<table>
-					<tr>
-
-						<th>Student User Name</th>
-						<th>Student password</th>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Email</th>
-						<th>Address</th>
-						<th>Phone Number</th>
-						<th>D.O.B</th>
-						<th>Gender</th>
-					</tr>
+			
 
 					<c:forEach items="${studentList}" var="s">
 						<tr>

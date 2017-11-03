@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>View Students</title>
 <link href="../css/Home.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 body {
@@ -62,6 +62,8 @@ table {
 			</div>
 			</nav>
 			<div class="mainContent">
+			
+				<h2> All Students</h2>
 
 				${message} <br /> <br /> <a href="addStudent"> Add Student </a> <br />
 				<br />
