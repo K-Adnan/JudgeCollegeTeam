@@ -14,7 +14,35 @@ body {
 	background-color: #1A1A1A;
 	background-image: url();
 	background-repeat: repeat-x;
-}
+	}
+table {
+	border="0";
+	border-color:#000000;
+	border-style: solid;
+	border-width: 0.5px;
+	}
+		
+table tr:nth-child(even){background-color: white}		
+		
+table td {
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	}
+		
+table td:first-child {
+	border-left: none;
+	}
+		
+table td:last-child {
+	border-right: none;
+	}
+				
+table tr:nth-child(even){background-color: white}		
+				
+form {
+	position: relative;
+	display: inline;
+	}		
 </style>
 <script  type="text/javascript">
 			function getConfirmationForCancellingEmpty() {
@@ -65,11 +93,11 @@ body {
 		</form>
 		<h2>List of Courses with less than 3 Students</h2>
 		
-		<table>
-			<tr>
-				<th>Course Code</th>
-				<th>Course Name</th>
-				<th>No. of enrolled students</th>
+		<table class="table" style="border-collapse: collapse;">
+			<tr style="background-color: lightgrey; border:2px solid black;">
+				<th style="background-color: lightgrey; border:2px solid black;">Course Code</th>
+				<th style="background-color: lightgrey; border:2px solid black;">Course Name</th>
+				<th style="background-color: lightgrey; border:2px solid black;">No. of enrolled students</th>
 				<th></th>
 			</tr>
 				<c:forEach items="${courseList}" var="c">

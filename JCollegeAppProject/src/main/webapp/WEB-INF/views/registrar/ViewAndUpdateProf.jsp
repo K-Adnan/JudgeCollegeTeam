@@ -15,6 +15,36 @@ body {
 	background-image: url();
 	background-repeat: repeat-x;
 }
+table {
+	border-collapse: collapse;
+	margin-top: 10px;
+	border="0";
+	border-color:#000000;
+	border-style: solid;
+	border-width: 0.5px;
+	column-rule-style: solid;
+	}
+	
+table td {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+table td:first-child {
+    border-left: none;
+}
+
+table td:last-child {
+    border-right: none;
+}
+		
+table tr:nth-child(even){background-color: white}		
+
+.edit {
+			text-align: left;
+		}
+p { margin-bottom: -1px;
+}
 </style>
 </head>
 <body>
@@ -45,18 +75,22 @@ body {
       </div>
     </nav>
     <div class="mainContent">
-      
+    
+    
 	<form align="left" name="form1" method="post" action="SystemUsers">
 			<label class="SystemUsersLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">
 			</label>
 		</form>
-	<h2>Profile Information</h2>
-	
+		
+	<h2 align="left" >Profile Information</h2>
+	 
+	<div align="left">
 	<form name="form1" method="post" action="EditInformationProf?username=${professor.username}">
 		<label class="EditInformationLblPos"> 
 			<input name="submit2" type="submit" id="submit2" value="Edit Information">
 		</label>
 	</form>
+   </div>
     
 	<table>
 		<tr>

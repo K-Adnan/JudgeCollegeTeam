@@ -45,7 +45,10 @@ body {
       </div>
     </nav>
     <div class="mainContent">
-      
+      <form align="centre" name="form1" method="post" action="SystemUsers">
+			<label class="SystemUsersLblPos"> <input name="submit2" type="submit" id="submit2" value="Back">
+			</label>
+		</form>
 <h2>Edit Information</h2>
 
 	<sf:form method="post" action="processEditProf" modelAttribute="professor">
