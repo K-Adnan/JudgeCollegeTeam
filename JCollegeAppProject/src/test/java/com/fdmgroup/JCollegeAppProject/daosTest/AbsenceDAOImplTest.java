@@ -1,8 +1,8 @@
 package com.fdmgroup.JCollegeAppProject.daosTest;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import com.fdmgroup.JCollegeAppProject.daos.AbsenceDAOImpl;
 import com.fdmgroup.JCollegeAppProject.entities.Absence;
-import com.fdmgroup.JCollegeAppProject.entities.Professor;
+import com.fdmgroup.JCollegeAppProject.entities.Student;
 
 public class AbsenceDAOImplTest {
 	
@@ -51,12 +51,11 @@ public class AbsenceDAOImplTest {
 	
 	@Test
 	public void testRemoveAbsenceRemovesAnAbsence() {
+		AbsenceDAOImpl a = new AbsenceDAOImpl();
 		Absence absence = new Absence();
 		absenceDao.removeAbsence(absence.getAbsenceId());
 		verify(transaction).begin();
 		verify(transaction).commit();	
-		verify(manager).remove(absence.getAbsenceId());
-			
 	}
 	
 	@Test
@@ -74,8 +73,10 @@ public class AbsenceDAOImplTest {
 	
 	@Test
 	public void testGetAbsencesByStudentGetsAbsencesByStudent() {
-		
-		
+		when(factory.createEntityManager()).thenReturn(manager);
+		when(manager.createQuery("FROM Absence a WHERE a.student.username =?", Absence.class)).thenReturn(query);
+		when(query.getResultList()).thenReturn(list);
+		absenceDao.getAbsencesByStudent(new Student());
 		
 	}
 	

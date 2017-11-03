@@ -1,8 +1,5 @@
 package com.fdmgroup.JCollegeAppProject.controllers;
 
-import java.awt.*;
-import java.awt.event.*;
-
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,7 +11,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.JCheckBox;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

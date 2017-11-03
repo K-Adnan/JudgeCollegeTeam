@@ -1,11 +1,13 @@
 package com.fdmgroup.JCollegeAppProject.controllersTest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,8 +31,8 @@ public class ProfessorControllerTest {
 	
 	ProfessorController professorController;
 	String username = "USERNAME";
-	int courseCode;
-	int gradeID;
+	int courseCode = 101;
+	int gradeID = 101;
 	String gradeComment = "Comment";
 	String gradeDropdown = "ABC";
 	
@@ -67,6 +69,7 @@ public class ProfessorControllerTest {
         courseList = new ArrayList<Course>();
         course = mock(Course.class);
         student = mock(Student.class);
+        grade = mock(Grade.class);
         studentList = new ArrayList<Student>();
 	}
 	
@@ -153,12 +156,12 @@ public class ProfessorControllerTest {
 		when(principal.getName()).thenReturn(username);
 		when(professorDao.getProfessor(username)).thenReturn(professor);
 		when(studentDao.getStudent(username)).thenReturn(student);
-//		when(grade.setGradeValue(gradeDropdown.charAt(0)).thenReturn(grade));
-		assertEquals("professor/professorViewStudentsOnTaughtCourse", professorController.doUpdateGrade(courseCode, username, gradeDropdown, gradeComment, model, session, principal));			
+		assertEquals("professor/professorViewStudentsOnTaughtCourse", professorController.doUpdateGrade(courseCode, username, 'A', gradeComment, model, session, principal));			
 	}
 	
 	@Test
 	public void testViewStudentReturnsViewStudents(){
+		ProfessorController p = new ProfessorController();
 		when(principal.getName()).thenReturn(username);
 		when(courseDao.getCourse(courseCode)).thenReturn(course);
 		when(studentDao.getStudent(username)).thenReturn(student);
@@ -179,6 +182,49 @@ public class ProfessorControllerTest {
 		when(professorDao.getProfessor(username)).thenReturn(professor);
 		when(courseDao.getAllCoursesByProfessor(professor)).thenReturn(courseList);
 		assertEquals("professor/timetable", professorController.goToViewTimetable(model, principal));		
+	}
+	
+	@Test
+	public void testGoToProfessorHome(){
+		assertEquals("professor/professorHome", professorController.goToProfessorHome());		
+	}
+	
+	@Test
+	public void test1(){
+		assertEquals("redirect:/", professorController.logout(session));		
+	}
+	
+	@Test
+	public void testDoUpdateGradeUpdatesTheGrades1(){
+		when(courseDao.getCourse(courseCode)).thenReturn(course);
+		when(studentDao.getStudent(username)).thenReturn(student);
+		when(gradeDao.getGradeForStudentForCourse(course, student)).thenReturn(grade);
+		assertEquals("professor/professorViewStudentsOnTaughtCourse", professorController.doUpdateGrade(courseCode, username, 'A', gradeComment, model, session, principal));			
+	}
+	
+	@Test
+	public void testDoUpdateGradeUpdatesTheGrades2(){
+		when(studentDao.getStudent(username)).thenReturn(student);
+		Set<Course> list = new HashSet<Course>();
+		list.add(course);
+		when(student.getCourseList()).thenReturn(list);
+		assertEquals("professor/viewStudent", professorController.goToViewStudent(username, model, session, principal));			
+	}
+	
+	@Test
+	public void testDoUpdateGradeUpdatesTheGrades3(){
+		when(studentDao.getStudent(username)).thenReturn(student);
+		when(courseDao.getCourse(courseCode)).thenReturn(course);
+		when(gradeDao.getGradeForStudentForCourse(course, student)).thenReturn(grade);
+		assertEquals("professor/professorViewStudentsOnTaughtCourse", professorController.doUpdateGrade(courseCode, username, 'A', "ABC", model, session, principal));			
+	}
+	
+	@Test
+	public void testDoUpdateGradeUpdatesTheGrades4(){
+		when(studentDao.getStudent(username)).thenReturn(student);
+		when(courseDao.getCourse(courseCode)).thenReturn(course);
+		when(gradeDao.getGradeForStudentForCourse(course, student)).thenReturn(grade);
+		assertEquals("professor/professorViewStudentsOnTaughtCourse", professorController.doUpdateGrade(courseCode, username, ' ', "ABC", model, session, principal));			
 	}
 		
 		

@@ -3,7 +3,6 @@ package com.fdmgroup.JCollegeAppProject.controllersTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -60,42 +59,53 @@ public class WelcomeControllerTest {
         Model model;
         HttpSession session;
         Principal principal;
+        Grade grade;
+        RedirectAttributes ra;
         CourseDAO courseDao;
-        UserDAO userDao;
         StudentDAO studentDao;
-        RegistrarDAO registrarDao;
+        Department department;
+        Registrar registrar;
+        ITAdmin itAdmin;
         ProfessorDAO professorDao;
+        RegistrarDAO registrarDao;
         ITAdminDAO itAdminDao;
         GradeDAO gradeDao;
         Student student;
         Professor professor;
-        Registrar registrar;
-        ITAdmin itadmin;
         ArrayList<Course> courseList;
         Course course;
+        UserDAO userDao;
+        User user;
+        DepartmentDAO departmentDao;
+        AbsenceDAO absenceDao;
         HttpServletRequest request;
-       
         
         @Before
         public void setUp(){
                 model = mock(Model.class);
                 principal = mock(Principal.class);
+                grade = mock(Grade.class);
                 session = mock(HttpSession.class);
-                userDao = mock(UserDAO.class);
+                itAdmin = mock(ITAdmin.class);
+                department = mock(Department.class);
+                ra = mock(RedirectAttributes.class);
                 studentDao = mock(StudentDAO.class);
-                professorDao = mock(ProfessorDAO.class);
-                registrarDao = mock (RegistrarDAO.class);
                 courseDao = mock(CourseDAO.class);
+                user = mock(User.class);
+                registrar = mock(Registrar.class);
+                request = mock(HttpServletRequest.class);
                 gradeDao = mock(GradeDAO.class);
                 itAdminDao = mock(ITAdminDAO.class);
+                registrarDao = mock(RegistrarDAO.class);
+                userDao = mock(UserDAO.class);
+                departmentDao = mock(DepartmentDAO.class);
+                professorDao = mock(ProfessorDAO.class);
+                absenceDao = mock(AbsenceDAO.class);
                 welcomeController = new WelcomeController(studentDao, professorDao, itAdminDao, registrarDao, userDao);
                 student = mock(Student.class);
                 professor = mock(Professor.class);
-                registrar = mock(Registrar.class);                
                 courseList = new ArrayList<Course>();
                 course = mock(Course.class);
-                request = mock(HttpServletRequest.class);
-                
         }
         
         @Test
@@ -110,43 +120,7 @@ public class WelcomeControllerTest {
         	assertEquals("index", welcomeController.goToLoginFailure(username, model));
         }
         
-        @Test
-        public void testToLoginReturnsRedirect(){
-        	String pageName = welcomeController.goToLogin(model, session, principal, request);
-        	assertEquals("redirect:/", welcomeController.goToLogin(model, session, principal, request));
-        }
-        
-        @Test
-        public void testToStudentHomeReturnsStudentHome(){
-        	String pageName = welcomeController.goToStudentHome(session);
-        	when (studentDao.getStudent(pageName)).thenReturn(student);
-        	assertEquals("student/studentHome", welcomeController.goToStudentHome(session));
-        }
-        
-        @Test
-        public void testToGoProfessorHomeReturnsProfessorHome(){
-        	String pageName = welcomeController.goToProfessorHome(session);
-        	when(professorDao.getProfessor(pageName)).thenReturn(professor);
-        	assertEquals("professor/professorHome", welcomeController.goToProfessorHome(session));
-        }
-        
-        @Test
-        public void testGoToRegistrarHomeReturnsRegistrarHome(){
-        	String pageName = welcomeController.goToRegistrarHome(session);
-        	when(session.getAttribute("username")).thenReturn(username);
-        	when(registrarDao.getRegistrar(username)).thenReturn(registrar);
-        	assertEquals("redirect:MyProfile", welcomeController.goToRegistrarHome(session));
-        	
-        }
-        
-        @Test
-        public void testGoToITAdminHomeReturnITAdminHome(){
-        	String pageName = welcomeController.goToITAdminHome(session);
-        	when(itAdminDao.getITAdmin(pageName)).thenReturn(itadmin);
-        	assertEquals("itadmin/itadminHome", welcomeController.goToITAdminHome(session));
-        	
-        }
-        
+
         @Test
         public void testLogOutReturnsRedirect(){
         	String pageName = welcomeController.doLogOut(session);
@@ -163,12 +137,107 @@ public class WelcomeControllerTest {
         
         @Test
         public void testGoToResetPasswordRedirectsConfirmPasswordReset(){
+        	WelcomeController w = new WelcomeController();
         	String pageName = welcomeController.doResetPassword(username);
         	when(userDao.getUser(username)).thenReturn(null);
         	assertEquals("confirmPasswordReset", welcomeController.doResetPassword(username));
         }
-        	
-}
-
-
         
+        @Test
+        public void test_GoToLoginFialure_ReturnsIndex(){
+        	when(userDao.getUser("ABC")).thenReturn(user);
+        	assertEquals("index", welcomeController.goToLoginFailure("ABC", model));
+        }
+        
+        @Test
+        public void test_GoToLoginFialure_ReturnsIndex2(){
+        	when(userDao.getUser("ABC")).thenReturn(professor);
+        	when(professor.getNoOfIncorrectAttempts()).thenReturn(4);
+        	assertEquals("index", welcomeController.goToLoginFailure("ABC", model));
+        }
+        
+        @Test
+        public void test_GoToLogin(){
+        	when(principal.getName()).thenReturn(username);
+        	when(userDao.getUser(username)).thenReturn(student);
+        	when(request.isUserInRole("Student")).thenReturn(true);
+        	when(user.getNoOfIncorrectAttempts()).thenReturn(4);
+        	assertEquals("redirect:student/home", welcomeController.goToLogin(model, session, principal, request));
+        }
+        
+        @Test
+        public void test_GoToLogin2(){
+        	when(principal.getName()).thenReturn(username);
+        	when(userDao.getUser(username)).thenReturn(registrar);
+        	when(request.isUserInRole("Registrar")).thenReturn(true);
+        	when(registrar.getNoOfIncorrectAttempts()).thenReturn(5);
+        	assertEquals("index", welcomeController.goToLogin(model, session, principal, request));
+        }
+        
+        @Test
+        public void test_GoToLogin3(){
+        	when(principal.getName()).thenReturn(username);
+        	when(userDao.getUser(username)).thenReturn(registrar);
+        	when(request.isUserInRole("Registrar")).thenReturn(true);
+        	when(registrar.getNoOfIncorrectAttempts()).thenReturn(2);
+        	assertEquals("redirect:registrar/home", welcomeController.goToLogin(model, session, principal, request));
+        }
+        
+        @Test
+        public void test_GoToLogin4(){
+        	when(principal.getName()).thenReturn(username);
+        	when(userDao.getUser(username)).thenReturn(user);
+        	when(request.isUserInRole("ITAdmin")).thenReturn(true);
+        	assertEquals("redirect:itAdmin/HomePage", welcomeController.goToLogin(model, session, principal, request));
+        }
+        
+        @Test
+        public void test_GoToLogin6(){
+        	when(principal.getName()).thenReturn(username);
+        	when(userDao.getUser(username)).thenReturn(user);
+        	assertEquals("redirect:/", welcomeController.goToLogin(model, session, principal, request));
+        }
+        
+        @Test
+        public void test_GoToLogin7(){
+        	when(principal.getName()).thenReturn(username);
+        	when(userDao.getUser(username)).thenReturn(professor);
+        	when(request.isUserInRole("Professor")).thenReturn(true);
+        	assertEquals("redirect:professor/home", welcomeController.goToLogin(model, session, principal, request));
+        }
+        
+        @Test
+        public void test_GoToStudentHome(){
+        	when(session.getAttribute("username")).thenReturn(username);
+        	when(studentDao.getStudent(username)).thenReturn(student);
+        	assertEquals("student/studentHome", welcomeController.goToStudentHome(session));
+        }
+        
+        @Test
+        public void test_GoToProfessorHome(){
+        	when(session.getAttribute("username")).thenReturn(username);
+        	when(professorDao.getProfessor(username)).thenReturn(professor);
+        	assertEquals("professor/professorHome", welcomeController.goToProfessorHome(session));
+        }
+        
+        @Test
+        public void test_GoToRegistrarHome(){
+        	when(session.getAttribute("username")).thenReturn(username);
+        	when(registrarDao.getRegistrar(username)).thenReturn(registrar);
+        	assertEquals("redirect:MyProfile", welcomeController.goToRegistrarHome(session));
+        }
+        
+        @Test
+        public void test_GoToITAdminHome(){
+        	when(session.getAttribute("username")).thenReturn(username);
+        	when(itAdminDao.getITAdmin(username)).thenReturn(itAdmin);
+        	assertEquals("itadmin/itadminHome", welcomeController.goToITAdminHome(session));
+        }
+        
+        @Test
+        public void test_DoResetPassword(){
+        	when(userDao.getUser(username)).thenReturn(user);
+        	assertEquals("confirmPasswordReset", welcomeController.doResetPassword(username));
+        }
+        
+}

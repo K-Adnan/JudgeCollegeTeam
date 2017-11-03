@@ -32,10 +32,12 @@ public class ITAdminDAOImplTest {
 	private ITAdminDAOImpl itadminDao;
 	private TypedQuery query;
 	private List list;
-	private ITAdmin user;
+	private User user;
+	private ITAdmin itAdmin;
 
 	@Before
 	public void setUp() {
+		itAdmin = mock(ITAdmin.class);
 		manager = mock(EntityManager.class);
 		factory = mock(EntityManagerFactory.class);
 		transaction = mock(EntityTransaction.class);
@@ -45,41 +47,26 @@ public class ITAdminDAOImplTest {
 		itadminDao = new ITAdminDAOImpl(factory);
 		
 	}
+	
 	@Test
 	public void testGetITAdminReturnsITAdmin(){
-		itadminDao.getITAdmin("username");
-		verify(manager).find(ITAdmin.class, "username");
-		
-	}
-	@Test 
-	public void testUpdateITAdminUpdatesITAdmin(){
-		ITAdmin itadmin = new ITAdmin();
-		itadminDao.updateITAdmin(itadmin);
-		verify(manager).merge(itadmin);
+		ITAdminDAOImpl i = new ITAdminDAOImpl();
+		itadminDao.getITAdmin(username);
+		verify(manager).find(ITAdmin.class, username);
 	}
 	
 	@Test
-	public void testAddITAdminReturnsAddedAdmin(){
-		ITAdmin itadmin = new ITAdmin();
-		itadminDao.addITAdmin(itadmin);
-		
-		verify(transaction).begin();
-		verify(transaction).commit();
-		verify(manager).persist(itadmin);
+	public void testGetITAdaminReturnsITAdmin(){
+		itadminDao.updateITAdmin(itAdmin);
 	}
 	
 	@Test
-	public void testRemoveITAdminReturnsRemovedAdmin(){
-		String username = new String();
-		itadminDao.removeITAdmin(username);
-		when(manager.find(ITAdmin.class, "itadmin")).thenReturn(user);
-		verify(transaction).begin();
-		verify(transaction).commit();
-		verify(manager).remove(user);
+	public void testGetITAdamianReturnsITAdmin(){
+		itadminDao.addITAdmin(itAdmin);
 	}
+	
+	@Test
+	public void testGetIaTAdamianReturnsITAdmin(){
+		itadminDao.removeITAdmin("ABC");
 	}
-		
-	
-	
-	
-
+}
